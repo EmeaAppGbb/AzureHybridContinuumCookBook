@@ -1,0 +1,346 @@
+/* ============================================================
+   Azure Hybrid Continuum CookBook — Custom Theme Overrides
+   Azure Enterprise Color Palette
+   ============================================================ */
+
+:root {
+  /* Azure primary palette */
+  --azure-primary: #0078D4;
+  --azure-primary-dark: #005a9e;
+  --azure-primary-darker: #004578;
+  --azure-accent: #50e6ff;
+  --azure-accent-muted: #3bc4e8;
+
+  /* Fluent UI neutrals */
+  --azure-bg-light: #f3f2f1;
+  --azure-bg-white: #ffffff;
+  --azure-surface-dark: #1b1a19;
+  --azure-text: #323130;
+  --azure-text-secondary: #605e5c;
+  --azure-border: #edebe9;
+
+  /* Semantic colors */
+  --azure-success: #107c10;
+  --azure-warning: #ff8c00;
+  --azure-error: #d13438;
+  --azure-info: #0078D4;
+}
+
+/* ---- Light Mode Custom Palette ---- */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #0078D4;
+  --md-primary-fg-color--light: #3a96dd;
+  --md-primary-fg-color--dark: #005a9e;
+  --md-accent-fg-color: #0078D4;
+  --md-default-bg-color: #ffffff;
+  --md-default-fg-color: #323130;
+  --md-typeset-a-color: #0078D4;
+}
+
+/* ---- Dark Mode Custom Palette ---- */
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #0078D4;
+  --md-primary-fg-color--light: #50e6ff;
+  --md-primary-fg-color--dark: #005a9e;
+  --md-accent-fg-color: #50e6ff;
+  --md-default-bg-color: #1b1a19;
+  --md-default-fg-color: #e1dfdd;
+  --md-typeset-a-color: #50e6ff;
+}
+
+/* ============================================================
+   HEADER & NAVIGATION — Azure Gradient
+   ============================================================ */
+
+.md-header {
+  background: linear-gradient(135deg, #005a9e 0%, #0078D4 50%, #3a96dd 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.md-header[data-md-state="shadow"] {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.md-tabs {
+  background: linear-gradient(135deg, #004578 0%, #005a9e 100%);
+  border-bottom: 2px solid #50e6ff;
+}
+
+.md-tabs__link {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.md-tabs__link:hover,
+.md-tabs__link--active {
+  opacity: 1;
+}
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+
+.md-typeset h1 {
+  font-weight: 700;
+  color: var(--azure-primary-dark);
+  border-bottom: 3px solid var(--azure-accent);
+  padding-bottom: 0.4em;
+  margin-bottom: 0.8em;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h1 {
+  color: #50e6ff;
+  border-bottom-color: #50e6ff;
+}
+
+.md-typeset h2 {
+  font-weight: 600;
+  color: var(--azure-primary);
+  margin-top: 1.6em;
+}
+
+[data-md-color-scheme="slate"] .md-typeset h2 {
+  color: #3a96dd;
+}
+
+.md-typeset h3 {
+  font-weight: 600;
+  color: var(--azure-text);
+}
+
+/* ============================================================
+   LINKS
+   ============================================================ */
+
+.md-typeset a {
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-bottom-color 0.2s ease;
+}
+
+.md-typeset a:hover {
+  color: var(--azure-primary-dark);
+  border-bottom-color: var(--azure-accent);
+}
+
+[data-md-color-scheme="slate"] .md-typeset a:hover {
+  color: #50e6ff;
+  border-bottom-color: #50e6ff;
+}
+
+/* ============================================================
+   CONTENT CARDS & SECTIONS
+   ============================================================ */
+
+.md-content {
+  max-width: 960px;
+}
+
+.md-typeset table:not([class]) {
+  border: 1px solid var(--azure-border);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+
+.md-typeset table:not([class]) th {
+  background: linear-gradient(135deg, #0078D4, #005a9e);
+  color: #ffffff;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  letter-spacing: 0.05em;
+  padding: 0.8em 1em;
+}
+
+.md-typeset table:not([class]) td {
+  padding: 0.7em 1em;
+  border-bottom: 1px solid var(--azure-border);
+}
+
+.md-typeset table:not([class]) tr:hover td {
+  background-color: rgba(0, 120, 212, 0.04);
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) {
+  border-color: #3b3a39;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) td {
+  border-bottom-color: #3b3a39;
+}
+
+[data-md-color-scheme="slate"] .md-typeset table:not([class]) tr:hover td {
+  background-color: rgba(80, 230, 255, 0.05);
+}
+
+/* ============================================================
+   CODE BLOCKS
+   ============================================================ */
+
+.md-typeset code {
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+.md-typeset pre {
+  border-left: 4px solid var(--azure-primary);
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+[data-md-color-scheme="slate"] .md-typeset pre {
+  border-left-color: #50e6ff;
+}
+
+/* ============================================================
+   ADMONITIONS — Azure Styled
+   ============================================================ */
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  border-width: 0 0 0 4px;
+}
+
+.md-typeset .admonition.note,
+.md-typeset details.note {
+  border-left-color: var(--azure-primary);
+}
+
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+  border-left-color: var(--azure-success);
+}
+
+.md-typeset .admonition.warning,
+.md-typeset details.warning {
+  border-left-color: var(--azure-warning);
+}
+
+.md-typeset .admonition.danger,
+.md-typeset details.danger {
+  border-left-color: var(--azure-error);
+}
+
+.md-typeset .admonition.info,
+.md-typeset details.info {
+  border-left-color: var(--azure-accent-muted);
+}
+
+/* ============================================================
+   SIDEBAR NAVIGATION
+   ============================================================ */
+
+.md-nav__link {
+  font-size: 0.82rem;
+  transition: color 0.15s ease;
+}
+
+.md-nav__item--active > .md-nav__link {
+  color: var(--azure-primary);
+  font-weight: 600;
+}
+
+[data-md-color-scheme="slate"] .md-nav__item--active > .md-nav__link {
+  color: #50e6ff;
+}
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+
+.md-search__form {
+  border-radius: 8px;
+}
+
+.md-search-result__link:hover {
+  background-color: rgba(0, 120, 212, 0.06);
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.md-footer {
+  background: linear-gradient(135deg, #004578 0%, #005a9e 100%);
+}
+
+.md-footer-meta {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================================
+   HERO SECTION (Home Page)
+   ============================================================ */
+
+.md-typeset .hero-banner {
+  background: linear-gradient(135deg, #005a9e 0%, #0078D4 40%, #3a96dd 100%);
+  color: #ffffff;
+  padding: 2.5rem 2rem;
+  border-radius: 12px;
+  margin: -0.5rem -0.5rem 2rem;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 120, 212, 0.25);
+}
+
+.md-typeset .hero-banner h1,
+.md-typeset .hero-banner h2 {
+  color: #ffffff;
+  border: none;
+  margin: 0;
+}
+
+.md-typeset .hero-banner p {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1em;
+  max-width: 700px;
+  margin: 0.8em auto 0;
+}
+
+/* ============================================================
+   MERMAID DIAGRAMS
+   ============================================================ */
+
+.md-typeset .mermaid {
+  margin: 1.5em 0;
+  text-align: center;
+}
+
+/* ============================================================
+   SCROLL-TO-TOP & MISC
+   ============================================================ */
+
+.md-top {
+  background-color: var(--azure-primary);
+  color: #ffffff;
+}
+
+.md-top:hover {
+  background-color: var(--azure-primary-dark);
+}
+
+/* Badge images on homepage */
+.md-typeset img[alt="Azure"],
+.md-typeset img[alt="License"],
+.md-typeset img[alt="PRs Welcome"] {
+  display: inline-block;
+  margin: 0 0.2em;
+}
+
+/* Smooth transitions globally */
+* {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
+}
+
+/* Reset transition for elements where it causes issues */
+.md-typeset pre *,
+.md-typeset code *,
+.mermaid * {
+  transition: none;
+}

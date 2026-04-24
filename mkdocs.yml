@@ -1,0 +1,163 @@
+site_name: Azure Hybrid Continuum CookBook
+site_description: Best practices, patterns, and architectures for building solid hybrid and sovereign cloud solutions with Microsoft Azure.
+site_url: https://emeaappgbb.github.io/AzureHybridContinuumCookBook/
+repo_url: https://github.com/EmeaAppGbb/AzureHybridContinuumCookBook
+repo_name: EmeaAppGbb/AzureHybridContinuumCookBook
+edit_uri: edit/main/docs/
+
+docs_dir: docs
+
+theme:
+  name: material
+  language: en
+  icon:
+    logo: material/cloud-outline
+    repo: fontawesome/brands/github
+  favicon: diagrams/banner.svg
+  palette:
+    - scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Segoe UI, Roboto, sans-serif
+    code: Cascadia Code, Fira Code, monospace
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.path
+    - navigation.top
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - search.share
+    - content.tabs.link
+    - content.code.copy
+    - content.code.annotate
+    - toc.follow
+    - header.autohide
+
+extra_css:
+  - stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/EmeaAppGbb/AzureHybridContinuumCookBook
+    - icon: fontawesome/brands/microsoft
+      link: https://azure.microsoft.com
+  generator: false
+
+copyright: >
+  Copyright &copy; 2025 Azure Hybrid Continuum Team —
+  <a href="https://github.com/EmeaAppGbb/AzureHybridContinuumCookBook/blob/main/LICENSE">MIT License</a>
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.mark
+  - pymdownx.critic
+  - pymdownx.keys
+  - attr_list
+  - md_in_html
+  - tables
+  - def_list
+  - footnotes
+  - toc:
+      permalink: true
+      toc_depth: 3
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+
+nav:
+  - Home: index.md
+  - Introduction:
+    - 01-introduction/README.md
+    - Overview: 01-introduction/01-overview.md
+    - The Hybrid Continuum: 01-introduction/02-the-hybrid-continuum.md
+    - How to Use This Guide: 01-introduction/03-how-to-use-this-guide.md
+  - Azure Hybrid Infrastructure:
+    - 02-azure-hybrid-infrastructure/README.md
+    - Azure Regions & Availability Zones: 02-azure-hybrid-infrastructure/01-azure-regions.md
+    - Azure Local: 02-azure-hybrid-infrastructure/02-azure-local.md
+    - Azure Arc: 02-azure-hybrid-infrastructure/03-azure-arc.md
+    - Azure Stack HCI: 02-azure-hybrid-infrastructure/04-azure-stack-hci.md
+    - Connectivity Models: 02-azure-hybrid-infrastructure/05-connectivity-models.md
+  - Sovereignty & Compliance:
+    - 03-sovereignty-and-compliance/README.md
+    - Sovereign Cloud Overview: 03-sovereignty-and-compliance/01-sovereign-cloud-overview.md
+    - Sovereign Landing Zone Deep Dive: 03-sovereignty-and-compliance/02-sovereign-landing-zone.md
+    - Controls & Principles: 03-sovereignty-and-compliance/03-controls-and-principles.md
+    - Data Residency & Sovereignty: 03-sovereignty-and-compliance/04-data-residency.md
+    - Compliance Frameworks: 03-sovereignty-and-compliance/05-compliance-frameworks.md
+  - Architecture Patterns:
+    - 04-architecture-patterns/README.md
+    - Cloud-Native Pattern: 04-architecture-patterns/01-cloud-native.md
+    - Hybrid Connected Pattern: 04-architecture-patterns/02-hybrid-connected.md
+    - Hybrid Disconnected Pattern: 04-architecture-patterns/03-hybrid-disconnected.md
+    - Cloud Exit Pattern: 04-architecture-patterns/04-cloud-exit.md
+    - Workload Placement Framework: 04-architecture-patterns/05-workload-placement.md
+  - Sovereign Landing Zone Guide:
+    - 05-sovereign-landing-zone-guide/README.md
+    - Design Areas Overview: 05-sovereign-landing-zone-guide/01-design-areas.md
+    - Identity & Access Management: 05-sovereign-landing-zone-guide/02-identity-and-access.md
+    - Network Topology: 05-sovereign-landing-zone-guide/03-network-topology.md
+    - Security & Governance: 05-sovereign-landing-zone-guide/04-security-governance.md
+    - Platform Automation: 05-sovereign-landing-zone-guide/05-platform-automation.md
+    - Implementation Options: 05-sovereign-landing-zone-guide/06-implementation-options.md
+  - Cloud Exit Scenarios:
+    - 06-cloud-exit-scenarios/README.md
+    - Workload Assessment: 06-cloud-exit-scenarios/01-assessment.md
+    - "Public Cloud → Connected": 06-cloud-exit-scenarios/02-public-to-connected.md
+    - "Connected → Disconnected": 06-cloud-exit-scenarios/03-connected-to-disconnected.md
+    - Data Migration Strategies: 06-cloud-exit-scenarios/04-data-migration.md
+    - Operational Continuity: 06-cloud-exit-scenarios/05-operational-continuity.md
+  - "Reference Scenario: Contoso Insurance":
+    - 07-reference-scenario/README.md
+    - Application Overview: 07-reference-scenario/01-application-overview.md
+    - "Phase 1: Public Cloud": 07-reference-scenario/02-phase1-public-cloud.md
+    - "Phase 2: Hybrid Connected": 07-reference-scenario/03-phase2-hybrid-connected.md
+    - "Phase 3: Disconnected": 07-reference-scenario/04-phase3-disconnected.md
+    - Architecture Decisions: 07-reference-scenario/05-architecture-decisions.md
+    - Lessons Learned: 07-reference-scenario/06-lessons-learned.md
+  - Best Practices:
+    - 08-best-practices/README.md
+    - Design Principles: 08-best-practices/01-design-principles.md
+    - Resilience: 08-best-practices/02-resilience.md
+    - Security: 08-best-practices/03-security.md
+    - Operations: 08-best-practices/04-operations.md
+    - Cost Optimization: 08-best-practices/05-cost-optimization.md
+  - Appendix:
+    - 09-appendix/README.md
+    - Glossary: 09-appendix/01-glossary.md
+    - Azure Service Mapping: 09-appendix/02-azure-service-mapping.md
+    - Additional Resources: 09-appendix/03-additional-resources.md
