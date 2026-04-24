@@ -4,8 +4,8 @@
 
 <p align="center">
   <a href="https://azure.microsoft.com"><img src="https://img.shields.io/badge/Azure-Hybrid-0078D4" alt="Azure"></a>
-  <a href="../LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
-  <a href="../CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
+  <a href="https://github.com/EmeaAppGbb/AzureHybridContinuumCookBook/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
+  <a href="https://github.com/EmeaAppGbb/AzureHybridContinuumCookBook/blob/main/CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
 </p>
 
 # Azure Hybrid Continuum CookBook
@@ -78,7 +78,7 @@ All content in this CookBook is grounded in official Microsoft documentation:
 
 ## Contributing
 
-We welcome contributions! See [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines and [BACKLOG.md](BACKLOG.md) for current work items and priorities.
+We welcome contributions! See [CONTRIBUTING.md](https://github.com/EmeaAppGbb/AzureHybridContinuumCookBook/blob/main/CONTRIBUTING.md) for guidelines and [BACKLOG.md](BACKLOG.md) for current work items and priorities.
 
 ---
 

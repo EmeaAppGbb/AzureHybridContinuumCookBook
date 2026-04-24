@@ -39,4 +39,4 @@ Curated collection of links, further reading, training resources, and community 
 
 ---
 
-> **Back to:** [Table of Contents](../README.md)
+> **Back to:** [Table of Contents](../index.md)
