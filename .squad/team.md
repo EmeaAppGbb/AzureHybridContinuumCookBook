@@ -18,6 +18,7 @@
 | Mallow | DevRel & Issue Triage | `.squad/agents/mallow/charter.md` | 💬 Active |
 | Scribe | Session Logger & Memory | `.squad/agents/scribe/charter.md` | 📋 Active |
 | Ralph | Work Monitor | `.squad/agents/ralph/charter.md` | 🔄 Active |
+| Marco | PM | 👤 Human | 👤 Active |
 
 ## Project Context
 
