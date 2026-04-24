@@ -39,3 +39,10 @@ All team members MUST ground their work in official Microsoft documentation:
 1. Hardin writes documentation → Seldon reviews for architecture & diagrams → Venabili validates against official Azure docs
 2. Humans review PRs before merging to main
 3. On rejection, a different agent revises (never the original author)
+
+## Issue Source
+
+- **Repository:** EmeaAppGbb/AzureHybridContinuumCookBook
+- **Connected:** 2026-04-24
+- **Filters:** All open issues
+- **Labels:** `squad` (inbox), `squad:{member}` (assigned)
