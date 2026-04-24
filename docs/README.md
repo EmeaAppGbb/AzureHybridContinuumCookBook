@@ -1,9 +1,16 @@
+<p align="center">
+  <img src="diagrams/banner.svg" alt="Azure Hybrid Continuum CookBook" width="100%">
+</p>
+
+<p align="center">
+  <a href="https://azure.microsoft.com"><img src="https://img.shields.io/badge/Azure-Hybrid-0078D4" alt="Azure"></a>
+  <a href="../LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"></a>
+  <a href="../CONTRIBUTING.md"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs Welcome"></a>
+</p>
+
 # Azure Hybrid Continuum CookBook
 
 > Best practices, patterns, and architectures for building solid hybrid and sovereign cloud solutions with Microsoft Azure.
-
-[![Azure](https://img.shields.io/badge/Azure-Hybrid-0078D4)](https://azure.microsoft.com)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](../LICENSE)
 
 ## What Is This?
 
@@ -71,7 +78,7 @@ All content in this CookBook is grounded in official Microsoft documentation:
 
 ## Contributing
 
-See [BACKLOG.md](BACKLOG.md) for the current work items and priorities.
+We welcome contributions! See [CONTRIBUTING.md](../CONTRIBUTING.md) for guidelines and [BACKLOG.md](BACKLOG.md) for current work items and priorities.
 
 ---
 
