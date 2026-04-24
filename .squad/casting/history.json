@@ -1,0 +1,22 @@
+{
+  "universe_usage_history": [
+    {
+      "universe": "Foundation",
+      "used_at": "2026-04-24T11:02:20Z",
+      "repo": "AzureHybridContinuumCookBook"
+    }
+  ],
+  "assignment_cast_snapshots": {
+    "2026-04-24-initial": {
+      "assignment_id": "2026-04-24-initial",
+      "universe": "Foundation",
+      "created_at": "2026-04-24T11:02:20Z",
+      "agents": {
+        "seldon": "Cloud Architect & Lead",
+        "hardin": "Technical Writer",
+        "venabili": "Technical Reviewer",
+        "mallow": "DevRel & Issue Triage"
+      }
+    }
+  }
+}

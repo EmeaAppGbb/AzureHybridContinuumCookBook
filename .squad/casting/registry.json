@@ -1,0 +1,32 @@
+{
+  "agents": {
+    "seldon": {
+      "persistent_name": "Seldon",
+      "universe": "Foundation",
+      "created_at": "2026-04-24T11:02:20Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "hardin": {
+      "persistent_name": "Hardin",
+      "universe": "Foundation",
+      "created_at": "2026-04-24T11:02:20Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "venabili": {
+      "persistent_name": "Venabili",
+      "universe": "Foundation",
+      "created_at": "2026-04-24T11:02:20Z",
+      "legacy_named": false,
+      "status": "active"
+    },
+    "mallow": {
+      "persistent_name": "Mallow",
+      "universe": "Foundation",
+      "created_at": "2026-04-24T11:02:20Z",
+      "legacy_named": false,
+      "status": "active"
+    }
+  }
+}
