@@ -47,3 +47,26 @@ Designed and implemented a 9-part documentation structure inspired by AWS Fault 
 - Cloud exit from public cloud to connected to disconnected is a key narrative arc
 - All content must be grounded in official Microsoft Learn documentation
 - Mermaid diagrams are required for all architecture explanations
+
+### 2026-04-24 — GitHub Pages with MkDocs Material
+
+**Decision: MkDocs Material for Documentation Portal**
+Set up a complete GitHub Pages deployment using MkDocs with Material theme, Azure enterprise color scheme, and automated CI/CD.
+
+**Key File Paths:**
+- `mkdocs.yml` — MkDocs configuration with full navigation, Material theme, Azure palette
+- `docs/stylesheets/extra.css` — Custom CSS: Azure gradients, Fluent UI colors, enterprise table/admonition styling
+- `.github/workflows/deploy-pages.yml` — GitHub Actions: triggers on docs changes, builds MkDocs, deploys to gh-pages
+- `requirements.txt` — Python deps: mkdocs-material, mkdocs-minify-plugin, pymdown-extensions
+- `docs/index.md` — Homepage (renamed from `docs/README.md` for MkDocs convention)
+
+**Architecture Decisions:**
+- MkDocs Material chosen over Jekyll/Hugo/Docusaurus for native Mermaid, admonitions, dark mode, and zero-JS-build simplicity
+- `navigation.indexes` feature enables section README.md files to serve as section landing pages
+- Azure color palette: Primary #0078D4, Accent #50e6ff, with gradient headers and Fluent UI neutrals
+- Workflow uses `peaceiris/actions-gh-pages@v4` for atomic deploys to `gh-pages` branch
+- Concurrency group prevents parallel deployments
+- Homepage renamed to `index.md` (MkDocs convention) — `git mv` preserves history
+
+**User Action Required:**
+- Marco needs to enable GitHub Pages in repo settings: Source → `gh-pages` branch
