@@ -102,6 +102,13 @@ We welcome contributions! Whether it's fixing a typo, improving a diagram, or wr
 
 All contributions go through a structured review process to ensure technical accuracy against official Azure documentation.
 
+## ✍️ Authors
+
+| Name | Role |
+|------|------|
+| **Marco Antonio Silva** | Senior Solution Engineer, M&M GBB EMEA |
+| **Mohammad Nofal** | Dir Specialist Mgmt, M&M GBB EMEA |
+
 ## ⚖️ License
 
 This project is licensed under the [MIT License](LICENSE).

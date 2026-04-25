@@ -80,6 +80,13 @@ All content in this CookBook is grounded in official Microsoft documentation:
 
 We welcome contributions! See [CONTRIBUTING.md](https://github.com/EmeaAppGbb/AzureHybridContinuumCookBook/blob/main/CONTRIBUTING.md) for guidelines and [BACKLOG.md](BACKLOG.md) for current work items and priorities.
 
+## ✍️ Authors
+
+| Name | Role |
+|------|------|
+| **Marco Antonio Silva** | Senior Solution Engineer, M&M GBB EMEA |
+| **Mohammad Nofal** | Dir Specialist Mgmt, M&M GBB EMEA |
+
 ---
 
 *Built with ❤️ by the Migrate and Modernize GBB team.*
