@@ -82,4 +82,4 @@ We welcome contributions! See [CONTRIBUTING.md](https://github.com/EmeaAppGbb/Az
 
 ---
 
-*Built with ❤️ by the Azure Hybrid Continuum team.*
+*Built with ❤️ by the Migrate and Modernize GBB team.*

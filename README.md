@@ -109,5 +109,5 @@ This project is licensed under the [MIT License](LICENSE).
 ---
 
 <p align="center">
-  <sub>Built with ❤️ by the Azure Hybrid Continuum team · Powered by <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a></sub>
+  <sub>Built with ❤️ by the Migrate and Modernize GBB team · Powered by <a href="https://squidfunk.github.io/mkdocs-material/">MkDocs Material</a></sub>
 </p>
