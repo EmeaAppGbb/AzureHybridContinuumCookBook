@@ -43,7 +43,7 @@
     class Stage1 stage1Style
     class Stage2 stage2Style
     class Stage3 stage3Style
-    class Stage4 stage4Style</code></pre> <p><strong>Figure 1: The Azure Hybrid Continuum Spectrum</strong> — Organizations operate across four stages, each with distinct connectivity models, management approaches, and service availability. Movement is bidirectional based on evolving requirements.</p> <hr> <pre class=mermaid><code>graph TD
+    class Stage4 stage4Style</code></pre> <p><strong>Figure 1: The Azure Hybrid Continuum Spectrum</strong> — Organizations operate across four stages, each with distinct connectivity models, management approaches, and service availability. Movement is bidirectional based on evolving requirements.</p> <div class="admonition example"> <p class=admonition-title>🔗 Working Example: Three Branches, Three Continuum Stages</p> <p>The <a href=https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal>Contoso Insurance sample application</a> demonstrates the continuum in code using a branch-per-stage model: <strong><code>main</code></strong> (Azure/AKS — fully connected), <strong><code>local-connected</code></strong> (Azure Local via Arc — hybrid connected), and <strong><code>local-disconnected</code></strong> (air-gapped — fully disconnected). Compare the branches to see exactly how infrastructure, services, and configuration change at each stage.</p> </div> <hr> <pre class=mermaid><code>graph TD
     Start["Organization Evaluating&lt;br/&gt;Deployment Model"]
 
     Start --&gt; RegQ{"Data Sovereignty&lt;br/&gt;or Regulatory&lt;br/&gt;Requirements?"}
