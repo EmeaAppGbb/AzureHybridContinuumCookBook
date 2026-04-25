@@ -112,3 +112,157 @@ The Hybrid Continuum is fundamentally about the tension between three forces:
 3. **Control & Sovereignty** (increasing left→right): Cloud provider managed → hybrid control → full customer control
 
 All architecture patterns in this cookbook are variations on managing these trade-offs.
+
+## 2026-04-25 02:01:56 - Navigation Map Diagram (P0-05)
+
+**Task:** Create navigation map diagram showing reading paths for all 5 roles
+
+**Actions Completed:**
+- Read `docs/01-introduction/03-how-to-use-this-guide.md` to understand guide structure
+- Created comprehensive Mermaid diagram (graph TD) with:
+  - All 9 parts of the guide as nodes
+  - 4 major groupings using subgraphs (Foundation, Architecture Deep Dives, Implementation, Cross-Cutting Concerns)
+  - 5 role-based reading paths with distinct line styles:
+    - Cloud Architect: solid thick lines (comprehensive journey)
+    - Platform Engineer: dashed lines (implementation-focused)
+    - Decision Maker: dotted lines (strategic overview)
+    - Developer: thick dotted lines (application-centric)
+    - Security & Compliance: thick dashed lines (security-focused)
+  - Color-coded subgraphs for visual clarity
+  - Reading path legend explaining each role's approach
+- Replaced placeholder comment with complete diagram
+- Committed changes with message: "diagrams: add navigation map diagram (P0-05)"
+
+**Technical Decisions:**
+- Used graph TD (top-down) for clear flow from foundation to implementation
+- Applied different line styles (==>, -->, -.>, -..>) to distinguish role paths
+- Color-coded subgraphs to highlight the 4-part structure
+- Included brief content summaries in each node for context
+- Added legend to explain reading path conventions
+
+**Status:** ✅ Complete - Diagram added, committed (not pushed)
+
+## 2026-04-25 02:15:23 - Part 2 Azure Infrastructure Diagrams (P1-02/04/06/08/10)
+
+**Task:** Create ALL Part 2 diagrams for Azure Hybrid Infrastructure chapters
+
+**Actions Completed:**
+- Read all 5 chapter files in `docs/02-azure-hybrid-infrastructure/`
+- Located 7 diagram placeholders across the chapters
+- Created 7 comprehensive Mermaid diagrams:
+
+**P1-02: Azure Regions Chapter** (`01-azure-regions.md`)
+1. **Azure Global Infrastructure Hierarchy** (graph TD)
+   - Shows Geography → Region → Availability Zone → Datacenter hierarchy
+   - Includes sovereign clouds (Azure Government, Azure China)
+   - Demonstrates Azure Local extending region boundaries via Azure Arc
+   - Region pairs visualization (East US ↔ West US)
+   - Color-coded layers: Global (blue) → Geography (cyan) → Regions (light blue) → On-premises (green)
+
+2. **Fault Isolation Hierarchy** (graph TD)
+   - Illustrates failure domain layers: Global → Regional → Zonal → Local
+   - Global services (DNS, CDN, Traffic Manager, Azure AD)
+   - Regional services (Compute, Storage, Database)
+   - Zonal services (independent datacenters with <2ms latency)
+   - Azure Local as customer-controlled failure domain
+   - Shows cross-region replication (GRS, GZRS, ASR)
+
+**P1-04: Azure Local Chapter** (`02-azure-local.md`)
+3. **Azure Local Architecture Stack** (graph TB) - First diagram at line 67
+   - 4-layer visualization of Azure Local architecture
+   - Layer 1: Validated Hardware (certified servers, storage, networking, clusters)
+   - Layer 2: Azure Local OS (Hyper-V, Storage Spaces Direct, SDN, Arc Agent)
+   - Layer 3: Workload Layer (VMs, AKS, AVD, Arc Data Services)
+   - Layer 4: Azure Management Plane (Portal, ARM, Arc, Monitor, Security, Backup)
+   - Shows management flow from Azure cloud through Arc to hardware
+
+4. **Detailed Architecture Stack** (graph TB) - Second diagram at line 351
+   - More detailed 4-layer breakdown with service specifics
+   - Hardware: Dell/HPE/Lenovo validation, storage tiers, RDMA networking, cluster configs
+   - OS: Hyper-V features, Storage Spaces Direct, SDN capabilities, Arc-based management
+   - Workloads: IaaS (VMs), Containers (AKS), Data Services (Arc SQL/PostgreSQL)
+   - Management: Azure Portal → ARM → Arc integration with Policy/Monitor/Security
+
+**P1-06: Azure Arc Chapter** (`03-azure-arc.md`)
+5. **Azure Arc Architecture** (graph TB)
+   - Azure Control Plane at top with Portal, ARM, Arc Resource Providers
+   - Azure Management Services: Policy, Monitor, Security, Sentinel, Update, Backup
+   - On-Premises Datacenter with 4 resource types:
+     - Arc-enabled Servers (Windows, Linux, SQL Server)
+     - Arc-enabled Kubernetes (AKS, OpenShift, Rancher, Vanilla K8s)
+     - Arc-enabled Data Services (SQL MI, PostgreSQL Hyperscale)
+     - Arc-enabled VM Management (VMware vSphere, SCVMM, Azure Local)
+   - Edge & Multi-Cloud: Edge K8s, AWS EC2, GCP VMs, Other clouds
+   - Arc Agent components: Connected Machine Agent, Extension Manager, Guest Config, Proxy
+   - Shows HTTPS 443 outbound-only connectivity model
+   - Bidirectional telemetry and heartbeat flows
+
+**P1-08: Azure Stack Family Chapter** (`04-azure-stack-hci.md`)
+6. **Azure Stack Family Comparison** (graph TB)
+   - Three-column comparison: Stack Hub vs Azure Local vs Stack Edge
+   - Stack Hub (brown): Full PaaS, air-gap support, 4-16 node integrated, multi-tenancy
+   - Azure Local (green): IaaS, Arc-managed, 1-16+ node flexible, datacenter modernization
+   - Stack Edge (gold): AI/IoT edge appliance, GPU/FPGA, HaaS model, Microsoft-managed
+   - Shows connectivity models: Hub (optional), Local (Arc required), Edge (always managed)
+   - Use case positioning for each product family member
+   - Distinct visual styling for each product line
+
+**P1-10: Connectivity Models Chapter** (`05-connectivity-models.md`)
+7. **Connectivity Models Comparison** (graph TB)
+   - Three-tier comparison: Fully Connected → Partially Connected → Disconnected
+   - Fully Connected (green):
+     - Network: ExpressRoute/Site-to-Site VPN, always-on
+     - Services: Real-time Arc, streaming telemetry, continuous policy, automated updates
+     - Operations: Cloud-managed, automated
+   - Partially Connected (yellow/warning):
+     - Network: Intermittent/Satellite, scheduled sync windows
+     - Services: Arc with retry, delayed telemetry, cached policies, manual updates
+     - Operations: Hybrid (local + cloud when available)
+   - Disconnected (red/air-gap):
+     - Network: No internet, physical isolation, manual media transfer
+     - Services: Local management only, Windows Admin Center, manual updates
+     - Operations: Fully local/manual, Use Stack Hub NOT Local
+   - Shows Azure Cloud connectivity strength for each model
+   - Color-coded service availability panels
+
+**Technical Decisions:**
+- Used `graph TD` (top-down) for hierarchies and stacks
+- Used `graph TB` (top-to-bottom) for architecture layers
+- Applied Azure color palette consistently: #0078D4 (primary), #50E6FF (accent), #00AA00 (on-prem), #FFB900 (sovereign/edge), #A4262C (disconnected)
+- Used subgraphs extensively for logical grouping
+- Added emoji icons for visual landmarks (🌍 global, ☁️ cloud, 🏢 on-prem, 🌐 edge, 🔒 air-gap)
+- Dotted lines for management/telemetry flows, solid for data paths
+- Consistent styling classes across all diagrams
+
+**Grounding:**
+- All diagrams based on official Azure documentation structure
+- Service capabilities aligned with Microsoft Learn docs for Azure Local, Arc, Stack family
+- Connectivity models match Azure Arc agent behavior documentation
+- Fault isolation hierarchy follows Azure reliability documentation
+
+**Commit:**
+```
+diagrams: add all Part 2 Azure Infrastructure diagrams (P1-02/04/06/08/10)
+
+- P1-02: Azure Global Infrastructure hierarchy with geographies, regions, AZs
+- P1-02b: Fault isolation hierarchy from global to local layers
+- P1-04: Azure Local architecture stack (4-layer diagram)
+- P1-04b: Detailed Azure Local architecture with validated hardware
+- P1-06: Azure Arc architecture showing control plane extending to hybrid resources
+- P1-08: Azure Stack family comparison (Hub vs Local vs Edge)
+- P1-10: Connectivity models comparison (Connected/Partial/Disconnected)
+```
+Commit SHA: 7c178e6
+
+**Status:** ✅ Complete - All 7 diagrams created, committed (not pushed)
+
+**Learning:**
+The Azure hybrid infrastructure model is fundamentally a progressive extension of Azure's regional infrastructure outward:
+1. **Azure Global → Regional → Zonal** (Cloud-native fault isolation)
+2. **Azure Arc** (Control plane projection beyond Azure boundaries)
+3. **Azure Local** (Platform layer for on-premises Azure services)
+4. **Azure Stack Family** (Purpose-built appliances for specific scenarios)
+5. **Connectivity Models** (Dictate service availability and operational model)
+
+All hybrid architecture decisions ultimately revolve around: Where does the control plane live? (Azure vs local) and What connectivity model supports the workload? (Connected/Partial/Disconnected).
+
