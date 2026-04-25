@@ -22,6 +22,11 @@ Hybrid connected architecture splits the control plane (management, monitoring, 
 - **Identity plane:** Hybrid Entra ID synchronizes on-premises Active Directory to Azure AD
 - **Network plane:** ExpressRoute or site-to-site VPN provides secure, low-latency connectivity
 
+!!! example "🔗 Working Example: Contoso Insurance Sample Application"
+    See the complete working implementation of this architecture at
+    [ContosoInsurances-NativeToLocal](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal) —
+    a .NET 8 enterprise application demonstrating hybrid connected deployment on Azure Local via Arc. Explore the **`local-connected`** branch to see how compute moves to on-premises AKS while identity, monitoring, and secrets remain in Azure.
+
 This split enables **Azure management of on-premises resources**, unlocking capabilities like:
 
 - Centralized policy enforcement across cloud and on-premises (Azure Policy)

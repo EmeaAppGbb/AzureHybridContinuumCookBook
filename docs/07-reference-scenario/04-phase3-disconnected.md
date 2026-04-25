@@ -638,6 +638,11 @@ graph TB
 - [OpenTelemetry](https://opentelemetry.io/docs/)
 - [GitLab CE](https://about.gitlab.com/install/)
 
+!!! example "🔗 Working Example: Contoso Insurance Sample Application"
+    See the complete Phase 3 disconnected implementation at
+    [ContosoInsurances-NativeToLocal (`local-disconnected` branch)](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal/tree/local-disconnected) —
+    demonstrating how every Azure dependency is replaced with local alternatives for air-gapped operation.
+
 ---
 
 > **Next:** [Architecture Decisions →](05-architecture-decisions.md)

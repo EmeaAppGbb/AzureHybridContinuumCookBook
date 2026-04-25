@@ -94,6 +94,7 @@ This appendix provides a curated collection of links, training resources, tools,
 
 ### GitHub Repositories
 
+- **[Contoso Insurance — NativeToLocal Sample Application](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal)** — Companion implementation for this CookBook: a .NET 8 enterprise app demonstrating deployment across the full hybrid continuum (Azure → Azure Local connected → air-gapped) with Bicep IaC, Kubernetes manifests, and .NET Aspire orchestration
 - **[Azure Landing Zones (Enterprise-Scale)](https://github.com/Azure/Enterprise-Scale)** — Reference implementation for Azure landing zones
 - **[Sovereign Landing Zone Reference Implementation](https://github.com/Azure/sovereign-landing-zone)** — SLZ Bicep and Terraform templates
 - **[Azure Arc Jumpstart](https://github.com/microsoft/azure_arc)** — Hands-on Arc scenarios and automation

@@ -6,7 +6,7 @@ The Azure Hybrid Continuum CookBook is a comprehensive, practitioner-focused gui
 
 Unlike traditional cloud migration guides that assume a one-way journey to the cloud, this CookBook recognizes that modern enterprises operate across a **continuum** of deployment models. Organizations may need to move workloads between these models in either direction — from cloud to on-premises (cloud exit), from disconnected to connected, or from public cloud to sovereign environments — based on evolving business, regulatory, and operational requirements.
 
-This guide provides architectural patterns, decision frameworks, implementation guidance, and a concrete reference implementation that demonstrates how a representative enterprise application can be designed to operate across the entire Azure Hybrid Continuum.
+This guide provides architectural patterns, decision frameworks, implementation guidance, and a concrete reference implementation that demonstrates how a representative enterprise application can be designed to operate across the entire Azure Hybrid Continuum. It is accompanied by a companion sample application — [ContosoInsurances-NativeToLocal](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal) — a working .NET 8 implementation that brings the concepts in this guide to life with deployable code across three continuum stages.
 
 ## Why This Guide Exists
 

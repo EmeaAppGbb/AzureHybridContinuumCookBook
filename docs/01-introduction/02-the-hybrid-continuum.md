@@ -74,6 +74,9 @@ graph LR
 
 **Figure 1: The Azure Hybrid Continuum Spectrum** — Organizations operate across four stages, each with distinct connectivity models, management approaches, and service availability. Movement is bidirectional based on evolving requirements.
 
+!!! example "🔗 Working Example: Three Branches, Three Continuum Stages"
+    The [Contoso Insurance sample application](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal) demonstrates the continuum in code using a branch-per-stage model: **`main`** (Azure/AKS — fully connected), **`local-connected`** (Azure Local via Arc — hybrid connected), and **`local-disconnected`** (air-gapped — fully disconnected). Compare the branches to see exactly how infrastructure, services, and configuration change at each stage.
+
 ---
 
 ```mermaid

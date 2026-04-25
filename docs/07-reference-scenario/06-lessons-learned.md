@@ -490,6 +490,11 @@ graph TB
 - [Site Reliability Engineering (SRE) Book](https://sre.google/books/)
 - [Kubernetes Production Best Practices](https://learnk8s.io/production-best-practices)
 
+!!! example "🔗 Working Example: Learn Hands-On with the Contoso Insurance Sample"
+    Put these lessons into practice with the companion implementation at
+    [ContosoInsurances-NativeToLocal](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal).
+    Deploy the sample across all three branches to experience the migration challenges described in this chapter firsthand — from cloud-native to hybrid connected to fully disconnected.
+
 ---
 
 > **Next:** [Part 8 — Best Practices →](../08-best-practices/README.md)

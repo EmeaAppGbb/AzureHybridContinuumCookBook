@@ -498,6 +498,11 @@ Phase 2 delivers significant cost and sovereignty benefits but maintains depende
 - [Azure ExpressRoute](https://learn.microsoft.com/en-us/azure/expressroute/)
 - [Azure Arc Overview](https://learn.microsoft.com/en-us/azure/azure-arc/overview)
 
+!!! example "🔗 Working Example: Contoso Insurance Sample Application"
+    See the complete Phase 2 hybrid connected implementation at
+    [ContosoInsurances-NativeToLocal (`local-connected` branch)](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal/tree/local-connected) —
+    demonstrating how compute migrates to Azure Local via Arc while identity, monitoring, and secrets remain in Azure.
+
 ---
 
 > **Next:** [Phase 3: Disconnected →](04-phase3-disconnected.md)

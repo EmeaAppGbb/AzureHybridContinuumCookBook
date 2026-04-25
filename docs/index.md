@@ -49,6 +49,10 @@ This CookBook is a comprehensive guide to designing, building, and operating hyb
 | 6 | [**Cloud Exit Scenarios**](06-cloud-exit-scenarios/README.md) | Assessment, migration from public cloud → connected → disconnected |
 | 7 | [**Reference Scenario**](07-reference-scenario/README.md) | Enterprise insurance app through the entire continuum |
 
+> 🔗 **Companion Sample Application:** This guide is accompanied by a working reference implementation —
+> [ContosoInsurances-NativeToLocal](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal) — a .NET 8 enterprise application
+> deployable across Azure (AKS), Azure Local (connected), and air-gapped environments. Three branches, three continuum stages, one codebase.
+
 ### Part 4: Cross-Cutting Concerns
 
 | # | Section | Description |

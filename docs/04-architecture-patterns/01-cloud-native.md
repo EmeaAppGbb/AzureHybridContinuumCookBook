@@ -96,6 +96,11 @@ Decompose applications into small, independently deployable services, each respo
 
 **Azure Implementation:** Deploy microservices to AKS or Azure Container Apps, use Service Bus for inter-service communication, and Azure API Management for external API exposure.
 
+!!! example "🔗 Working Example: Contoso Insurance Sample Application"
+    See the complete working implementation of this architecture at
+    [ContosoInsurances-NativeToLocal](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal) —
+    a .NET 8 enterprise application demonstrating cloud-native AKS deployment with Blazor Server, Minimal API, RabbitMQ messaging, and Bicep IaC. Explore the **`main`** branch for the full Azure cloud-native pattern, including `infra/` (Bicep templates) and `k8s/` (Kubernetes manifests).
+
 ### 2. Containerization
 
 Package applications and dependencies into container images for consistent deployment across environments. Containers provide:

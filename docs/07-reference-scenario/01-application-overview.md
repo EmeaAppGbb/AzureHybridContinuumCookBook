@@ -333,6 +333,46 @@ Contoso's journey through the hybrid continuum is driven by real business challe
 
 These challenges set the stage for Contoso's hybrid continuum journey — a carefully planned migration from Azure public cloud through hybrid connected operation to fully disconnected sovereign computing.
 
+## Companion Sample Implementation
+
+!!! example "🔗 Working Example: Contoso Insurance Sample Application"
+    The architecture described in this reference scenario has a complete, deployable companion implementation at
+    [ContosoInsurances-NativeToLocal](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal).
+
+This companion repository contains a working .NET 8 enterprise application that brings the Contoso Insurance scenario to life with real, runnable code. While this CookBook explains the *why* and *how* of each architectural decision, the sample repo provides the *what* — deployable source code, infrastructure templates, and Kubernetes manifests.
+
+**Technology stack:**
+
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | Blazor Server (.NET 8) |
+| **Backend API** | ASP.NET Core Minimal API |
+| **Background Processing** | .NET Worker Service + RabbitMQ |
+| **Orchestration** | .NET Aspire |
+| **Database** | SQL Server (via EF Core) |
+| **Infrastructure** | Bicep IaC (AKS, ACR, SQL, Key Vault, App Gateway, Networking, Monitoring) |
+| **Deployment** | Kubernetes manifests, Azure Developer CLI (`azd`) |
+
+**Three deployment models mapped to continuum phases:**
+
+| Branch | Continuum Phase | Target Environment | Connectivity |
+|--------|----------------|-------------------|-------------|
+| **`main`** | Phase 1 — Public Cloud | Azure (AKS) | Full internet |
+| **`local-connected`** | Phase 2 — Hybrid Connected | Azure Local (Arc-connected) | Partial |
+| **`local-disconnected`** | Phase 3 — Disconnected | Azure Local (air-gapped) | None |
+
+**Key repository paths:**
+
+- `src/ContosoInsurance.AppHost/` — .NET Aspire orchestrator
+- `src/ContosoInsurance.Api/` — Minimal API with REST endpoints
+- `src/ContosoInsurance.Web/` — Blazor Server frontend
+- `src/ContosoInsurance.Worker/` — Background RabbitMQ consumer
+- `infra/` — Bicep IaC (main.bicep + modules for AKS, ACR, SQL, Key Vault, networking, monitoring)
+- `k8s/` — Kubernetes manifests (deployments, services, network policies)
+
+!!! tip "How to Use the Documentation and Code Together"
+    Read the chapters in this section to understand the architectural reasoning behind each phase, then explore the corresponding branch in the sample repo to see how those decisions are implemented in code. The documentation and code are kept in separate repositories intentionally — they complement each other without duplicating content.
+
 ## References
 
 - [.NET 8 Documentation](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-8)

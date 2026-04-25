@@ -97,6 +97,11 @@ Security cannot be added as an afterthought in hybrid architectures. The expande
 !!! note "Zero Trust Across the Continuum"
     Zero Trust principles—verify explicitly, use least-privilege access, assume breach—apply equally whether workloads run in public cloud or air-gapped data centers. The implementation tools change, but the principles remain constant.
 
+!!! example "🔗 Working Example: Contoso Insurance Sample Application"
+    See these design principles in action at
+    [ContosoInsurances-NativeToLocal](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal) —
+    demonstrating portable containers across three deployment models, Bicep IaC for all environments, zero-trust networking (NSGs, private endpoints, Calico network policies), and OpenTelemetry-based distributed tracing.
+
 ### Observe Everything
 
 **Principle**: Comprehensive observability is essential for operating hybrid workloads effectively.

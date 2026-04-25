@@ -43,6 +43,8 @@ This CookBook covers the full **Azure Hybrid Continuum** — from cloud-native w
 | | [Sovereign Landing Zone Guide](docs/05-sovereign-landing-zone-guide/) | Identity, network, security, governance, automation |
 | **3 — Scenarios** | [Cloud Exit Scenarios](docs/06-cloud-exit-scenarios/) | Migrating from public → connected → disconnected |
 | | [Reference Scenario](docs/07-reference-scenario/) | Contoso Insurance app through the full continuum |
+
+> 🔗 **Companion Sample Application:** [ContosoInsurances-NativeToLocal](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal) — a working .NET 8 implementation of the Contoso Insurance reference scenario, deployable across Azure (AKS), Azure Local (connected), and air-gapped environments.
 | **4 — Operations** | [Best Practices](docs/08-best-practices/) | Design principles, resilience, security, cost optimization |
 | | [Appendix](docs/09-appendix/) | Glossary, Azure service mapping, additional resources |
 

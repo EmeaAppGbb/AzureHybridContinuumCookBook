@@ -501,6 +501,11 @@ The assessment phase should produce:
 
 These artifacts form the foundation for detailed migration planning and execution covered in subsequent chapters.
 
+!!! example "🔗 Working Example: Contoso Insurance Sample Application"
+    See how a real application structure enables cloud exit assessment at
+    [ContosoInsurances-NativeToLocal](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal).
+    The sample's modular architecture (.NET Aspire orchestration, containerized services, Bicep IaC) demonstrates many of the portability characteristics that score well on the readiness framework above. Compare branches to see how PaaS coupling changes across deployment models.
+
 ## References
 
 - [Azure Migrate — Assessment](https://learn.microsoft.com/en-us/azure/migrate/concepts-assessment-calculation)

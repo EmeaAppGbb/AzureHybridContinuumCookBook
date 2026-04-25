@@ -468,6 +468,11 @@ These challenges set the stage for Phase 2 — migration to Azure Local with hyb
 - [Azure Monitor Container Insights](https://learn.microsoft.com/en-us/azure/azure-monitor/containers/container-insights-overview)
 - [GitHub Actions for Azure](https://learn.microsoft.com/en-us/azure/developer/github/github-actions)
 
+!!! example "🔗 Working Example: Contoso Insurance Sample Application"
+    See the complete Phase 1 cloud-native implementation at
+    [ContosoInsurances-NativeToLocal (`main` branch)](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal/tree/main) —
+    including `infra/` Bicep templates for AKS, ACR, SQL, Key Vault, App Gateway, and networking modules, plus `k8s/` Kubernetes manifests for deployments, services, and network policies.
+
 ---
 
 > **Next:** [Phase 2: Hybrid Connected →](03-phase2-hybrid-connected.md)

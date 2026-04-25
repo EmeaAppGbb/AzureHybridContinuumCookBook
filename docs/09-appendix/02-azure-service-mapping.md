@@ -193,6 +193,11 @@ The mapping reflects real-world constraints: not every Azure service has a direc
 - [CNCF Cloud Native Landscape](https://landscape.cncf.io/)
 - [Azure hybrid and multicloud patterns](https://learn.microsoft.com/en-us/azure/architecture/hybrid/hybrid-start-here)
 
+!!! example "🔗 Working Example: Contoso Insurance Sample Application"
+    See these service mappings implemented in a real application at
+    [ContosoInsurances-NativeToLocal](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal).
+    Compare the `main`, `local-connected`, and `local-disconnected` branches to see how services like AKS → local K8s, Azure SQL → SQL on Arc → SQL Server local, ACR → local registry, and App Insights → Prometheus/Grafana are swapped across the continuum.
+
 ---
 
 > **Next:** [Additional Resources →](03-additional-resources.md)

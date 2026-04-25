@@ -25,6 +25,11 @@ Hybrid disconnected architecture eliminates all dependencies on Azure or externa
 
 This pattern sacrifices the convenience of cloud management for **absolute control and data sovereignty**. Every capability present in cloud-native or hybrid connected patterns must be replicated locally using open-source or commercial software.
 
+!!! example "🔗 Working Example: Contoso Insurance Sample Application"
+    See the complete working implementation of this architecture at
+    [ContosoInsurances-NativeToLocal](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal) —
+    a .NET 8 enterprise application demonstrating fully disconnected, air-gapped deployment. Explore the **`local-disconnected`** branch to see how every Azure dependency is replaced with local alternatives: Prometheus/Grafana for monitoring, a local container registry, and on-premises identity.
+
 ## When to Use Hybrid Disconnected
 
 The hybrid disconnected pattern is **mandatory** when:
