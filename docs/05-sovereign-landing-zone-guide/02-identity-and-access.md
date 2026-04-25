@@ -52,7 +52,75 @@ For sovereign environments, **Password Hash Synchronization with Seamless SSO** 
 - Implement Azure AD Application Proxy for secure access to on-premises web applications without VPN
 - Use Entra ID conditional access policies to enforce device compliance for both cloud and on-premises resources
 
-<!-- DIAGRAM: Identity architecture across the hybrid continuum showing three columns: Connected (Azure AD + hybrid join), Intermittent (Azure AD Connect sync + offline capabilities), Disconnected (on-premises AD DS only) — with authentication flows for each -->
+```mermaid
+graph TB
+    subgraph Connected["☁️ Connected Cloud - Full Azure"]
+        ConnIdentity[Entra ID<br/>Primary Identity]
+        ConnSync[Entra Connect<br/>Hybrid Sync]
+        ConnADDS[On-Prem AD DS<br/>Synchronized]
+        ConnAuth[Authentication Flow]
+        
+        ConnUser[User] -->|1. Access Request| ConnAuth
+        ConnAuth -->|2. Authenticate| ConnIdentity
+        ConnIdentity -->|3. Validate| ConnADDS
+        ConnADDS -->|4. Sync| ConnSync
+        ConnSync -.->|Continuous Sync| ConnIdentity
+        ConnIdentity -->|5. Token| ConnUser
+    end
+    
+    subgraph Intermittent["🔗 Hybrid Connected - Azure Local"]
+        IntIdentity[Entra ID<br/>Cloud Identity]
+        IntSync[Entra Connect<br/>Periodic Sync]
+        IntADDS[On-Prem AD DS<br/>Primary]
+        IntADFS[AD FS<br/>Federation]
+        IntAuth[Authentication Flow]
+        IntCache[Cached Credentials<br/>Offline Support]
+        
+        IntUser[User] -->|1. Access Request| IntAuth
+        IntAuth -->|2. Check Connectivity| IntADFS
+        IntADFS -->|3a. If Online| IntIdentity
+        IntADFS -->|3b. If Offline| IntCache
+        IntADDS --> IntADFS
+        IntADDS -->|Periodic Sync| IntSync
+        IntSync -.->|When Connected| IntIdentity
+        IntIdentity & IntCache -->|4. Token| IntUser
+    end
+    
+    subgraph Disconnected["🔒 Disconnected - Air-Gapped"]
+        DiscADDS[Active Directory DS<br/>Standalone]
+        DiscADFS[AD FS<br/>Local Federation]
+        DiscAuth[Authentication Flow]
+        DiscFreeIPA[FreeIPA<br/>Linux Identity]
+        DiscKeycloak[Keycloak<br/>Modern Auth]
+        
+        DiscUser[User] -->|1. Access Request| DiscAuth
+        DiscAuth -->|2. Authenticate| DiscADFS
+        DiscADFS -->|3. Validate| DiscADDS
+        DiscADDS -->|4. Token| DiscUser
+        
+        DiscLinuxUser[Linux User] -->|Alt: Linux Auth| DiscFreeIPA
+        DiscFreeIPA --> DiscADDS
+        
+        DiscAppUser[Modern App User] -->|Alt: OAuth2/OIDC| DiscKeycloak
+        DiscKeycloak --> DiscADDS
+    end
+    
+    Internet[☁️ Internet<br/>Azure Services] -.->|Always Connected| ConnIdentity
+    Internet -.->|Intermittent| IntIdentity
+    Internet -.->|No Connection| Disconnected
+    
+    style Connected fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style Intermittent fill:#00BCF2,stroke:#0078D4,stroke-width:3px
+    style Disconnected fill:#505050,stroke:#FFB900,stroke-width:3px,color:#fff
+    
+    style ConnIdentity fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style IntIdentity fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style IntCache fill:#FFB900,stroke:#D83B01,stroke-width:2px
+    style DiscADDS fill:#7FBA00,stroke:#107C10,stroke-width:2px
+    style DiscKeycloak fill:#00B7C3,stroke:#005B70,stroke-width:2px
+    
+    style Internet fill:#E8F4FD,stroke:#0078D4,stroke-width:2px,stroke-dasharray: 5 5
+```
 
 ### Federated Identity with Active Directory Federation Services (ADFS)
 

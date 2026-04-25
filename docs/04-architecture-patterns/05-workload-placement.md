@@ -289,7 +289,64 @@ START: Assess Workload
          └─ High (24/7 ops, deep expertise) → 🏢 On-Premises viable
 ```
 
-<!-- DIAGRAM: Workload placement decision tree as a visual flowchart starting from data classification through regulatory, latency, dependency, scale, and maturity checks, ending with recommended placement -->
+```mermaid
+graph TD
+    Start([Start: Workload Placement Analysis]) --> DataClass{Data<br/>Classification?}
+    
+    DataClass -->|Highly Sensitive<br/>Classified| Compliance{Regulatory<br/>Compliance?}
+    DataClass -->|Confidential<br/>Business-Critical| Confidential{Data Residency<br/>Requirements?}
+    DataClass -->|Internal<br/>General| Internal{Latency<br/>Sensitive?}
+    DataClass -->|Public<br/>Non-Sensitive| Public[☁️ Azure Public Cloud<br/>Standard Services]
+    
+    Compliance -->|Air-Gap Required| Disconnected[🔒 Disconnected On-Prem<br/>Air-Gapped Architecture]
+    Compliance -->|Sovereignty Required| Sovereign{Connected<br/>Allowed?}
+    Compliance -->|Industry Standards| ConfidentialLZ
+    
+    Sovereign -->|Yes| SovereignCloud[🛡️ Sovereign Landing Zone<br/>Azure with Sovereignty Controls]
+    Sovereign -->|No| Disconnected
+    
+    Confidential -->|Yes - In-Country| ConfidentialLZ{Cloud Exit<br/>Considered?}
+    Confidential -->|No| Internal
+    
+    ConfidentialLZ -->|Yes - Strategic| HybridEval
+    ConfidentialLZ -->|No| SovereignCloud
+    
+    Internal -->|Yes - <10ms| LatencyCheck{User<br/>Location?}
+    Internal -->|No - >10ms OK| Dependencies
+    
+    LatencyCheck -->|Remote/Edge| EdgeLocal[🌐 Azure Local<br/>Edge Location]
+    LatencyCheck -->|Central DC| HybridEval{Hybrid Cloud<br/>Capability?}
+    
+    HybridEval -->|Yes| HybridConnected[🔗 Hybrid Connected<br/>Azure Arc + Azure Local]
+    HybridEval -->|No| OnPremVM[🏢 On-Premises VMs<br/>Traditional Infrastructure]
+    
+    Dependencies{Cloud Service<br/>Dependencies?} -->|Heavy - PaaS| CloudServices[☁️ Azure Public Cloud<br/>PaaS Services]
+    Dependencies -->|Moderate - IaaS| IaaSEval{Cost vs.<br/>Scale?}
+    Dependencies -->|None - Self-Contained| SelfContained
+    
+    IaaSEval -->|High Scale<br/>Variable Load| CloudServices
+    IaaSEval -->|Stable Predictable<br/>Cost-Sensitive| HybridEval
+    
+    SelfContained{Portability<br/>Required?} -->|Yes - Multi-Cloud| ContainerPlatform[📦 Kubernetes<br/>Azure AKS or Arc-Enabled]
+    SelfContained -->|No| OnPremVM
+    
+    style Start fill:#0078D4,stroke:#002050,stroke-width:2px,color:#fff
+    style Disconnected fill:#505050,stroke:#FFB900,stroke-width:3px,color:#fff
+    style SovereignCloud fill:#5E5E5E,stroke:#00BCF2,stroke-width:3px,color:#fff
+    style HybridConnected fill:#00BCF2,stroke:#0078D4,stroke-width:3px
+    style EdgeLocal fill:#7FBA00,stroke:#107C10,stroke-width:3px
+    style CloudServices fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style Public fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style OnPremVM fill:#FFB900,stroke:#D83B01,stroke-width:3px
+    style ContainerPlatform fill:#00B7C3,stroke:#005B70,stroke-width:3px
+    
+    style DataClass fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style Compliance fill:#E74856,stroke:#A80000,stroke-width:2px
+    style Confidential fill:#E74856,stroke:#A80000,stroke-width:2px
+    style Internal fill:#FFB900,stroke:#D83B01,stroke-width:2px
+    style LatencyCheck fill:#FFB900,stroke:#D83B01,stroke-width:2px
+    style Dependencies fill:#7FBA00,stroke:#107C10,stroke-width:2px
+```
 
 ## Hybrid Split Placement
 

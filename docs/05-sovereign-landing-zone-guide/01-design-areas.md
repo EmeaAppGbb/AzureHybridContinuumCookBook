@@ -46,7 +46,98 @@ Governance establishes guardrails that ensure workloads remain compliant with or
 
 Automation is critical for consistent, repeatable deployment and management of landing zones. Infrastructure as Code (IaC) using Bicep or Terraform allows the SLZ to be deployed, updated, and extended in a controlled, auditable manner. CI/CD pipelines automate validation, testing, and deployment, reducing human error and ensuring policy compliance before resources are provisioned. For disconnected scenarios, automation must accommodate offline deployment workflows, including pre-built infrastructure packages deployed via physical media.
 
-<!-- DIAGRAM: SLZ design areas wheel showing all 8 design areas with the SLZ-modified areas highlighted in a different color, with annotations showing what changed -->
+```mermaid
+graph TB
+    subgraph SLZ["Sovereign Landing Zone"]
+        Center([SLZ Core<br/>Enhanced Security<br/>Data Sovereignty])
+    end
+    
+    subgraph DA1["🔐 Identity & Access"]
+        DA1a[Enhanced RBAC]
+        DA1b[Conditional Access]
+        DA1c[Privileged Identity Mgmt]
+        DA1d[Data Residency Controls]
+    end
+    
+    subgraph DA2["🌐 Network Topology"]
+        DA2a[Isolated Hub & Spoke]
+        DA2b[Private Endpoints Only]
+        DA2c[Network Sovereignty]
+        DA2d[Traffic Inspection]
+    end
+    
+    subgraph DA3["🔒 Security & Governance"]
+        DA3a[Enhanced Policies]
+        DA3b[Confidential Computing]
+        DA3c[Encryption at Rest/Transit]
+        DA3d[Audit & Compliance]
+    end
+    
+    subgraph DA4["📊 Management & Monitoring"]
+        DA4a[Local Log Storage]
+        DA4b[Sovereign Monitoring]
+        DA4c[Compliance Dashboards]
+        DA4d[Alert Management]
+    end
+    
+    subgraph DA5["💼 Business Continuity"]
+        DA5a[In-Region Backup]
+        DA5b[Disaster Recovery]
+        DA5c[Data Sovereignty DR]
+        DA5d[RTO/RPO Compliance]
+    end
+    
+    subgraph DA6["⚙️ Platform Automation"]
+        DA6a[IaC Templates]
+        DA6b[Policy as Code]
+        DA6c[Sovereign Pipelines]
+        DA6d[Compliance Validation]
+    end
+    
+    subgraph DA7["🏗️ Resource Organization"]
+        DA7a[Confidential Subscriptions]
+        DA7b[Management Groups]
+        DA7c[Tagging Strategy]
+        DA7d[Cost Management]
+    end
+    
+    subgraph DA8["🚀 Deployment & Operations"]
+        DA8a[Landing Zone Deployment]
+        DA8b[Workload Onboarding]
+        DA8c[Operational Procedures]
+        DA8d[Change Management]
+    end
+    
+    Center --> DA1
+    Center --> DA2
+    Center --> DA3
+    Center --> DA4
+    Center --> DA5
+    Center --> DA6
+    Center --> DA7
+    Center --> DA8
+    
+    DA1 --> DA1a & DA1b & DA1c & DA1d
+    DA2 --> DA2a & DA2b & DA2c & DA2d
+    DA3 --> DA3a & DA3b & DA3c & DA3d
+    DA4 --> DA4a & DA4b & DA4c & DA4d
+    DA5 --> DA5a & DA5b & DA5c & DA5d
+    DA6 --> DA6a & DA6b & DA6c & DA6d
+    DA7 --> DA7a & DA7b & DA7c & DA7d
+    DA8 --> DA8a & DA8b & DA8c & DA8d
+    
+    style Center fill:#0078D4,stroke:#002050,stroke-width:4px,color:#fff
+    style SLZ fill:#E8F4FD,stroke:#0078D4,stroke-width:2px
+    
+    style DA1 fill:#B4A0FF,stroke:#5E5E5E,stroke-width:3px
+    style DA2 fill:#7FBA00,stroke:#107C10,stroke-width:3px
+    style DA3 fill:#E74856,stroke:#A80000,stroke-width:3px
+    style DA4 fill:#00B7C3,stroke:#005B70,stroke-width:3px
+    style DA5 fill:#FFB900,stroke:#D83B01,stroke-width:3px
+    style DA6 fill:#00BCF2,stroke:#0078D4,stroke-width:3px
+    style DA7 fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style DA8 fill:#FFF100,stroke:#FFB900,stroke-width:3px
+```
 
 ## SLZ-Specific Modifications by Design Area
 

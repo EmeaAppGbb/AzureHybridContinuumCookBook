@@ -422,7 +422,56 @@ START → Do regulations mandate on-premises data residency?
                                     └─ NO → Remain in cloud [NO EXIT]
 ```
 
-<!-- DIAGRAM: Cloud exit decision framework flowchart with decision nodes for regulatory requirements, cost analysis, latency needs, strategic priorities, leading to exit recommendations (required, candidate, optional, none) -->
+```mermaid
+graph TD
+    Start([Start: Cloud Exit Assessment]) --> Regulatory{Regulatory<br/>Requirement?}
+    
+    Regulatory -->|Yes - Hard Mandate| RegType{Mandate Type?}
+    Regulatory -->|No| Cost{Cost Reduction<br/>Primary Driver?}
+    
+    RegType -->|Data Sovereignty| DataSov[Exit Required<br/>Sovereign Cloud or On-Prem]
+    RegType -->|Air-Gap Security| AirGap[Exit Required<br/>Disconnected Architecture]
+    RegType -->|Classified Data| Classified[Exit Required<br/>Government Cloud or On-Prem]
+    
+    Cost -->|Yes| CostAnalysis{Current vs.<br/>On-Prem TCO?}
+    Cost -->|No| Latency{Latency<br/>Requirements?}
+    
+    CostAnalysis -->|>30% Savings| CostProfile{Workload<br/>Profile?}
+    CostAnalysis -->|<30% Savings| Strategic
+    
+    CostProfile -->|Stable, Predictable| CostCandidate[Exit Candidate<br/>Repatriate to On-Prem]
+    CostProfile -->|Variable, Bursty| StayCloud[Stay in Cloud<br/>Cost Unpredictable On-Prem]
+    
+    Latency -->|<10ms Required| LatencyCheck{Can Edge<br/>Solve It?}
+    Latency -->|>10ms OK| Strategic
+    
+    LatencyCheck -->|Yes| EdgeDeploy[Partial Exit<br/>Deploy to Azure Local/Edge]
+    LatencyCheck -->|No - Full Local| FullLocal[Exit Candidate<br/>Full On-Prem Deployment]
+    
+    Strategic{Strategic<br/>Priorities?} -->|Vendor Independence| Vendor[Exit Candidate<br/>Multi-Cloud or On-Prem]
+    Strategic -->|Innovation Focus| Innovation[Stay in Cloud<br/>Maximize Cloud-Native Services]
+    Strategic -->|Control & Autonomy| Control[Exit Candidate<br/>Self-Hosted Stack]
+    Strategic -->|None Critical| Assess
+    
+    Assess{Operational<br/>Maturity?} -->|High - Expert Teams| Mature[Exit Option Available<br/>Assess Business Case]
+    Assess -->|Low - Cloud-Dependent| Immature[Stay in Cloud<br/>Build Capability First]
+    
+    DataSov & AirGap & Classified --> Required[✅ Exit REQUIRED]
+    CostCandidate & FullLocal & Vendor & Control --> Candidate[⚠️ Exit CANDIDATE<br/>Detailed Analysis Needed]
+    EdgeDeploy & Mature --> Optional[ℹ️ Exit OPTIONAL<br/>Business Decision]
+    StayCloud & Innovation & Immature --> None[❌ Stay in Cloud<br/>Exit Not Recommended]
+    
+    style Start fill:#0078D4,stroke:#002050,stroke-width:2px,color:#fff
+    style Required fill:#107C10,stroke:#004B1C,stroke-width:3px,color:#fff
+    style Candidate fill:#FFB900,stroke:#D83B01,stroke-width:3px
+    style Optional fill:#00BCF2,stroke:#0078D4,stroke-width:3px
+    style None fill:#E74856,stroke:#A80000,stroke-width:3px,color:#fff
+    style Regulatory fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style Cost fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style Latency fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style Strategic fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style Assess fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+```
 
 ## Post-Exit Considerations
 

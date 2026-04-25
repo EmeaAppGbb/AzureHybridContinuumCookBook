@@ -175,7 +175,89 @@ A typical cloud-native architecture on Azure includes:
 - Azure Monitor + Application Insights (observability)
 - Azure Policy (governance and compliance)
 
-<!-- DIAGRAM: Cloud-native reference architecture showing Internet → Azure Front Door → Application Gateway → AKS cluster running multiple microservices → Azure SQL Database + Cosmos DB + Service Bus + Blob Storage, all within a single Azure region with Azure Monitor observability -->
+```mermaid
+graph TB
+    subgraph Internet
+        Users[Users/Clients]
+    end
+    
+    subgraph Azure["Azure Region - Cloud-Native Architecture"]
+        subgraph Ingress["Global Edge & Ingress"]
+            AFD[Azure Front Door<br/>Global Load Balancer]
+            CDN[Azure CDN<br/>Static Content]
+            APIM[API Management<br/>API Gateway]
+        end
+        
+        subgraph Compute["Compute Layer"]
+            AppGW[Application Gateway<br/>WAF]
+            AKS[AKS Cluster]
+            subgraph AKSNodes["Microservices"]
+                MS1[Auth Service]
+                MS2[Order Service]
+                MS3[Inventory Service]
+                MS4[Notification Service]
+            end
+            AppSvc[App Service<br/>Web Apps]
+            Functions[Azure Functions<br/>Serverless]
+        end
+        
+        subgraph Data["Data & Storage Layer"]
+            SQL[(Azure SQL Database<br/>Relational Data)]
+            Cosmos[(Cosmos DB<br/>NoSQL/Global)]
+            Storage[Blob Storage<br/>Object Storage]
+            Redis[Azure Cache for Redis<br/>In-Memory Cache]
+        end
+        
+        subgraph Integration["Integration Layer"]
+            ServiceBus[Service Bus<br/>Message Queue]
+            EventGrid[Event Grid<br/>Event Routing]
+        end
+        
+        subgraph Security["Security & Compliance"]
+            KV[Key Vault<br/>Secrets Management]
+            AAD[Entra ID<br/>Identity & Access]
+            Defender[Defender for Cloud<br/>Security Posture]
+        end
+        
+        subgraph Observability["Observability & Management"]
+            Monitor[Azure Monitor<br/>Metrics & Logs]
+            AppInsights[Application Insights<br/>APM]
+            LogAnalytics[Log Analytics<br/>Query & Analysis]
+        end
+    end
+    
+    Users -->|HTTPS| AFD
+    Users -->|Static Assets| CDN
+    AFD --> APIM
+    APIM --> AppGW
+    AppGW --> AKS
+    AppGW --> AppSvc
+    
+    AKS --> MS1 & MS2 & MS3 & MS4
+    MS1 & MS2 & MS3 --> SQL
+    MS2 & MS3 --> Cosmos
+    MS4 --> ServiceBus
+    MS1 & MS2 & MS3 & MS4 --> Redis
+    AppSvc --> Storage
+    Functions --> ServiceBus
+    
+    MS1 --> AAD
+    MS1 & MS2 & MS3 & MS4 --> KV
+    
+    AKS & AppSvc & Functions --> Monitor
+    Monitor --> AppInsights
+    Monitor --> LogAnalytics
+    
+    Defender -.->|Security Monitoring| AKS & AppSvc & SQL & Cosmos
+    
+    style Azure fill:#0078D4,stroke:#002050,stroke-width:3px,color:#fff
+    style Ingress fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Compute fill:#00BCF2,stroke:#0078D4,stroke-width:2px
+    style Data fill:#FFB900,stroke:#D83B01,stroke-width:2px
+    style Integration fill:#7FBA00,stroke:#107C10,stroke-width:2px
+    style Security fill:#E74856,stroke:#A80000,stroke-width:2px
+    style Observability fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+```
 
 !!! example "Example: E-Commerce Platform"
     A cloud-native e-commerce platform might deploy:

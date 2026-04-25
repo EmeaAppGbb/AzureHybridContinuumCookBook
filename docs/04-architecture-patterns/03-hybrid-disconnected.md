@@ -42,6 +42,142 @@ Hybrid disconnected is **not suitable** when:
 ❌ Operational teams lack expertise to manage full infrastructure stack  
 ❌ Budget constraints prevent investment in on-premises hardware and redundancy
 
+## Reference Architecture
+
+```mermaid
+graph TB
+    subgraph AirGap["Air-Gapped / Disconnected Environment"]
+        subgraph Users["User Access"]
+            AdminUsers[Admin Workstations]
+            AppUsers[Application Users]
+        end
+        
+        subgraph Identity["Identity & Access Management"]
+            ADDS[Active Directory DS<br/>Domain Controllers]
+            ADFS[AD FS<br/>Federation Services]
+            FreeIPA[FreeIPA<br/>Linux Identity]
+            Keycloak[Keycloak<br/>OAuth2/OIDC]
+        end
+        
+        subgraph Compute["Compute Platform"]
+            K3s[K3s / RKE2<br/>Kubernetes Cluster]
+            
+            subgraph Apps["Application Services"]
+                AuthSvc[Auth Service]
+                APIGw[API Gateway]
+                AppSvc1[Business App 1]
+                AppSvc2[Business App 2]
+            end
+        end
+        
+        subgraph Data["Data Services"]
+            Postgres[(PostgreSQL<br/>Primary DB)]
+            PostgresReplica[(PostgreSQL<br/>Replica)]
+            Redis[(Redis<br/>Cache)]
+            MinIO[MinIO<br/>S3-Compatible Storage]
+        end
+        
+        subgraph Messaging["Messaging & Events"]
+            RabbitMQ[RabbitMQ<br/>Message Broker]
+            Kafka[Apache Kafka<br/>Event Streaming]
+        end
+        
+        subgraph Security["Security Services"]
+            Vault[HashiCorp Vault<br/>Secrets Management]
+            PKI[Local PKI/CA<br/>Certificate Authority]
+            SIEM[Local SIEM<br/>Security Monitoring]
+        end
+        
+        subgraph Monitoring["Observability Stack"]
+            Prometheus[Prometheus<br/>Metrics]
+            Grafana[Grafana<br/>Dashboards]
+            Loki[Loki<br/>Log Aggregation]
+            Jaeger[Jaeger<br/>Distributed Tracing]
+        end
+        
+        subgraph Network["Network Infrastructure"]
+            FW[Firewall<br/>Segmentation]
+            LB[Load Balancer<br/>HAProxy/NGINX]
+            DNS[Local DNS<br/>BIND/CoreDNS]
+        end
+        
+        subgraph Backup["Backup & DR"]
+            LocalBackup[Veeam/Velero<br/>Local Backup]
+            OffSite[Tape/Disk Rotation<br/>Off-Site Storage]
+        end
+        
+        subgraph Registry["Container & Artifacts"]
+            Harbor[Harbor Registry<br/>Container Images]
+            Nexus[Nexus Repository<br/>Artifacts/Packages]
+        end
+    end
+    
+    subgraph External["Isolated Transfer Zone"]
+        SecureMedia[Secure Media Transfer<br/>Air-Gap Data Diode]
+        Updates[Updates & Patches<br/>Manual Transfer]
+    end
+    
+    %% User Access
+    AdminUsers --> ADDS
+    AppUsers --> LB
+    LB --> APIGw
+    
+    %% Kubernetes Apps
+    K3s --> Apps
+    APIGw --> AppSvc1 & AppSvc2
+    AuthSvc --> Keycloak
+    Apps --> Harbor
+    
+    %% Identity Flow
+    ADDS --> Keycloak
+    FreeIPA --> K3s
+    ADDS --> ADFS
+    ADFS --> AuthSvc
+    
+    %% Data Access
+    Apps --> Postgres
+    Apps --> Redis
+    Apps --> MinIO
+    Postgres -.->|Replication| PostgresReplica
+    
+    %% Messaging
+    AppSvc1 & AppSvc2 --> RabbitMQ
+    AppSvc1 --> Kafka
+    
+    %% Security
+    Apps --> Vault
+    Vault --> PKI
+    FW --> K3s
+    K3s & Apps --> SIEM
+    
+    %% Monitoring
+    K3s & Apps & Postgres & Redis --> Prometheus
+    Prometheus --> Grafana
+    Apps --> Loki
+    Apps --> Jaeger
+    
+    %% Network
+    DNS --> K3s & Apps
+    LB --> K3s
+    
+    %% Backup
+    K3s & Postgres & MinIO --> LocalBackup
+    LocalBackup -.->|Physical Transfer| OffSite
+    
+    %% External Updates
+    SecureMedia -.->|One-Way Transfer| Harbor & Nexus
+    Updates -.->|Manual Process| Harbor & Nexus
+    
+    style AirGap fill:#505050,stroke:#FFB900,stroke-width:4px,color:#fff
+    style Identity fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style Compute fill:#00BCF2,stroke:#0078D4,stroke-width:2px
+    style Data fill:#FFB900,stroke:#D83B01,stroke-width:2px
+    style Messaging fill:#7FBA00,stroke:#107C10,stroke-width:2px
+    style Security fill:#E74856,stroke:#A80000,stroke-width:2px
+    style Monitoring fill:#00B7C3,stroke:#005B70,stroke-width:2px
+    style External fill:#D83B01,stroke:#A80000,stroke-width:3px,stroke-dasharray: 5 5
+```
+
 ## Reference Architecture Components
 
 ### Compute Services

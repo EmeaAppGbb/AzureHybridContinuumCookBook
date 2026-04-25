@@ -51,7 +51,100 @@ Spoke VNets map to the management group structure in the SLZ:
 - **Confidential Corp landing zones**: Spoke VNets with additional NSG restrictions and mandatory Private Endpoints
 - **Confidential Online landing zones**: Spoke VNets for internet-facing workloads with strict egress controls
 
-<!-- DIAGRAM: Hub & Spoke network topology for SLZ showing: Azure Hub VNet (Firewall, ExpressRoute Gateway, Bastion) connected to Spoke VNets (Confidential Corp, Confidential Online, Public workloads) and via ExpressRoute to on-premises Azure Local cluster -->
+```mermaid
+graph TB
+    subgraph Cloud["☁️ Azure Cloud Services"]
+        EntraID[Entra ID]
+        AzureMonitor[Azure Monitor]
+        Defender[Defender for Cloud]
+    end
+    
+    subgraph Hub["🏢 Hub VNet - 10.0.0.0/16"]
+        subgraph HubServices["Hub Services"]
+            AzFW[Azure Firewall<br/>10.0.1.0/24<br/>Traffic Inspection]
+            Bastion[Azure Bastion<br/>10.0.2.0/24<br/>Secure Access]
+            Gateway[ExpressRoute Gateway<br/>10.0.3.0/24<br/>Hybrid Connection]
+            HubDNS[Private DNS Resolver<br/>10.0.4.0/24]
+        end
+    end
+    
+    subgraph Spoke1["🔐 Spoke 1: Confidential Corp - 10.1.0.0/16"]
+        Spoke1Subnet1[App Subnet<br/>10.1.1.0/24<br/>Confidential VMs]
+        Spoke1Subnet2[Data Subnet<br/>10.1.2.0/24<br/>Confidential SQL MI]
+        Spoke1PE[Private Endpoints<br/>10.1.3.0/24]
+        Spoke1NSG[NSG: Deny All<br/>Except Required]
+    end
+    
+    subgraph Spoke2["🛡️ Spoke 2: Confidential Online - 10.2.0.0/16"]
+        Spoke2Subnet1[AKS Cluster<br/>10.2.1.0/24<br/>Confidential Containers]
+        Spoke2Subnet2[App Service<br/>10.2.2.0/24<br/>VNet Integration]
+        Spoke2PE[Private Endpoints<br/>10.2.3.0/24]
+        Spoke2NSG[NSG: Strict Rules]
+    end
+    
+    subgraph Spoke3["📊 Spoke 3: Public Workloads - 10.3.0.0/16"]
+        Spoke3Subnet1[Public App Tier<br/>10.3.1.0/24]
+        Spoke3Subnet2[Integration Tier<br/>10.3.2.0/24]
+        Spoke3PE[Private Endpoints<br/>10.3.3.0/24]
+    end
+    
+    subgraph OnPrem["🏢 On-Premises"]
+        AzureLocal[Azure Local Cluster<br/>192.168.0.0/16]
+        OnPremDNS[On-Prem DNS]
+        OnPremAD[Active Directory DS]
+    end
+    
+    subgraph PaaS["🔒 Azure PaaS Services"]
+        SQLConfidential[(Confidential SQL MI<br/>Private Endpoint)]
+        KeyVault[Key Vault<br/>Private Endpoint]
+        Storage[Storage Account<br/>Private Endpoint]
+        ACR[Container Registry<br/>Private Endpoint]
+    end
+    
+    %% Hub to Spoke Peering
+    Hub <-->|VNet Peering| Spoke1
+    Hub <-->|VNet Peering| Spoke2
+    Hub <-->|VNet Peering| Spoke3
+    
+    %% All traffic through Firewall
+    Spoke1Subnet1 & Spoke1Subnet2 -->|User Defined Route| AzFW
+    Spoke2Subnet1 & Spoke2Subnet2 -->|User Defined Route| AzFW
+    Spoke3Subnet1 & Spoke3Subnet2 -->|User Defined Route| AzFW
+    
+    %% Private Endpoints
+    Spoke1PE --> SQLConfidential
+    Spoke1PE --> KeyVault
+    Spoke2PE --> ACR
+    Spoke2PE --> KeyVault
+    Spoke3PE --> Storage
+    
+    %% Hybrid Connectivity
+    Gateway <-->|ExpressRoute<br/>Private Connection| AzureLocal
+    AzureLocal --> OnPremDNS
+    AzureLocal --> OnPremAD
+    
+    %% DNS Resolution
+    HubDNS <-.->|Conditional Forward| OnPremDNS
+    Spoke1 & Spoke2 & Spoke3 -.->|DNS Query| HubDNS
+    
+    %% Cloud Services
+    EntraID -.->|Identity| Hub & Spoke1 & Spoke2 & Spoke3
+    AzureMonitor -.->|Monitoring| Hub & Spoke1 & Spoke2 & Spoke3
+    Defender -.->|Security| Hub & Spoke1 & Spoke2 & Spoke3
+    
+    %% Bastion Access
+    Bastion -.->|Secure RDP/SSH| Spoke1Subnet1 & Spoke2Subnet1
+    
+    style Hub fill:#0078D4,stroke:#002050,stroke-width:3px,color:#fff
+    style Spoke1 fill:#E74856,stroke:#A80000,stroke-width:3px,color:#fff
+    style Spoke2 fill:#FFB900,stroke:#D83B01,stroke-width:3px
+    style Spoke3 fill:#7FBA00,stroke:#107C10,stroke-width:3px
+    style OnPrem fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style PaaS fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style Cloud fill:#E8F4FD,stroke:#0078D4,stroke-width:2px
+    style AzFW fill:#E74856,stroke:#A80000,stroke-width:2px,color:#fff
+    style Gateway fill:#00BCF2,stroke:#0078D4,stroke-width:2px
+```
 
 ### Network Segmentation and Micro-Segmentation
 

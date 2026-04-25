@@ -90,7 +90,77 @@ The **Azure Landing Zone Portal Accelerator** provides a guided, wizard-based de
 !!! warning "Portal Accelerator Not Recommended for Production SLZ"
     While the Portal Accelerator is useful for learning, **production sovereign environments must use IaC** (Bicep or Terraform) to meet auditability, repeatability, and compliance requirements. Manual deployments cannot provide the necessary audit trails for sovereign workloads.
 
-<!-- DIAGRAM: Implementation option decision tree: "Multi-cloud?" → Yes → Terraform / No → "Azure-native IaC experience?" → Yes → Bicep / No → "Learning/POC?" → Yes → Portal / No → Bicep -->
+```mermaid
+graph TD
+    Start([Start: SLZ Implementation]) --> ExistingLZ{Existing<br/>Landing Zone?}
+    
+    ExistingLZ -->|Yes| AdoptType{Adoption<br/>Approach?}
+    ExistingLZ -->|No - Greenfield| IaCChoice
+    
+    AdoptType -->|Retrofit Existing| AssessGaps[Assess Gaps<br/>vs. SLZ Requirements]
+    AdoptType -->|Fresh Start| IaCChoice
+    
+    AssessGaps --> RetrofitPlan[Create Retrofit Plan<br/>Incremental Changes]
+    RetrofitPlan --> IaCChoice
+    
+    IaCChoice{IaC Tool<br/>Preference?} -->|Multi-Cloud Strategy| Terraform[✅ Terraform<br/>Azure Landing Zones TF]
+    IaCChoice -->|Azure-Native| Bicep[✅ Bicep<br/>Azure Landing Zones Bicep]
+    IaCChoice -->|Portal-Based POC| Portal[⚠️ Azure Portal<br/>Manual Setup]
+    IaCChoice -->|CI/CD Focus| Pipeline{Existing<br/>Pipeline?}
+    
+    Pipeline -->|GitHub Actions| Bicep
+    Pipeline -->|Azure DevOps| Bicep
+    Pipeline -->|GitLab / Jenkins| Terraform
+    
+    Terraform --> CloudType{Multi-Cloud<br/>Required?}
+    Bicep --> CloudType
+    Portal --> CloudType
+    
+    CloudType -->|Yes| TerraformAdvanced[Terraform with<br/>Cloud-Agnostic Modules]
+    CloudType -->|No - Azure Only| ConnectivityCheck
+    
+    TerraformAdvanced --> ConnectivityCheck
+    
+    ConnectivityCheck{Connectivity<br/>Model?} -->|Connected| Connected[Connected SLZ<br/>Azure Arc Enabled]
+    ConnectivityCheck -->|Intermittent| Intermittent[Hybrid SLZ<br/>Azure Local + Arc]
+    ConnectivityCheck -->|Disconnected| Disconnected[Disconnected SLZ<br/>Air-Gapped]
+    
+    Connected --> DeployMethod{Deployment<br/>Method?}
+    Intermittent --> DeployMethod
+    Disconnected --> OfflinePackage[Create Offline Package<br/>Bundle IaC + Dependencies]
+    
+    OfflinePackage --> DisconnectedDeploy[Manual Deployment<br/>Air-Gapped Environment]
+    
+    DeployMethod -->|Automated| AutoDeploy[Automated Pipeline<br/>CI/CD Deployment]
+    DeployMethod -->|Manual/Controlled| ManualDeploy[Manual Steps<br/>with IaC]
+    
+    AutoDeploy --> Validate[Validate Deployment<br/>Policy Compliance]
+    ManualDeploy --> Validate
+    DisconnectedDeploy --> ManualValidate[Manual Validation<br/>Compliance Review]
+    
+    Validate --> Success[✅ SLZ Deployed<br/>Ready for Workloads]
+    ManualValidate --> Success
+    
+    Success --> Operate[Operational Mode<br/>Workload Onboarding]
+    
+    style Start fill:#0078D4,stroke:#002050,stroke-width:2px,color:#fff
+    style Success fill:#107C10,stroke:#004B1C,stroke-width:3px,color:#fff
+    style Operate fill:#7FBA00,stroke:#107C10,stroke-width:3px
+    
+    style Terraform fill:#00BCF2,stroke:#0078D4,stroke-width:2px
+    style Bicep fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Portal fill:#FFB900,stroke:#D83B01,stroke-width:2px
+    
+    style Connected fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Intermittent fill:#00BCF2,stroke:#0078D4,stroke-width:2px
+    style Disconnected fill:#505050,stroke:#FFB900,stroke-width:3px,color:#fff
+    
+    style ExistingLZ fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style IaCChoice fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style CloudType fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style ConnectivityCheck fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style DeployMethod fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+```
 
 ## Bicep Implementation Walkthrough
 

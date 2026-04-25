@@ -378,7 +378,88 @@ CI/CD pipelines require credentials to deploy Azure resources. For sovereign wor
 !!! warning "Avoid Service Principal Secrets in Pipelines"
     Service principal secrets (client secrets, certificates) represent a significant security risk if leaked. Prefer **managed identities** or **workload identity federation** to eliminate secrets entirely.
 
-<!-- DIAGRAM: CI/CD pipeline architecture for SLZ showing: Source Code (Git) → Build Pipeline (lint, validate, test) → Approval Gate → Deploy to Connected Environment → Verify Compliance. Parallel track: Offline Package Build → Secure Transfer → Deploy to Disconnected Environment -->
+```mermaid
+graph LR
+    subgraph Source["📝 Source Control"]
+        Git[Git Repository<br/>Bicep/Terraform]
+        GitOps[GitOps Manifests<br/>Kubernetes YAML]
+    end
+    
+    subgraph CI["🔨 CI Pipeline - Build & Validate"]
+        Lint[Lint & Format<br/>Check Syntax]
+        Validate[Validate Templates<br/>Azure What-If]
+        SecurityScan[Security Scan<br/>Checkov/TFSec]
+        Test[Unit Tests<br/>Pester/Terratest]
+    end
+    
+    subgraph Artifacts["📦 Artifact Storage"]
+        ACR[Azure Container Registry<br/>Container Images]
+        ArtifactStore[Artifact Store<br/>Bicep Modules / TF Modules]
+    end
+    
+    subgraph CD["🚀 CD Pipeline - Connected Environment"]
+        Approval[Manual Approval Gate<br/>Change Review]
+        DeployDev[Deploy to Dev<br/>Test Environment]
+        ComplianceCheck[Compliance Validation<br/>Policy Check]
+        DeployProd[Deploy to Prod<br/>SLZ Environment]
+        Verify[Post-Deploy Verify<br/>Health Checks]
+    end
+    
+    subgraph Disconnected["🔒 Disconnected Track"]
+        OfflineBuild[Offline Package Build<br/>Bundle All Dependencies]
+        SecureTransfer[Secure Transfer<br/>Air-Gap Data Diode]
+        DisconnectedDeploy[Deploy to Disconnected<br/>Air-Gapped Environment]
+        ManualValidation[Manual Validation<br/>Compliance Review]
+    end
+    
+    subgraph Monitoring["📊 Continuous Monitoring"]
+        AzMonitor[Azure Monitor<br/>Deployment Health]
+        PolicyMonitor[Policy Compliance<br/>Non-Compliance Alerts]
+        Sentinel[Sentinel<br/>Security Events]
+    end
+    
+    %% Connected Flow
+    Git --> Lint
+    Lint --> Validate
+    Validate --> SecurityScan
+    SecurityScan --> Test
+    Test --> ArtifactStore
+    GitOps --> ACR
+    
+    ArtifactStore --> Approval
+    ACR --> Approval
+    
+    Approval -->|Approved| DeployDev
+    DeployDev --> ComplianceCheck
+    ComplianceCheck -->|Compliant| DeployProd
+    ComplianceCheck -->|Non-Compliant| Approval
+    DeployProd --> Verify
+    
+    %% Disconnected Flow
+    Git -.->|Branch| OfflineBuild
+    OfflineBuild --> SecureTransfer
+    SecureTransfer -.->|Physical Media Transfer| DisconnectedDeploy
+    DisconnectedDeploy --> ManualValidation
+    
+    %% Monitoring
+    DeployProd --> AzMonitor
+    DeployProd --> PolicyMonitor
+    DeployProd --> Sentinel
+    
+    DisconnectedDeploy -.->|Local Monitoring| ManualValidation
+    
+    style Source fill:#7FBA00,stroke:#107C10,stroke-width:2px
+    style CI fill:#00BCF2,stroke:#0078D4,stroke-width:2px
+    style Artifacts fill:#FFB900,stroke:#D83B01,stroke-width:2px
+    style CD fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Disconnected fill:#505050,stroke:#FFB900,stroke-width:3px,color:#fff
+    style Monitoring fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    
+    style Approval fill:#E74856,stroke:#A80000,stroke-width:2px,color:#fff
+    style ComplianceCheck fill:#E74856,stroke:#A80000,stroke-width:2px,color:#fff
+    style SecurityScan fill:#E74856,stroke:#A80000,stroke-width:2px,color:#fff
+    style SecureTransfer fill:#D83B01,stroke:#A80000,stroke-width:2px,color:#fff
+```
 
 ## GitOps for Kubernetes Workloads
 

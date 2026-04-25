@@ -213,7 +213,115 @@ For Azure Local clusters and on-premises servers, **Azure Arc** extends Defender
 
 For disconnected environments, Defender for Cloud cannot function (no connectivity to Azure). Organizations must deploy alternative security tools (e.g., endpoint detection and response solutions, host-based intrusion detection).
 
-<!-- DIAGRAM: Governance structure for SLZ showing management group hierarchy with policies annotated at each level, showing which policies are inherited and which are specific to confidential landing zones -->
+```mermaid
+graph TB
+    subgraph Root["Root Management Group"]
+        RootNode[Tenant Root<br/>Foundational Policies]
+    end
+    
+    subgraph Platform["Platform Management Group"]
+        PlatformNode[Platform<br/>Infrastructure Services]
+        
+        subgraph PlatformChildren["Platform Children"]
+            Management[Management<br/>Monitoring & Logging]
+            Connectivity[Connectivity<br/>Hub Networks]
+            Identity[Identity<br/>Domain Controllers]
+        end
+    end
+    
+    subgraph LandingZones["Landing Zones Management Group"]
+        LZNode[Landing Zones<br/>Workload Subscriptions]
+        
+        subgraph ConfidentialLZ["🔐 Confidential Landing Zones"]
+            ConfidentalCorp[Confidential Corp<br/>High Security Workloads]
+            ConfidentialOnline[Confidential Online<br/>Internet-Facing Confidential]
+        end
+        
+        subgraph StandardLZ["📊 Standard Landing Zones"]
+            Corp[Corp<br/>Internal Workloads]
+            Online[Online<br/>Public Workloads]
+        end
+    end
+    
+    subgraph Decommissioned["Decommissioned"]
+        Decomm[Decommissioned<br/>Quarantine Subscriptions]
+    end
+    
+    subgraph Sandbox["Sandbox"]
+        SandboxNode[Sandbox<br/>Development & Testing]
+    end
+    
+    %% Hierarchy
+    RootNode --> PlatformNode
+    RootNode --> LZNode
+    RootNode --> Decomm
+    RootNode --> SandboxNode
+    
+    PlatformNode --> Management
+    PlatformNode --> Connectivity
+    PlatformNode --> Identity
+    
+    LZNode --> ConfidentalCorp
+    LZNode --> ConfidentialOnline
+    LZNode --> Corp
+    LZNode --> Online
+    
+    %% Policy Annotations
+    RootNode -.->|Inherit| RootPolicies[Root Policies:<br/>✓ Allowed Regions<br/>✓ Required Tags<br/>✓ Audit Encryption]
+    
+    PlatformNode -.->|Inherit + Add| PlatformPolicies[Platform Policies:<br/>✓ Root Policies<br/>✓ Diagnostic Settings<br/>✓ Network Rules]
+    
+    ConfidentalCorp -.->|Inherit + Enhance| ConfidentialPolicies[Confidential Policies:<br/>✓ Root + LZ Policies<br/>✓ Deny Public Endpoints<br/>✓ Require Private Link<br/>✓ Confidential Computing<br/>✓ Defender for Cloud Required<br/>✓ Customer Managed Keys<br/>✓ Data Sovereignty Controls]
+    
+    Corp -.->|Inherit| StandardPolicies[Standard LZ Policies:<br/>✓ Root Policies<br/>✓ Security Baseline<br/>✓ Backup Required]
+    
+    %% RBAC
+    subgraph RBAC["🔑 RBAC Assignments"]
+        RootRBAC[Root: Tenant Admins]
+        PlatformRBAC[Platform: Platform Team]
+        LZOwner[LZ: Workload Owners]
+        SecOps[All: Security Readers]
+    end
+    
+    RootRBAC -.->|Contributor<br/>at Root| RootNode
+    PlatformRBAC -.->|Contributor<br/>at Platform| PlatformNode
+    LZOwner -.->|Owner<br/>at Subscription| ConfidentalCorp & Corp
+    SecOps -.->|Security Reader<br/>at Root| RootNode
+    
+    %% Defender & Sentinel
+    subgraph Security["🛡️ Security Services"]
+        DefenderPlan[Defender for Cloud Plans:<br/>✓ Servers<br/>✓ Containers<br/>✓ SQL<br/>✓ Storage<br/>✓ Key Vault]
+        Sentinel[Sentinel:<br/>✓ Log Analytics Workspace<br/>✓ Data Connectors<br/>✓ Analytics Rules]
+    end
+    
+    DefenderPlan -.->|Enabled on| ConfidentalCorp & ConfidentialOnline
+    Sentinel -.->|Monitors| Management
+    Management -.->|Collects from| ConfidentalCorp & ConfidentialOnline & Corp & Online
+    
+    %% Key Vault Governance
+    subgraph KVGov["🔐 Key Vault Governance"]
+        KVPolicy[Key Vault Policies:<br/>✓ Purge Protection Required<br/>✓ Soft Delete Enabled<br/>✓ Private Endpoint Only<br/>✓ Firewall Rules Required]
+        KVRBAC[Key Vault RBAC:<br/>✓ Key Vault Administrator<br/>✓ Key Vault Secrets Officer<br/>✓ Key Vault Secrets User]
+    end
+    
+    KVPolicy -.->|Applied to| ConfidentalCorp & ConfidentialOnline
+    KVRBAC -.->|Assigned per Vault| ConfidentalCorp & ConfidentialOnline
+    
+    style Root fill:#0078D4,stroke:#002050,stroke-width:3px,color:#fff
+    style Platform fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style LandingZones fill:#7FBA00,stroke:#107C10,stroke-width:3px
+    style ConfidentialLZ fill:#E74856,stroke:#A80000,stroke-width:3px,color:#fff
+    style StandardLZ fill:#FFB900,stroke:#D83B01,stroke-width:3px
+    style Decommissioned fill:#5E5E5E,stroke:#000,stroke-width:2px,color:#fff
+    style Sandbox fill:#00B7C3,stroke:#005B70,stroke-width:2px
+    
+    style ConfidentalCorp fill:#C4314B,stroke:#5E0000,stroke-width:2px,color:#fff
+    style ConfidentialOnline fill:#E74856,stroke:#A80000,stroke-width:2px,color:#fff
+    
+    style Security fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style RBAC fill:#FFF100,stroke:#FFB900,stroke-width:2px
+    style KVGov fill:#00BCF2,stroke:#0078D4,stroke-width:2px
+```
 
 ## Microsoft Sentinel for Security Operations
 

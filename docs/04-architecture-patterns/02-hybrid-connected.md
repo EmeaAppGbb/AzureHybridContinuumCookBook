@@ -297,7 +297,100 @@ A typical hybrid connected architecture includes:
 - Private Link for Azure PaaS service access (if needed)
 - Azure Virtual WAN for multi-site deployments
 
-<!-- DIAGRAM: Hybrid connected architecture showing on-premises datacenter with Azure Local cluster running AKS and Arc-enabled SQL MI, connected via ExpressRoute to Azure cloud where Azure Arc, Azure Monitor, Azure Policy, and Defender for Cloud provide management and monitoring, with Entra ID synchronizing from on-premises AD DS -->
+```mermaid
+graph TB
+    subgraph Cloud["Azure Cloud - Management Plane"]
+        subgraph Management["Azure Arc Control Plane"]
+            Arc[Azure Arc<br/>Hybrid Management]
+            Policy[Azure Policy<br/>Governance]
+            Monitor[Azure Monitor<br/>Observability]
+            Defender[Defender for Cloud<br/>Security]
+        end
+        
+        subgraph Identity["Identity Services"]
+            EntraID[Entra ID<br/>Cloud Identity]
+            EntraConnect[Entra Connect<br/>Sync Service]
+        end
+        
+        subgraph CloudServices["Cloud Services"]
+            AKSCloud[AKS<br/>Cloud Clusters]
+            SQLCloud[Azure SQL<br/>Cloud Databases]
+            Storage[Blob Storage<br/>Cloud Storage]
+        end
+    end
+    
+    subgraph Connectivity["Connectivity Layer"]
+        ExpressRoute[ExpressRoute<br/>Private Connection<br/>10Gbps]
+        VPN[VPN Gateway<br/>Backup Connection]
+    end
+    
+    subgraph OnPrem["On-Premises Datacenter"]
+        subgraph LocalStack["Azure Local Cluster"]
+            AzureLocal[Azure Local<br/>Hyperconverged Infrastructure]
+            
+            subgraph Workloads["Arc-Enabled Workloads"]
+                AKSLocal[AKS on Azure Local<br/>Kubernetes Clusters]
+                SQLMI[Arc-enabled SQL MI<br/>Managed Instance]
+                VMs[Virtual Machines<br/>Windows/Linux]
+            end
+        end
+        
+        subgraph LocalIdentity["On-Premises Identity"]
+            ADDS[Active Directory DS<br/>Domain Controllers]
+            ADFS[AD FS<br/>Federation]
+        end
+        
+        subgraph Network["Network Infrastructure"]
+            FW[Firewall<br/>Security]
+            LB[Load Balancer<br/>HA/DR]
+        end
+        
+        subgraph LocalMonitoring["Local Services"]
+            LocalDNS[DNS Servers]
+            LocalDHCP[DHCP Servers]
+        end
+    end
+    
+    %% Connectivity
+    Cloud <-->|Private Connection| ExpressRoute
+    Cloud <-.->|Backup| VPN
+    ExpressRoute & VPN --> FW
+    FW --> AzureLocal
+    
+    %% Azure Arc Management
+    Arc -->|Manages & Projects| AKSLocal
+    Arc -->|Manages & Projects| SQLMI
+    Arc -->|Manages & Projects| VMs
+    Policy -->|Enforces Policies| AKSLocal & SQLMI & VMs
+    Monitor -->|Collects Telemetry| AKSLocal & SQLMI & VMs
+    Defender -->|Security Monitoring| AzureLocal
+    
+    %% Identity Synchronization
+    ADDS <-->|Sync| EntraConnect
+    EntraConnect --> EntraID
+    ADDS --> ADFS
+    ADFS -.->|Federation| EntraID
+    
+    %% Local Infrastructure
+    AzureLocal --> AKSLocal & SQLMI & VMs
+    AKSLocal & SQLMI & VMs --> LocalDNS
+    ADDS --> LocalDNS
+    LB --> AKSLocal
+    
+    %% Hybrid Workload Communication
+    AKSLocal <-.->|Hybrid Apps| AKSCloud
+    SQLMI <-.->|Data Sync| SQLCloud
+    VMs <-.->|Backup| Storage
+    
+    style Cloud fill:#0078D4,stroke:#002050,stroke-width:3px,color:#fff
+    style OnPrem fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style Management fill:#00BCF2,stroke:#0078D4,stroke-width:2px
+    style LocalStack fill:#FFB900,stroke:#D83B01,stroke-width:2px
+    style Workloads fill:#FFF100,stroke:#FFB900,stroke-width:2px
+    style Identity fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style LocalIdentity fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style Connectivity fill:#7FBA00,stroke:#107C10,stroke-width:2px
+```
 
 !!! example "Example: Healthcare Provider"
     A hospital deploys electronic health records (EHR) on Azure Local to meet HIPAA data residency requirements:
