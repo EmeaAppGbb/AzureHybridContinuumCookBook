@@ -1,6 +1,14 @@
 # Part 3: Sovereignty & Compliance
 
-This section explores the sovereignty landscape in cloud computing — what it means, why it matters, and how Azure addresses sovereign requirements through purpose-built architectures, policies, and technologies including Confidential Computing.
+This section explores the critical topic of digital sovereignty in cloud computing—what it means, why it matters, and how Azure addresses sovereign requirements through purpose-built architectures and technologies. You'll learn about the Sovereign Landing Zone, data residency, compliance frameworks, and Confidential Computing for protecting data in use.
+
+## What You'll Learn
+
+- The dimensions of digital sovereignty: data, operational, and software sovereignty
+- How the Sovereign Landing Zone extends Azure Landing Zones with sovereignty controls
+- The difference between data residency and data sovereignty
+- Confidential Computing and hardware-based Trusted Execution Environments
+- Major regulatory compliance frameworks and how Azure supports them
 
 ## Chapters
 

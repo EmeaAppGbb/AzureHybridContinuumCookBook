@@ -846,9 +846,109 @@ kubectl set image deployment/backend backend=harbor.azurelocal.local/app/backend
 - Plan hardware refresh cycles (typically 5 years for servers)
 - Budget for periodic infrastructure upgrades
 
-<!-- DIAGRAM: Before/After architecture showing the connected state (with cloud dependencies highlighted) and the disconnected state (with all cloud dependencies replaced by local alternatives), connected by transition arrows showing the replacement mapping -->
+```mermaid
+graph TB
+    subgraph Before["🔗 Connected State - Azure Local with Cloud Dependencies"]
+        direction TB
+        AKS_C[AKS on Azure Local]
+        SQL_C[Arc-enabled SQL MI]
+        Storage_C[Local Storage]
+        Queue_C[RabbitMQ]
+        
+        subgraph CloudDeps["☁️ Cloud Dependencies"]
+            AAD_C[Azure AD<br/>🔴 CLOUD DEP]
+            KV_C[Azure Key Vault<br/>🔴 CLOUD DEP]
+            Monitor_C[Azure Monitor<br/>🔴 CLOUD DEP]
+            ACR_C[Azure Container Registry<br/>🔴 CLOUD DEP]
+        end
+        
+        AKS_C -.->|ExpressRoute| AAD_C
+        AKS_C -.->|ExpressRoute| KV_C
+        AKS_C -.->|Arc Agent| Monitor_C
+        AKS_C -.->|Image Pulls| ACR_C
+        AKS_C --> SQL_C
+        AKS_C --> Storage_C
+        AKS_C --> Queue_C
+    end
+    
+    Before ==>|TRANSITION| After
+    
+    subgraph After["🔒 Disconnected State - Fully Self-Contained"]
+        direction TB
+        K3s_D[K3s/RKE2 Cluster]
+        SQL_D[SQL Server on VMs]
+        Storage_D[MinIO Object Storage]
+        Queue_D[RabbitMQ]
+        
+        subgraph LocalServices["🏠 Local Services"]
+            ADDS_D[AD DS + ADFS<br/>✅ LOCAL]
+            Vault_D[HashiCorp Vault<br/>✅ LOCAL]
+            Prom_D[Prometheus + Grafana<br/>✅ LOCAL]
+            Harbor_D[Harbor Registry<br/>✅ LOCAL]
+        end
+        
+        K3s_D --> ADDS_D
+        K3s_D --> Vault_D
+        K3s_D --> Prom_D
+        K3s_D --> Harbor_D
+        K3s_D --> SQL_D
+        K3s_D --> Storage_D
+        K3s_D --> Queue_D
+    end
+    
+    AAD_C -.->|Replace with| ADDS_D
+    KV_C -.->|Replace with| Vault_D
+    Monitor_C -.->|Replace with| Prom_D
+    ACR_C -.->|Replace with| Harbor_D
+    
+    style Before fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style After fill:#107C10,stroke:#004B1C,stroke-width:3px,color:#fff
+    style CloudDeps fill:#DC3545,stroke:#A71D2A,stroke-width:2px,color:#fff
+    style LocalServices fill:#107C10,stroke:#004B1C,stroke-width:2px,color:#fff
+```
 
-<!-- DIAGRAM: Disconnection execution timeline showing: Pre-staging (days 1-14) → Infrastructure hardening (days 15-21) → Service migration (days 22-28) → Validation testing (days 29-35) → Disconnection event (day 36) → Post-disconnect validation (days 37-42) -->
+```mermaid
+gantt
+    title Disconnection Execution Timeline (42-Day Plan)
+    dateFormat YYYY-MM-DD
+    axisFormat %d
+    
+    section Pre-Staging
+    Deploy Harbor registry                :p1, 2024-01-01, 7d
+    Deploy HashiCorp Vault               :p2, 2024-01-03, 5d
+    Deploy AD DS & ADFS                  :p3, 2024-01-05, 7d
+    Deploy Prometheus/Grafana            :p4, 2024-01-07, 5d
+    Sync container images                :p5, 2024-01-08, 6d
+    
+    section Infrastructure Hardening
+    Configure certificate authority       :h1, 2024-01-15, 4d
+    Implement local DNS                  :h2, 2024-01-16, 3d
+    Deploy WSUS server                   :h3, 2024-01-18, 3d
+    Test backup/restore procedures       :h4, 2024-01-19, 2d
+    
+    section Service Migration
+    Migrate identity (AAD→ADDS)          :crit, m1, 2024-01-22, 4d
+    Migrate secrets (KV→Vault)           :crit, m2, 2024-01-24, 3d
+    Migrate monitoring                    :m3, 2024-01-26, 2d
+    Update app configurations            :m4, 2024-01-27, 1d
+    
+    section Validation Testing
+    Functional testing                    :v1, 2024-01-29, 3d
+    Performance testing                   :v2, 2024-01-31, 2d
+    DR failover test                     :v3, 2024-02-01, 2d
+    User acceptance testing              :v4, 2024-02-03, 2d
+    
+    section Disconnection Event
+    Final data sync                      :crit, d1, 2024-02-05, 4h
+    Disable ExpressRoute                 :crit, milestone, d2, 2024-02-05, 0d
+    Switch DNS to local                  :crit, d3, 2024-02-05, 2h
+    
+    section Post-Disconnect
+    Monitor for issues                    :pd1, 2024-02-06, 5d
+    Validate all services                :pd2, 2024-02-06, 3d
+    Performance validation               :pd3, 2024-02-08, 2d
+    Document lessons learned             :pd4, 2024-02-10, 2d
+```
 
 ## Conclusion
 

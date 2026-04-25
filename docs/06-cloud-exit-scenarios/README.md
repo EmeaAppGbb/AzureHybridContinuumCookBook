@@ -1,6 +1,14 @@
 # Part 6: Cloud Exit Scenarios
 
-This section provides detailed guidance on moving workloads from public cloud to on-premises infrastructure — the cloud exit journey. It covers assessment, planning, migration strategies, and operational continuity for each transition stage along the hybrid continuum.
+This section provides comprehensive guidance on cloud exit—the journey of moving workloads from Azure public cloud to on-premises Azure Local infrastructure. You'll learn how to assess workload readiness, execute a phased migration through connected hybrid first, then progress to fully disconnected sovereign operation. The section covers data migration strategies, operational continuity practices, and risk mitigation throughout the transition.
+
+## What You'll Learn
+
+- How to assess workloads for cloud exit readiness and complexity
+- The three-stage migration path: public cloud → hybrid connected → fully disconnected
+- Data migration strategies including cutover timing and validation
+- How to maintain operational continuity during transitions
+- Risk management and rollback strategies
 
 ## Chapters
 

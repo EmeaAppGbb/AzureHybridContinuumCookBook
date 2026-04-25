@@ -1,8 +1,14 @@
 # Part 7: Reference Scenario — Insurance Enterprise Application
 
-This section presents a concrete, end-to-end reference scenario: an enterprise insurance application that moves through the entire Azure Hybrid Continuum. From running fully in Azure public cloud, through hybrid connected operation on Azure Local, to a completely disconnected sovereign deployment.
+This section brings everything together through a concrete, end-to-end reference scenario. You'll follow the Contoso Insurance platform—a realistic enterprise application with microservices, databases, message queues, and file storage—as it transitions through all three deployment models: public cloud, hybrid connected, and fully disconnected. This hands-on scenario demonstrates exactly how the architectural patterns and migration strategies apply to a real application.
 
-This scenario makes the abstract patterns concrete by showing exactly how each architectural decision plays out with real application components.
+## What You'll Learn
+
+- How to decompose a real enterprise application for hybrid deployment
+- Concrete technology choices for databases, storage, messaging, and identity at each stage
+- What changes between public cloud, hybrid connected, and disconnected deployments
+- How to document architecture decisions and their rationale
+- Key lessons learned and recommendations for your own cloud exit journeys
 
 ## The Application: Contoso Insurance Platform
 

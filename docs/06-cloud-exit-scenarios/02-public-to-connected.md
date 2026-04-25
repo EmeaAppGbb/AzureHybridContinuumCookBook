@@ -142,6 +142,61 @@ az k8s-extension create \
 
 ## Migration Approach by Workload Type
 
+```mermaid
+graph LR
+    subgraph Phase1["☁️ Phase 1: Azure Public Cloud"]
+        direction TB
+        AFD1[Azure Front Door]
+        AKS1[AKS Cluster]
+        AzSQL1[Azure SQL Database]
+        Blob1[Azure Blob Storage]
+        SBus1[Azure Service Bus]
+        KV1[Azure Key Vault]
+        Monitor1[Azure Monitor]
+        
+        AFD1 --> AKS1
+        AKS1 --> AzSQL1
+        AKS1 --> Blob1
+        AKS1 --> SBus1
+        AKS1 --> KV1
+        AKS1 --> Monitor1
+    end
+    
+    subgraph Phase2["🔗 Phase 2: Azure Local + Arc"]
+        direction TB
+        LB2[Load Balancer]
+        AKS2[AKS on Azure Local]
+        ArcSQL2[Arc-enabled SQL MI]
+        MinIO2[MinIO/Azure Local Storage]
+        RabbitMQ2[RabbitMQ]
+        
+        subgraph AzureServices["Azure Services via ExpressRoute"]
+            KV2[Azure Key Vault]
+            Monitor2[Azure Monitor via Arc]
+            AAD2[Azure AD]
+        end
+        
+        LB2 --> AKS2
+        AKS2 --> ArcSQL2
+        AKS2 --> MinIO2
+        AKS2 --> RabbitMQ2
+        AKS2 -.->|ExpressRoute| KV2
+        AKS2 -.->|Arc Agent| Monitor2
+        AKS2 -.->|Auth| AAD2
+    end
+    
+    AKS1 ==>|Migrate Containers| AKS2
+    AzSQL1 ==>|Database Migration| ArcSQL2
+    Blob1 ==>|Data Copy| MinIO2
+    SBus1 ==>|Replatform| RabbitMQ2
+    KV1 -.->|Retain via Connectivity| KV2
+    Monitor1 -.->|Arc Integration| Monitor2
+    
+    style Phase1 fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style Phase2 fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style AzureServices fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+```
+
 ### Containerized Workloads: AKS → AKS on Azure Local
 
 **Migration Strategy: Blue/Green Deployment**

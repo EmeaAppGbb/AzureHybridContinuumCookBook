@@ -1,6 +1,14 @@
 # Part 8: Best Practices
 
-This section distills cross-cutting best practices for designing, building, and operating workloads across the Azure Hybrid Continuum. These practices apply regardless of where your workload sits on the spectrum.
+This section distills cross-cutting best practices for designing, building, and operating workloads across the Azure Hybrid Continuum. These practices are grounded in the Azure Well-Architected Framework's five pillars and adapted specifically for hybrid and sovereign scenarios. Whether your workload runs in public cloud, hybrid connected, or fully disconnected, these principles will help you build reliable, secure, efficient, and cost-effective solutions.
+
+## What You'll Learn
+
+- Foundational design principles for hybrid architectures
+- How to design for resilience across distributed hybrid environments
+- Security best practices from identity to data protection to network isolation
+- Operational excellence patterns including monitoring, incident response, and automation
+- Cost optimization strategies comparing cloud vs. on-premises TCO
 
 ## Chapters
 

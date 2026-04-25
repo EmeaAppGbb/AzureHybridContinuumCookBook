@@ -1,6 +1,14 @@
 # Part 4: Architecture Patterns
 
-This section presents reusable architecture patterns for deploying workloads across the Azure Hybrid Continuum. Each pattern addresses a specific deployment model and includes guidance on when to apply it.
+This section presents proven, reusable architecture patterns for deploying workloads across the Azure Hybrid Continuum. Each pattern addresses a specific deployment model—from fully cloud-native to completely disconnected—with guidance on when to apply it and what trade-offs to consider. You'll also learn a decision framework for workload placement.
+
+## What You'll Learn
+
+- When to use cloud-native vs. hybrid architectures
+- How to design hybrid connected solutions with Azure Local and Arc
+- Architecture considerations for air-gapped, disconnected environments
+- The cloud exit pattern: when and how to move from cloud to on-premises
+- A structured framework for deciding where to run each workload
 
 ## Chapters
 

@@ -180,9 +180,100 @@ To understand how these components interact, consider the end-to-end flow when a
 14. **Settlement processed** (if approved), generates payment, updates claim status to "Settled"
 15. **Notification Worker sends** settlement confirmation email to customer
 
-<!-- DIAGRAM: Component architecture diagram for Seldon - shows Frontend (React SPA) → API Backend (.NET 8) → Database (SQL Server), with bidirectional arrows to Object Storage and Message Queue. Background Workers consume from Message Queue and update Database. Identity Provider authenticates all users. Include technology labels and port numbers (443, 5432, 5672, etc.) -->
+```mermaid
+graph TB
+    Customer([👤 Customer])
+    Agent([👨‍💼 Agent])
+    
+    subgraph Frontend["🖥️ Frontend Layer"]
+        Portal[Customer Portal<br/>React SPA<br/>:443]
+        Dashboard[Agent Dashboard<br/>React SPA<br/>:443]
+    end
+    
+    subgraph Backend["⚙️ Backend Layer"]
+        API[API Backend<br/>.NET 8 Web API<br/>:5000]
+        DocWorker[Document Worker<br/>.NET 8 Background<br/>OCR Processing]
+        NotifyWorker[Notification Worker<br/>.NET 8 Background<br/>Email/SMS]
+    end
+    
+    subgraph Data["💾 Data Layer"]
+        DB[(Database<br/>SQL Server<br/>:1433)]
+        Storage[(Object Storage<br/>Blob/MinIO<br/>:9000)]
+        Queue[Message Queue<br/>Service Bus/RabbitMQ<br/>:5672]
+    end
+    
+    subgraph Security["🔐 Security & Identity"]
+        IdP[Identity Provider<br/>Azure AD / ADFS<br/>:443]
+    end
+    
+    Customer --> Portal
+    Agent --> Dashboard
+    Portal --> API
+    Dashboard --> API
+    
+    API --> DB
+    API <--> Storage
+    API --> Queue
+    
+    Queue --> DocWorker
+    Queue --> NotifyWorker
+    DocWorker --> DB
+    DocWorker --> Storage
+    NotifyWorker --> DB
+    
+    Portal -.->|Auth| IdP
+    Dashboard -.->|Auth| IdP
+    API -.->|Validate Token| IdP
+    
+    style Frontend fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Backend fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style Data fill:#107C10,stroke:#004B1C,stroke-width:2px,color:#fff
+    style Security fill:#DC3545,stroke:#A71D2A,stroke-width:2px,color:#fff
+```
 
-<!-- DIAGRAM: Data flow sequence diagram for Seldon - shows the 15-step claim submission process as a sequence diagram with Customer, Frontend, API, Database, Object Storage, Message Queue, Document Worker, Notification Worker, and Agent as participants -->
+```mermaid
+sequenceDiagram
+    participant C as 👤 Customer
+    participant F as Frontend SPA
+    participant A as API Backend
+    participant DB as Database
+    participant S as Object Storage
+    participant Q as Message Queue
+    participant DW as Document Worker
+    participant NW as Notification Worker
+    participant Agent as 👨‍💼 Agent
+    
+    C->>F: 1. Submit claim form
+    F->>A: 2. POST /api/claims<br/>(policy, date, description)
+    A->>A: 3. Validate policy & coverage
+    A->>S: 4. Generate presigned upload URL
+    A-->>F: Return upload URL
+    F->>S: 5. Upload documents<br/>(photos, police report)
+    A->>DB: 6. Write claim record<br/>(status: Submitted)
+    A->>Q: 7. Publish document.uploaded event
+    A->>Q: 8. Publish notification.requested event
+    A-->>F: 9. Return claim ID & status
+    
+    Q->>DW: 10. Consume document.uploaded
+    DW->>S: Fetch documents
+    DW->>DW: Perform OCR extraction
+    DW->>DB: 11. Update claim with OCR results<br/>(status: Under Review)
+    
+    Q->>NW: 12. Consume notification.requested
+    NW->>C: Send confirmation email
+    
+    Agent->>A: 13. GET /api/claims/{id}
+    A->>DB: Fetch claim details
+    A-->>Agent: Return claim + OCR data
+    Agent->>A: Approve/Request more info
+    
+    A->>DB: 14. Process settlement<br/>(status: Settled)
+    A->>Q: Publish notification.settlement
+    Q->>NW: 15. Consume settlement event
+    NW->>C: Send settlement confirmation
+    
+    Note over C,Agent: Complete claim lifecycle<br/>with async processing
+```
 
 ## Non-Functional Requirements
 

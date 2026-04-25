@@ -45,9 +45,154 @@ The Phase 1 deployment uses a hub-spoke network topology with Azure as the centr
 **Azure Front Door**  
 : Sits at the internet edge, provides global load balancing, SSL/TLS termination, and Web Application Firewall (WAF) protection. Routes traffic to the AKS ingress controller via private link.
 
-<!-- DIAGRAM: Phase 1 architecture for Seldon - Hub-spoke network topology with Azure Front Door at the edge → AKS cluster (frontend, backend, workers) in spoke VNet → Private Endpoints connecting to Azure SQL Database, Blob Storage, and Service Bus. Include Azure AD B2C for customer auth, Entra ID for employee auth, Key Vault for secrets, ACR for images, Azure Monitor for observability, and GitHub Actions for CI/CD. Show network boundaries (VNets, subnets, NSGs) and data flows -->
+```mermaid
+graph TB
+    Internet([🌐 Internet])
+    
+    subgraph Edge["Edge Services"]
+        AFD[Azure Front Door<br/>+ WAF]
+    end
+    
+    Internet --> AFD
+    
+    subgraph Hub["Hub VNet (10.0.0.0/16)"]
+        Firewall[Azure Firewall]
+        Bastion[Azure Bastion]
+        VPN[VPN Gateway]
+    end
+    
+    subgraph Spoke["Spoke VNet (10.1.0.0/16)"]
+        subgraph AKS["AKS Cluster"]
+            direction TB
+            Ingress[Ingress Controller<br/>10.1.0.0/24]
+            Frontend[Frontend Pods<br/>NGINX<br/>10.1.1.0/24]
+            Backend[Backend Pods<br/>.NET API<br/>10.1.2.0/24]
+            Workers[Worker Pods<br/>Background<br/>10.1.3.0/24]
+        end
+        
+        subgraph PrivateEndpoints["Private Endpoints"]
+            PE_SQL[SQL PE]
+            PE_Blob[Blob PE]
+            PE_SBus[Service Bus PE]
+        end
+    end
+    
+    AFD -.->|Private Link| Ingress
+    
+    subgraph PaaS["Azure PaaS Services"]
+        SQL[(Azure SQL<br/>Database)]
+        Blob[(Azure Blob<br/>Storage)]
+        SBus[Azure Service<br/>Bus]
+        KV[Azure Key<br/>Vault]
+        ACR[Azure Container<br/>Registry]
+    end
+    
+    subgraph Identity["Identity & Auth"]
+        B2C[Azure AD B2C<br/>Customers]
+        EntraID[Microsoft Entra ID<br/>Employees]
+    end
+    
+    subgraph Management["Management & Monitoring"]
+        Monitor[Azure Monitor<br/>+ App Insights]
+        GitHub[GitHub Actions<br/>CI/CD]
+    end
+    
+    Ingress --> Frontend
+    Frontend --> Backend
+    Backend --> Workers
+    
+    Backend --> PE_SQL
+    Backend --> PE_Blob
+    Backend --> PE_SBus
+    Workers --> PE_SQL
+    Workers --> PE_Blob
+    Workers --> PE_SBus
+    
+    PE_SQL -.-> SQL
+    PE_Blob -.-> Blob
+    PE_SBus -.-> SBus
+    
+    Backend -.->|Secrets| KV
+    Workers -.->|Secrets| KV
+    
+    Frontend -.->|Auth| B2C
+    Backend -.->|Auth| EntraID
+    
+    AKS -.->|Telemetry| Monitor
+    AKS -.->|Images| ACR
+    GitHub -.->|Deploy| AKS
+    
+    Hub -.->|Peering| Spoke
+    
+    style Edge fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style Hub fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Spoke fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style AKS fill:#326CE5,stroke:#1A4D8C,stroke-width:2px,color:#fff
+    style PaaS fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style Identity fill:#DC3545,stroke:#A71D2A,stroke-width:2px,color:#fff
+    style Management fill:#107C10,stroke:#004B1C,stroke-width:2px,color:#fff
+```
 
-<!-- DIAGRAM: AKS cluster internal architecture for Seldon - Show node pools (system, frontend, backend, workers), pod deployments, ingress controller, Azure CNI networking, Azure Monitor agent, and connectivity to Azure services via private endpoints -->
+```mermaid
+graph TB
+    subgraph Cluster["AKS Cluster - Phase 1"]
+        direction TB
+        
+        subgraph SystemPool["System Node Pool<br/>3x Standard_D4s_v5<br/>Ubuntu 22.04"]
+            SysNode1[System Node 1<br/>Core DNS, Metrics Server]
+            SysNode2[System Node 2<br/>Ingress Controller]
+            SysNode3[System Node 3<br/>Azure Monitor Agent]
+        end
+        
+        subgraph FrontendPool["Frontend Node Pool<br/>2-8x Standard_D2s_v5<br/>Autoscaling"]
+            FENode1[Frontend Pods<br/>NGINX Static]
+            FENode2[Frontend Pods<br/>NGINX Static]
+        end
+        
+        subgraph BackendPool["Backend Node Pool<br/>3-12x Standard_D4s_v5<br/>Autoscaling"]
+            BENode1[API Pods<br/>.NET 8]
+            BENode2[API Pods<br/>.NET 8]
+            BENode3[API Pods<br/>.NET 8]
+        end
+        
+        subgraph WorkerPool["Worker Node Pool<br/>2-6x Standard_D4s_v5<br/>Autoscaling"]
+            WNode1[Document Worker<br/>OCR Processing]
+            WNode2[Notification Worker<br/>Email/SMS]
+        end
+        
+        subgraph Network["Networking"]
+            CNI[Azure CNI<br/>+ Calico Policies]
+            LB[Azure Load<br/>Balancer]
+        end
+        
+        SysNode2 -.->|Routes| LB
+        LB --> FENode1
+        LB --> FENode2
+        
+        FENode1 --> BENode1
+        FENode2 --> BENode2
+        FENode2 --> BENode3
+        
+        BENode1 -.->|Messages| WNode1
+        BENode2 -.->|Messages| WNode2
+    end
+    
+    subgraph External["External Connectivity"]
+        PrivateEP[Private Endpoints<br/>SQL, Blob, Service Bus]
+        AzureServices[Azure Monitor<br/>Azure Key Vault<br/>Azure AD]
+    end
+    
+    Cluster -.->|Azure CNI| CNI
+    Cluster -.->|Private| PrivateEP
+    Cluster -.->|Management| AzureServices
+    
+    style SystemPool fill:#326CE5,stroke:#1A4D8C,stroke-width:2px,color:#fff
+    style FrontendPool fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style BackendPool fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style WorkerPool fill:#107C10,stroke:#004B1C,stroke-width:2px,color:#fff
+    style Network fill:#FFC107,stroke:#F57C00,stroke-width:2px
+    style External fill:#DC3545,stroke:#A71D2A,stroke-width:2px,color:#fff
+```
 
 ## Azure Kubernetes Service (AKS) Configuration
 

@@ -85,6 +85,9 @@ Data Residency
 Data Sovereignty
 : The principle that data is subject to the laws and governance of the country or region where it is located. Data sovereignty encompasses who can access data, under what conditions, legal frameworks governing data protection, and the rights of data subjects. Critical for regulated industries and government entities.
 
+Data Gravity
+: The concept that as data accumulates in a location, it becomes increasingly difficult and costly to move it, attracting applications and services to run near that data. Data gravity influences architecture decisions around workload placement, latency requirements, and data residency, with larger datasets exerting stronger gravitational pull on compute resources.
+
 Defense in Depth
 : A layered security strategy that employs multiple defensive mechanisms across different levels—physical, network, perimeter, identity, compute, application, and data. If one layer is compromised, additional layers continue to provide protection, reducing the attack surface and impact of security breaches.
 : [Azure security best practices](https://learn.microsoft.com/en-us/azure/security/fundamentals/best-practices-and-patterns)
@@ -103,6 +106,18 @@ Fault Domain
 : A logical grouping of hardware that shares a common power source and network switch, representing a single point of failure. Distributing virtual machines across multiple fault domains in Azure Local or Azure ensures that hardware failures affect only a subset of workloads, improving overall availability.
 : [Azure availability zones and fault domains](https://learn.microsoft.com/en-us/azure/reliability/availability-zones-overview)
 
+GitOps
+: A declarative approach to continuous delivery that uses Git as the single source of truth for infrastructure and application configuration. Changes are made through Git commits, with automated agents ensuring that the deployed state matches the desired state in Git. GitOps is particularly valuable in hybrid environments for consistent configuration management across clusters.
+: [Azure Arc-enabled Kubernetes with GitOps](https://learn.microsoft.com/en-us/azure/azure-arc/kubernetes/conceptual-gitops-flux2)
+
+Harbor
+: An open-source container registry that stores, signs, and scans container images. Harbor provides role-based access control, vulnerability scanning, image replication, and supports disconnected scenarios through offline image distribution. Often used in sovereign and air-gapped environments where public container registries cannot be accessed.
+: [Harbor Project](https://goharbor.io/)
+
+Helm
+: A package manager for Kubernetes that uses templates called "charts" to define, install, and upgrade Kubernetes applications. Helm simplifies deployment of complex applications by bundling related Kubernetes resources together. Helm charts are essential for repeatable deployments across hybrid environments.
+: [Helm documentation](https://helm.sh/)
+
 Hybrid Cloud
 : An IT architecture that combines on-premises infrastructure, private cloud services, and public cloud services with orchestration and management across environments. Hybrid cloud enables workload portability, consistent security and governance, and flexibility to place workloads based on performance, cost, compliance, and sovereignty requirements.
 
@@ -113,6 +128,10 @@ Infrastructure as Code (IaC)
 : The practice of managing and provisioning infrastructure through machine-readable definition files rather than manual processes. IaC enables version control, automated deployment, consistency, repeatability, and disaster recovery. Azure supports IaC through ARM templates, Bicep, Terraform, and other declarative tools.
 : [Infrastructure as Code on Azure](https://learn.microsoft.com/en-us/devops/deliver/what-is-infrastructure-as-code)
 
+K3s
+: A lightweight, certified Kubernetes distribution designed for resource-constrained and edge environments. K3s simplifies installation and operations by packaging all Kubernetes components into a single binary under 100MB. Commonly used in edge computing, IoT scenarios, and disconnected environments where full Kubernetes would be too heavyweight.
+: [K3s documentation](https://k3s.io/)
+
 Landing Zone
 : A pre-configured Azure environment that provides governance, security, networking, identity, and management capabilities aligned with the Cloud Adoption Framework. Landing zones serve as the foundational platform for workload deployment, ensuring compliance with organizational policies and best practices from day one.
 : [Azure landing zones](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/ready/landing-zone/)
@@ -121,14 +140,41 @@ Management Group
 : A container that helps manage access, policy, and compliance across multiple Azure subscriptions. Management groups provide hierarchical organization, enabling efficient application of governance controls at scale. Policies and RBAC assignments applied to a management group are inherited by all child subscriptions and resources.
 : [Azure management groups](https://learn.microsoft.com/en-us/azure/governance/management-groups/overview)
 
+MetalLB
+: A load balancer implementation for bare-metal Kubernetes clusters that provides network load balancing capabilities similar to cloud providers. MetalLB announces service IPs using standard routing protocols (BGP) or Layer 2 mode. Critical for on-premises Kubernetes deployments on Azure Local where cloud load balancers are unavailable.
+: [MetalLB documentation](https://metallb.universe.tf/)
+
+MinIO
+: A high-performance, S3-compatible object storage system that runs on-premises or in disconnected environments. MinIO provides API compatibility with Amazon S3, enabling applications to use the same code across cloud and on-premises deployments. Often used as a blob storage replacement in hybrid and sovereign scenarios.
+: [MinIO documentation](https://min.io/)
+
+Observability
+: The ability to understand the internal state of a system by examining its external outputs, including logs, metrics, traces, and events. Observability goes beyond monitoring by enabling exploration of system behavior to answer unexpected questions. Essential for managing complex distributed systems across hybrid environments.
+: [Azure Monitor observability](https://learn.microsoft.com/en-us/azure/azure-monitor/overview)
+
 Operational Sovereignty
 : The ability to independently operate, manage, and maintain IT infrastructure and services without dependency on external entities. Includes control over updates, maintenance schedules, access to infrastructure, incident response, and operational procedures—critical for organizations requiring operational autonomy for security or regulatory reasons.
+
+Platform Engineering
+: The discipline of designing and building toolchains and workflows that enable self-service capabilities for software engineering teams. Platform engineering creates internal developer platforms (IDPs) that abstract away infrastructure complexity, providing standardized, secure, and compliant paths to production. Increasingly important in hybrid environments requiring consistent developer experiences.
 
 Private Cloud
 : Cloud computing resources dedicated to a single organization, deployed either on-premises or hosted by a third party. Private clouds provide greater control over infrastructure, security, and compliance compared to public cloud, while still offering cloud characteristics like self-service, scalability, and resource pooling.
 
 Regulated Industry
 : Industries subject to strict regulatory frameworks governing data protection, security, operational practices, and compliance. Examples include financial services (PCI DSS, SOX), healthcare (HIPAA, GDPR), government (FedRAMP, ITAR), and critical infrastructure. Regulated industries often require enhanced sovereignty, audit trails, and data residency controls.
+
+RKE2
+: Rancher Kubernetes Engine 2, a fully conformant Kubernetes distribution focused on security and compliance. RKE2 combines the ease of use of RKE with security hardening to meet U.S. government standards (FIPS 140-2, STIG compliance). Used in government and regulated environments requiring certified, hardened Kubernetes.
+: [RKE2 documentation](https://docs.rke2.io/)
+
+Service Mesh
+: An infrastructure layer that manages service-to-service communication in microservices architectures, providing capabilities like traffic management, security (mTLS), observability, and resilience (retries, circuit breakers). Service meshes decouple these concerns from application code. Examples include Istio, Linkerd, and Open Service Mesh.
+: [Service mesh patterns](https://learn.microsoft.com/en-us/azure/architecture/patterns/gateway-routing)
+
+Site Reliability Engineering (SRE)
+: A discipline that incorporates software engineering practices into IT operations to build and maintain highly reliable, scalable systems. SRE emphasizes automation, monitoring, incident response, and balancing reliability with feature velocity through error budgets. Foundational for operating complex hybrid infrastructure.
+: [SRE principles](https://sre.google/)
 
 Sovereign Cloud
 : Cloud infrastructure and services designed to meet specific sovereignty requirements for governments and regulated industries. Microsoft provides sovereign cloud offerings (Azure Government, Azure China) with physical and logical separation, data residency guarantees, local operations, and restricted access to meet national security and compliance mandates.
@@ -140,6 +186,10 @@ Sovereign Landing Zone (SLZ)
 
 Software Sovereignty
 : The ability to control software supply chains, understand and audit source code, avoid vendor lock-in, and maintain independence from foreign technology dependencies. Software sovereignty concerns include open-source vs. proprietary software choices, hosting location of software providers, and ability to modify or replace components as needed.
+
+Total Cost of Ownership (TCO)
+: A comprehensive assessment of all costs associated with acquiring, deploying, operating, and maintaining IT infrastructure over its entire lifecycle. TCO includes capital expenses (hardware, software licenses), operational expenses (power, cooling, maintenance, personnel), and hidden costs (downtime, complexity). Critical for evaluating cloud vs. on-premises decisions and cloud exit scenarios.
+: [Azure TCO Calculator](https://azure.microsoft.com/en-us/pricing/tco/calculator/)
 
 Trusted Execution Environment (TEE)
 : A secure, isolated area within a processor that guarantees code and data loaded inside are protected with respect to confidentiality and integrity. TEEs use hardware-based security mechanisms (Intel SGX, AMD SEV, ARM TrustZone) to create encrypted enclaves where sensitive computations occur, protected even from privileged system software.

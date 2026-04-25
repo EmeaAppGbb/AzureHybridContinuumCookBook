@@ -798,7 +798,49 @@ Thank you for your patience as we improve our services.
 - Document acceptance of new SLAs
 - Monitor actual performance and adjust over time
 
-<!-- DIAGRAM: Operational continuity timeline overlaid with migration phases showing: dual monitoring period, team training milestones, DR validation checkpoints, and the transition from cloud-based operations to local operations -->
+```mermaid
+gantt
+    title Operational Continuity Timeline During Cloud Exit
+    dateFormat YYYY-MM-DD
+    axisFormat %b %d
+    
+    section Migration Phases
+    Planning & Design             :phase1, 2024-01-01, 45d
+    Infrastructure Setup          :phase2, 2024-02-15, 30d
+    Pilot Migration               :phase3, 2024-03-16, 30d
+    Production Migration          :crit, phase4, 2024-04-15, 14d
+    
+    section Monitoring Operations
+    Dual Monitoring (Cloud+Local) :monitor1, 2024-03-01, 60d
+    Transition Period              :monitor2, 2024-04-15, 14d
+    Local-Only Monitoring         :monitor3, 2024-04-29, 30d
+    
+    section Team Training
+    Kubernetes Training           :train1, 2024-01-15, 30d
+    Prometheus/Grafana Training   :train2, 2024-02-01, 21d
+    Vault & Security Training     :train3, 2024-02-15, 21d
+    DR Drill #1                   :milestone, drill1, 2024-03-10, 0d
+    Operations Handoff            :train4, 2024-04-01, 14d
+    DR Drill #2                   :milestone, drill2, 2024-04-20, 0d
+    
+    section DR Validation
+    DR Site Setup                 :dr1, 2024-02-01, 30d
+    Replication Testing           :dr2, 2024-03-01, 14d
+    Failover Test #1              :crit, milestone, drtest1, 2024-03-20, 0d
+    Failover Test #2              :crit, milestone, drtest2, 2024-04-25, 0d
+    DR Procedures Finalized       :milestone, dr3, 2024-05-01, 0d
+    
+    section SLA Management
+    SLA Review with Stakeholders  :sla1, 2024-01-15, 7d
+    SLA Agreement Signed          :milestone, sla2, 2024-01-25, 0d
+    Performance Baseline          :sla3, 2024-03-16, 30d
+    Post-Migration SLA Validation :sla4, 2024-04-29, 14d
+    
+    section Operations Transition
+    Cloud-Based Operations        :ops1, 2024-01-01, 105d
+    Hybrid Operations             :ops2, 2024-04-15, 14d
+    Local Operations              :ops3, 2024-04-29, 30d
+```
 
 ## Long-Term Operational Considerations
 

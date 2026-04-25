@@ -399,7 +399,88 @@ Phase 3 (disconnected) requires 2x personnel vs. Phase 2 (hybrid):
 
 ---
 
-<!-- DIAGRAM: Effort/complexity heat map for Seldon - Matrix showing relative difficulty of migrating each component (Frontend, API, Workers, Database, Storage, Queue, Identity, Monitoring, Secrets, Registry, CI/CD) across three phases (Phase 1→2, Phase 2→3). Use color coding: Green (easy), Yellow (moderate), Red (hard). Database and Identity consistently red. -->
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
+graph TB
+    subgraph Legend["🔲 Complexity Legend"]
+        direction LR
+        Green["🟢 Easy (1-2 weeks)"]
+        Yellow["🟡 Moderate (2-4 weeks)"]
+        Red["🔴 Hard (4-8+ weeks)"]
+    end
+    
+    subgraph Migration["Migration Complexity Heat Map"]
+        direction TB
+        
+        subgraph Phase1to2["Phase 1 → Phase 2 (Public to Hybrid)"]
+            direction LR
+            P12_Frontend["Frontend<br/>🟢 Easy"]
+            P12_API["API Backend<br/>🟢 Easy"]
+            P12_Workers["Workers<br/>🟢 Easy"]
+            P12_Database["Database<br/>🔴 Hard"]
+            P12_Storage["Storage<br/>🟡 Moderate"]
+            P12_Queue["Queue<br/>🟡 Moderate"]
+            P12_Identity["Identity<br/>🟢 Easy"]
+            P12_Monitoring["Monitoring<br/>🟢 Easy"]
+            P12_Secrets["Secrets<br/>🟢 Easy"]
+            P12_Registry["Registry<br/>🟡 Moderate"]
+            P12_CICD["CI/CD<br/>🟡 Moderate"]
+        end
+        
+        subgraph Phase2to3["Phase 2 → Phase 3 (Hybrid to Disconnected)"]
+            direction LR
+            P23_Frontend["Frontend<br/>🟢 Easy"]
+            P23_API["API Backend<br/>🟡 Moderate"]
+            P23_Workers["Workers<br/>🟡 Moderate"]
+            P23_Database["Database<br/>🔴 Hard"]
+            P23_Storage["Storage<br/>🟢 Easy"]
+            P23_Queue["Queue<br/>🟢 Easy"]
+            P23_Identity["Identity<br/>🔴 Hard"]
+            P23_Monitoring["Monitoring<br/>🔴 Hard"]
+            P23_Secrets["Secrets<br/>🟡 Moderate"]
+            P23_Registry["Registry<br/>🟢 Easy"]
+            P23_CICD["CI/CD<br/>🔴 Hard"]
+        end
+    end
+    
+    subgraph Insights["Key Insights"]
+        direction TB
+        I1["Database migration consistently<br/>the hardest component"]
+        I2["Identity & Monitoring easy in Phase 1→2<br/>but very hard in Phase 2→3"]
+        I3["Container workloads most portable<br/>(Frontend, API, Workers)"]
+        I4["Cloud-native PaaS replacement<br/>increases complexity significantly"]
+    end
+    
+    style Legend fill:#E0E0E0,stroke:#666,stroke-width:2px
+    style Migration fill:#FFF,stroke:#0078D4,stroke-width:2px
+    style Phase1to2 fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Phase2to3 fill:#107C10,stroke:#004B1C,stroke-width:2px,color:#fff
+    style Insights fill:#FFC107,stroke:#F57C00,stroke-width:2px
+    
+    style P12_Frontend fill:#90EE90,stroke:#006400,stroke-width:2px
+    style P12_API fill:#90EE90,stroke:#006400,stroke-width:2px
+    style P12_Workers fill:#90EE90,stroke:#006400,stroke-width:2px
+    style P12_Database fill:#FF6B6B,stroke:#8B0000,stroke-width:2px,color:#fff
+    style P12_Storage fill:#FFD93D,stroke:#CC6600,stroke-width:2px
+    style P12_Queue fill:#FFD93D,stroke:#CC6600,stroke-width:2px
+    style P12_Identity fill:#90EE90,stroke:#006400,stroke-width:2px
+    style P12_Monitoring fill:#90EE90,stroke:#006400,stroke-width:2px
+    style P12_Secrets fill:#90EE90,stroke:#006400,stroke-width:2px
+    style P12_Registry fill:#FFD93D,stroke:#CC6600,stroke-width:2px
+    style P12_CICD fill:#FFD93D,stroke:#CC6600,stroke-width:2px
+    
+    style P23_Frontend fill:#90EE90,stroke:#006400,stroke-width:2px
+    style P23_API fill:#FFD93D,stroke:#CC6600,stroke-width:2px
+    style P23_Workers fill:#FFD93D,stroke:#CC6600,stroke-width:2px
+    style P23_Database fill:#FF6B6B,stroke:#8B0000,stroke-width:2px,color:#fff
+    style P23_Storage fill:#90EE90,stroke:#006400,stroke-width:2px
+    style P23_Queue fill:#90EE90,stroke:#006400,stroke-width:2px
+    style P23_Identity fill:#FF6B6B,stroke:#8B0000,stroke-width:2px,color:#fff
+    style P23_Monitoring fill:#FF6B6B,stroke:#8B0000,stroke-width:2px,color:#fff
+    style P23_Secrets fill:#FFD93D,stroke:#CC6600,stroke-width:2px
+    style P23_Registry fill:#90EE90,stroke:#006400,stroke-width:2px
+    style P23_CICD fill:#FF6B6B,stroke:#8B0000,stroke-width:2px,color:#fff
+```
 
 ## References
 

@@ -734,7 +734,67 @@ find /mnt/azurelocal-data/ -type f -exec sha256sum {} \; > migration-hashes.txt
 # Retention period per compliance requirements (typically 7 years)
 ```
 
-<!-- DIAGRAM: Data migration architecture showing parallel migration paths for different data types (databases, blobs, queues, files) from Azure cloud to on-premises, with validation checkpoints at each stage -->
+```mermaid
+graph TB
+    subgraph Azure["☁️ Azure Cloud"]
+        direction TB
+        AzSQL[(Azure SQL<br/>Database)]
+        Blob[(Azure Blob<br/>Storage)]
+        SBus[Azure Service<br/>Bus Queues]
+        Files[(Azure<br/>Files)]
+    end
+    
+    subgraph Migration["📦 Migration Layer"]
+        direction TB
+        DMS[Database Migration<br/>Service]
+        AzCopy[AzCopy /<br/>Storage Explorer]
+        QueueDrain[Queue Drain<br/>Scripts]
+        Robocopy[Robocopy /<br/>rsync]
+        
+        subgraph Validation["✓ Validation Checkpoints"]
+            V1[Schema Validation]
+            V2[Checksum Verification]
+            V3[Count Validation]
+            V4[File Integrity Check]
+        end
+    end
+    
+    subgraph OnPrem["🏢 Azure Local / On-Premises"]
+        direction TB
+        SQLServer[(SQL Server<br/>on VMs)]
+        MinIO[(MinIO Object<br/>Storage)]
+        RabbitMQ[RabbitMQ<br/>Queues]
+        SMB[(SMB File<br/>Shares)]
+    end
+    
+    AzSQL -->|Online Replication| DMS
+    DMS -->|Initial Sync| V1
+    V1 -->|Validated| SQLServer
+    AzSQL -.->|Continuous Sync| SQLServer
+    
+    Blob -->|Parallel Copy| AzCopy
+    AzCopy -->|Batch Transfer| V2
+    V2 -->|Hash Match| MinIO
+    
+    SBus -->|Message Replay| QueueDrain
+    QueueDrain -->|Count Check| V3
+    V3 -->|Verified| RabbitMQ
+    
+    Files -->|Incremental Sync| Robocopy
+    Robocopy -->|File Check| V4
+    V4 -->|Complete| SMB
+    
+    SQLServer -.->|Final Cutover| Cutover([Production<br/>Cutover])
+    MinIO -.->|Ready| Cutover
+    RabbitMQ -.->|Ready| Cutover
+    SMB -.->|Ready| Cutover
+    
+    style Azure fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style OnPrem fill:#107C10,stroke:#004B1C,stroke-width:2px,color:#fff
+    style Migration fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Validation fill:#FFC107,stroke:#F57C00,stroke-width:2px
+    style Cutover fill:#DC3545,stroke:#A71D2A,stroke-width:3px,color:#fff
+```
 
 ## Data Migration Tools and Automation
 

@@ -1,6 +1,15 @@
 # Part 5: Sovereign Landing Zone — Implementation Guide
 
-This section provides a practical, step-by-step guide to implementing a Sovereign Landing Zone. It walks through each design area with concrete implementation guidance, policy definitions, and infrastructure-as-code examples.
+This section provides practical, step-by-step guidance for implementing a Sovereign Landing Zone on Azure. You'll learn how the SLZ design areas differ from standard Azure Landing Zones, and walk through each area with concrete implementation patterns, policy definitions, and infrastructure-as-code examples using Bicep and Terraform.
+
+## What You'll Learn
+
+- The eight SLZ design areas and how they extend standard Azure Landing Zones
+- How to implement sovereign identity and access management patterns
+- Network topology designs for data residency and isolation requirements
+- Security and governance controls specific to sovereign scenarios
+- Platform automation approaches using Bicep, Terraform, and CI/CD pipelines
+- Deployment options and when to use Portal, Bicep, or Terraform
 
 ## Chapters
 

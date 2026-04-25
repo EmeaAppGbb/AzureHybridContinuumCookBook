@@ -49,6 +49,90 @@ Phase 2 architecture runs all application workloads on Azure Local while maintai
 !!! info "What Stayed in the Cloud"
     Phase 2 maintains cloud dependencies for identity (Azure AD B2C / Entra ID), monitoring (Azure Monitor via Arc), secrets (Azure Key Vault), and management (Azure Portal via Arc). These dependencies enable hybrid management but require continuous ExpressRoute connectivity.
 
+```mermaid
+graph TB
+    Internet([🌐 Internet])
+    
+    subgraph OnPremises["🏢 On-Premises Data Center"]
+        subgraph AzureLocal["Azure Local Cluster (4 nodes)"]
+            direction TB
+            
+            subgraph AKS["AKS on Azure Local"]
+                Ingress[MetalLB<br/>LoadBalancer]
+                Frontend[Frontend Pods<br/>React SPA]
+                Backend[Backend Pods<br/>.NET 8 API]
+                Workers[Worker Pods<br/>Background Jobs]
+            end
+            
+            subgraph Data["Data Services"]
+                ArcSQL[(Arc-enabled<br/>SQL MI)]
+                MinIO[(MinIO<br/>Object Storage)]
+                RabbitMQ[RabbitMQ<br/>Message Queue]
+            end
+        end
+        
+        Harbor[Harbor<br/>Local Registry]
+    end
+    
+    subgraph Azure["☁️ Azure Cloud Services (via ExpressRoute)"]
+        direction TB
+        
+        subgraph Identity["Identity Services"]
+            B2C[Azure AD B2C<br/>Customer Auth]
+            EntraID[Microsoft Entra ID<br/>Employee Auth]
+        end
+        
+        subgraph Management["Management Services"]
+            Arc[Azure Arc<br/>Cluster Management]
+            Monitor[Azure Monitor<br/>+ App Insights]
+            KV[Azure Key Vault<br/>Secrets]
+        end
+        
+        ACR[Azure Container<br/>Registry]
+        GitHub[GitHub Actions<br/>CI/CD]
+    end
+    
+    subgraph Network["Network Connectivity"]
+        ER[ExpressRoute<br/>1 Gbps Circuit]
+    end
+    
+    Internet --> Ingress
+    Ingress --> Frontend
+    Frontend --> Backend
+    Backend --> Workers
+    
+    Backend --> ArcSQL
+    Backend --> MinIO
+    Backend --> RabbitMQ
+    Workers --> ArcSQL
+    Workers --> MinIO
+    Workers --> RabbitMQ
+    
+    AKS --> Harbor
+    
+    AzureLocal -.->|Arc Agent| ER
+    ER -.-> Arc
+    ER -.-> Monitor
+    ER -.-> KV
+    
+    Frontend -.->|Auth| ER
+    Backend -.->|Auth| ER
+    ER -.-> B2C
+    ER -.-> EntraID
+    
+    ACR -.->|Mirror Images| Harbor
+    GitHub -.->|Deploy| AKS
+    
+    style OnPremises fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style AzureLocal fill:#107C10,stroke:#004B1C,stroke-width:2px,color:#fff
+    style AKS fill:#326CE5,stroke:#1A4D8C,stroke-width:2px,color:#fff
+    style Data fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style Azure fill:#0078D4,stroke:#005A9E,stroke-width:3px,color:#fff
+    style Identity fill:#DC3545,stroke:#A71D2A,stroke-width:2px,color:#fff
+    style Management fill:#FFC107,stroke:#F57C00,stroke-width:2px
+    style Network fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+```
+
 ### Azure Local Infrastructure
 
 Contoso procured a 4-node Azure Local cluster for the production environment:

@@ -459,9 +459,170 @@ Phase 3 successfully delivers full operational sovereignty for Contoso Insurance
 !!! quote "CTO Perspective"
     "Phase 3 represents the ultimate trade-off — we gained complete control and regulatory compliance but sacrificed operational simplicity. For our government contracts requiring air-gap operation, it was necessary. For our commercial business, Phase 2 hybrid model was the sweet spot. Organizations should carefully evaluate whether full disconnection is truly required or if hybrid connected delivers sufficient sovereignty."
 
-<!-- DIAGRAM: Phase 3 architecture for Seldon - Fully self-contained environment with air-gap boundary. Show RKE2 cluster running frontend/backend/workers, SQL Server VMs, MinIO, RabbitMQ, HashiCorp Vault, Harbor, GitLab, Prometheus/Grafana/Loki/Jaeger, AD DS domain controllers, ADFS servers, Windows CA, WSUS server. All components within a single security perimeter with no external connectivity -->
+```mermaid
+graph TB
+    Internet([🌐 Internet<br/>❌ NO CONNECTIVITY])
+    
+    subgraph AirGap["🔒 Air-Gapped On-Premises Environment"]
+        direction TB
+        
+        subgraph Apps["Application Layer"]
+            direction LR
+            subgraph K8s["RKE2 Kubernetes Cluster"]
+                Frontend[Frontend Pods<br/>React SPA]
+                Backend[Backend Pods<br/>.NET 8 API]
+                Workers[Worker Pods<br/>Background]
+            end
+            LB[MetalLB<br/>LoadBalancer]
+        end
+        
+        subgraph DataLayer["Data Layer"]
+            direction LR
+            SQL[(SQL Server 2022<br/>AlwaysOn AG<br/>2 VMs)]
+            MinIO[(MinIO<br/>Distributed<br/>4 nodes)]
+            RabbitMQ[RabbitMQ<br/>Cluster<br/>3 nodes]
+        end
+        
+        subgraph Identity["Identity & Security"]
+            direction LR
+            ADDS[AD DS<br/>Domain Controllers<br/>3 VMs]
+            ADFS[ADFS<br/>Federation Servers<br/>2 VMs]
+            CA[Windows CA<br/>Certificate Authority]
+            Vault[HashiCorp Vault<br/>Secrets Management]
+        end
+        
+        subgraph DevOps["DevOps & Management"]
+            direction LR
+            Harbor[Harbor<br/>Container Registry]
+            GitLab[GitLab CE<br/>Source Control + CI/CD]
+            WSUS[WSUS<br/>Windows Updates]
+        end
+        
+        subgraph Observability["Observability Stack"]
+            direction LR
+            Prometheus[Prometheus<br/>Metrics]
+            Grafana[Grafana<br/>Dashboards]
+            Loki[Loki<br/>Logs]
+            Jaeger[Jaeger<br/>Traces]
+        end
+        
+        LB --> Frontend
+        Frontend --> Backend
+        Backend --> Workers
+        
+        Backend --> SQL
+        Backend --> MinIO
+        Backend --> RabbitMQ
+        Workers --> SQL
+        Workers --> MinIO
+        Workers --> RabbitMQ
+        
+        Frontend -.->|Auth| ADFS
+        Backend -.->|Auth| ADFS
+        ADFS --> ADDS
+        
+        Backend -.->|Secrets| Vault
+        Workers -.->|Secrets| Vault
+        
+        K8s --> Harbor
+        K8s -.->|Metrics| Prometheus
+        K8s -.->|Logs| Loki
+        K8s -.->|Traces| Jaeger
+        
+        Prometheus --> Grafana
+        Loki --> Grafana
+        Jaeger --> Grafana
+        
+        GitLab -.->|Deploy| K8s
+        GitLab --> Harbor
+        
+        SQL -.->|Patches| WSUS
+        ADDS -.->|Patches| WSUS
+        
+        Vault --> CA
+    end
+    
+    Internet -.->|❌ BLOCKED| AirGap
+    
+    style AirGap fill:#107C10,stroke:#004B1C,stroke-width:4px,color:#fff
+    style Apps fill:#326CE5,stroke:#1A4D8C,stroke-width:2px,color:#fff
+    style K8s fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style DataLayer fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style Identity fill:#DC3545,stroke:#A71D2A,stroke-width:2px,color:#fff
+    style DevOps fill:#FFC107,stroke:#F57C00,stroke-width:2px
+    style Observability fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:#fff
+```
 
-<!-- DIAGRAM: Three-phase comparison matrix for Seldon - Side-by-side table showing Phase 1 (Azure PaaS), Phase 2 (Hybrid), Phase 3 (Disconnected) for each application component. Visual highlight showing migration path with arrows. Include cost, personnel, and complexity rows at bottom -->
+```mermaid
+graph TB
+    subgraph Comparison["Three-Phase Architecture Evolution"]
+        direction LR
+        
+        subgraph Phase1["Phase 1: Azure Public Cloud<br/>💰 €28,400/mo | 👥 3 FTE"]
+            direction TB
+            P1_Compute[AKS in Azure<br/>Fully Managed]
+            P1_DB[Azure SQL DB<br/>PaaS]
+            P1_Storage[Azure Blob<br/>PaaS]
+            P1_Queue[Service Bus<br/>PaaS]
+            P1_Identity[Azure AD B2C<br/>PaaS]
+            P1_Monitor[Azure Monitor<br/>PaaS]
+            P1_Secrets[Azure Key Vault<br/>PaaS]
+            P1_Registry[Azure ACR<br/>PaaS]
+            
+            P1_Compute --> P1_DB
+            P1_Compute --> P1_Storage
+            P1_Compute --> P1_Queue
+        end
+        
+        subgraph Phase2["Phase 2: Hybrid Connected<br/>💰 €46,600/mo | 👥 5 FTE"]
+            direction TB
+            P2_Compute[AKS on Azure Local<br/>Self-Managed]
+            P2_DB[Arc-enabled SQL MI<br/>Hybrid]
+            P2_Storage[MinIO<br/>Self-Hosted]
+            P2_Queue[RabbitMQ<br/>Self-Hosted]
+            P2_Identity[Azure AD via ER<br/>Cloud Dependency]
+            P2_Monitor[Azure Monitor + Arc<br/>Hybrid]
+            P2_Secrets[Azure KV via ER<br/>Cloud Dependency]
+            P2_Registry[Harbor + ACR Mirror<br/>Hybrid]
+            
+            P2_Compute --> P2_DB
+            P2_Compute --> P2_Storage
+            P2_Compute --> P2_Queue
+        end
+        
+        subgraph Phase3["Phase 3: Disconnected<br/>💰 €58,500/mo | 👥 10 FTE"]
+            direction TB
+            P3_Compute[RKE2 K8s<br/>Fully Local]
+            P3_DB[SQL Server VMs<br/>Fully Local]
+            P3_Storage[MinIO Distributed<br/>Fully Local]
+            P3_Queue[RabbitMQ Cluster<br/>Fully Local]
+            P3_Identity[AD DS + ADFS<br/>Fully Local]
+            P3_Monitor[Prometheus+Grafana<br/>Fully Local]
+            P3_Secrets[HashiCorp Vault<br/>Fully Local]
+            P3_Registry[Harbor<br/>Fully Local]
+            
+            P3_Compute --> P3_DB
+            P3_Compute --> P3_Storage
+            P3_Compute --> P3_Queue
+        end
+        
+        Phase1 ==>|Migration 1<br/>6 months| Phase2
+        Phase2 ==>|Migration 2<br/>5 months| Phase3
+    end
+    
+    subgraph Metrics["Key Metrics Comparison"]
+        direction TB
+        Cost["Cost Trend: ↗️ Linear Growth<br/>Cloud < Hybrid < Disconnected"]
+        Personnel["Personnel: ↗️ 3x → 5x → 10x<br/>Operational Complexity Increases"]
+        Control["Control: ↗️ Low → Medium → Complete<br/>Sovereignty Increases"]
+        Complexity["Deployment Time: API Deploy<br/>5 min → 15 min → 30 min"]
+    end
+    
+    style Phase1 fill:#0078D4,stroke:#005A9E,stroke-width:3px,color:#fff
+    style Phase2 fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style Phase3 fill:#107C10,stroke:#004B1C,stroke-width:3px,color:#fff
+    style Metrics fill:#FFC107,stroke:#F57C00,stroke-width:2px
+```
 
 ## References
 

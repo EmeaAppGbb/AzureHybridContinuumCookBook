@@ -1,6 +1,14 @@
 # Part 2: Azure Hybrid Infrastructure
 
-This section provides a deep dive into the Azure technologies that form the hybrid continuum. Understanding these building blocks is essential before designing architectures that span cloud, edge, and on-premises environments.
+This section provides a comprehensive exploration of the Azure technologies that form the hybrid continuum. You'll learn about Azure's global infrastructure, Azure Local for on-premises deployments, Azure Arc for unified management, and the connectivity models that enable different levels of cloud integration.
+
+## What You'll Learn
+
+- How Azure's regional infrastructure and availability zones provide global scale and resilience
+- Azure Local capabilities for running Azure workloads in your own datacenter
+- Azure Arc's role as the unified control plane for hybrid and multicloud environments
+- Azure Stack HCI's hyperconverged infrastructure for mission-critical workloads
+- The three connectivity models: connected, partially connected, and fully disconnected
 
 ## Chapters
 

@@ -20,7 +20,41 @@ The cloud exit assessment framework consists of six sequential phases, each buil
 5. **Strategy Selection** — Choose the appropriate migration approach (rehost, replatform, rearchitect)
 6. **Risk Assessment** — Identify risks, define mitigations, and establish rollback procedures
 
-<!-- DIAGRAM: Assessment flowchart showing: Inventory → Classify → Score Readiness → Map Dependencies → Select Strategy → Risk Assessment → Migration Plan, with decision gates between each step -->
+```mermaid
+graph TD
+    Start([Start Assessment]) --> Inventory[Workload Inventory<br/>Catalog components & services]
+    Inventory --> Classify[Classification<br/>Type, criticality, architecture]
+    Classify --> Score[Readiness Scoring<br/>Quantify migration complexity]
+    
+    Score --> Gate1{Score<br/>Acceptable?}
+    Gate1 -->|No| Reassess[Reassess or<br/>Remain in Cloud]
+    Gate1 -->|Yes| Dependencies[Dependency Mapping<br/>Service relationships]
+    
+    Dependencies --> Gate2{Dependencies<br/>Manageable?}
+    Gate2 -->|No| Redesign[Redesign or<br/>Decouple Services]
+    Gate2 -->|Yes| Strategy[Strategy Selection<br/>Rehost/Replatform/Rearchitect]
+    
+    Strategy --> Risk[Risk Assessment<br/>Identify risks & mitigations]
+    Risk --> Gate3{Risk<br/>Acceptable?}
+    Gate3 -->|No| Mitigate[Enhance<br/>Mitigations]
+    Gate3 -->|Yes| Plan[Migration Plan<br/>Scope, sequence, execution]
+    
+    Plan --> End([Assessment Complete])
+    Reassess --> End
+    
+    style Start fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style End fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style Inventory fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Classify fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Score fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Dependencies fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Strategy fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Risk fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Plan fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Gate1 fill:#FFF,stroke:#0078D4,stroke-width:2px
+    style Gate2 fill:#FFF,stroke:#0078D4,stroke-width:2px
+    style Gate3 fill:#FFF,stroke:#0078D4,stroke-width:2px
+```
 
 Each phase produces artifacts that feed into subsequent phases, culminating in a comprehensive migration plan with well-defined scope, sequencing, and risk mitigation strategies.
 
@@ -177,7 +211,82 @@ Create a dependency graph identifying:
 
 Map each Azure PaaS service to its on-premises equivalent:
 
-<!-- DIAGRAM: PaaS-to-self-hosted service mapping table showing Azure PaaS services (left column) and their self-hosted equivalents for connected and disconnected environments (right columns) -->
+```mermaid
+graph LR
+    subgraph Azure["☁️ Azure PaaS Services"]
+        AzureSQL[Azure SQL Database]
+        CosmosDB[Cosmos DB]
+        BlobStorage[Azure Blob Storage]
+        AzureFiles[Azure Files]
+        ServiceBus[Service Bus]
+        EventHubs[Event Hubs]
+        RedisCache[Redis Cache]
+        KeyVault[Key Vault]
+        AppService[App Service]
+        Functions[Azure Functions]
+        AppInsights[Application Insights]
+        AzureAD[Azure AD]
+    end
+    
+    subgraph Connected["🔗 Connected Azure Local"]
+        ArcSQL[Arc-enabled SQL MI]
+        MongoDB1[MongoDB/PostgreSQL]
+        AzLocalBlob[Azure Local Blob]
+        AzLocalFiles[Azure Local Files]
+        SBusArc[Service Bus via Arc]
+        Kafka1[Kafka on K8s]
+        Redis1[Redis on K8s]
+        KVCloud[Key Vault via Cloud]
+        AKS1[AKS on Azure Local]
+        KEDA1[KEDA on AKS]
+        AzMonitor[Azure Monitor via Arc]
+        AzADConn[Azure AD via Connectivity]
+    end
+    
+    subgraph Disconnected["🔒 Disconnected Azure Local"]
+        SQLServer[SQL Server on VMs]
+        MongoDB2[MongoDB/PostgreSQL Cluster]
+        MinIO[MinIO/Ceph Storage]
+        SMB[SMB/NFS Server]
+        RabbitMQ[RabbitMQ/NATS]
+        Kafka2[Kafka on K8s]
+        Redis2[Redis/Valkey on K8s]
+        Vault[HashiCorp Vault]
+        AKS2[AKS on Azure Local]
+        KEDA2[KEDA/Knative]
+        PromGraf[Prometheus+Grafana+Jaeger]
+        ADDS[AD DS + ADFS]
+    end
+    
+    AzureSQL -->|Low Effort| ArcSQL
+    ArcSQL -->|Moderate| SQLServer
+    CosmosDB -->|Moderate| MongoDB1
+    MongoDB1 -->|Low| MongoDB2
+    BlobStorage -->|Low| AzLocalBlob
+    AzLocalBlob -->|Low| MinIO
+    AzureFiles -->|Low| AzLocalFiles
+    AzLocalFiles -->|Low| SMB
+    ServiceBus -->|Moderate| SBusArc
+    SBusArc -->|High| RabbitMQ
+    EventHubs -->|Moderate| Kafka1
+    Kafka1 -->|Low| Kafka2
+    RedisCache -->|Low| Redis1
+    Redis1 -->|Low| Redis2
+    KeyVault -->|Low| KVCloud
+    KVCloud -->|High| Vault
+    AppService -->|Low| AKS1
+    AKS1 -->|Low| AKS2
+    Functions -->|Moderate| KEDA1
+    KEDA1 -->|Low| KEDA2
+    AppInsights -->|Low| AzMonitor
+    AzMonitor -->|High| PromGraf
+    AzureAD -->|Low| AzADConn
+    AzADConn -->|Very High| ADDS
+    
+    style Azure fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style Connected fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Disconnected fill:#107C10,stroke:#004B1C,stroke-width:2px,color:#fff
+```
 
 | Azure PaaS Service | Connected Azure Local | Disconnected Azure Local |
 |-------------------|----------------------|--------------------------|
