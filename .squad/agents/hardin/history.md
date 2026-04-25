@@ -1162,3 +1162,22 @@ Together, these updates transform the CookBook from "comprehensive content" into
 **Commit:**
 `git commit -m "docs: P3 polish — Additional Resources, glossary update, section READMEs (P3-01, P3-02)"`
 
+
+### 2026-07-25 — Integrate ContosoInsurances-NativeToLocal Sample References
+
+**Completed:**
+- Added references to the companion sample application repository (https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal) across 16 documentation files
+- Created a prominent Companion Sample Implementation section in docs/07-reference-scenario/01-application-overview.md with tech stack table, branch-to-phase mapping, and key repository paths
+- Added MkDocs Material example callout boxes in architecture patterns, cloud exit assessment, best practices, service mapping, and lessons learned chapters
+- Added inline references in overview, hybrid continuum, index.md, and README.md
+
+**Key Decisions:**
+- Used example admonition style for all sample repo references
+- Kept documentation and code repos clearly separate as companion implementation
+- Used branch-specific links for phase-specific chapters
+- Primary application overview chapter got the most detailed treatment
+
+**Integration Pattern:**
+- Surgical additions only — no existing content rewritten or restructured
+- Each callout mentions the specific aspect relevant to that chapter
+- Sample repo three-branch model maps directly to documentation three-phase structure
