@@ -59,35 +59,35 @@ graph TB
         Tools["🛠️ Management Tools:&lt;br/&gt;PaaS: Azure Portal only&lt;br/&gt;Connected: Portal + Local tools&lt;br/&gt;Disconnected: All local tools"]
     end
 
-    style PublicCloud fill:#0078D4,stroke:#005A9E,stroke-width:3px,color:#fff
-    style Connected fill:#50E6FF,stroke:#0078D4,stroke-width:3px
-    style Disconnected fill:#107C10,stroke:#004B1C,stroke-width:3px,color:#fff
-    style Legend fill:#E0E0E0,stroke:#666,stroke-width:2px
-    style Metrics fill:#FFC107,stroke:#F57C00,stroke-width:2px
+    style PublicCloud fill:#0078d4,stroke:#005a9e,stroke-width:3px,color:#fff
+    style Connected fill:#50e6ff,stroke:#0078d4,stroke-width:3px
+    style Disconnected fill:#107c10,stroke:#004b1c,stroke-width:3px,color:#fff
+    style Legend fill:#e0e0e0,stroke:#666,stroke-width:2px
+    style Metrics fill:#ffc107,stroke:#f57c00,stroke-width:2px
 
-    style PC_Data fill:#90EE90,stroke:#006400,stroke-width:2px
-    style PC_App fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
-    style PC_Platform fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
-    style PC_OS fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
-    style PC_Hypervisor fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
-    style PC_Network fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
-    style PC_Physical fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style PC_Data fill:#90ee90,stroke:#006400,stroke-width:2px
+    style PC_App fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
+    style PC_Platform fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
+    style PC_OS fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
+    style PC_Hypervisor fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
+    style PC_Network fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
+    style PC_Physical fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
 
-    style HC_Data fill:#90EE90,stroke:#006400,stroke-width:2px
-    style HC_App fill:#90EE90,stroke:#006400,stroke-width:2px
-    style HC_Platform fill:#FFD93D,stroke:#CC6600,stroke-width:2px
-    style HC_OS fill:#FFD93D,stroke:#CC6600,stroke-width:2px
-    style HC_Hypervisor fill:#90EE90,stroke:#006400,stroke-width:2px
-    style HC_Network fill:#90EE90,stroke:#006400,stroke-width:2px
-    style HC_Physical fill:#90EE90,stroke:#006400,stroke-width:2px
+    style HC_Data fill:#90ee90,stroke:#006400,stroke-width:2px
+    style HC_App fill:#90ee90,stroke:#006400,stroke-width:2px
+    style HC_Platform fill:#ffd93d,stroke:#cc6600,stroke-width:2px
+    style HC_OS fill:#ffd93d,stroke:#cc6600,stroke-width:2px
+    style HC_Hypervisor fill:#90ee90,stroke:#006400,stroke-width:2px
+    style HC_Network fill:#90ee90,stroke:#006400,stroke-width:2px
+    style HC_Physical fill:#90ee90,stroke:#006400,stroke-width:2px
 
-    style DC_Data fill:#90EE90,stroke:#006400,stroke-width:2px
-    style DC_App fill:#90EE90,stroke:#006400,stroke-width:2px
-    style DC_Platform fill:#90EE90,stroke:#006400,stroke-width:2px
-    style DC_OS fill:#90EE90,stroke:#006400,stroke-width:2px
-    style DC_Hypervisor fill:#90EE90,stroke:#006400,stroke-width:2px
-    style DC_Network fill:#90EE90,stroke:#006400,stroke-width:2px
-    style DC_Physical fill:#90EE90,stroke:#006400,stroke-width:2px</code></pre> <div class="admonition warning"> <p class=admonition-title>Operational Complexity Increases with Control</p> <p>More control means more responsibility. Air-gapped deployments require significantly more operational staff with broader skill sets than cloud-native deployments. Budget for 3-5x the operational cost of equivalent cloud deployments.</p> </div> <h2 id=monitoring-and-observability>Monitoring and Observability<a class=headerlink href=#monitoring-and-observability title="Permanent link">&para;</a></h2> <p>Comprehensive observability is essential for operating hybrid environments. Observability encompasses metrics, logs, traces, and continuous profiling.</p> <h3 id=monitoring-in-connected-environments>Monitoring in Connected Environments<a class=headerlink href=#monitoring-in-connected-environments title="Permanent link">&para;</a></h3> <p><strong>Azure Monitor</strong>: - Collects metrics and logs from Azure resources automatically - <strong>Log Analytics workspaces</strong> provide centralized log storage and querying (KQL) - <strong>Application Insights</strong> instruments applications for performance monitoring and distributed tracing - <strong>Alerts</strong> trigger on metric thresholds or log query patterns - <strong>Dashboards and workbooks</strong> visualize metrics and logs</p> <p><strong>Azure Monitor for Kubernetes</strong>: - <strong>Container Insights</strong> monitors AKS and Arc-enabled Kubernetes clusters - Collects container logs, node metrics, and cluster events - Provides Kubernetes-specific dashboards (pod health, node utilization, persistent volume usage)</p> <p><strong>Integration with Azure Local via Azure Arc</strong>: - Connect Azure Local Kubernetes clusters to Azure Arc - Enable Container Insights to send metrics and logs to Azure Monitor - Centralize monitoring across cloud and on-premises in a single pane of glass</p> <h3 id=monitoring-in-disconnected-environments>Monitoring in Disconnected Environments<a class=headerlink href=#monitoring-in-disconnected-environments title="Permanent link">&para;</a></h3> <p><strong>Prometheus + Grafana stack</strong>: - <strong>Prometheus</strong> collects metrics from Kubernetes, applications (via exporters), and infrastructure - <strong>Grafana</strong> visualizes metrics with dashboards - <strong>Alertmanager</strong> routes alerts to on-premises notification systems - <strong>Thanos or Cortex</strong> provide long-term storage and multi-cluster federation</p> <p><strong>Logging with ELK or PLG stack</strong>: - <strong>Elasticsearch/Loki</strong> for log storage - <strong>Fluentd/Fluent-bit</strong> for log collection and forwarding - <strong>Kibana/Grafana</strong> for log querying and visualization</p> <p><strong>Distributed tracing</strong>: - <strong>Jaeger</strong> or <strong>Tempo</strong> for distributed tracing - Instrument applications with <strong>OpenTelemetry</strong> SDKs for consistent telemetry across environments</p> <h3 id=opentelemetry-as-a-consistent-instrumentation-layer>OpenTelemetry as a Consistent Instrumentation Layer<a class=headerlink href=#opentelemetry-as-a-consistent-instrumentation-layer title="Permanent link">&para;</a></h3> <p><strong>OpenTelemetry</strong> provides vendor-neutral instrumentation: - Instrument applications once with OpenTelemetry SDKs - Configure <strong>OpenTelemetry Collector</strong> to export telemetry to different backends: - <strong>Connected environments</strong>: Export to Azure Monitor - <strong>Disconnected environments</strong>: Export to Prometheus, Loki, Jaeger - Change backend without changing application code</p> <p><strong>Example configuration</strong>: <div class="language-yaml highlight"><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1 href=#__codelineno-0-1></a><span class=c1># OpenTelemetry Collector config for disconnected environment</span>
+    style DC_Data fill:#90ee90,stroke:#006400,stroke-width:2px
+    style DC_App fill:#90ee90,stroke:#006400,stroke-width:2px
+    style DC_Platform fill:#90ee90,stroke:#006400,stroke-width:2px
+    style DC_OS fill:#90ee90,stroke:#006400,stroke-width:2px
+    style DC_Hypervisor fill:#90ee90,stroke:#006400,stroke-width:2px
+    style DC_Network fill:#90ee90,stroke:#006400,stroke-width:2px
+    style DC_Physical fill:#90ee90,stroke:#006400,stroke-width:2px</code></pre> <div class="admonition warning"> <p class=admonition-title>Operational Complexity Increases with Control</p> <p>More control means more responsibility. Air-gapped deployments require significantly more operational staff with broader skill sets than cloud-native deployments. Budget for 3-5x the operational cost of equivalent cloud deployments.</p> </div> <h2 id=monitoring-and-observability>Monitoring and Observability<a class=headerlink href=#monitoring-and-observability title="Permanent link">&para;</a></h2> <p>Comprehensive observability is essential for operating hybrid environments. Observability encompasses metrics, logs, traces, and continuous profiling.</p> <h3 id=monitoring-in-connected-environments>Monitoring in Connected Environments<a class=headerlink href=#monitoring-in-connected-environments title="Permanent link">&para;</a></h3> <p><strong>Azure Monitor</strong>: - Collects metrics and logs from Azure resources automatically - <strong>Log Analytics workspaces</strong> provide centralized log storage and querying (KQL) - <strong>Application Insights</strong> instruments applications for performance monitoring and distributed tracing - <strong>Alerts</strong> trigger on metric thresholds or log query patterns - <strong>Dashboards and workbooks</strong> visualize metrics and logs</p> <p><strong>Azure Monitor for Kubernetes</strong>: - <strong>Container Insights</strong> monitors AKS and Arc-enabled Kubernetes clusters - Collects container logs, node metrics, and cluster events - Provides Kubernetes-specific dashboards (pod health, node utilization, persistent volume usage)</p> <p><strong>Integration with Azure Local via Azure Arc</strong>: - Connect Azure Local Kubernetes clusters to Azure Arc - Enable Container Insights to send metrics and logs to Azure Monitor - Centralize monitoring across cloud and on-premises in a single pane of glass</p> <h3 id=monitoring-in-disconnected-environments>Monitoring in Disconnected Environments<a class=headerlink href=#monitoring-in-disconnected-environments title="Permanent link">&para;</a></h3> <p><strong>Prometheus + Grafana stack</strong>: - <strong>Prometheus</strong> collects metrics from Kubernetes, applications (via exporters), and infrastructure - <strong>Grafana</strong> visualizes metrics with dashboards - <strong>Alertmanager</strong> routes alerts to on-premises notification systems - <strong>Thanos or Cortex</strong> provide long-term storage and multi-cluster federation</p> <p><strong>Logging with ELK or PLG stack</strong>: - <strong>Elasticsearch/Loki</strong> for log storage - <strong>Fluentd/Fluent-bit</strong> for log collection and forwarding - <strong>Kibana/Grafana</strong> for log querying and visualization</p> <p><strong>Distributed tracing</strong>: - <strong>Jaeger</strong> or <strong>Tempo</strong> for distributed tracing - Instrument applications with <strong>OpenTelemetry</strong> SDKs for consistent telemetry across environments</p> <h3 id=opentelemetry-as-a-consistent-instrumentation-layer>OpenTelemetry as a Consistent Instrumentation Layer<a class=headerlink href=#opentelemetry-as-a-consistent-instrumentation-layer title="Permanent link">&para;</a></h3> <p><strong>OpenTelemetry</strong> provides vendor-neutral instrumentation: - Instrument applications once with OpenTelemetry SDKs - Configure <strong>OpenTelemetry Collector</strong> to export telemetry to different backends: - <strong>Connected environments</strong>: Export to Azure Monitor - <strong>Disconnected environments</strong>: Export to Prometheus, Loki, Jaeger - Change backend without changing application code</p> <p><strong>Example configuration</strong>: <div class="language-yaml highlight"><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1 href=#__codelineno-0-1></a><span class=c1># OpenTelemetry Collector config for disconnected environment</span>
 </span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2 href=#__codelineno-0-2></a><span class=nt>receivers</span><span class=p>:</span>
 </span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3 href=#__codelineno-0-3></a><span class=w>  </span><span class=nt>otlp</span><span class=p>:</span>
 </span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4 href=#__codelineno-0-4></a><span class=w>    </span><span class=nt>protocols</span><span class=p>:</span>

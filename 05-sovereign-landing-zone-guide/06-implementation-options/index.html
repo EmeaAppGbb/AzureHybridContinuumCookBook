@@ -50,23 +50,23 @@
 
     Success --&gt; Operate[Operational Mode&lt;br/&gt;Workload Onboarding]
 
-    style Start fill:#0078D4,stroke:#002050,stroke-width:2px,color:#fff
-    style Success fill:#107C10,stroke:#004B1C,stroke-width:3px,color:#fff
-    style Operate fill:#7FBA00,stroke:#107C10,stroke-width:3px
+    style Start fill:#0078d4,stroke:#002050,stroke-width:2px,color:#fff
+    style Success fill:#107c10,stroke:#004b1c,stroke-width:3px,color:#fff
+    style Operate fill:#7fba00,stroke:#107c10,stroke-width:3px
 
-    style Terraform fill:#00BCF2,stroke:#0078D4,stroke-width:2px
-    style Bicep fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Portal fill:#FFB900,stroke:#D83B01,stroke-width:2px
+    style Terraform fill:#00bcf2,stroke:#0078d4,stroke-width:2px
+    style Bicep fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Portal fill:#ffb900,stroke:#d83b01,stroke-width:2px
 
-    style Connected fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Intermittent fill:#00BCF2,stroke:#0078D4,stroke-width:2px
-    style Disconnected fill:#505050,stroke:#FFB900,stroke-width:3px,color:#fff
+    style Connected fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Intermittent fill:#00bcf2,stroke:#0078d4,stroke-width:2px
+    style Disconnected fill:#505050,stroke:#ffb900,stroke-width:3px,color:#fff
 
-    style ExistingLZ fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style IaCChoice fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style CloudType fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style ConnectivityCheck fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style DeployMethod fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px</code></pre> <h2 id=bicep-implementation-walkthrough>Bicep Implementation Walkthrough<a class=headerlink href=#bicep-implementation-walkthrough title="Permanent link">&para;</a></h2> <p>This section provides a detailed walkthrough for deploying the Sovereign Landing Zone using Bicep.</p> <h3 id=prerequisites>Prerequisites<a class=headerlink href=#prerequisites title="Permanent link">&para;</a></h3> <p>Before deploying the SLZ with Bicep, ensure the following:</p> <ul> <li><strong>Azure CLI</strong> installed (version 2.40.0 or later)</li> <li><strong>Bicep CLI</strong> installed (<code>az bicep install</code>)</li> <li><strong>Azure subscription</strong> with Owner or User Access Administrator role at tenant root</li> <li><strong>Management group permissions</strong> to create and modify management groups</li> <li><strong>Git repository</strong> for storing Bicep code (GitHub, Azure Repos, or GitLab)</li> </ul> <h3 id=repository-structure>Repository Structure<a class=headerlink href=#repository-structure title="Permanent link">&para;</a></h3> <p>Organize the Bicep deployment repository with a modular structure:</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1 href=#__codelineno-0-1></a>slz-bicep/
+    style ExistingLZ fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style IaCChoice fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style CloudType fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style ConnectivityCheck fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style DeployMethod fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px</code></pre> <h2 id=bicep-implementation-walkthrough>Bicep Implementation Walkthrough<a class=headerlink href=#bicep-implementation-walkthrough title="Permanent link">&para;</a></h2> <p>This section provides a detailed walkthrough for deploying the Sovereign Landing Zone using Bicep.</p> <h3 id=prerequisites>Prerequisites<a class=headerlink href=#prerequisites title="Permanent link">&para;</a></h3> <p>Before deploying the SLZ with Bicep, ensure the following:</p> <ul> <li><strong>Azure CLI</strong> installed (version 2.40.0 or later)</li> <li><strong>Bicep CLI</strong> installed (<code>az bicep install</code>)</li> <li><strong>Azure subscription</strong> with Owner or User Access Administrator role at tenant root</li> <li><strong>Management group permissions</strong> to create and modify management groups</li> <li><strong>Git repository</strong> for storing Bicep code (GitHub, Azure Repos, or GitLab)</li> </ul> <h3 id=repository-structure>Repository Structure<a class=headerlink href=#repository-structure title="Permanent link">&para;</a></h3> <p>Organize the Bicep deployment repository with a modular structure:</p> <div class="language-text highlight"><pre><span></span><code><span id=__span-0-1><a id=__codelineno-0-1 name=__codelineno-0-1 href=#__codelineno-0-1></a>slz-bicep/
 </span><span id=__span-0-2><a id=__codelineno-0-2 name=__codelineno-0-2 href=#__codelineno-0-2></a>├── modules/
 </span><span id=__span-0-3><a id=__codelineno-0-3 name=__codelineno-0-3 href=#__codelineno-0-3></a>│   ├── managementGroups/
 </span><span id=__span-0-4><a id=__codelineno-0-4 name=__codelineno-0-4 href=#__codelineno-0-4></a>│   │   └── main.bicep
