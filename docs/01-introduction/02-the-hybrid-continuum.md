@@ -23,7 +23,107 @@ Understanding where on the continuum your workloads operate — and designing th
 
 The Azure Hybrid Continuum consists of four primary deployment stages. While real-world architectures may blend characteristics from multiple stages, this framework provides a structured way to understand the options available and the trade-offs inherent in each.
 
-<!-- DIAGRAM: Hybrid Continuum spectrum diagram - will be added by Seldon -->
+```mermaid
+graph LR
+    subgraph Stage1["<b>Stage 1: Public Cloud</b><br/>(Fully Connected)"]
+        direction TB
+        S1_Conn["🌐 Continuous Azure Connectivity<br/>ExpressRoute / VPN"]
+        S1_Mgmt["☁️ Azure Control Plane<br/>Full ARM Management"]
+        S1_Svc["<b>Available Services:</b><br/>• AKS, App Service, Functions<br/>• SQL DB, Cosmos DB<br/>• Azure ML, Cognitive Services<br/>• Logic Apps, Event Grid<br/>• Full PaaS Catalog"]
+    end
+    
+    subgraph Stage2["<b>Stage 2: Connected Hybrid</b><br/>(Azure Local + Arc)"]
+        direction TB
+        S2_Conn["🔗 Outbound Azure Connectivity<br/>Management & Telemetry"]
+        S2_Mgmt["☁️ Azure Control Plane<br/>Hybrid ARM via Arc"]
+        S2_Svc["<b>Available Services:</b><br/>• Azure Local VMs<br/>• AKS on Azure Local<br/>• Arc-enabled SQL MI<br/>• Arc-enabled Kubernetes<br/>• Azure Monitor (hybrid)<br/>• Azure Policy (hybrid)"]
+    end
+    
+    subgraph Stage3["<b>Stage 3: Sovereign Cloud</b><br/>(Enhanced Controls)"]
+        direction TB
+        S3_Conn["🔒 Restricted Connectivity<br/>In-Jurisdiction Only"]
+        S3_Mgmt["🛡️ Sovereign Control Plane<br/>Policy-Enforced ARM"]
+        S3_Svc["<b>Available Services:</b><br/>• Azure VMs, AKS<br/>• Azure SQL DB (limited)<br/>• Sovereign Landing Zones<br/>• Confidential Computing<br/>• Customer Lockbox<br/>• In-Region Key Vault"]
+    end
+    
+    subgraph Stage4["<b>Stage 4: Disconnected</b><br/>(Air-Gapped)"]
+        direction TB
+        S4_Conn["❌ No External Connectivity<br/>Physical Isolation"]
+        S4_Mgmt["💻 Local Control Plane<br/>On-Premises Management"]
+        S4_Svc["<b>Available Services:</b><br/>• Azure Local (disconnected)<br/>• Self-hosted Kubernetes<br/>• Local container registry<br/>• Local AD DS<br/>• Prometheus/Grafana<br/>• GitOps (local Git)"]
+    end
+    
+    Stage1 -->|"Increasing Sovereignty ➡️<br/>Decreasing Connectivity"| Stage2
+    Stage2 -->|"Increasing Sovereignty ➡️<br/>Decreasing Connectivity"| Stage3
+    Stage3 -->|"Increasing Sovereignty ➡️<br/>Decreasing Connectivity"| Stage4
+    
+    Stage4 -.->|"⬅️ Cloud Adoption<br/>Improved Connectivity"| Stage3
+    Stage3 -.->|"⬅️ Cloud Adoption<br/>Regulatory Relief"| Stage2
+    Stage2 -.->|"⬅️ Cloud Adoption<br/>Full Migration"| Stage1
+    
+    classDef stage1Style fill:#0078d4,stroke:#003d6b,stroke-width:2px,color:#fff
+    classDef stage2Style fill:#50e6ff,stroke:#0078d4,stroke-width:2px,color:#000
+    classDef stage3Style fill:#ffb900,stroke:#b8860b,stroke-width:2px,color:#000
+    classDef stage4Style fill:#e74856,stroke:#a31e22,stroke-width:2px,color:#fff
+    
+    class Stage1 stage1Style
+    class Stage2 stage2Style
+    class Stage3 stage3Style
+    class Stage4 stage4Style
+```
+
+**Figure 1: The Azure Hybrid Continuum Spectrum** — Organizations operate across four stages, each with distinct connectivity models, management approaches, and service availability. Movement is bidirectional based on evolving requirements.
+
+---
+
+```mermaid
+graph TD
+    Start["Organization Evaluating<br/>Deployment Model"]
+    
+    Start --> RegQ{"Data Sovereignty<br/>or Regulatory<br/>Requirements?"}
+    
+    RegQ -->|"Classified / Air-Gapped<br/>Required"| Disconnected["<b>Stage 4: Disconnected</b><br/>Air-gapped infrastructure<br/>No cloud connectivity"]
+    
+    RegQ -->|"National Sovereignty<br/>Laws Apply"| SovQ{"Enhanced Governance<br/>Controls Sufficient?"}
+    
+    SovQ -->|"Yes"| Sovereign["<b>Stage 3: Sovereign Cloud</b><br/>Sovereign Landing Zone<br/>In-jurisdiction resources"]
+    
+    SovQ -->|"No - Physical<br/>Isolation Required"| Disconnected
+    
+    RegQ -->|"Data Residency<br/>On-Premises"| LatencyQ{"Local Processing<br/>Required?"}
+    
+    LatencyQ -->|"Yes"| Connected["<b>Stage 2: Connected Hybrid</b><br/>Azure Local + Arc<br/>Cloud management"]
+    
+    LatencyQ -->|"No"| Sovereign
+    
+    RegQ -->|"No Restrictions"| CostQ{"Workload<br/>Characteristics?"}
+    
+    CostQ -->|"Variable Demand<br/>Global Scale<br/>Rapid Innovation"| PublicCloud["<b>Stage 1: Public Cloud</b><br/>Full Azure PaaS/SaaS<br/>Cloud-native operations"]
+    
+    CostQ -->|"Predictable Load<br/>Large Data Volume<br/>Cost Optimization"| Connected
+    
+    CostQ -->|"Hybrid Permanence<br/>Strategic Independence"| Connected
+    
+    PublicCloud -.->|"Repatriation Drivers:<br/>• New regulations<br/>• Cost optimization<br/>• Vendor independence"| Connected
+    
+    Connected -.->|"Cloud Migration Drivers:<br/>• Innovation needs<br/>• Global expansion<br/>• Operational efficiency"| PublicCloud
+    
+    Sovereign -.->|"Sovereignty Increase:<br/>• Geopolitical change<br/>• Stricter regulations"| Disconnected
+    
+    classDef decisionStyle fill:#fff,stroke:#0078d4,stroke-width:2px,color:#000
+    classDef stage1Style fill:#0078d4,stroke:#003d6b,stroke-width:3px,color:#fff
+    classDef stage2Style fill:#50e6ff,stroke:#0078d4,stroke-width:3px,color:#000
+    classDef stage3Style fill:#ffb900,stroke:#b8860b,stroke-width:3px,color:#000
+    classDef stage4Style fill:#e74856,stroke:#a31e22,stroke-width:3px,color:#fff
+    
+    class Start,RegQ,SovQ,LatencyQ,CostQ decisionStyle
+    class PublicCloud stage1Style
+    class Connected stage2Style
+    class Sovereign stage3Style
+    class Disconnected stage4Style
+```
+
+**Figure 2: Decision Factors Driving Continuum Positioning** — Key drivers that determine where organizations operate along the continuum, including regulatory requirements, latency needs, cost optimization, and strategic considerations. Dotted lines show common transition paths as requirements evolve.
 
 ### Stage 1: Public Cloud (Fully Connected)
 
