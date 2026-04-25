@@ -214,7 +214,84 @@ Different roles have different priorities when approaching hybrid and sovereign 
 
 **Estimated Reading Time:** 5–6 hours for security and compliance focus
 
-<!-- DIAGRAM: Navigation map showing reading paths - will be added by Seldon -->
+```mermaid
+graph TD
+    %% Define all 9 parts grouped by major sections
+    subgraph Foundation["Foundation (Part 1)"]
+        P1[Part 1: Introduction<br/>Overview, Hybrid Continuum,<br/>How to Use This Guide]
+    end
+    
+    subgraph DeepDives["Architecture Deep Dives (Parts 2-4)"]
+        P2[Part 2: Azure Hybrid Infrastructure<br/>Azure Local, Azure Arc,<br/>Connectivity Models]
+        P3[Part 3: Sovereignty & Compliance<br/>Sovereign Clouds, SLZ Architecture,<br/>Data Residency, Compliance Frameworks]
+        P4[Part 4: Architecture Patterns<br/>Cloud-Native, Hybrid Connected,<br/>Hybrid Disconnected, Cloud Exit,<br/>Workload Placement Framework]
+    end
+    
+    subgraph Implementation["Implementation (Parts 5-7)"]
+        P5[Part 5: Sovereign Landing Zone Guide<br/>Identity, Networking, Security,<br/>Governance, Automation]
+        P6[Part 6: Cloud Exit Scenarios<br/>Workload Assessment, Data Migration,<br/>Operational Continuity]
+        P7[Part 7: Reference Scenario<br/>Contoso Insurance End-to-End<br/>Architecture Decisions, Lessons Learned]
+    end
+    
+    subgraph CrossCutting["Cross-Cutting Concerns (Parts 8-9)"]
+        P8[Part 8: Best Practices<br/>Design Principles, Resilience,<br/>Security, Operations, Cost Optimization]
+        P9[Part 9: Appendix<br/>Glossary, Azure Service Mapping,<br/>References]
+    end
+    
+    %% Cloud Architect path (thick solid lines, blue)
+    P1 ==>|Cloud Architect| P2
+    P2 ==>|Cloud Architect| P3
+    P3 ==>|Cloud Architect| P4
+    P4 ==>|Cloud Architect| P5
+    P5 ==>|Cloud Architect| P7
+    P7 -.->|Cloud Architect| P8
+    P7 -.->|Cloud Architect| P6
+    
+    %% Platform Engineer path (dashed lines, green)
+    P1 -->|Platform Engineer| P2
+    P2 -->|Platform Engineer| P5
+    P5 -->|Platform Engineer| P6
+    P6 -->|Platform Engineer| P8
+    P8 -.->|Platform Engineer| P9
+    
+    %% Decision Maker path (dotted lines, purple)
+    P1 -.->|Decision Maker| P4
+    P1 -.->|Decision Maker| P3
+    P4 -.->|Decision Maker| P6
+    P3 -.->|Decision Maker| P6
+    P6 -.->|Decision Maker| P7
+    P7 -.->|Decision Maker| P8
+    
+    %% Developer path (thick dotted lines, orange)
+    P1 -..->|Developer| P7
+    P7 -..->|Developer| P9
+    P9 -..->|Developer| P4
+    P4 -..->|Developer| P8
+    
+    %% Security & Compliance path (thick dashed lines, red)
+    P1 -.->|Security| P3
+    P3 -.->|Security| P5
+    P5 -.->|Security| P4
+    P4 -.->|Security| P8
+    P8 -.->|Security| P7
+    
+    classDef foundation fill:#e1f5ff,stroke:#0078d4,stroke-width:2px
+    classDef deepdive fill:#fff4e1,stroke:#ff8c00,stroke-width:2px
+    classDef implementation fill:#e1ffe1,stroke:#107c10,stroke-width:2px
+    classDef crosscutting fill:#f4e1ff,stroke:#8661c5,stroke-width:2px
+    
+    class P1 foundation
+    class P2,P3,P4 deepdive
+    class P5,P6,P7 implementation
+    class P8,P9 crosscutting
+```
+
+**Reading Path Legend:**
+- **Cloud Architect** (solid thick lines): Comprehensive journey through all core sections
+- **Platform Engineer** (dashed lines): Implementation-focused path prioritizing hands-on guidance
+- **Decision Maker** (dotted lines): Strategic overview emphasizing patterns, compliance, and cloud exit
+- **Developer** (thick dotted lines): Application-centric path starting with reference implementation
+- **Security & Compliance** (thick dashed lines): Security and compliance-focused journey
 
 ## Prerequisites
 
