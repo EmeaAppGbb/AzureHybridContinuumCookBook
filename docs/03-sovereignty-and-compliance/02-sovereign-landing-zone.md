@@ -62,8 +62,48 @@ Root Management Group
     └── Subscriptions pending deletion
 ```
 
-!!! info "DIAGRAM PLACEHOLDER: SLZ Management Group Hierarchy"
-    **Seldon diagram needed**: A hierarchical tree diagram showing the full management group structure from Root → Platform (Identity, Management, Connectivity) + Landing Zones (Public, Confidential Corp, Confidential Online) → Sandbox + Decommissioned. Annotate policy assignments at each level, such as "Require encryption" at Root, "Data residency enforcement" at Landing Zones, "Confidential computing required" at Confidential Corp/Online.
+```mermaid
+graph TD
+    Root["<b>Root Management Group</b><br/><br/>📋 Policies:<br/>• Require encryption at rest<br/>• Enforce TLS 1.2+<br/>• Audit all admin actions"]
+    
+    Platform["<b>Platform</b><br/><br/>📋 Policies:<br/>• Network security baseline<br/>• Centralized logging required"]
+    LandingZones["<b>Landing Zones</b><br/><br/>📋 Policies:<br/>• Data residency enforcement<br/>• Tag requirements<br/>• Backup policies"]
+    Sandbox["<b>Sandbox</b><br/><br/>📋 Policies:<br/>• Budget limits<br/>• Auto-delete resources"]
+    Decommissioned["<b>Decommissioned</b><br/><br/>📋 Policies:<br/>• Deny all new resources<br/>• Audit access"]
+    
+    Identity["<b>Identity</b><br/><br/>🔐 Azure AD<br/>🔐 MFA enforcement<br/>🔐 Domain controllers"]
+    Management["<b>Management</b><br/><br/>📊 Log Analytics<br/>📊 Azure Monitor<br/>📊 Automation<br/>📊 Backup vaults"]
+    Connectivity["<b>Connectivity</b><br/><br/>🌐 Hub VNets<br/>🌐 Azure Firewall<br/>🌐 VPN/ExpressRoute"]
+    
+    Public["<b>Public</b><br/><br/>📋 Standard workloads<br/>✓ Public IPs allowed"]
+    ConfCorp["<b>Confidential Corp</b><br/><br/>📋 Policies:<br/>• Confidential computing required<br/>• Private endpoints only<br/>• No public IPs<br/>• Customer Lockbox enabled"]
+    ConfOnline["<b>Confidential Online</b><br/><br/>📋 Policies:<br/>• Confidential computing required<br/>• Internet ingress via WAF only<br/>• Strict egress controls<br/>• Customer Lockbox enabled"]
+    
+    Root --> Platform
+    Root --> LandingZones
+    Root --> Sandbox
+    Root --> Decommissioned
+    
+    Platform --> Identity
+    Platform --> Management
+    Platform --> Connectivity
+    
+    LandingZones --> Public
+    LandingZones --> ConfCorp
+    LandingZones --> ConfOnline
+    
+    style Root fill:#0078D4,stroke:#004578,color:#fff,stroke-width:3px
+    style Platform fill:#0078D4,stroke:#004578,color:#fff
+    style LandingZones fill:#0078D4,stroke:#004578,color:#fff
+    style Sandbox fill:#50E6FF,stroke:#0078D4,color:#000
+    style Decommissioned fill:#50E6FF,stroke:#0078D4,color:#000
+    style Identity fill:#E6F3FF,stroke:#0078D4,color:#000
+    style Management fill:#E6F3FF,stroke:#0078D4,color:#000
+    style Connectivity fill:#E6F3FF,stroke:#0078D4,color:#000
+    style Public fill:#E6F3FF,stroke:#0078D4,color:#000
+    style ConfCorp fill:#FFE6CC,stroke:#D97700,color:#000,stroke-width:2px
+    style ConfOnline fill:#FFE6CC,stroke:#D97700,color:#000,stroke-width:2px
+```
 
 ### Platform Management Groups
 
@@ -187,12 +227,68 @@ In a **hub-and-spoke** topology, the hub VNet contains shared networking service
 - **Hub-based inspection**: All traffic between spokes and to/from on-premises flows through the hub firewall for inspection.
 - **Private DNS zones**: Centralized private DNS zones in the hub resolve private endpoint FQDNs.
 
-!!! info "DIAGRAM PLACEHOLDER: SLZ Hub & Spoke Network Topology"
-    **Seldon diagram needed**: A hub-and-spoke network diagram showing:
-    - **Hub VNet**: Azure Firewall, VPN Gateway, ExpressRoute Gateway, Azure Bastion, Private DNS Zones.
-    - **Spoke VNets**: One spoke for Confidential Corp workloads, one for Confidential Online workloads, each with private endpoints for Storage, SQL, Key Vault.
-    - **On-premises connectivity**: Via VPN or ExpressRoute to the hub gateway.
-    - **Peering relationships**: Hub-to-spoke VNet peering with "Use Remote Gateway" enabled on spokes.
+```mermaid
+graph TB
+    subgraph OnPrem["🏢 On-Premises"]
+        DC["Data Center<br/>Corporate Network"]
+    end
+    
+    subgraph HubVNet["Hub VNet (10.0.0.0/16)"]
+        direction TB
+        Firewall["🔥 Azure Firewall<br/>10.0.1.0/24"]
+        VPNGw["🔐 VPN Gateway<br/>10.0.2.0/27"]
+        ERGw["⚡ ExpressRoute Gateway<br/>10.0.2.32/27"]
+        Bastion["🖥️ Azure Bastion<br/>10.0.3.0/26"]
+        DNS["🌐 Private DNS Zones<br/>blob.core.windows.net<br/>database.windows.net<br/>vault.azure.net"]
+    end
+    
+    subgraph SpokeConfCorp["Spoke: Confidential Corp (10.1.0.0/16)"]
+        direction TB
+        CorpApp["💼 Corporate Apps<br/>10.1.1.0/24"]
+        CorpData["📊 Data Tier<br/>10.1.2.0/24"]
+        CorpPE["🔒 Private Endpoints:<br/>• Storage Account<br/>• SQL Database<br/>• Key Vault<br/>10.1.3.0/24"]
+    end
+    
+    subgraph SpokeConfOnline["Spoke: Confidential Online (10.2.0.0/16)"]
+        direction TB
+        AppGw["🌍 Application Gateway<br/>+ WAF<br/>10.2.0.0/24"]
+        OnlineApp["🌐 Internet-facing Apps<br/>10.2.1.0/24"]
+        OnlinePE["🔒 Private Endpoints:<br/>• Storage Account<br/>• SQL Database<br/>• Key Vault<br/>10.2.3.0/24"]
+    end
+    
+    Internet["☁️ Internet"]
+    
+    DC -.->|"VPN/ExpressRoute"| VPNGw
+    DC -.->|"ExpressRoute"| ERGw
+    
+    VPNGw --> Firewall
+    ERGw --> Firewall
+    
+    Firewall <-->|"VNet Peering<br/>Use Remote Gateway"| CorpApp
+    Firewall <-->|"VNet Peering<br/>Use Remote Gateway"| AppGw
+    
+    CorpApp --> CorpData
+    CorpData --> CorpPE
+    
+    AppGw --> OnlineApp
+    OnlineApp --> OnlinePE
+    
+    Internet -->|"HTTPS only"| AppGw
+    
+    DNS -.->|"Resolves"| CorpPE
+    DNS -.->|"Resolves"| OnlinePE
+    
+    style HubVNet fill:#0078D4,stroke:#004578,color:#fff,stroke-width:2px
+    style SpokeConfCorp fill:#FFE6CC,stroke:#D97700,color:#000,stroke-width:2px
+    style SpokeConfOnline fill:#FFE6CC,stroke:#D97700,color:#000,stroke-width:2px
+    style OnPrem fill:#E6F3FF,stroke:#0078D4,color:#000
+    style Internet fill:#f0f0f0,stroke:#999
+    style Firewall fill:#50E6FF,stroke:#0078D4,color:#000
+    style VPNGw fill:#50E6FF,stroke:#0078D4,color:#000
+    style ERGw fill:#50E6FF,stroke:#0078D4,color:#000
+    style Bastion fill:#50E6FF,stroke:#0078D4,color:#000
+    style DNS fill:#50E6FF,stroke:#0078D4,color:#000
+```
 
 ### Virtual WAN Topology
 

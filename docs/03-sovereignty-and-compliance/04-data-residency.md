@@ -396,7 +396,67 @@ Organizations can implement data sovereignty controls across a spectrum, dependi
 
 **Limitations**: Customer manages infrastructure, limited to Azure Local-compatible services
 
-<!-- DIAGRAM PLACEHOLDER: Data sovereignty tiers pyramid, from Tier 1 (broadest use cases, least control) at the bottom to Tier 4 (narrowest use cases, maximum control) at top, with key characteristics and use cases for each tier -->
+```mermaid
+graph TB
+    subgraph Tier4["🔒 Tier 4: Full On-Premises with Azure Local"]
+        direction TB
+        T4Features["<b>Complete Sovereignty</b><br/><br/>✓ All data on-premises<br/>✓ Air-gapped option<br/>✓ Physical hardware control<br/>✓ Azure Local services"]
+        T4Use["<b>Use Cases:</b><br/>Classified data, critical infrastructure,<br/>OT/ICS, extreme regulatory requirements"]
+        T4Limit["<b>Limitations:</b><br/>Customer manages infrastructure,<br/>limited service compatibility"]
+    end
+    
+    subgraph Tier3["🔐 Tier 3: HYOK (Hold Your Own Key)"]
+        direction TB
+        T3Features["<b>Maximum Cloud Sovereignty</b><br/><br/>✓ Keys stored on-premises<br/>✓ Data encrypted before upload<br/>✓ Decryption outside Azure<br/>✓ Ultimate key control"]
+        T3Use["<b>Use Cases:</b><br/>Defense contractors, intelligence,<br/>highly regulated financial institutions"]
+        T3Limit["<b>Limitations:</b><br/>Performance overhead,<br/>limited service compatibility"]
+    end
+    
+    subgraph Tier2["🔑 Tier 2: BYOK (Bring Your Own Key)"]
+        direction TB
+        T2Features["<b>Enhanced Data Sovereignty</b><br/><br/>✓ Customer-managed keys<br/>✓ Azure Key Vault Managed HSM<br/>✓ Full key lifecycle control<br/>✓ Revocation capability"]
+        T2Use["<b>Use Cases:</b><br/>Financial services, healthcare,<br/>regulated industries, public sector"]
+        T2Limit["<b>Limitations:</b><br/>Metadata flows to Microsoft,<br/>keys stored in cloud"]
+    end
+    
+    subgraph Tier1["☁️ Tier 1: Geographic Data Residency"]
+        direction TB
+        T1Features["<b>Basic Data Sovereignty</b><br/><br/>✓ Data stays in selected region<br/>✓ Microsoft-managed encryption<br/>✓ Compliance certifications<br/>✓ Azure Policy enforcement"]
+        T1Use["<b>Use Cases:</b><br/>General business workloads,<br/>GDPR compliance, regional requirements"]
+        T1Limit["<b>Limitations:</b><br/>Microsoft-managed keys,<br/>standard cloud operations"]
+    end
+    
+    Tier4 --> Tier3
+    Tier3 --> Tier2
+    Tier2 --> Tier1
+    
+    Control["<b>Control Level</b><br/>Maximum ↑"]
+    Complexity["<b>Complexity</b><br/>Highest ↑"]
+    UseCases["<b>Use Cases</b><br/>Narrower ↑"]
+    
+    Tier4 -.->|"Maximum"| Control
+    Tier3 -.->|"Very High"| Control
+    Tier2 -.->|"High"| Control
+    Tier1 -.->|"Standard"| Control
+    
+    Tier4 -.->|"Highest"| Complexity
+    Tier1 -.->|"Lowest"| Complexity
+    
+    Tier4 -.->|"Most Specialized"| UseCases
+    Tier1 -.->|"Broadest"| UseCases
+    
+    style Tier4 fill:#D97700,stroke:#8B4500,color:#fff,stroke-width:3px
+    style Tier3 fill:#FF9933,stroke:#D97700,color:#000,stroke-width:2px
+    style Tier2 fill:#0078D4,stroke:#004578,color:#fff,stroke-width:2px
+    style Tier1 fill:#50E6FF,stroke:#0078D4,color:#000
+    style T4Features fill:#FFE6CC,stroke:#D97700,color:#000
+    style T3Features fill:#FFE6CC,stroke:#D97700,color:#000
+    style T2Features fill:#E6F3FF,stroke:#0078D4,color:#000
+    style T1Features fill:#E6F3FF,stroke:#0078D4,color:#000
+    style Control fill:#f0f0f0,stroke:#999
+    style Complexity fill:#f0f0f0,stroke:#999
+    style UseCases fill:#f0f0f0,stroke:#999
+```
 
 ---
 

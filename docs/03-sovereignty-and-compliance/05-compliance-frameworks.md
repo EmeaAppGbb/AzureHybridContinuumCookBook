@@ -400,7 +400,104 @@ In fully disconnected scenarios:
 - **Microsoft provides**: Software and documentation; support is limited to "sneakernet" updates and remote diagnostics (if allowed)
 - **Compliance**: Customer has complete responsibility and complete control
 
-<!-- DIAGRAM PLACEHOLDER: Compliance responsibility matrix showing shift in Microsoft vs. customer responsibilities across the continuum: Public Cloud (most Microsoft responsibility) → Hybrid with Arc (shared) → Azure Local Connected (majority customer) → Azure Local Disconnected (full customer responsibility). Visual representation of IaaS/PaaS/SaaS responsibility layers. -->
+```mermaid
+graph TB
+    subgraph Legend["Responsibility Legend"]
+        direction LR
+        MSResp["🟦 Microsoft Responsibility"]
+        SharedResp["🟨 Shared Responsibility"]
+        CustResp["🟧 Customer Responsibility"]
+    end
+    
+    subgraph PublicCloud["☁️ Azure Public Cloud"]
+        direction TB
+        PC_App["Applications & Data"]
+        PC_Runtime["Runtime & Middleware"]
+        PC_OS["Operating System"]
+        PC_VM["Virtualization"]
+        PC_Infra["Infrastructure"]
+        PC_Physical["Physical Security"]
+        
+        PC_App --> PC_Runtime --> PC_OS --> PC_VM --> PC_Infra --> PC_Physical
+    end
+    
+    subgraph HybridArc["🔄 Hybrid with Azure Arc"]
+        direction TB
+        Arc_App["Applications & Data"]
+        Arc_Runtime["Runtime & Middleware"]
+        Arc_OS["Operating System"]
+        Arc_VM["Virtualization"]
+        Arc_Infra["Infrastructure"]
+        Arc_Physical["Physical Security"]
+        
+        Arc_App --> Arc_Runtime --> Arc_OS --> Arc_VM --> Arc_Infra --> Arc_Physical
+    end
+    
+    subgraph AzLocalConn["🔌 Azure Local Connected"]
+        direction TB
+        Conn_App["Applications & Data"]
+        Conn_Runtime["Runtime & Middleware"]
+        Conn_OS["Operating System"]
+        Conn_VM["Virtualization"]
+        Conn_Infra["Infrastructure"]
+        Conn_Physical["Physical Security"]
+        
+        Conn_App --> Conn_Runtime --> Conn_OS --> Conn_VM --> Conn_Infra --> Conn_Physical
+    end
+    
+    subgraph AzLocalDisc["🔒 Azure Local Disconnected"]
+        direction TB
+        Disc_App["Applications & Data"]
+        Disc_Runtime["Runtime & Middleware"]
+        Disc_OS["Operating System"]
+        Disc_VM["Virtualization"]
+        Disc_Infra["Infrastructure"]
+        Disc_Physical["Physical Security"]
+        
+        Disc_App --> Disc_Runtime --> Disc_OS --> Disc_VM --> Disc_Infra --> Disc_Physical
+    end
+    
+    PublicCloud -.->|"Increasing Customer Control"| HybridArc
+    HybridArc -.->|"Increasing Customer Control"| AzLocalConn
+    AzLocalConn -.->|"Increasing Customer Control"| AzLocalDisc
+    
+    style PublicCloud fill:#E6F3FF,stroke:#0078D4,color:#000,stroke-width:2px
+    style HybridArc fill:#E6F3FF,stroke:#0078D4,color:#000,stroke-width:2px
+    style AzLocalConn fill:#FFE6CC,stroke:#D97700,color:#000,stroke-width:2px
+    style AzLocalDisc fill:#FFE6CC,stroke:#D97700,color:#000,stroke-width:2px
+    
+    style PC_App fill:#FF9933,stroke:#D97700,color:#000
+    style PC_Runtime fill:#FFA500,stroke:#D97700,color:#000
+    style PC_OS fill:#FFD700,stroke:#D97700,color:#000
+    style PC_VM fill:#50E6FF,stroke:#0078D4,color:#000
+    style PC_Infra fill:#0078D4,stroke:#004578,color:#fff
+    style PC_Physical fill:#004578,stroke:#002952,color:#fff
+    
+    style Arc_App fill:#FF9933,stroke:#D97700,color:#000
+    style Arc_Runtime fill:#FF9933,stroke:#D97700,color:#000
+    style Arc_OS fill:#FF9933,stroke:#D97700,color:#000
+    style Arc_VM fill:#FFD700,stroke:#D97700,color:#000
+    style Arc_Infra fill:#FFD700,stroke:#D97700,color:#000
+    style Arc_Physical fill:#FF9933,stroke:#D97700,color:#000
+    
+    style Conn_App fill:#FF9933,stroke:#D97700,color:#000
+    style Conn_Runtime fill:#FF9933,stroke:#D97700,color:#000
+    style Conn_OS fill:#FF9933,stroke:#D97700,color:#000
+    style Conn_VM fill:#FF9933,stroke:#D97700,color:#000
+    style Conn_Infra fill:#FF9933,stroke:#D97700,color:#000
+    style Conn_Physical fill:#FF9933,stroke:#D97700,color:#000
+    
+    style Disc_App fill:#FF9933,stroke:#D97700,color:#000
+    style Disc_Runtime fill:#FF9933,stroke:#D97700,color:#000
+    style Disc_OS fill:#FF9933,stroke:#D97700,color:#000
+    style Disc_VM fill:#FF9933,stroke:#D97700,color:#000
+    style Disc_Infra fill:#FF9933,stroke:#D97700,color:#000
+    style Disc_Physical fill:#FF9933,stroke:#D97700,color:#000
+    
+    style MSResp fill:#0078D4,stroke:#004578,color:#fff
+    style SharedResp fill:#FFD700,stroke:#D97700,color:#000
+    style CustResp fill:#FF9933,stroke:#D97700,color:#000
+```
 
 ---
 

@@ -430,15 +430,81 @@ Identity is the control plane for modern cloud environments. The SLZ enforces st
 
 The SLZ implements **defense-in-depth**, layering multiple security controls so that if one fails, others provide continued protection.
 
-!!! info "DIAGRAM PLACEHOLDER: Defense-in-Depth for Sovereign Workloads"
-    **Seldon diagram needed**: A layered diagram showing:
-    - **Layer 1 (Physical Security)**: Azure data center physical security, FIPS 140-2 Level 3 HSMs.
-    - **Layer 2 (Network Isolation)**: Private endpoints, NSGs, Azure Firewall, no public IPs.
-    - **Layer 3 (Identity)**: Azure AD Conditional Access, PIM, MFA.
-    - **Layer 4 (Data Protection)**: Encryption at rest (CMK), encryption in transit (TLS 1.3).
-    - **Layer 5 (Confidential Computing)**: TEEs (AMD SEV-SNP, Intel TDX, SGX).
-    - **Layer 6 (Application Security)**: Secure coding practices, vulnerability scanning, WAF.
-    - **Layer 7 (Monitoring & Audit)**: Azure Monitor, Microsoft Sentinel, Customer Lockbox logs, attestation.
+```mermaid
+graph TB
+    subgraph Layer7["Layer 7: Monitoring & Audit"]
+        direction LR
+        L7A["📊 Azure Monitor"]
+        L7B["🛡️ Microsoft Sentinel"]
+        L7C["📝 Customer Lockbox logs"]
+        L7D["✅ Attestation reports"]
+    end
+    
+    subgraph Layer6["Layer 6: Application Security"]
+        direction LR
+        L6A["🔒 Secure coding practices"]
+        L6B["🔍 Vulnerability scanning"]
+        L6C["🛡️ Web Application Firewall"]
+        L6D["🔐 API security"]
+    end
+    
+    subgraph Layer5["Layer 5: Confidential Computing"]
+        direction LR
+        L5A["💻 AMD SEV-SNP"]
+        L5B["💻 Intel TDX"]
+        L5C["💻 Intel SGX"]
+        L5D["🔐 TEE protection"]
+    end
+    
+    subgraph Layer4["Layer 4: Data Protection"]
+        direction LR
+        L4A["🔐 Encryption at rest<br/>Customer-Managed Keys"]
+        L4B["🔐 Encryption in transit<br/>TLS 1.3"]
+        L4C["🔑 Azure Key Vault<br/>Managed HSM"]
+    end
+    
+    subgraph Layer3["Layer 3: Identity & Access"]
+        direction LR
+        L3A["🔑 Azure AD<br/>Conditional Access"]
+        L3B["⏱️ Privileged Identity<br/>Management (PIM)"]
+        L3C["📱 Multi-Factor<br/>Authentication"]
+    end
+    
+    subgraph Layer2["Layer 2: Network Isolation"]
+        direction LR
+        L2A["🔒 Private Endpoints"]
+        L2B["🛡️ Network Security<br/>Groups (NSGs)"]
+        L2C["🔥 Azure Firewall"]
+        L2D["🚫 No Public IPs"]
+    end
+    
+    subgraph Layer1["Layer 1: Physical Security"]
+        direction LR
+        L1A["🏢 Data center<br/>physical security"]
+        L1B["🔐 FIPS 140-2<br/>Level 3 HSMs"]
+        L1C["🎯 Dedicated hardware<br/>options"]
+    end
+    
+    Layer7 --> Layer6
+    Layer6 --> Layer5
+    Layer5 --> Layer4
+    Layer4 --> Layer3
+    Layer3 --> Layer2
+    Layer2 --> Layer1
+    
+    Core["☁️<br/><b>Sovereign<br/>Workload</b><br/>☁️"]
+    
+    Layer1 -.->|"Protects"| Core
+    
+    style Layer7 fill:#0078D4,stroke:#004578,color:#fff
+    style Layer6 fill:#1A8CCC,stroke:#004578,color:#fff
+    style Layer5 fill:#3399D4,stroke:#004578,color:#fff
+    style Layer4 fill:#50A6DC,stroke:#004578,color:#fff
+    style Layer3 fill:#6BB3E4,stroke:#0078D4,color:#000
+    style Layer2 fill:#85C0EC,stroke:#0078D4,color:#000
+    style Layer1 fill:#A0CDF4,stroke:#0078D4,color:#000
+    style Core fill:#FFE6CC,stroke:#D97700,color:#000,stroke-width:4px
+```
 
 ### How Defense-in-Depth Works in Practice
 

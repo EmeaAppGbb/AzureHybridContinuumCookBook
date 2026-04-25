@@ -122,8 +122,45 @@ The highest level of sovereignty involves fully disconnected Azure Local deploym
 - **Key features**: Air-gapped deployment, complete operational independence, manual update processes.
 - **Use cases**: Defense, classified workloads, maximum operational sovereignty.
 
-!!! info "DIAGRAM PLACEHOLDER: Sovereignty Spectrum"
-    **Seldon diagram needed**: A visual spectrum showing Azure Public (with policies) → Azure Public (with SLZ + Confidential Computing) → Azure Government Sovereign Regions → Azure Local Connected → Azure Local Disconnected, mapped against increasing levels of sovereignty control (data residency, operational independence, access restrictions).
+```mermaid
+graph LR
+    subgraph "Sovereignty Spectrum"
+        L1["<b>Level 1</b><br/>Azure Public<br/>with Policies<br/><br/>✓ Data residency<br/>✓ Compliance policies<br/>✓ Encryption at rest"]
+        L2["<b>Level 2</b><br/>Azure Public with<br/>SLZ + Confidential<br/><br/>✓ Confidential VMs<br/>✓ CMK encryption<br/>✓ Private endpoints<br/>✓ Customer Lockbox"]
+        L3["<b>Level 3</b><br/>Azure Government<br/>Sovereign Regions<br/><br/>✓ Dedicated regions<br/>✓ Personnel screening<br/>✓ FedRAMP High<br/>✓ Enhanced contracts"]
+        L4["<b>Level 4</b><br/>Azure Local<br/>Connected<br/><br/>✓ On-premises infra<br/>✓ Customer hardware<br/>✓ Azure Arc mgmt<br/>✓ Hybrid services"]
+        L5["<b>Level 5</b><br/>Azure Local<br/>Disconnected<br/><br/>✓ Air-gapped<br/>✓ Full independence<br/>✓ Manual updates<br/>✓ Complete control"]
+        
+        L1 --> L2
+        L2 --> L3
+        L3 --> L4
+        L4 --> L5
+    end
+    
+    subgraph "Control Dimensions"
+        direction TB
+        C1["Data Residency"]
+        C2["Operational Independence"]
+        C3["Access Restrictions"]
+        C4["Hardware Control"]
+    end
+    
+    L1 -.->|"Low"| C1
+    L2 -.->|"Medium"| C2
+    L3 -.->|"High"| C3
+    L4 -.->|"Higher"| C4
+    L5 -.->|"Maximum"| C4
+    
+    style L1 fill:#0078D4,stroke:#004578,color:#fff
+    style L2 fill:#0078D4,stroke:#004578,color:#fff
+    style L3 fill:#0078D4,stroke:#004578,color:#fff
+    style L4 fill:#50E6FF,stroke:#0078D4,color:#000
+    style L5 fill:#50E6FF,stroke:#0078D4,color:#000
+    style C1 fill:#f0f0f0,stroke:#999
+    style C2 fill:#f0f0f0,stroke:#999
+    style C3 fill:#f0f0f0,stroke:#999
+    style C4 fill:#f0f0f0,stroke:#999
+```
 
 ## Sovereignty vs. Compliance
 
