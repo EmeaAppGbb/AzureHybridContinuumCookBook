@@ -70,3 +70,45 @@ Set up a complete GitHub Pages deployment using MkDocs with Material theme, Azur
 
 **User Action Required:**
 - Marco needs to enable GitHub Pages in repo settings: Source → `gh-pages` branch
+
+### 2026-04-24 — Hybrid Continuum Spectrum Diagrams (P0-03)
+
+**Task: Create comprehensive Mermaid diagrams for the Hybrid Continuum model**
+Added two foundational diagrams to `docs/01-introduction/02-the-hybrid-continuum.md` to visually communicate the four-stage continuum model.
+
+**Diagram 1: Main Spectrum Diagram (graph LR)**
+- Shows four stages as a left-to-right progression with bidirectional arrows
+- Stage 1 (Public Cloud): Full Azure connectivity, complete PaaS catalog (AKS, Functions, Cosmos DB, Azure ML)
+- Stage 2 (Connected Hybrid): Azure Local + Arc with hybrid ARM management (AKS-HCI, Arc-enabled SQL MI)
+- Stage 3 (Sovereign Cloud): Sovereign Landing Zones with enhanced controls (Customer Lockbox, Confidential Computing)
+- Stage 4 (Disconnected): Air-gapped infrastructure with local-only operations (local K8s, Prometheus/Grafana)
+- Uses subgraphs for each stage showing: connectivity model, control plane, available services
+- Color-coded: Blue (#0078d4) → Cyan (#50e6ff) → Gold (#ffb900) → Red (#e74856) to show progression
+- Bidirectional arrows show movement is not one-way: cloud adoption ←→ repatriation
+
+**Diagram 2: Decision Factors Diagram (graph TD)**
+- Decision tree showing key drivers that position organizations along the continuum
+- Start node branches based on: regulatory requirements → latency needs → cost/workload characteristics
+- Maps decision outcomes to appropriate continuum stages
+- Shows common transition paths with dotted lines (e.g., "New regulations" → repatriation)
+- Highlights drivers: data sovereignty laws, air-gap requirements, local processing needs, cost optimization, rapid innovation
+
+**Design Choices:**
+- Used `graph LR` for spectrum (horizontal continuum metaphor) and `graph TD` for decision tree (top-down flow)
+- Subgraphs group related components within each stage for readability
+- Emoji icons provide visual landmarks (🌐 connectivity, 🔒 sovereignty, ❌ disconnected)
+- CSS classes apply consistent Azure color palette across both diagrams
+- Dotted lines distinguish dynamic transitions from static structure
+
+**Grounding:**
+- Stage definitions align with official Azure Local docs (connected/disconnected modes)
+- Service availability based on Azure Arc and Azure Local documentation from Microsoft Learn
+- Sovereign Landing Zone model from Azure Sovereign Cloud documentation
+
+**Learning:**
+The Hybrid Continuum is fundamentally about the tension between three forces:
+1. **Connectivity** (decreasing left→right): Full cloud → periodic sync → air-gap
+2. **Service Richness** (decreasing left→right): Full PaaS → subset PaaS → self-hosted only
+3. **Control & Sovereignty** (increasing left→right): Cloud provider managed → hybrid control → full customer control
+
+All architecture patterns in this cookbook are variations on managing these trade-offs.
