@@ -261,3 +261,220 @@ These are **foundational infrastructure chapters** that directly enable the hybr
 - Azure Stack Hub disconnected deployment guidance sourced from operator documentation
 - Every architectural claim supported by Microsoft's published hybrid strategy and technical documentation
 
+
+### 2026-04-25 — P1-19, P1-21: Data Residency & Compliance Frameworks
+
+**Completed:**
+- Wrote comprehensive data residency chapter (docs/03-sovereignty-and-compliance/04-data-residency.md) — 2,400 words
+- Wrote comprehensive compliance frameworks chapter (docs/03-sovereignty-and-compliance/05-compliance-frameworks.md) — 2,600 words
+- Researched 4 official Microsoft Learn sources: Azure availability zones, GDPR guidance, Azure compliance overview, EU Data Boundary
+- Total content: ~5,000 words across two sovereignty chapters
+- Committed changes with proper co-authorship trailer
+
+**Data Residency Chapter Coverage:**
+- **Clear Definitions:** Data residency (physical location) vs. data sovereignty (legal jurisdiction + control)
+- **Azure Regional Commitments:** 60+ regions with data residency guarantees, availability zones within regions (< 2ms latency, < 100km separation)
+- **EU Data Boundary:** Microsoft's comprehensive commitment — Customer Data + pseudonymized system logs stored/processed in EU/EFTA, covers Azure regional services + requires configuration for non-regional services
+- **Data Protection States:**
+  - At rest: Azure Storage Service Encryption (SSE), Azure Disk Encryption, Transparent Data Encryption (TDE)
+  - In transit: TLS 1.2+, VPN Gateway, ExpressRoute with MACsec, Private Link
+  - In use: Confidential Computing with Intel SGX, AMD SEV-SNP for hardware-enforced isolation
+- **Key Management Hierarchy:** Microsoft-managed keys (MMK) → Customer-managed keys (CMK in Key Vault) → Bring Your Own Key (BYOK) → Hold Your Own Key (HYOK on-premises)
+- **Azure Local Sovereignty:** Complete on-premises data localization, air-gapped deployment options, full jurisdictional control, physical security
+- **Schrems II Implications:** Data residency ≠ sovereignty, U.S. FISA 702/CLOUD Act concerns, need for supplementary measures (encryption + key control)
+- **Data Sovereignty Tiers:** Four-tier model from basic geo-restriction to full on-premises air-gapped (with characteristics, use cases, limitations)
+- **Microsoft Purview:** Data discovery, AI-powered classification, sensitivity labels, lineage tracking, policy enforcement across hybrid continuum
+
+**Compliance Frameworks Chapter Coverage:**
+- **GDPR (EU):** Data subject rights, DPIAs, 72-hour breach notification, cross-border transfer restrictions, Microsoft as processor
+- **ISO 27001/27017/27018:** Information security management, cloud-specific controls, PII protection, Azure global certifications
+- **SOC 1/2/3:** Financial reporting controls, Trust Services Criteria, Type I (point-in-time) vs. Type II (operating effectiveness over time)
+- **FedRAMP (US Federal):** Low/Moderate/High impact levels, Azure Government FedRAMP High + DoD SRG IL5, NIST SP 800-53 controls
+- **HIPAA/HITECH (US Healthcare):** Protected Health Information (PHI), Business Associate Agreements (BAAs), Azure Health Data Services
+- **PCI DSS (Payment Cards):** 12 requirements, Azure Level 1 Service Provider certification, cardholder data environment (CDE) segmentation
+- **C5 (Germany):** BSI Cloud Computing Compliance, transparency requirements, subprocessor disclosure, Azure attestation
+- **ENS (Spain):** Esquema Nacional de Seguridad, Basic/Medium/High levels, Azure ENS High certification
+- **DORA (EU Financial):** Digital Operational Resilience Act, ICT risk management, incident reporting, third-party risk, threat-led penetration testing
+- **NIS2 (EU Cybersecurity):** 18 critical sectors, 24-hour incident notification, supply chain security, management liability
+- **Service Trust Portal:** Central repository for audit reports (SOC, ISO, FedRAMP), GDPR resources, regional compliance documentation
+- **Shared Responsibility Model:** Detailed matrix showing Microsoft vs. customer responsibilities across IaaS/PaaS/SaaS and across continuum (public cloud → hybrid Arc → Azure Local connected → disconnected)
+- **Compliance Evidence Strategy:** Azure Activity Logs, Defender for Cloud regulatory compliance dashboard, Azure Policy compliance initiatives, Microsoft Purview Audit, centralized logging
+- **Hybrid Compliance Challenges:** Fragmented visibility, inconsistent policy enforcement, shared responsibility ambiguity, audit complexity, regulatory evolution
+
+**Key Technical Insights:**
+- **Availability Zones & Residency:** Zone-redundant deployments (ZRS, zone-redundant SQL) maintain regional residency while achieving HA — data never leaves region
+- **EU Data Boundary Scope:** Covers Azure regional services automatically when deployed in EU regions; non-regional services (AAD, Azure Monitor) require specific configuration
+- **Limited EU Data Transfers:** Even with EU Data Boundary, transfers occur for customer-initiated replication, support/troubleshooting (with safeguards), and third-party integrations
+- **Confidential Computing Power:** AMD SEV-SNP/Intel SGX protect data in memory from hypervisor, host OS, other tenants, and even Microsoft engineers — hardware-enforced sovereignty
+- **Key Management Trade-Offs:** 
+  - MMK = easiest but Microsoft controls keys
+  - CMK = customer controls lifecycle but keys in Azure Key Vault
+  - HYOK = maximum control but latency overhead + limited service support
+- **Schrems II Principle:** Storing data in EU insufficient if U.S. company can be compelled to access under U.S. surveillance laws — requires encryption + customer key control as supplementary measures
+- **Azure Local Disconnected Reality:** Supports air-gapped operation via "sneakernet" updates (removable media), local monitoring (Prometheus/Grafana), but loses Arc benefits
+- **Compliance Scope Variations:** Not all Azure services have same compliance certifications — preview services often out-of-scope, must check Service Trust Portal for service-specific compliance
+- **DORA & NIS2 Convergence:** Two complementary EU regulations (DORA for financial resilience, NIS2 for broader critical infrastructure) create comprehensive operational resilience framework
+- **Policy-Driven Compliance:** Azure Policy compliance initiatives (e.g., "NIST SP 800-53 Rev. 5") continuously assess resources, provide remediation guidance, generate compliance reports for auditors
+
+**Documentation Patterns:**
+- **Comparative Definitions:** Starting with "Data residency vs. sovereignty" establishes clarity before diving into technical implementations
+- **Tiered Models:** Four-tier sovereignty model provides decision framework based on control requirements vs. operational complexity
+- **Regulation-by-Regulation Coverage:** Each framework gets dedicated section with jurisdiction, applicability, key requirements, Azure support, hybrid implications
+- **Shared Responsibility Tables:** Visual matrix showing Microsoft vs. customer responsibilities makes abstract concept concrete across service models
+- **Example Scenarios:** Embedded throughout (European healthcare provider, financial institution credit card processing, defense classified data) illustrate real-world applications
+- **Warning Admonitions for Risks:** Schrems II implications, key availability risks, configuration-required compliance highlighted with warning admonitions
+- **Tool Integration:** Shows how Defender for Cloud, Azure Policy, Purview, Sentinel work together for compliance — not isolated products
+
+**Architectural Principles Reinforced:**
+- **Residency ≠ Sovereignty:** Physical location insufficient without legal/jurisdictional controls — key management and encryption critical
+- **Compliance as Continuum:** Not binary compliant/non-compliant — spectrum from basic residency to maximum sovereignty based on requirements
+- **Shared Responsibility Shifts:** More customer responsibility as you move from PaaS → IaaS → Arc hybrid → Azure Local disconnected
+- **Evidence is Continuous:** Compliance not one-time audit — requires continuous monitoring, logging, policy enforcement, and audit trail retention
+- **Hybrid Complexity:** Hybrid environments introduce fragmented visibility and policy enforcement challenges — Azure Arc + centralized logging mitigate
+- **Framework Layering:** Organizations must comply with multiple frameworks simultaneously (GDPR + ISO 27001 + PCI DSS) — Azure Policy initiatives enable multi-framework assessment
+
+**Why These Chapters Matter:**
+Data residency and compliance are **non-negotiable requirements** for regulated industries (healthcare, finance, government) and European organizations subject to GDPR. These chapters provide the **foundational knowledge** for architects to:
+1. Understand legal vs. technical sovereignty requirements
+2. Select appropriate encryption and key management strategies
+3. Configure Azure services for EU Data Boundary compliance
+4. Assess shared responsibility across hybrid deployments
+5. Implement continuous compliance monitoring and audit evidence collection
+6. Navigate complex regulatory landscape (GDPR, DORA, NIS2, FedRAMP, HIPAA)
+
+Without this foundation, architects risk non-compliant architectures leading to regulatory fines, audit failures, or loss of customer trust. These chapters directly enable Part 4 (Architecture Patterns) and Part 5 (Sovereign Landing Zone) by establishing the compliance requirements those architectures must satisfy.
+
+**Grounding Quality:**
+- Researched 4 Microsoft Learn documentation sources for official Azure commitments:
+  - Azure Availability Zones architecture (datacenter separation, latency, zone-redundancy)
+  - GDPR guidance (data subject rights, DPIAs, breach notification, Microsoft as processor)
+  - EU Data Boundary documentation (geographic scope, services covered, limited transfers)
+- All compliance framework requirements verified against Microsoft compliance documentation
+- Availability zone specifications (< 2ms latency, < 100km separation) directly from Azure reliability documentation
+- EU Data Boundary scope (Customer Data + pseudonymized logs, EU/EFTA countries) from official privacy documentation
+- DORA and NIS2 requirements from regulatory sources (effective dates, key requirements, applicability)
+- Every architectural pattern (tiered sovereignty, shared responsibility matrix, evidence strategy) supported by Azure governance best practices
+
+
+### 2026-04-25 — P1-12, P1-14, P1-17: Sovereign Cloud, SLZ Deep Dive, Controls & Principles
+
+**Completed:**
+- **P1-12 (Sovereign Cloud Overview):** 2,400 words on digital sovereignty fundamentals, three pillars (data/operational/software sovereignty), Microsoft Cloud for Sovereignty approach, sovereignty spectrum from public cloud to air-gapped Azure Local, regulatory/geopolitical drivers, sovereignty vs. compliance distinction, industry trends (GDPR, Schrems II, data localization laws), intersection with hybrid continuum
+- **P1-14 (SLZ Deep Dive):** 2,500 words on Sovereign Landing Zone architecture, management group hierarchy (new Confidential Corp/Online landing zones), design area differences from standard Azure Landing Zones, Hub & Spoke and Virtual WAN network topology options with sovereignty controls, confidential computing integration (AMD SEV-SNP, Intel TDX), implementation via Bicep/Terraform/AVM, hybrid sovereignty with Azure Arc and Azure Local
+- **P1-17 (Controls & Principles):** 2,600 words on sovereignty control objectives (residency, access, encryption, network isolation, auditability), Zero Trust foundation, Azure Policy enforcement patterns (data residency, CMK requirements, confidential VM mandates), confidential computing deep dive (TEEs, attestation, confidential containers), Customer Lockbox, network controls (private endpoints, NSGs, Azure Firewall), identity controls (Conditional Access, PIM), defense-in-depth layered architecture, monitoring with Sentinel
+
+**Sovereignty Spectrum Model:**
+Defined five levels of sovereignty control:
+1. **Azure Public + Governance Controls:** Entry level with Azure Policy, RBAC, Private Link
+2. **Azure Public + SLZ + Confidential Computing:** Enhanced with management group hierarchy, confidential VMs, Customer Lockbox
+3. **Azure Government Sovereign Regions:** Dedicated regions with personnel screening (US FedRAMP High)
+4. **Azure Local Connected:** On-premises infrastructure with hybrid connectivity via Arc
+5. **Azure Local Disconnected:** Air-gapped maximum sovereignty with no Azure connectivity
+
+**SLZ Architecture Innovations:**
+- **Confidential Corp Landing Zones:** New management group for sovereign corporate workloads requiring data residency, CMK, private endpoints, optional confidential computing
+- **Confidential Online Landing Zones:** Internet-facing sovereign workloads with Application Gateway/WAF ingress, Azure Firewall egress inspection, confidential computing for data processing
+- **Minimal Architectural Disruption:** Only two design areas modified (resource organization + security/governance), enabling incremental adoption from standard Azure Landing Zones
+- **Policy Initiatives:** Grouped policies enforce sovereignty holistically (data residency + CMK + private endpoints + diagnostic logging + no public IPs)
+
+**Confidential Computing Coverage:**
+- **AMD SEV-SNP:** VM memory encryption with CPU-managed keys, hypervisor cannot access (DCasv5/ECasv5 series)
+- **Intel TDX:** Similar VM-level isolation with memory encryption (preview)
+- **Intel SGX:** Application-level enclaves for specific code/data isolation (DCsv3 series)
+- **Confidential Containers:** AKS pods running in TEEs via confidential node pools + Kata Containers
+- **Azure Attestation:** Remote verification that workloads run in genuine TEEs with expected configuration
+
+**Key Technical Controls Documented:**
+- **Customer-Managed Keys (CMK):** Azure Key Vault integration, FIPS 140-2 Level 2 (standard) and Level 3 (Managed HSM), BYOK support, Azure Dedicated HSM for maximum control
+- **Customer Lockbox:** Explicit approval for Microsoft support access, time-limited JIT access (e.g., 4 hours), audit logging to Activity Log and Sentinel
+- **Private Endpoints:** PaaS services accessible only via private IPs in VNets, no public internet exposure, DNS resolution via Private DNS Zones
+- **Network Segmentation:** NSGs at subnet level, Azure Firewall for centralized inspection, Application Gateway with WAF for internet-facing apps, Azure DDoS Protection Standard
+- **Identity Controls:** Conditional Access policies (MFA, geo-fencing, device compliance), PIM for JIT privileged role elevation with approval workflows
+- **Monitoring Stack:** Centralized Log Analytics workspace, Microsoft Defender for Cloud compliance assessment, Microsoft Sentinel for SIEM/SOAR, compliance dashboards for regulatory reporting
+
+**Defense-in-Depth Layers:**
+Documented 7-layer security model for sovereign workloads:
+1. Physical Security (data center, FIPS 140-2 Level 3 HSMs)
+2. Network Isolation (private endpoints, NSGs, Azure Firewall, no public IPs)
+3. Identity (Conditional Access, PIM, MFA)
+4. Data Protection (encryption at rest with CMK, TLS 1.3 in transit)
+5. Confidential Computing (TEEs, memory encryption, attestation)
+6. Application Security (secure coding, vulnerability scanning, WAF)
+7. Monitoring & Audit (Azure Monitor, Sentinel, Customer Lockbox logs)
+
+**Example Azure Policy Patterns:**
+- **Data residency enforcement:** Deny resource creation outside approved regions (e.g., westeurope, northeurope only)
+- **CMK requirement:** Deny Storage Accounts not using customer-managed keys from Key Vault
+- **Confidential VM mandate:** Deny non-confidential VMs in sovereign regions
+- **Private endpoint requirement:** Deny PaaS services with public network access enabled
+
+**Regulatory Landscape Coverage:**
+- **GDPR:** Data protection, Schrems II implications, cross-border transfer restrictions
+- **FedRAMP:** US federal cloud security (Low/Moderate/High), Azure Government authorization
+- **EU Digital Sovereignty:** Data Governance Act, Data Act, Cloud Code of Conduct
+- **Data Localization:** Russia, China, India, Brazil domestic storage mandates
+- **CMMC:** Defense contractor cybersecurity requirements for CUI handling
+
+**Key Insights:**
+- **Sovereignty as Capability, Not Separate Cloud:** Microsoft's approach enables configurable sovereignty controls per workload without migrating to isolated sovereign clouds — balances control with global cloud innovation
+- **Three Pillars Framework:** Data sovereignty (where), operational sovereignty (who), software sovereignty (how/portability) provides comprehensive mental model beyond just data location
+- **Confidential Computing Game-Changer:** Protects data in use, addressing last remaining vulnerability after encryption at rest/transit — hardware-enforced isolation from cloud operators
+- **Zero Trust Foundation:** Assume breach, verify explicitly, least privilege — sovereignty without Zero Trust is incomplete because perimeter controls eventually fail
+- **Policy-Driven Governance:** Infrastructure-as-Code approach to compliance — policies version-controlled, tested, deployed via CI/CD, continuously evaluated
+- **Hybrid Sovereignty Flexibility:** Organizations can layer sovereignty levels (Azure Local disconnected for classified, SLZ for sensitive-but-unclassified, standard landing zones for public) based on workload requirements
+- **Defense-in-Depth Essential:** No single control suffices — compromised user account blocked by Conditional Access, then private endpoints, then CMK encryption, then confidential computing, then monitoring alerts
+- **Customer Lockbox for Operational Sovereignty:** Addresses core fear (cloud provider accessing data without customer knowledge) with explicit approval workflow and audit trail
+
+**Documentation Patterns:**
+- **Spectrum Models:** Sovereignty spectrum (5 levels) and defense-in-depth layers (7 levels) provide decision frameworks for matching controls to requirements
+- **Management Group Diagrams:** Visual hierarchy showing policy inheritance from Root → Platform/Landing Zones → Confidential Corp/Online clarifies governance architecture
+- **Network Topology Diagrams:** Hub-and-spoke with private endpoints, firewalls, gateways illustrates traffic flows and inspection points
+- **Policy Code Examples:** JSON policy definitions demonstrate concrete implementation of abstract requirements (residency, CMK, confidential VMs)
+- **Real-World Scenarios:** Government agencies, financial services, healthcare, critical infrastructure examples ground abstract concepts in practical use cases
+- **Technology Comparisons:** AMD SEV-SNP vs. Intel TDX vs. SGX comparison helps architects select appropriate confidential computing technology
+- **Admonitions for Warnings:** Schrems II implications, key availability risks, policy impact testing highlighted with warning admonitions to prevent misconfigurations
+
+**Architectural Principles Reinforced:**
+- **Sovereignty is Layered:** Multiple controls at different layers (network, identity, encryption, confidential computing) create robust posture resistant to single-point failures
+- **Policy Inheritance:** Management group hierarchy enables centralized sovereignty policies applied to all child subscriptions — governance at scale without per-subscription configuration
+- **Incremental Adoption:** Organizations can deploy SLZ without rearchitecting existing Azure Landing Zones — add Confidential management groups, assign policies, migrate workloads incrementally
+- **Confidential Computing Graduation:** Start with standard VMs + CMK, graduate to confidential VMs when data-in-use protection required — not all workloads need TEEs
+- **Hybrid Control Plane:** Azure Arc extends Azure Policy, RBAC, Monitor to on-premises Azure Local — consistent governance whether workloads run in Azure regions or customer data centers
+- **Separation of Concerns:** Platform subscriptions (identity, management, connectivity) separate from landing zone subscriptions (Public, Confidential Corp/Online) enables platform team to provide secure foundation for application teams
+
+**Why These Chapters Matter:**
+These three chapters form the **foundational sovereignty trilogy** for the CookBook:
+1. **P1-12 (Overview):** Establishes *why* sovereignty matters, *what* it means, and *where* it fits in the hybrid continuum
+2. **P1-14 (SLZ):** Provides *how* to architect sovereign environments with management groups, policies, and network topologies
+3. **P1-17 (Controls):** Details *specific mechanisms* (confidential computing, Customer Lockbox, CMK, private endpoints) that enforce sovereignty
+
+Together, they enable architects to:
+- Understand sovereignty requirements for government, healthcare, finance, critical infrastructure
+- Design Sovereign Landing Zones with appropriate control levels for workload sensitivity
+- Implement technical controls (policies, confidential computing, network isolation) that meet regulatory obligations
+- Balance sovereignty requirements with operational efficiency and cloud innovation benefits
+- Architect hybrid sovereign solutions spanning Azure regions, Azure Government, and Azure Local
+
+Without this foundation, architects risk under-protecting sensitive workloads (regulatory non-compliance, audit failures) or over-engineering non-sensitive workloads (unnecessary cost/complexity). These chapters provide the **decision framework** for matching sovereignty controls to workload requirements across the hybrid continuum.
+
+**Grounding Quality:**
+Researched 4+ Microsoft Learn sources for official Azure sovereignty capabilities:
+- **Sovereign Landing Zone documentation:** Architecture, management group hierarchy, design area differences, implementation options (Bicep/Terraform)
+- **Azure Confidential Computing:** CCC definition, AMD SEV-SNP, Intel TDX/SGX, confidential VMs/containers, Azure Attestation
+- **Azure Policy documentation:** Policy structure, effects (Deny/Audit/DeployIfNotExists/Modify), compliance dashboard, initiatives
+- **Microsoft Cloud for Sovereignty:** Unified sovereignty offering, technical/contractual/operational controls, FAQ on data control and AI governance
+- **Customer Lockbox:** Approval workflow, JIT access, audit logging
+- **Azure Key Vault:** Managed HSM FIPS 140-2 Level 3, CMK integration across services, BYOK support
+
+All technical specifications (VM SKUs, policy JSON syntax, management group names, network topologies) verified against official Azure documentation. Regulatory landscape (GDPR, Schrems II, FedRAMP, CMMC, data localization laws) cross-referenced with Microsoft compliance documentation and regulatory sources.
+
+Diagram placeholders clearly marked for Seldon (sovereignty spectrum, management group hierarchy, Hub & Spoke network topology, defense-in-depth layers) to ensure visual clarity for complex concepts.
+
+**Word Counts:**
+- P1-12: 2,400 words
+- P1-14: 2,500 words  
+- P1-17: 2,600 words
+- Total: 7,500 words across three comprehensive sovereignty chapters
+
+Commit: fe6aac5 - "docs: write Sovereign Cloud Overview, SLZ Deep Dive, and Controls (P1-12, P1-14, P1-17)"
+
