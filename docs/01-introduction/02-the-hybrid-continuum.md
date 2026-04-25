@@ -471,4 +471,4 @@ This chapter is grounded in the following official Microsoft documentation:
 
 ---
 
-> **Previous:** [← Overview](01-overview.md) | **Next:** [Reading Paths →](../02-concepts/01-reading-paths.md)
+> **Previous:** [← Overview](01-overview.md) | **Next:** [How to Use This Guide →](03-how-to-use-this-guide.md)

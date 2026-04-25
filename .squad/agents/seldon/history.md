@@ -266,3 +266,136 @@ The Azure hybrid infrastructure model is fundamentally a progressive extension o
 
 All hybrid architecture decisions ultimately revolve around: Where does the control plane live? (Azure vs local) and What connectivity model supports the workload? (Connected/Partial/Disconnected).
 
+
+## 2026-04-25 02:52 - Part 3 Sovereignty Diagrams Complete
+
+**Task:** Create ALL Part 3 Sovereignty diagrams (P1-13, P1-15, P1-16, P1-18, P1-20, P1-22)
+
+**Delivered:**
+- **P1-13**: Sovereignty Spectrum diagram (01-sovereign-cloud-overview.md) - 5-level progression showing Azure Public → Public with SLZ → Government Regions → Azure Local Connected → Disconnected, with control dimensions
+- **P1-15**: SLZ Management Group Hierarchy diagram (02-sovereign-landing-zone.md) - Tree structure from Root through Platform/Landing Zones/Sandbox/Decommissioned with policy annotations at each level
+- **P1-16**: SLZ Hub & Spoke Network topology diagram (02-sovereign-landing-zone.md) - Hub with firewall/gateways/DNS, two sovereign spokes with private endpoints, on-premises connectivity
+- **P1-18**: Defense-in-Depth diagram (03-controls-and-principles.md) - 7 security layers from physical to monitoring, protecting sovereign workloads
+- **P1-20**: Data Sovereignty Tiers diagram (04-data-residency.md) - 4-tier pyramid from geographic residency to full on-premises control
+- **P1-22**: Compliance Responsibility Matrix (05-compliance-frameworks.md) - Shared responsibility shift across continuum from public to disconnected
+
+**Technical approach:**
+- All diagrams implemented in Mermaid (graph TD/TB for hierarchies, graph LR for flows)
+- Azure color scheme (#0078D4, #50E6FF, #FFE6CC for sovereign elements)
+- Subgraphs for logical grouping and clear visual hierarchy
+- Replaced all <!-- DIAGRAM: --> and !!! info "DIAGRAM PLACEHOLDER" markers
+
+**Commit:** 51925fa
+
+**Status:** ✅ All Part 3 sovereignty diagrams complete and committed (not pushed per instructions)
+
+## 2026-04-25 03:15 - Part 4+5 Architecture & SLZ Diagrams Complete
+
+**Task:** Create ALL Part 4 Architecture Patterns diagrams + Part 5 SLZ Guide diagrams (11 total)
+
+**Delivered:**
+
+**Part 4 - Architecture Patterns (5 diagrams):**
+- **P1-25**: Cloud-Native Reference Architecture (01-cloud-native.md) - Full Azure PaaS stack with Front Door → APIM → AKS → microservices → SQL/Cosmos/Service Bus → Functions, with monitoring and security layers
+- **P1-27**: Hybrid Connected Architecture (02-hybrid-connected.md) - Azure cloud control plane managing on-premises Azure Local cluster via ExpressRoute, with Arc-enabled AKS + SQL MI, identity sync between Entra ID and AD DS
+- **P1-29**: Disconnected Architecture (03-hybrid-disconnected.md) - Air-gapped environment with self-hosted stack: K3s, PostgreSQL, MinIO, RabbitMQ, HashiCorp Vault, Prometheus/Grafana, local AD DS + Keycloak, secure media transfer zone
+- **P1-31**: Cloud Exit Decision Framework (04-cloud-exit.md) - Decision flowchart starting from regulatory requirements → cost analysis → latency needs → strategic priorities, ending with exit recommendations (required/candidate/optional/none)
+- **P1-33**: Workload Placement Decision Flowchart (05-workload-placement.md) - Decision tree from data classification → compliance → latency → dependencies → scale, resulting in placement across continuum (disconnected/sovereign/hybrid/edge/cloud)
+
+**Part 5 - SLZ Guide (6 diagrams):**
+- **P1-36**: Design Areas Wheel (01-design-areas.md) - 8 design areas radiating from central SLZ node: Identity & Access, Network Topology, Security & Governance, Management & Monitoring, Business Continuity, Platform Automation, Resource Organization, Deployment & Operations
+- **P1-38**: Identity Architecture Across Continuum (02-identity-and-access.md) - Three-column comparison showing Connected (Entra ID + hybrid sync), Intermittent (Entra Connect + offline cache), Disconnected (AD DS + ADFS + Keycloak) with authentication flows
+- **P1-40**: Hub & Spoke for SLZ (03-network-topology.md) - Detailed hub VNet with firewall/gateway/Bastion/DNS + three spoke VNets (Confidential Corp, Confidential Online, Public) with private endpoints, ExpressRoute to Azure Local, NSG rules and UDRs
+- **P1-42**: Governance Structure (04-security-governance.md) - Management group hierarchy from Root → Platform/Landing Zones, with policy inheritance annotations, confidential LZ enhancements (deny public endpoints, require private link, CMK), RBAC assignments, Defender plans, Key Vault governance
+- **P1-44**: CI/CD Pipeline Architecture (05-platform-automation.md) - GitOps pipeline: Git → lint/validate/scan/test → artifact store → approval gate → deploy → compliance check, with parallel disconnected track (offline package → secure transfer → air-gap deploy)
+- **P1-46**: Implementation Decision Tree (06-implementation-options.md) - Decision flow from existing LZ assessment → IaC choice (Terraform/Bicep/Portal) → connectivity model (connected/intermittent/disconnected) → deployment method → validation → success
+
+**Technical approach:**
+- All diagrams use Mermaid syntax (graph TD for hierarchies, graph LR for pipelines/flows)
+- Consistent Azure color scheme: #0078D4 (primary blue), #50E6FF (light blue), #FFB900 (amber), #E74856 (red for security), #7FBA00 (green), #505050 (dark gray for air-gapped)
+- Subgraphs for logical component grouping and visual clarity
+- Replaced all <!-- DIAGRAM: ... --> placeholders
+- Added disconnected architecture diagram (P1-29) which had no placeholder but was required per spec
+
+**Commit:** 5c429f2
+
+**Status:** ✅ All Part 4+5 diagrams complete and committed (11 diagrams total, not pushed per instructions)
+
+**Key patterns established:**
+- Decision flowcharts use diamond shapes for decision nodes, rounded rectangles for outcomes
+- Architecture diagrams show data flow with solid arrows, management/control with dashed arrows
+- Color coding: security (red), identity (purple), networking (blue/green), data (amber), air-gap (dark gray)
+- All diagrams are self-documenting with clear labels and component descriptions
+
+## 2026-04-25 03:28:24 - Part 8 Best Practices Diagrams (P2-29 through P2-37)
+
+**Task:** Create ALL remaining P2 diagrams for Parts 6, 7, and 8
+
+**Discovery:**
+Upon inspection, discovered that Parts 6 and 7 diagrams were already completed by Hardin in commit 9330b76 ("docs: P3 polish"). This included all diagrams from:
+- Part 6 Cloud Exit Scenarios: P2-02, P2-03, P2-05, P2-07, P2-09, P2-11
+- Part 7 Reference Scenario: P2-14, P2-15, P2-17, P2-19, P2-21, P2-22, P2-24, P2-26
+
+**Actions Completed:**
+Focused on Part 8 (Best Practices) which was incomplete. Created 5 comprehensive Mermaid diagrams:
+
+**P2-29: Design Principles Pentagon** (`01-design-principles.md`)
+- Pentagon-style graph showing 5 principles: Portability, Disconnection Tolerance, Automation, Security, Observability
+- Central node: "Hybrid Design Excellence"
+- Bidirectional edges showing principle interactions (e.g., Portability enables Automation)
+- Color: Azure blue (#0078D4) for center, cyan (#50E6FF) for principles
+
+**P2-31: Fault Domain Hierarchy** (`02-resilience.md`)
+- Hierarchical graph showing nested failure boundaries
+- Azure path: Global → Region → Availability Zone → Datacenter
+- On-Premises path: Site → Cluster → Rack → Node → VM/Container → Pod
+- Blast radius visualization showing impact at each level (Catastrophic → Minimal)
+- Color-coded: Cloud (blue), On-Prem (green), Blast Radius (yellow)
+
+**P2-33: Defense-in-Depth Security Model** (`03-security.md`)
+- 6-layer security model: Physical → Network → Identity → Application → Data → Operations
+- Each layer shows Connected tools (Azure AD, Defender, Sentinel) vs Disconnected tools (AD DS, Wazuh, local SIEM)
+- Attacker progression path showing how each layer blocks different attack stages
+- Color-coded layers: Physical (red) → Network (orange) → Identity (yellow) → App (green) → Data (blue) → Ops (purple)
+
+**P2-35: Operations Responsibility Matrix** (`04-operations.md`)
+- Side-by-side comparison showing responsibility shift across continuum
+- 3 deployment models: Public Cloud (PaaS) → Connected Azure Local → Disconnected Azure Local
+- 7 layers: Data/App Logic → Application Runtime → Platform → OS → Hypervisor → Network → Physical
+- Color-coded: Microsoft (blue), Shared (yellow), Customer (green)
+- Shows transition from mostly Microsoft-managed to fully customer-managed
+- Includes operational metrics: Staff (3-5 → 5-8 → 10-15 FTE), Skills, Tools
+
+**P2-37: TCO Comparison** (`05-cost-optimization.md`)
+- 3-year TCO comparison across all 3 deployment models
+- Public Cloud: Linear €340K/year (total €1.02M)
+- Connected Hybrid: High CapEx Y1 (€739K), then stable €469K/year (total €1.68M)
+- Disconnected: High CapEx Y1 (€616K), then stable €435K/year (total €1.49M)
+- Detailed cost breakdowns showing: Hardware, Software, Operations, Azure Fees, Power, Tooling, Training
+- 5-year trend showing break-even analysis
+- Key insight: Break-even at 2-3 years for hybrid/disconnected with steady workload
+
+**Technical Decisions:**
+- Used `%%{init: {'theme':'base'}}%%` for custom theming where needed
+- Applied consistent color palette: Azure blue (#0078D4), cyan (#50E6FF), green (#107C10) for on-prem
+- Used different graph types based on content: TD for hierarchies, TB for comparisons, LR for flows
+- Included legends and metrics to make diagrams self-explanatory
+- Added emoji icons for visual landmarks (☁️, 🔒, 🏢, 👥, 💰, 🛡️)
+
+**Commit:**
+- Message: "diagrams: add Part 8 best practices diagrams (P2-29 through P2-37)"
+- SHA: 3a66b2c (amended from a4d945a to fix commit message)
+- Files: 5 changed (all Part 8 files)
+
+**Status:** ✅ Complete - All Part 8 diagrams created, committed (not pushed)
+
+**Learning:**
+Best practices diagrams require balancing technical accuracy with visual simplicity. Key patterns:
+1. **Principle diagrams** (pentagon) show relationships, not just lists
+2. **Hierarchy diagrams** (fault domains) need clear nesting to show blast radius
+3. **Security diagrams** (defense-in-depth) benefit from showing both controls AND attacker progression
+4. **Responsibility matrices** work best as progressive transitions (blue→yellow→green gradient)
+5. **Cost diagrams** must show both snapshot (per-year) and trend (over time) for decision-making
+
+The hybrid continuum TCO model reveals the fundamental trade-off: CapEx front-loading (hybrid/disconnected) vs OpEx predictability (public cloud). Organizations must evaluate based on: workload stability, regulatory requirements, and acceptable operational complexity.
+

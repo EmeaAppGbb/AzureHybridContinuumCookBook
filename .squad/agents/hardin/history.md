@@ -1029,3 +1029,136 @@ These chapters transform abstract continuum theory into concrete implementation 
 **Commit:** 
 `git commit -m "docs: write all Reference Scenario Contoso Insurance chapters (P2-13/16/18/20/23/25)"`
 
+
+---
+
+## 2025-01-XX — P3-01 & P3-02: Additional Resources, Glossary Updates, Section READMEs
+
+**Tasks Completed:**
+
+### P3-01: Additional Resources
+Completely rewrote docs/09-appendix/03-additional-resources.md from scaffold to comprehensive resource guide:
+
+**Official Microsoft Documentation:**
+- Azure Hybrid Infrastructure section: Azure Architecture Center, Azure Local, Azure Arc, Azure Stack Hub, ExpressRoute
+- Sovereignty & Compliance section: Azure Sovereign Clouds, SLZ documentation, Confidential Computing, Compliance docs, Trust Center
+- Frameworks & Governance section: CAF, Well-Architected Framework, Landing Zones, Azure Policy, Blueprints
+- Security section: Azure Security docs, Defender for Cloud, Zero Trust, Private Link, Key Vault
+
+**Microsoft Learn Training Paths:**
+- Hybrid Infrastructure: Azure hybrid services, Arc management, Azure Local implementation, Arc servers & Kubernetes
+- Security & Compliance: Cloud data security, DevSecOps, AZ-500 prep, policy-driven security
+- Architecture & Governance: AZ-305 prep, infrastructure operations, governance design
+
+**Reference Architectures:**
+- Hybrid & Sovereign: Hybrid architecture patterns, Arc-based solutions, disconnected AI, Azure Local DR, regulated industries
+- High Availability & DR: Mission-critical baseline, multi-region web apps, hybrid backup
+- Kubernetes & Containers: AKS baseline, microservices architecture, GitOps patterns
+
+**Community Resources:**
+- Microsoft Tech Community: Azure Blog, Hybrid/Multicloud Blog, Azure Stack Blog, Governance blog
+- GitHub Repositories: Enterprise-Scale ALZ, SLZ reference implementation, Arc Jumpstart, AKS baseline automation, Azure Verified Modules
+- Community Programs: Azure Advocates, FastTrack, Customer Architecture & Engineering
+
+**Tools & Utilities:**
+- Assessment & Planning: Azure Migrate, TCO Calculator, Pricing Calculator, Advisor, Well-Architected Review
+- Management & Operations: Resource Graph Explorer, Monitor Workbooks, Policy compliance dashboard, Cost Management, DevOps
+- Development & Automation: Azure CLI, PowerShell, Bicep, Terraform, ARM templates
+
+**Books & Whitepapers:**
+- Microsoft Official: CAF downloadable docs, Architecture Center e-book, Security Benchmark, Cybersecurity Reference Architectures, Zero Trust Deployment Guide
+- Industry Publications: "Cloud Native Infrastructure", "Kubernetes Patterns", "The Phoenix Project", "Site Reliability Engineering"
+
+**Standards & Frameworks:**
+- Compliance: ISO 27001, NIST Cybersecurity Framework, CIS Azure Benchmark, PCI DSS, HIPAA, GDPR, FedRAMP
+- Industry Frameworks: TOGAF, COBIT, ITIL
+
+**Conference Talks & Videos:**
+- Microsoft Ignite & Build session recommendations (search terms provided)
+- Azure Friday, Cloud Native Show
+- YouTube Channels: Microsoft Azure, Microsoft Mechanics, Azure Academy, John Savill's Technical Training
+- Podcasts: Azure Podcast, Azure Security Podcast, Kubernetes Podcast
+
+**Getting Help:**
+- Microsoft Q&A, Azure Support Plans, Stack Hub Support
+- Community: Stack Overflow, Reddit r/AZURE, Tech Community Forums
+
+### P3-02: Glossary Updates
+Added 13 new terms to docs/09-appendix/01-glossary.md identified from later chapters:
+
+**New Terms Added (alphabetically integrated):**
+1. **Data Gravity** — Concept that large datasets attract compute resources, influencing workload placement decisions
+2. **GitOps** — Declarative continuous delivery using Git as single source of truth, valuable in hybrid environments
+3. **Harbor** — Open-source container registry for sovereign/air-gapped environments with vulnerability scanning and replication
+4. **Helm** — Kubernetes package manager using charts for repeatable deployments across hybrid environments
+5. **K3s** — Lightweight Kubernetes for edge and resource-constrained environments (<100MB binary)
+6. **MetalLB** — Load balancer for bare-metal Kubernetes, critical for on-premises Azure Local Kubernetes deployments
+7. **MinIO** — High-performance S3-compatible object storage for on-premises/disconnected environments
+8. **Observability** — Understanding system state via logs/metrics/traces/events, essential for hybrid distributed systems
+9. **Platform Engineering** — Discipline of building internal developer platforms (IDPs) for self-service capabilities
+10. **RKE2** — Rancher Kubernetes Engine 2, hardened for FIPS 140-2 and government STIG compliance
+11. **Service Mesh** — Infrastructure layer managing service-to-service communication (traffic, security, observability)
+12. **Site Reliability Engineering (SRE)** — Software engineering practices applied to operations (automation, error budgets)
+13. **Total Cost of Ownership (TCO)** — Comprehensive lifecycle cost assessment (CapEx + OpEx + hidden costs)
+
+Note: "Cloud Repatriation" was already present as "Cloud Exit / Cloud Repatriation". Fixed one duplicate entry for "Software Sovereignty".
+
+### Section README Updates
+Updated ALL 8 section README.md files with enhanced descriptions reflecting completed content:
+
+1. **02-azure-hybrid-infrastructure/README.md** — Added "What You'll Learn" section emphasizing foundational knowledge for hybrid architects
+2. **03-sovereignty-and-compliance/README.md** — Emphasized dimensions of sovereignty and Confidential Computing
+3. **04-architecture-patterns/README.md** — Highlighted decision framework and trade-off analysis
+4. **05-sovereign-landing-zone-guide/README.md** — Emphasized practical step-by-step implementation with IaC examples
+5. **06-cloud-exit-scenarios/README.md** — Highlighted three-stage migration path and risk mitigation
+6. **07-reference-scenario/README.md** — Emphasized hands-on concrete application showing patterns in practice
+7. **08-best-practices/README.md** — Highlighted WAF alignment and applicability across all deployment models
+8. **09-appendix/README.md** — Added "How to Use This Appendix" section explaining each document's purpose
+
+All section READMEs now have consistent structure:
+- Enhanced introduction paragraph explaining section value
+- "What You'll Learn" bullet points (where applicable)
+- Chapter table (unchanged)
+- Diagrams placeholders (unchanged)
+- Prerequisites/References (where applicable)
+
+**Key Achievements:**
+
+**Additional Resources:**
+- Transformed placeholder scaffold into 250+ line comprehensive resource guide
+- Organized into 12 major categories for easy navigation
+- Provided direct links to official Microsoft documentation, training paths, reference architectures
+- Included community resources (GitHub repos: Enterprise-Scale, SLZ, Arc Jumpstart, AKS baseline)
+- Listed essential tools (Azure Migrate, TCO Calculator, Bicep, Terraform, Resource Graph)
+- Referenced industry standards (ISO 27001, NIST, CIS Benchmarks, GDPR, FedRAMP)
+- Included conference talk search strategies and YouTube channels
+- Added podcast recommendations for continuous learning
+
+**Glossary Completeness:**
+- Captured all major technical terms introduced in later chapters (architecture patterns, cloud exit, reference scenario, best practices)
+- Terms include both Microsoft-specific technologies (Arc, Azure Local) and open-source ecosystem (Harbor, Helm, MinIO, MetalLB, RKE2)
+- Each term includes concise definition, context for when/why it's used, and authoritative documentation link
+- Focus on hybrid/sovereign-specific terminology that wouldn't be in standard Azure glossaries
+- Glossary now comprehensive across entire CookBook content (60+ terms total)
+
+**Section README Polish:**
+- Consistent "What You'll Learn" structure helps readers understand value before diving in
+- Enhanced introductions explain WHY each section matters (not just WHAT it contains)
+- Maintained existing structure (chapter tables, diagrams, references) while improving narrative quality
+- Better transitions between sections — readers can understand the journey from infrastructure basics (Part 2) through sovereignty (Part 3), patterns (Part 4), SLZ implementation (Part 5), cloud exit execution (Part 6), real-world scenario (Part 7), to best practices (Part 8)
+
+**Documentation Quality:**
+- Additional Resources provides genuine value — not just "here's a link dump" but organized by purpose (learning, assessment, implementation, troubleshooting)
+- Glossary is reader-friendly — definitions are clear, examples provided, links to deep-dive content
+- Section READMEs now serve as effective landing pages — readers can make informed decisions about which chapters to read based on their needs
+
+**Why This Polish Matters:**
+P3 tasks complete the CookBook's supporting materials. Additional Resources gives readers clear paths for continued learning beyond this guide. The updated glossary eliminates terminology confusion — when readers encounter "K3s" or "MetalLB" in the cloud exit scenarios, they have concise definitions with context. Enhanced section READMEs improve discoverability — architects can quickly scan "What You'll Learn" sections to find relevant chapters for their current challenge (designing SLZ vs executing cloud exit vs optimizing costs).
+
+Together, these updates transform the CookBook from "comprehensive content" into "comprehensive and navigable content" — readers can find what they need, understand key concepts, and know where to go next.
+
+**Word Count:** ~3,500 words in Additional Resources, ~500 words across section README enhancements, 13 new glossary entries (~1,000 words)
+
+**Commit:**
+`git commit -m "docs: P3 polish — Additional Resources, glossary update, section READMEs (P3-01, P3-02)"`
+
