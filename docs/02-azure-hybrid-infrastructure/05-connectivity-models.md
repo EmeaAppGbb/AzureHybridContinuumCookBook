@@ -322,7 +322,68 @@ While technically possible to deploy Azure Local without Arc registration, it's 
 
 For disconnected scenarios, **choose Azure Stack Hub** rather than attempting to use Azure Local offline.
 
-<!-- DIAGRAM: Connectivity models comparison - will be added by Seldon -->
+```mermaid
+graph TB
+    subgraph Connected["✅ Fully Connected Model"]
+        ConnNetwork["Network: ExpressRoute / Site-to-Site VPN<br/>Always-on connectivity"]
+        
+        subgraph ConnServices["Available Services"]
+            ConnMgmt["• Real-time Azure Arc management<br/>• Azure Monitor streaming telemetry<br/>• Azure Policy continuous enforcement<br/>• Automated Update Management"]
+            ConnData["• Azure Backup (continuous)<br/>• Azure Site Recovery<br/>• Azure File Sync"]
+            ConnSecurity["• Microsoft Defender for Cloud<br/>• Microsoft Sentinel SIEM<br/>• Just-In-Time VM access"]
+        end
+        
+        ConnOps["Operations:<br/>Cloud-managed, Automated"]
+    end
+    
+    subgraph Partial["⚠️ Partially Connected Model"]
+        PartialNetwork["Network: Intermittent / Satellite<br/>Scheduled sync windows"]
+        
+        subgraph PartialServices["Available Services"]
+            PartialMgmt["• Azure Arc with retry/backoff<br/>• Delayed telemetry upload<br/>• Cached policy enforcement<br/>• Manual update scheduling"]
+            PartialData["• Scheduled backup windows<br/>• Store-and-forward sync<br/>• Eventual consistency"]
+            PartialSecurity["• Delayed security alerts<br/>• Local security policies<br/>• Offline threat detection"]
+        end
+        
+        PartialOps["Operations:<br/>Hybrid (Local + Cloud when available)"]
+    end
+    
+    subgraph Disconnected["🔒 Disconnected Model (Air-Gapped)"]
+        DisconnNetwork["Network: No Internet / Physical Isolation<br/>Manual media transfer"]
+        
+        subgraph DisconnServices["Available Services"]
+            DisconnMgmt["• Local management only<br/>• Windows Admin Center<br/>• Manual policy application<br/>• Physical update delivery"]
+            DisconnData["• Local backup only<br/>• No cloud replication<br/>• On-premises DR only"]
+            DisconnSecurity["• Local security tools<br/>• Manual compliance checks<br/>• Isolated threat detection"]
+        end
+        
+        DisconnOps["Operations:<br/>Fully Local / Manual Processes"]
+        DisconnNote["⚠️ Use Azure Stack Hub,<br/>NOT Azure Local"]
+    end
+    
+    Azure["☁️ Azure Cloud"]
+    
+    Azure <-->|"Always On<br/>< 50ms latency"| ConnNetwork
+    Azure <-.->|"Intermittent<br/>Hours/Days apart"| PartialNetwork
+    Azure x--x|"No Connection<br/>Air-Gap"| DisconnNetwork
+    
+    ConnNetwork --> ConnServices
+    PartialNetwork --> PartialServices
+    DisconnNetwork --> DisconnServices
+    
+    ConnServices --> ConnOps
+    PartialServices --> PartialOps
+    DisconnServices --> DisconnOps
+    DisconnOps --> DisconnNote
+    
+    style Connected fill:#00AA00,color:#fff
+    style Partial fill:#FFB900,color:#000
+    style Disconnected fill:#A4262C,color:#fff
+    style Azure fill:#0078D4,color:#fff
+    style ConnServices fill:#E8F4FD,color:#000
+    style PartialServices fill:#FFF4CE,color:#000
+    style DisconnServices fill:#FDE7E9,color:#000
+```
 
 ## Choosing a Connectivity Model: Decision Factors
 

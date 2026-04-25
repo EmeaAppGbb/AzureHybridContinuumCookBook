@@ -81,7 +81,60 @@ Microsoft's Azure Stack portfolio addresses three distinct hybrid and edge scena
 !!! info "The Azure Local Transition"
     In 2024, Microsoft announced that Azure Stack HCI would evolve into the Azure Local brand, signaling tighter convergence with Azure services, unified licensing through Azure subscriptions, and deeper Arc-based management. Existing Azure Stack HCI deployments will transition to Azure Local branding with continued support and migration paths.
 
-<!-- DIAGRAM: Azure Stack family comparison - will be added by Seldon -->
+```mermaid
+graph TB
+    subgraph Hub["🏗️ Azure Stack Hub"]
+        HubDesc["Full Azure Cloud On-Premises"]
+        HubFeatures["• PaaS Services (App Services, Functions)<br/>• Local ARM + Marketplace<br/>• 4-16 Node Integrated System<br/>• Air-gap Support<br/>• Multi-tenancy"]
+        HubUse["Use Cases:<br/>Disconnected ops, Military,<br/>Service Providers, Cruise Ships"]
+        HubConnect["Connectivity:<br/>Optional - Works Fully Offline"]
+    end
+    
+    subgraph Local["💻 Azure Local (HCI)"]
+        LocalDesc["Hyperconverged Infrastructure"]
+        LocalFeatures["• IaaS Focus (VMs, Storage)<br/>• Azure Arc Management<br/>• 1-16+ Node Flexible Clusters<br/>• Multi-vendor Hardware<br/>• AKS + Azure Services"]
+        LocalUse["Use Cases:<br/>Datacenter Modernization,<br/>VDI, Branch Offices, ROBO"]
+        LocalConnect["Connectivity:<br/>Periodic (Arc Sync Required)"]
+    end
+    
+    subgraph Edge["🌐 Azure Stack Edge"]
+        EdgeDesc["AI/IoT Edge Appliance"]
+        EdgeFeatures["• GPU/FPGA Acceleration<br/>• Container Runtime<br/>• Hardware-as-a-Service<br/>• Managed by Microsoft<br/>• Data Pipeline to Azure"]
+        EdgeUse["Use Cases:<br/>Edge AI Inference, IoT,<br/>Video Analytics, Manufacturing"]
+        EdgeConnect["Connectivity:<br/>Expected (Can Buffer Offline)"]
+    end
+    
+    subgraph Azure["☁️ Azure Cloud Integration"]
+        AzureRM["Azure Resource Manager"]
+        AzureServices["Monitor | Security | Backup<br/>Policy | Update | Arc"]
+    end
+    
+    HubDesc --> HubFeatures
+    HubFeatures --> HubUse
+    HubUse --> HubConnect
+    
+    LocalDesc --> LocalFeatures
+    LocalFeatures --> LocalUse
+    LocalUse --> LocalConnect
+    
+    EdgeDesc --> EdgeFeatures
+    EdgeFeatures --> EdgeUse
+    EdgeUse --> EdgeConnect
+    
+    HubConnect -.->|"Optional<br/>Management"| AzureRM
+    LocalConnect -->|"Azure Arc<br/>Required"| AzureRM
+    EdgeConnect -->|"Always<br/>Managed"| AzureRM
+    
+    AzureRM --> AzureServices
+    
+    style Hub fill:#8B4513,color:#fff
+    style Local fill:#00AA00,color:#fff
+    style Edge fill:#FFB900,color:#000
+    style Azure fill:#0078D4,color:#fff
+    
+    classDef positioning fill:#E8F4FD,color:#000
+    class HubDesc,LocalDesc,EdgeDesc positioning
+```
 
 ## Product Comparison: Choosing the Right Stack
 

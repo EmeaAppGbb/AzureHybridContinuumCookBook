@@ -221,9 +221,100 @@ Understanding Azure's regional infrastructure is critical for hybrid deployments
 
 The hybrid continuum extends Azure's infrastructure model — with its focus on fault isolation, data residency, and service availability — into every location where organizations need to run workloads. Azure Local and Azure Arc make this extension seamless, providing consistent management regardless of where infrastructure physically resides.
 
-<!-- DIAGRAM: Azure global infrastructure map showing regions, availability zones, and how Azure Local extends the region boundary into customer premises — will be added by Seldon -->
+```mermaid
+graph TD
+    subgraph Global["🌍 Azure Global Infrastructure"]
+        subgraph Geography1["Geography: United States"]
+            subgraph Region1["Region: East US"]
+                AZ1["Availability Zone 1<br/>(Datacenter Group A)"]
+                AZ2["Availability Zone 2<br/>(Datacenter Group B)"]
+                AZ3["Availability Zone 3<br/>(Datacenter Group C)"]
+            end
+            subgraph Region2["Region: West US"]
+                AZ4["Availability Zone 1"]
+                AZ5["Availability Zone 2"]
+                AZ6["Availability Zone 3"]
+            end
+        end
+        
+        subgraph Geography2["Geography: Europe"]
+            subgraph Region3["Region: North Europe"]
+                AZ7["Availability Zone 1"]
+                AZ8["Availability Zone 2"]
+                AZ9["Availability Zone 3"]
+            end
+        end
+        
+        subgraph Sovereign["☁️ Sovereign Clouds"]
+            GovCloud["Azure Government<br/>(US Gov Virginia, Arizona)"]
+            ChinaCloud["Azure China<br/>(Operated by 21Vianet)"]
+        end
+    end
+    
+    subgraph OnPrem["🏢 Customer Premises"]
+        Local1["Azure Local<br/>(Manufacturing Plant)"]
+        Local2["Azure Local<br/>(Branch Office)"]
+        Local3["Azure Local<br/>(Remote Datacenter)"]
+    end
+    
+    Region1 -.->|"Azure Arc<br/>Management"| Local1
+    Region1 -.->|"Azure Arc<br/>Management"| Local2
+    Region3 -.->|"Azure Arc<br/>Management"| Local3
+    
+    Region1 <-->|"Region Pair<br/>300+ miles"| Region2
+    
+    style Global fill:#0078D4,color:#fff
+    style Geography1 fill:#50E6FF,color:#000
+    style Geography2 fill:#50E6FF,color:#000
+    style Sovereign fill:#FFB900,color:#000
+    style OnPrem fill:#00AA00,color:#fff
+    style Region1 fill:#E8F4FD,color:#000
+    style Region2 fill:#E8F4FD,color:#000
+    style Region3 fill:#E8F4FD,color:#000
+```
 
-<!-- DIAGRAM: Fault isolation hierarchy in Azure — from global (DNS, CDN) through regional (compute, storage) to zonal (individual data centers) to local (Azure Local instances) — will be added by Seldon -->
+```mermaid
+graph TD
+    Global["🌐 Global Services<br/>DNS, CDN, Traffic Manager<br/>Front Door, Azure AD"]
+    
+    subgraph RegionalLayer["Regional Services (Failure Domain: Region)"]
+        Region1["Region A<br/>Compute, Storage, Networking<br/>Database, App Services"]
+        Region2["Region B<br/>(Paired Region)<br/>Geo-Replication Target"]
+    end
+    
+    subgraph ZonalLayer["Zonal Services (Failure Domain: Zone)"]
+        Zone1["Zone 1<br/>Datacenter Group A<br/>Independent Power/Network"]
+        Zone2["Zone 2<br/>Datacenter Group B<br/>Independent Power/Network"]
+        Zone3["Zone 3<br/>Datacenter Group C<br/>Independent Power/Network"]
+    end
+    
+    subgraph LocalLayer["🏢 Azure Local (Failure Domain: Local Cluster)"]
+        Local1["On-Premises Cluster 1<br/>Customer Datacenter"]
+        Local2["On-Premises Cluster 2<br/>Branch Office"]
+    end
+    
+    Global --> Region1
+    Global --> Region2
+    
+    Region1 --> Zone1
+    Region1 --> Zone2
+    Region1 --> Zone3
+    
+    Region1 -.->|"Azure Arc Control Plane"| Local1
+    Region1 -.->|"Azure Arc Control Plane"| Local2
+    
+    Region1 <-->|"Cross-Region Replication<br/>GRS, GZRS, ASR"| Region2
+    
+    Zone1 <-.->|"< 2ms latency<br/>Synchronous Replication"| Zone2
+    Zone2 <-.->|"< 2ms latency<br/>Synchronous Replication"| Zone3
+    
+    style Global fill:#FFB900,color:#000
+    style RegionalLayer fill:#0078D4,color:#fff
+    style ZonalLayer fill:#50E6FF,color:#000
+    style LocalLayer fill:#00AA00,color:#fff
+    style Region1 fill:#0078D4,color:#fff
+    style Region2 fill:#0078D4,color:#fff
+```
 
 ## References
 

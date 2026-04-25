@@ -384,7 +384,99 @@ Azure Arc is the **architectural enabler** of the hybrid continuum, providing:
 
 Without Azure Arc, hybrid environments remain fragmented across vendor-specific tools, each with different identity systems, policy frameworks, and operational models. Arc provides the **control plane unification layer** that makes the hybrid continuum operationally viable at enterprise scale.
 
-<!-- DIAGRAM: Azure Arc architecture - will be added by Seldon -->
+```mermaid
+graph TB
+    subgraph AzureCloud["☁️ Azure Control Plane"]
+        Portal["Azure Portal"]
+        ARM["Azure Resource Manager"]
+        ArcRP["Azure Arc Resource Providers"]
+        
+        subgraph AzureServices["Azure Management Services"]
+            Policy["Azure Policy"]
+            Monitor["Azure Monitor"]
+            Security["Microsoft Defender"]
+            Sentinel["Microsoft Sentinel"]
+            Update["Update Management"]
+            Backup["Azure Backup"]
+        end
+    end
+    
+    subgraph OnPremDC["🏢 On-Premises Datacenter"]
+        subgraph Servers["Arc-enabled Servers"]
+            Windows["Windows Servers"]
+            Linux["Linux Servers"]
+            SQLServer["SQL Server Instances"]
+        end
+        
+        subgraph K8s["Arc-enabled Kubernetes"]
+            AKS["AKS Hybrid"]
+            OpenShift["OpenShift"]
+            Rancher["Rancher"]
+            Vanilla["Vanilla K8s"]
+        end
+        
+        subgraph DataSvc["Arc-enabled Data Services"]
+            SQLManagedInstance["SQL Managed Instance"]
+            PostgreSQL["PostgreSQL Hyperscale"]
+        end
+        
+        subgraph Virtualization["Arc-enabled VM Management"]
+            VMware["VMware vSphere"]
+            SCVMM["System Center VMM"]
+            AzureLocal["Azure Local VMs"]
+        end
+    end
+    
+    subgraph Edge["🌐 Edge & Multi-Cloud"]
+        EdgeK8s["Edge Kubernetes"]
+        AWS["AWS EC2 Instances"]
+        GCP["Google Cloud VMs"]
+        OtherCloud["Other Cloud Resources"]
+    end
+    
+    subgraph Agent["🔧 Azure Arc Agent Components"]
+        ConnectedMachine["Connected Machine Agent<br/>(azcmagent)"]
+        ExtensionMgr["Extension Manager"]
+        GuestConfig["Guest Configuration"]
+        CloudAgent["Azure Arc Proxy"]
+    end
+    
+    Portal --> ARM
+    ARM --> ArcRP
+    ArcRP -.->|"HTTPS 443<br/>Outbound Only"| Agent
+    
+    AzureServices -.->|"Policies, Monitoring,<br/>Security, Updates"| Agent
+    
+    Agent --> Windows
+    Agent --> Linux
+    Agent --> SQLServer
+    Agent --> AKS
+    Agent --> OpenShift
+    Agent --> Rancher
+    Agent --> Vanilla
+    Agent --> SQLManagedInstance
+    Agent --> PostgreSQL
+    Agent --> VMware
+    Agent --> SCVMM
+    Agent --> AzureLocal
+    Agent --> EdgeK8s
+    Agent --> AWS
+    Agent --> GCP
+    Agent --> OtherCloud
+    
+    Windows -.->|"Heartbeat<br/>Telemetry"| CloudAgent
+    Linux -.->|"Heartbeat<br/>Telemetry"| CloudAgent
+    K8s -.->|"Cluster<br/>Metadata"| CloudAgent
+    DataSvc -.->|"Service<br/>Metrics"| CloudAgent
+    
+    CloudAgent -.-> ArcRP
+    
+    style AzureCloud fill:#0078D4,color:#fff
+    style AzureServices fill:#50E6FF,color:#000
+    style OnPremDC fill:#00AA00,color:#fff
+    style Edge fill:#FFB900,color:#000
+    style Agent fill:#E8F4FD,color:#000
+```
 
 ## References
 

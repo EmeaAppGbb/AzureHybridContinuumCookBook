@@ -64,7 +64,67 @@ These use cases share a common thread: the need to maintain cloud-like agility, 
 
 Azure Local implements a layered architecture stack integrating validated hardware, a specialized operating system, Azure management services, and workload hosting capabilities.
 
-<!-- DIAGRAM: Azure Local architecture stack - will be added by Seldon -->
+```mermaid
+graph TB
+    subgraph Azure["☁️ Azure Management Plane"]
+        Portal["Azure Portal"]
+        ARM["Azure Resource Manager"]
+        Arc["Azure Arc"]
+        Monitor["Azure Monitor"]
+        Security["Defender for Cloud"]
+        Backup["Azure Backup"]
+    end
+    
+    subgraph Workloads["💼 Workload Layer"]
+        VMs["Virtual Machines<br/>(Windows/Linux)"]
+        AKS["Azure Kubernetes Service<br/>(Containerized Apps)"]
+        AVD["Azure Virtual Desktop"]
+        DataServices["Arc Data Services<br/>(SQL, PostgreSQL)"]
+    end
+    
+    subgraph AzureLocal["🖥️ Azure Local Operating System"]
+        HyperV["Hyper-V Hypervisor<br/>(Compute)"]
+        S2D["Storage Spaces Direct<br/>(Software-Defined Storage)"]
+        SDN["Software Defined Networking<br/>(Network Virtualization)"]
+        ArcAgent["Azure Arc Agent<br/>(Management Connectivity)"]
+    end
+    
+    subgraph Hardware["⚙️ Validated Hardware Layer"]
+        Servers["Certified Servers<br/>(Dell, HPE, Lenovo, etc)"]
+        Storage["NVMe/SSD Storage<br/>(Local Drives)"]
+        Network["10/25/100 GbE RDMA<br/>(Networking)"]
+        Cluster["1-16 Node Clusters"]
+    end
+    
+    Azure -.->|"Management & Monitoring"| ArcAgent
+    
+    Portal --> ARM
+    ARM --> Arc
+    Arc -.-> ArcAgent
+    
+    Monitor -.-> ArcAgent
+    Security -.-> ArcAgent
+    Backup -.-> ArcAgent
+    
+    VMs --> HyperV
+    AKS --> HyperV
+    AVD --> HyperV
+    DataServices --> HyperV
+    
+    HyperV --> Servers
+    S2D --> Storage
+    SDN --> Network
+    ArcAgent --> Network
+    
+    Servers --> Cluster
+    Storage --> Cluster
+    Network --> Cluster
+    
+    style Azure fill:#0078D4,color:#fff
+    style Workloads fill:#50E6FF,color:#000
+    style AzureLocal fill:#00AA00,color:#fff
+    style Hardware fill:#605E5C,color:#fff
+```
 
 ### Hardware Layer: Validated Solutions
 
@@ -348,7 +408,56 @@ Azure Local is the **cornerstone technology** enabling the hybrid continuum by:
 
 Without Azure Local, the hybrid continuum would be limited to Azure Arc's management capabilities over existing infrastructure. Azure Local provides the **platform layer** — compute, storage, networking, and Azure service hosting — that makes truly seamless cloud-to-edge architectures possible.
 
-<!-- DIAGRAM: Azure Local architecture stack showing layers: Hardware (validated servers) → Azure Local OS → Azure services (VMs, AKS, data services) → Azure management plane (Azure portal, Azure Resource Manager) — will be added by Seldon -->
+```mermaid
+graph TB
+    subgraph Layer4["Layer 4: Azure Management & Services"]
+        Portal["🌐 Azure Portal<br/>Unified Management"]
+        ARM["Azure Resource Manager<br/>(ARM Templates, APIs)"]
+        Services["Azure Services<br/>Monitor | Backup | Security | Policy"]
+    end
+    
+    subgraph Layer3["Layer 3: Azure Workloads"]
+        IaaS["IaaS Workloads<br/>• Windows/Linux VMs<br/>• Managed Disks<br/>• Virtual Networks"]
+        Containers["Container Platform<br/>• AKS Hybrid<br/>• Azure Arc-enabled K8s<br/>• Container Registry"]
+        Data["Data Services<br/>• Arc-enabled SQL<br/>• Arc-enabled PostgreSQL<br/>• Azure Virtual Desktop"]
+    end
+    
+    subgraph Layer2["Layer 2: Azure Local Operating System"]
+        Compute["Hyper-V Hypervisor<br/>• Nested Virtualization<br/>• Live Migration<br/>• VM Security"]
+        Storage["Storage Spaces Direct<br/>• Mirror/Parity<br/>• Tiering (SSD/HDD)<br/>• Deduplication"]
+        Network["Software-Defined Network<br/>• Network Virtualization<br/>• Micro-segmentation<br/>• QoS"]
+        Management["Arc-based Management<br/>• Cloud Registration<br/>• Policy Enforcement<br/>• Update Management"]
+    end
+    
+    subgraph Layer1["Layer 1: Validated Hardware"]
+        Hardware["Certified Server Hardware<br/>• Dell | HPE | Lenovo | Cisco | DataON<br/>• x64 CPUs with SLAT<br/>• 32GB-1.5TB RAM"]
+        StorageHW["Storage Tier<br/>• NVMe (Performance)<br/>• SSD (Capacity)<br/>• Optional HDD"]
+        NetworkHW["Network Infrastructure<br/>• 10/25/100 GbE<br/>• RDMA (iWARP/RoCE)<br/>• Redundant Switches"]
+        Config["Cluster Configuration<br/>• Single Node (Edge)<br/>• 2-Node (ROBO)<br/>• 3-16 Node (Enterprise)"]
+    end
+    
+    Portal --> ARM
+    ARM --> Services
+    Services -.->|"Azure Arc"| Management
+    
+    IaaS --> Compute
+    Containers --> Compute
+    Data --> Compute
+    
+    Compute --> Hardware
+    Storage --> StorageHW
+    Network --> NetworkHW
+    Management --> NetworkHW
+    
+    Hardware --> Config
+    StorageHW --> Config
+    NetworkHW --> Config
+    
+    style Layer4 fill:#0078D4,color:#fff
+    style Layer3 fill:#50E6FF,color:#000
+    style Layer2 fill:#00AA00,color:#fff
+    style Layer1 fill:#605E5C,color:#fff
+```
 
 ## References
 
