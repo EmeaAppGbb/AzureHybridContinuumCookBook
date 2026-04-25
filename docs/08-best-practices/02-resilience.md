@@ -54,7 +54,79 @@ Understanding fault domains—components that fail together—is critical to res
 - **Mitigation**: UPS, backup generators, cooling redundancy, environmental monitoring
 - **Hybrid advantage**: Cloud workloads provide resilience against facility-level failures
 
-<!-- DIAGRAM: Fault domain hierarchy for hybrid environments showing nested failure boundaries: Azure Global → Azure Region → Availability Zone → Azure Local Cluster → Azure Local Node → Application Pod — with blast radius visualization showing how failure at each level impacts downstream components -->
+```mermaid
+graph TB
+    subgraph Global["🌍 Azure Global (Highest Level)"]
+        subgraph Region1["Azure Region 1<br/>(e.g., West Europe)"]
+            subgraph AZ1["Availability Zone 1"]
+                DC1["Datacenter 1-A<br/>Independent power,<br/>cooling, network"]
+            end
+            subgraph AZ2["Availability Zone 2"]
+                DC2["Datacenter 2-B<br/>Independent power,<br/>cooling, network"]
+            end
+        end
+        
+        subgraph Region2["Azure Region 2<br/>(e.g., North Europe)"]
+            subgraph AZ3["Availability Zone 3"]
+                DC3["Datacenter 3-C<br/>Independent power,<br/>cooling, network"]
+            end
+        end
+    end
+    
+    subgraph OnPrem["🏢 On-Premises / Azure Local"]
+        subgraph Site["Datacenter Site<br/>(Single Location)"]
+            subgraph Cluster["Azure Local Cluster"]
+                subgraph Rack1["Rack 1<br/>(Separate power & network)"]
+                    Node1["Node 1<br/>(Physical Server)"]
+                end
+                subgraph Rack2["Rack 2<br/>(Separate power & network)"]
+                    Node2["Node 2<br/>(Physical Server)"]
+                end
+                subgraph Rack3["Rack 3<br/>(Separate power & network)"]
+                    Node3["Node 3<br/>(Physical Server)"]
+                end
+            end
+        end
+    end
+    
+    Node1 --> VM1["VM / Container<br/>(Application Instance)"]
+    Node2 --> VM2["VM / Container<br/>(Application Instance)"]
+    Node3 --> VM3["VM / Container<br/>(Application Instance)"]
+    
+    VM1 --> Pod1["Pod 1<br/>(Replica 1)"]
+    VM2 --> Pod2["Pod 2<br/>(Replica 2)"]
+    VM3 --> Pod3["Pod 3<br/>(Replica 3)"]
+    
+    subgraph BlastRadius["💥 Blast Radius Impact"]
+        direction TB
+        
+        B1["Global Outage<br/>☁️ All regions down<br/>💥 CATASTROPHIC<br/>(Extremely rare)"]
+        
+        B2["Region Outage<br/>☁️ Single region down<br/>💥 MAJOR<br/>(Multiple datacenters)"]
+        
+        B3["Zone/Datacenter Outage<br/>☁️ Single AZ down<br/>🏢 Site down<br/>💥 SIGNIFICANT"]
+        
+        B4["Cluster/Rack Outage<br/>🏢 Rack power failure<br/>💥 MODERATE<br/>(Multiple nodes)"]
+        
+        B5["Node Outage<br/>🖥️ Server hardware failure<br/>💥 MINOR<br/>(Auto-recovered by K8s)"]
+        
+        B6["Pod/Container Outage<br/>📦 App crash<br/>💥 MINIMAL<br/>(Auto-restart)"]
+    end
+    
+    style Global fill:#0078D4,stroke:#005A9E,stroke-width:3px,color:#fff
+    style Region1 fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Region2 fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style AZ1 fill:#E0F7FF,stroke:#0078D4,stroke-width:1px
+    style AZ2 fill:#E0F7FF,stroke:#0078D4,stroke-width:1px
+    style AZ3 fill:#E0F7FF,stroke:#0078D4,stroke-width:1px
+    style OnPrem fill:#107C10,stroke:#004B1C,stroke-width:3px,color:#fff
+    style Site fill:#50E6FF,stroke:#0078D4,stroke-width:2px
+    style Cluster fill:#E0F7FF,stroke:#0078D4,stroke-width:2px
+    style Rack1 fill:#FFF,stroke:#666,stroke-width:1px
+    style Rack2 fill:#FFF,stroke:#666,stroke-width:1px
+    style Rack3 fill:#FFF,stroke:#666,stroke-width:1px
+    style BlastRadius fill:#FFC107,stroke:#F57C00,stroke-width:2px
+```
 
 !!! warning "Correlated Failures"
     The most dangerous failures are those that impact multiple fault domains simultaneously. For example, an ExpressRoute circuit failure combined with an Azure Local node failure can exceed design redundancy. Use failure mode and effects analysis (FMEA) to identify correlated failure scenarios.

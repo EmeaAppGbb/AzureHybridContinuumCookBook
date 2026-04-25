@@ -55,7 +55,98 @@ Understanding the shared responsibility model for each deployment model is criti
 
 **Operational Focus**: Full-stack operations. Teams manage the entire stack from hardware to applications. Operational maturity and staffing are critical.
 
-<!-- DIAGRAM: Operations responsibility matrix showing what Microsoft manages vs. what customer manages across each position on the continuum. Use a stacked bar chart showing layers (Physical, Network, Hypervisor, OS, Platform, Application, Data) with color-coding for Microsoft responsibility (blue) vs. customer responsibility (green). Show transition from mostly Microsoft (public cloud) to fully customer (disconnected) -->
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'fontSize':'13px'}}}%%
+graph TB
+    subgraph Continuum["Hybrid Continuum Responsibility Model"]
+        direction LR
+        
+        subgraph PublicCloud["☁️ Azure Public Cloud<br/>(PaaS Model)"]
+            direction TB
+            PC_Data["📊 Data & App Logic<br/>🟢 Customer"]
+            PC_App["💻 Application Runtime<br/>🔵 Microsoft"]
+            PC_Platform["⚙️ Platform Services<br/>🔵 Microsoft"]
+            PC_OS["🖥️ Operating System<br/>🔵 Microsoft"]
+            PC_Hypervisor["🔧 Hypervisor<br/>🔵 Microsoft"]
+            PC_Network["🌐 Network & Fabric<br/>🔵 Microsoft"]
+            PC_Physical["🏢 Physical Infrastructure<br/>🔵 Microsoft"]
+            
+            PC_Data --> PC_App --> PC_Platform --> PC_OS --> PC_Hypervisor --> PC_Network --> PC_Physical
+        end
+        
+        subgraph Connected["🔗 Azure Local Connected<br/>(Hybrid Model)"]
+            direction TB
+            HC_Data["📊 Data & App Logic<br/>🟢 Customer"]
+            HC_App["💻 Application Runtime<br/>🟢 Customer"]
+            HC_Platform["⚙️ Platform Services<br/>🟡 Shared (Arc)"]
+            HC_OS["🖥️ Operating System<br/>🟡 Shared (Updates via Arc)"]
+            HC_Hypervisor["🔧 Hypervisor<br/>🟢 Customer"]
+            HC_Network["🌐 Network & Fabric<br/>🟢 Customer"]
+            HC_Physical["🏢 Physical Infrastructure<br/>🟢 Customer"]
+            
+            HC_Data --> HC_App --> HC_Platform --> HC_OS --> HC_Hypervisor --> HC_Network --> HC_Physical
+        end
+        
+        subgraph Disconnected["🔒 Azure Local Disconnected<br/>(Sovereign Model)"]
+            direction TB
+            DC_Data["📊 Data & App Logic<br/>🟢 Customer"]
+            DC_App["💻 Application Runtime<br/>🟢 Customer"]
+            DC_Platform["⚙️ Platform Services<br/>🟢 Customer"]
+            DC_OS["🖥️ Operating System<br/>🟢 Customer"]
+            DC_Hypervisor["🔧 Hypervisor<br/>🟢 Customer"]
+            DC_Network["🌐 Network & Fabric<br/>🟢 Customer"]
+            DC_Physical["🏢 Physical Infrastructure<br/>🟢 Customer"]
+            
+            DC_Data --> DC_App --> DC_Platform --> DC_OS --> DC_Hypervisor --> DC_Network --> DC_Physical
+        end
+    end
+    
+    subgraph Legend["Responsibility Legend"]
+        direction LR
+        Microsoft["🔵 Microsoft Managed"]
+        Shared["🟡 Shared Responsibility"]
+        Customer["🟢 Customer Managed"]
+    end
+    
+    subgraph Metrics["Operational Requirements"]
+        direction TB
+        Staff["👥 Staff Requirements:<br/>PaaS: 3-5 FTE<br/>Connected: 5-8 FTE<br/>Disconnected: 10-15 FTE"]
+        
+        Skills["🎓 Skill Requirements:<br/>PaaS: App focus<br/>Connected: App + Infrastructure<br/>Disconnected: Full-stack expertise"]
+        
+        Tools["🛠️ Management Tools:<br/>PaaS: Azure Portal only<br/>Connected: Portal + Local tools<br/>Disconnected: All local tools"]
+    end
+    
+    style PublicCloud fill:#0078D4,stroke:#005A9E,stroke-width:3px,color:#fff
+    style Connected fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style Disconnected fill:#107C10,stroke:#004B1C,stroke-width:3px,color:#fff
+    style Legend fill:#E0E0E0,stroke:#666,stroke-width:2px
+    style Metrics fill:#FFC107,stroke:#F57C00,stroke-width:2px
+    
+    style PC_Data fill:#90EE90,stroke:#006400,stroke-width:2px
+    style PC_App fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style PC_Platform fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style PC_OS fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style PC_Hypervisor fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style PC_Network fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style PC_Physical fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    
+    style HC_Data fill:#90EE90,stroke:#006400,stroke-width:2px
+    style HC_App fill:#90EE90,stroke:#006400,stroke-width:2px
+    style HC_Platform fill:#FFD93D,stroke:#CC6600,stroke-width:2px
+    style HC_OS fill:#FFD93D,stroke:#CC6600,stroke-width:2px
+    style HC_Hypervisor fill:#90EE90,stroke:#006400,stroke-width:2px
+    style HC_Network fill:#90EE90,stroke:#006400,stroke-width:2px
+    style HC_Physical fill:#90EE90,stroke:#006400,stroke-width:2px
+    
+    style DC_Data fill:#90EE90,stroke:#006400,stroke-width:2px
+    style DC_App fill:#90EE90,stroke:#006400,stroke-width:2px
+    style DC_Platform fill:#90EE90,stroke:#006400,stroke-width:2px
+    style DC_OS fill:#90EE90,stroke:#006400,stroke-width:2px
+    style DC_Hypervisor fill:#90EE90,stroke:#006400,stroke-width:2px
+    style DC_Network fill:#90EE90,stroke:#006400,stroke-width:2px
+    style DC_Physical fill:#90EE90,stroke:#006400,stroke-width:2px
+```
 
 !!! warning "Operational Complexity Increases with Control"
     More control means more responsibility. Air-gapped deployments require significantly more operational staff with broader skill sets than cloud-native deployments. Budget for 3-5x the operational cost of equivalent cloud deployments.

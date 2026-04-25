@@ -137,7 +137,88 @@ Each deployment model has a distinct cost structure. Understanding these differe
 - Remote locations with no reliable connectivity (ships, offshore platforms, military bases)
 - Critical infrastructure (nuclear power, utilities) with strict isolation requirements
 
-<!-- DIAGRAM: TCO comparison chart showing stacked bar chart for three scenarios (Public Cloud, Connected Azure Local, Disconnected Azure Local) over 3 years. Bars show cost breakdown: Hardware (purple), Software Licensing (blue), Operations Staff (green), Azure Fees (light blue), Power/Facilities (orange), Tooling (yellow). Include trendline showing public cloud growing linearly, on-premises flattening after initial CapEx -->
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'fontSize':'14px'}}}%%
+graph TB
+    subgraph TCO["3-Year Total Cost of Ownership Comparison"]
+        direction LR
+        
+        subgraph PublicCloud["☁️ Azure Public Cloud<br/>Total 3Y: ~€1,022,400"]
+            direction TB
+            PC_Y1["Year 1: €340,800"]
+            PC_Y2["Year 2: €340,800"]
+            PC_Y3["Year 3: €340,800"]
+            
+            PC_Y1 -.-> PC_Breakdown1["Azure Fees: €240,000<br/>Operations: €90,000<br/>Tooling: €10,800"]
+            PC_Y2 -.-> PC_Breakdown2["Azure Fees: €240,000<br/>Operations: €90,000<br/>Tooling: €10,800"]
+            PC_Y3 -.-> PC_Breakdown3["Azure Fees: €240,000<br/>Operations: €90,000<br/>Tooling: €10,800"]
+        end
+        
+        subgraph ConnectedHybrid["🔗 Connected Azure Local<br/>Total 3Y: ~€1,677,600"]
+            direction TB
+            CH_Y1["Year 1: €739,200<br/>(High CapEx)"]
+            CH_Y2["Year 2: €469,200"]
+            CH_Y3["Year 3: €469,200"]
+            
+            CH_Y1 -.-> CH_Breakdown1["Hardware: €180,000<br/>Software: €160,000<br/>Operations: €180,000<br/>Azure Fees: €120,000<br/>Power: €12,000<br/>Tooling: €18,000<br/>Training: €20,000<br/>ExpressRoute: €49,200"]
+            
+            CH_Y2 -.-> CH_Breakdown2["Software SA: €20,000<br/>Operations: €180,000<br/>Azure Fees: €120,000<br/>Power: €12,000<br/>Tooling: €18,000<br/>Training: €20,000<br/>ExpressRoute: €49,200<br/>Maintenance: €50,000"]
+            
+            CH_Y3 -.-> CH_Breakdown3["Software SA: €20,000<br/>Operations: €180,000<br/>Azure Fees: €120,000<br/>Power: €12,000<br/>Tooling: €18,000<br/>Training: €20,000<br/>ExpressRoute: €49,200<br/>Maintenance: €50,000"]
+        end
+        
+        subgraph DisconnectedLocal["🔒 Disconnected Azure Local<br/>Total 3Y: ~€1,486,000"]
+            direction TB
+            DL_Y1["Year 1: €616,000<br/>(High CapEx)"]
+            DL_Y2["Year 2: €435,000"]
+            DL_Y3["Year 3: €435,000"]
+            
+            DL_Y1 -.-> DL_Breakdown1["Hardware: €180,000<br/>Software: €160,000<br/>Operations: €300,000<br/>Power: €12,000<br/>Tooling: €50,000<br/>Training: €20,000"]
+            
+            DL_Y2 -.-> DL_Breakdown2["Software SA: €20,000<br/>Operations: €300,000<br/>Power: €12,000<br/>Tooling: €50,000<br/>Training: €20,000<br/>Maintenance: €50,000"]
+            
+            DL_Y3 -.-> DL_Breakdown3["Software SA: €20,000<br/>Operations: €300,000<br/>Power: €12,000<br/>Tooling: €50,000<br/>Training: €20,000<br/>Maintenance: €50,000"]
+        end
+    end
+    
+    subgraph Insights["💡 Key Cost Insights"]
+        direction TB
+        I1["Public Cloud: Linear growth, predictable<br/>Best for: Variable workloads, rapid scaling"]
+        I2["Connected Hybrid: High initial CapEx, then stable<br/>Best for: Predictable workloads, data sovereignty + cloud mgmt"]
+        I3["Disconnected: High CapEx + high OpEx (staff)<br/>Best for: Air-gap requirements, regulatory mandates"]
+        I4["⚠️ Break-even typically at 2-3 years for hybrid/disconnected<br/>assuming steady workload utilization"]
+    end
+    
+    subgraph Trend["📈 Cost Trend Over 5 Years"]
+        direction LR
+        Cloud5Y["Public Cloud<br/>€1.7M"]
+        Connected5Y["Connected Hybrid<br/>€2.1M"]
+        Disconnected5Y["Disconnected<br/>€1.9M"]
+        
+        Cloud5Y -.->|Linear| CloudTrend["Continues growing<br/>€28K/month forever"]
+        Connected5Y -.->|Flattens| ConnectedTrend["Stabilizes after Y1<br/>€39K/month ongoing"]
+        Disconnected5Y -.->|Flattens| DisconnectedTrend["Stabilizes after Y1<br/>€36K/month ongoing"]
+    end
+    
+    style TCO fill:#E0F7FF,stroke:#0078D4,stroke-width:3px
+    style PublicCloud fill:#0078D4,stroke:#005A9E,stroke-width:3px,color:#fff
+    style ConnectedHybrid fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style DisconnectedLocal fill:#107C10,stroke:#004B1C,stroke-width:3px,color:#fff
+    style Insights fill:#FFC107,stroke:#F57C00,stroke-width:2px
+    style Trend fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:#fff
+    
+    style PC_Y1 fill:#4A9EFF,stroke:#0078D4,stroke-width:2px
+    style PC_Y2 fill:#4A9EFF,stroke:#0078D4,stroke-width:2px
+    style PC_Y3 fill:#4A9EFF,stroke:#0078D4,stroke-width:2px
+    
+    style CH_Y1 fill:#FF6B6B,stroke:#DC3545,stroke-width:2px,color:#fff
+    style CH_Y2 fill:#90EE90,stroke:#107C10,stroke-width:2px
+    style CH_Y3 fill:#90EE90,stroke:#107C10,stroke-width:2px
+    
+    style DL_Y1 fill:#FF6B6B,stroke:#DC3545,stroke-width:2px,color:#fff
+    style DL_Y2 fill:#90EE90,stroke:#107C10,stroke-width:2px
+    style DL_Y3 fill:#90EE90,stroke:#107C10,stroke-width:2px
+```
 
 !!! warning "Hidden Costs Often Underestimated"
     Organizations transitioning from cloud to on-premises often underestimate operational costs. Staff time, training, tooling replacement, and the opportunity cost of slower innovation can exceed infrastructure costs.

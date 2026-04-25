@@ -121,7 +121,48 @@ You cannot manage what you cannot measure. Observability—the combination of me
 !!! tip "Unified Observability"
     Tools like Grafana can provide a unified view across environments by querying multiple Prometheus datasources (one per environment) simultaneously. Operators see a consistent interface regardless of where workloads run.
 
-<!-- DIAGRAM: Design principles pentagon showing the five principles (Portability, Disconnection Tolerance, Automation, Security, Observability) with bidirectional connections showing how they reinforce each other. Central text: "Hybrid Design Excellence" -->
+```mermaid
+graph TB
+    Center["⭐ Hybrid Design<br/>Excellence"]
+    
+    Portability["🔄 Design for Portability<br/>• Standard APIs<br/>• Abstraction layers<br/>• Container-first"]
+    
+    Disconnection["🔌 Assume Disconnection<br/>• Local caching<br/>• Static stability<br/>• Eventual consistency"]
+    
+    Automation["⚙️ Automate Everything<br/>• IaC (Terraform/Bicep)<br/>• GitOps (Flux/ArgoCD)<br/>• Self-healing systems"]
+    
+    Security["🔐 Secure by Default<br/>• Zero Trust<br/>• Defense-in-depth<br/>• Supply chain security"]
+    
+    Observability["👁️ Observe Everything<br/>• OpenTelemetry<br/>• Multi-env monitoring<br/>• Structured logging"]
+    
+    Center --- Portability
+    Center --- Disconnection
+    Center --- Automation
+    Center --- Security
+    Center --- Observability
+    
+    Portability <-.->|Enables| Automation
+    Portability <-.->|Simplifies| Observability
+    
+    Disconnection <-.->|Requires| Automation
+    Disconnection <-.->|Demands| Observability
+    
+    Automation <-.->|Enforces| Security
+    Automation <-.->|Enables| Observability
+    
+    Security <-.->|Protects| Portability
+    Security <-.->|Validated by| Observability
+    
+    Observability <-.->|Informs| Automation
+    Observability <-.->|Monitors| Security
+    
+    style Center fill:#0078D4,stroke:#005A9E,stroke-width:4px,color:#fff,font-size:16px
+    style Portability fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style Disconnection fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style Automation fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style Security fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style Observability fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+```
 
 ## Mapping to Well-Architected Framework Pillars
 
