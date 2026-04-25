@@ -330,22 +330,22 @@ graph TD
     SelfContained{Portability<br/>Required?} -->|Yes - Multi-Cloud| ContainerPlatform[📦 Kubernetes<br/>Azure AKS or Arc-Enabled]
     SelfContained -->|No| OnPremVM
     
-    style Start fill:#0078D4,stroke:#002050,stroke-width:2px,color:#fff
-    style Disconnected fill:#505050,stroke:#FFB900,stroke-width:3px,color:#fff
-    style SovereignCloud fill:#5E5E5E,stroke:#00BCF2,stroke-width:3px,color:#fff
-    style HybridConnected fill:#00BCF2,stroke:#0078D4,stroke-width:3px
-    style EdgeLocal fill:#7FBA00,stroke:#107C10,stroke-width:3px
-    style CloudServices fill:#50E6FF,stroke:#0078D4,stroke-width:3px
-    style Public fill:#50E6FF,stroke:#0078D4,stroke-width:3px
-    style OnPremVM fill:#FFB900,stroke:#D83B01,stroke-width:3px
-    style ContainerPlatform fill:#00B7C3,stroke:#005B70,stroke-width:3px
+    style Start fill:#0078d4,stroke:#002050,stroke-width:2px,color:#fff
+    style Disconnected fill:#505050,stroke:#ffb900,stroke-width:3px,color:#fff
+    style SovereignCloud fill:#5e5e5e,stroke:#00bcf2,stroke-width:3px,color:#fff
+    style HybridConnected fill:#00bcf2,stroke:#0078d4,stroke-width:3px
+    style EdgeLocal fill:#7fba00,stroke:#107c10,stroke-width:3px
+    style CloudServices fill:#50e6ff,stroke:#0078d4,stroke-width:3px
+    style Public fill:#50e6ff,stroke:#0078d4,stroke-width:3px
+    style OnPremVM fill:#ffb900,stroke:#d83b01,stroke-width:3px
+    style ContainerPlatform fill:#00b7c3,stroke:#005b70,stroke-width:3px
     
-    style DataClass fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style Compliance fill:#E74856,stroke:#A80000,stroke-width:2px
-    style Confidential fill:#E74856,stroke:#A80000,stroke-width:2px
-    style Internal fill:#FFB900,stroke:#D83B01,stroke-width:2px
-    style LatencyCheck fill:#FFB900,stroke:#D83B01,stroke-width:2px
-    style Dependencies fill:#7FBA00,stroke:#107C10,stroke-width:2px
+    style DataClass fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style Compliance fill:#e74856,stroke:#a80000,stroke-width:2px
+    style Confidential fill:#e74856,stroke:#a80000,stroke-width:2px
+    style Internal fill:#ffb900,stroke:#d83b01,stroke-width:2px
+    style LatencyCheck fill:#ffb900,stroke:#d83b01,stroke-width:2px
+    style Dependencies fill:#7fba00,stroke:#107c10,stroke-width:2px
 ```
 
 ## Hybrid Split Placement

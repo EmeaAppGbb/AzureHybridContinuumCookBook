@@ -200,24 +200,24 @@ graph TB
         Disconnected5Y -.->|Flattens| DisconnectedTrend["Stabilizes after Y1<br/>€36K/month ongoing"]
     end
     
-    style TCO fill:#E0F7FF,stroke:#0078D4,stroke-width:3px
-    style PublicCloud fill:#0078D4,stroke:#005A9E,stroke-width:3px,color:#fff
-    style ConnectedHybrid fill:#50E6FF,stroke:#0078D4,stroke-width:3px
-    style DisconnectedLocal fill:#107C10,stroke:#004B1C,stroke-width:3px,color:#fff
-    style Insights fill:#FFC107,stroke:#F57C00,stroke-width:2px
-    style Trend fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:#fff
+    style TCO fill:#e0f7ff,stroke:#0078d4,stroke-width:3px
+    style PublicCloud fill:#0078d4,stroke:#005a9e,stroke-width:3px,color:#fff
+    style ConnectedHybrid fill:#50e6ff,stroke:#0078d4,stroke-width:3px
+    style DisconnectedLocal fill:#107c10,stroke:#004b1c,stroke-width:3px,color:#fff
+    style Insights fill:#ffc107,stroke:#f57c00,stroke-width:2px
+    style Trend fill:#9c27b0,stroke:#6a1b9a,stroke-width:2px,color:#fff
     
-    style PC_Y1 fill:#4A9EFF,stroke:#0078D4,stroke-width:2px
-    style PC_Y2 fill:#4A9EFF,stroke:#0078D4,stroke-width:2px
-    style PC_Y3 fill:#4A9EFF,stroke:#0078D4,stroke-width:2px
+    style PC_Y1 fill:#4a9eff,stroke:#0078d4,stroke-width:2px
+    style PC_Y2 fill:#4a9eff,stroke:#0078d4,stroke-width:2px
+    style PC_Y3 fill:#4a9eff,stroke:#0078d4,stroke-width:2px
     
-    style CH_Y1 fill:#FF6B6B,stroke:#DC3545,stroke-width:2px,color:#fff
-    style CH_Y2 fill:#90EE90,stroke:#107C10,stroke-width:2px
-    style CH_Y3 fill:#90EE90,stroke:#107C10,stroke-width:2px
+    style CH_Y1 fill:#ff6b6b,stroke:#dc3545,stroke-width:2px,color:#fff
+    style CH_Y2 fill:#90ee90,stroke:#107c10,stroke-width:2px
+    style CH_Y3 fill:#90ee90,stroke:#107c10,stroke-width:2px
     
-    style DL_Y1 fill:#FF6B6B,stroke:#DC3545,stroke-width:2px,color:#fff
-    style DL_Y2 fill:#90EE90,stroke:#107C10,stroke-width:2px
-    style DL_Y3 fill:#90EE90,stroke:#107C10,stroke-width:2px
+    style DL_Y1 fill:#ff6b6b,stroke:#dc3545,stroke-width:2px,color:#fff
+    style DL_Y2 fill:#90ee90,stroke:#107c10,stroke-width:2px
+    style DL_Y3 fill:#90ee90,stroke:#107c10,stroke-width:2px
 ```
 
 !!! warning "Hidden Costs Often Underestimated"

@@ -445,14 +445,14 @@ graph TB
     Tier4 -.->|"Most Specialized"| UseCases
     Tier1 -.->|"Broadest"| UseCases
     
-    style Tier4 fill:#D97700,stroke:#8B4500,color:#fff,stroke-width:3px
-    style Tier3 fill:#FF9933,stroke:#D97700,color:#000,stroke-width:2px
-    style Tier2 fill:#0078D4,stroke:#004578,color:#fff,stroke-width:2px
-    style Tier1 fill:#50E6FF,stroke:#0078D4,color:#000
-    style T4Features fill:#FFE6CC,stroke:#D97700,color:#000
-    style T3Features fill:#FFE6CC,stroke:#D97700,color:#000
-    style T2Features fill:#E6F3FF,stroke:#0078D4,color:#000
-    style T1Features fill:#E6F3FF,stroke:#0078D4,color:#000
+    style Tier4 fill:#d97700,stroke:#8b4500,color:#fff,stroke-width:3px
+    style Tier3 fill:#ff9933,stroke:#d97700,color:#000,stroke-width:2px
+    style Tier2 fill:#0078d4,stroke:#004578,color:#fff,stroke-width:2px
+    style Tier1 fill:#50e6ff,stroke:#0078d4,color:#000
+    style T4Features fill:#ffe6cc,stroke:#d97700,color:#000
+    style T3Features fill:#ffe6cc,stroke:#d97700,color:#000
+    style T2Features fill:#e6f3ff,stroke:#0078d4,color:#000
+    style T1Features fill:#e6f3ff,stroke:#0078d4,color:#000
     style Control fill:#f0f0f0,stroke:#999
     style Complexity fill:#f0f0f0,stroke:#999
     style UseCases fill:#f0f0f0,stroke:#999

@@ -113,19 +113,19 @@ graph TB
         B6["Pod/Container Outage<br/>📦 App crash<br/>💥 MINIMAL<br/>(Auto-restart)"]
     end
     
-    style Global fill:#0078D4,stroke:#005A9E,stroke-width:3px,color:#fff
-    style Region1 fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Region2 fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style AZ1 fill:#E0F7FF,stroke:#0078D4,stroke-width:1px
-    style AZ2 fill:#E0F7FF,stroke:#0078D4,stroke-width:1px
-    style AZ3 fill:#E0F7FF,stroke:#0078D4,stroke-width:1px
-    style OnPrem fill:#107C10,stroke:#004B1C,stroke-width:3px,color:#fff
-    style Site fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Cluster fill:#E0F7FF,stroke:#0078D4,stroke-width:2px
+    style Global fill:#0078d4,stroke:#005a9e,stroke-width:3px,color:#fff
+    style Region1 fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Region2 fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style AZ1 fill:#e0f7ff,stroke:#0078d4,stroke-width:1px
+    style AZ2 fill:#e0f7ff,stroke:#0078d4,stroke-width:1px
+    style AZ3 fill:#e0f7ff,stroke:#0078d4,stroke-width:1px
+    style OnPrem fill:#107c10,stroke:#004b1c,stroke-width:3px,color:#fff
+    style Site fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Cluster fill:#e0f7ff,stroke:#0078d4,stroke-width:2px
     style Rack1 fill:#FFF,stroke:#666,stroke-width:1px
     style Rack2 fill:#FFF,stroke:#666,stroke-width:1px
     style Rack3 fill:#FFF,stroke:#666,stroke-width:1px
-    style BlastRadius fill:#FFC107,stroke:#F57C00,stroke-width:2px
+    style BlastRadius fill:#ffc107,stroke:#f57c00,stroke-width:2px
 ```
 
 !!! warning "Correlated Failures"

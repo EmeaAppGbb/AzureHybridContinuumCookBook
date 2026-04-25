@@ -451,35 +451,35 @@ graph TB
         I4["Cloud-native PaaS replacement<br/>increases complexity significantly"]
     end
     
-    style Legend fill:#E0E0E0,stroke:#666,stroke-width:2px
-    style Migration fill:#FFF,stroke:#0078D4,stroke-width:2px
-    style Phase1to2 fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Phase2to3 fill:#107C10,stroke:#004B1C,stroke-width:2px,color:#fff
-    style Insights fill:#FFC107,stroke:#F57C00,stroke-width:2px
+    style Legend fill:#e0e0e0,stroke:#666,stroke-width:2px
+    style Migration fill:#FFF,stroke:#0078d4,stroke-width:2px
+    style Phase1to2 fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Phase2to3 fill:#107c10,stroke:#004b1c,stroke-width:2px,color:#fff
+    style Insights fill:#ffc107,stroke:#f57c00,stroke-width:2px
     
-    style P12_Frontend fill:#90EE90,stroke:#006400,stroke-width:2px
-    style P12_API fill:#90EE90,stroke:#006400,stroke-width:2px
-    style P12_Workers fill:#90EE90,stroke:#006400,stroke-width:2px
-    style P12_Database fill:#FF6B6B,stroke:#8B0000,stroke-width:2px,color:#fff
-    style P12_Storage fill:#FFD93D,stroke:#CC6600,stroke-width:2px
-    style P12_Queue fill:#FFD93D,stroke:#CC6600,stroke-width:2px
-    style P12_Identity fill:#90EE90,stroke:#006400,stroke-width:2px
-    style P12_Monitoring fill:#90EE90,stroke:#006400,stroke-width:2px
-    style P12_Secrets fill:#90EE90,stroke:#006400,stroke-width:2px
-    style P12_Registry fill:#FFD93D,stroke:#CC6600,stroke-width:2px
-    style P12_CICD fill:#FFD93D,stroke:#CC6600,stroke-width:2px
+    style P12_Frontend fill:#90ee90,stroke:#006400,stroke-width:2px
+    style P12_API fill:#90ee90,stroke:#006400,stroke-width:2px
+    style P12_Workers fill:#90ee90,stroke:#006400,stroke-width:2px
+    style P12_Database fill:#ff6b6b,stroke:#8b0000,stroke-width:2px,color:#fff
+    style P12_Storage fill:#ffd93d,stroke:#cc6600,stroke-width:2px
+    style P12_Queue fill:#ffd93d,stroke:#cc6600,stroke-width:2px
+    style P12_Identity fill:#90ee90,stroke:#006400,stroke-width:2px
+    style P12_Monitoring fill:#90ee90,stroke:#006400,stroke-width:2px
+    style P12_Secrets fill:#90ee90,stroke:#006400,stroke-width:2px
+    style P12_Registry fill:#ffd93d,stroke:#cc6600,stroke-width:2px
+    style P12_CICD fill:#ffd93d,stroke:#cc6600,stroke-width:2px
     
-    style P23_Frontend fill:#90EE90,stroke:#006400,stroke-width:2px
-    style P23_API fill:#FFD93D,stroke:#CC6600,stroke-width:2px
-    style P23_Workers fill:#FFD93D,stroke:#CC6600,stroke-width:2px
-    style P23_Database fill:#FF6B6B,stroke:#8B0000,stroke-width:2px,color:#fff
-    style P23_Storage fill:#90EE90,stroke:#006400,stroke-width:2px
-    style P23_Queue fill:#90EE90,stroke:#006400,stroke-width:2px
-    style P23_Identity fill:#FF6B6B,stroke:#8B0000,stroke-width:2px,color:#fff
-    style P23_Monitoring fill:#FF6B6B,stroke:#8B0000,stroke-width:2px,color:#fff
-    style P23_Secrets fill:#FFD93D,stroke:#CC6600,stroke-width:2px
-    style P23_Registry fill:#90EE90,stroke:#006400,stroke-width:2px
-    style P23_CICD fill:#FF6B6B,stroke:#8B0000,stroke-width:2px,color:#fff
+    style P23_Frontend fill:#90ee90,stroke:#006400,stroke-width:2px
+    style P23_API fill:#ffd93d,stroke:#cc6600,stroke-width:2px
+    style P23_Workers fill:#ffd93d,stroke:#cc6600,stroke-width:2px
+    style P23_Database fill:#ff6b6b,stroke:#8b0000,stroke-width:2px,color:#fff
+    style P23_Storage fill:#90ee90,stroke:#006400,stroke-width:2px
+    style P23_Queue fill:#90ee90,stroke:#006400,stroke-width:2px
+    style P23_Identity fill:#ff6b6b,stroke:#8b0000,stroke-width:2px,color:#fff
+    style P23_Monitoring fill:#ff6b6b,stroke:#8b0000,stroke-width:2px,color:#fff
+    style P23_Secrets fill:#ffd93d,stroke:#cc6600,stroke-width:2px
+    style P23_Registry fill:#90ee90,stroke:#006400,stroke-width:2px
+    style P23_CICD fill:#ff6b6b,stroke:#8b0000,stroke-width:2px,color:#fff
 ```
 
 ## References

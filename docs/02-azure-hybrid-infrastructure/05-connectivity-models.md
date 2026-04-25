@@ -376,13 +376,13 @@ graph TB
     DisconnServices --> DisconnOps
     DisconnOps --> DisconnNote
     
-    style Connected fill:#00AA00,color:#fff
-    style Partial fill:#FFB900,color:#000
-    style Disconnected fill:#A4262C,color:#fff
-    style Azure fill:#0078D4,color:#fff
-    style ConnServices fill:#E8F4FD,color:#000
-    style PartialServices fill:#FFF4CE,color:#000
-    style DisconnServices fill:#FDE7E9,color:#000
+    style Connected fill:#00aa00,color:#fff
+    style Partial fill:#ffb900,color:#000
+    style Disconnected fill:#a4262c,color:#fff
+    style Azure fill:#0078d4,color:#fff
+    style ConnServices fill:#e8f4fd,color:#000
+    style PartialServices fill:#fff4ce,color:#000
+    style DisconnServices fill:#fde7e9,color:#000
 ```
 
 ## Choosing a Connectivity Model: Decision Factors

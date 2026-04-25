@@ -263,14 +263,14 @@ graph TD
     
     Region1 <-->|"Region Pair<br/>300+ miles"| Region2
     
-    style Global fill:#0078D4,color:#fff
-    style Geography1 fill:#50E6FF,color:#000
-    style Geography2 fill:#50E6FF,color:#000
-    style Sovereign fill:#FFB900,color:#000
-    style OnPrem fill:#00AA00,color:#fff
-    style Region1 fill:#E8F4FD,color:#000
-    style Region2 fill:#E8F4FD,color:#000
-    style Region3 fill:#E8F4FD,color:#000
+    style Global fill:#0078d4,color:#fff
+    style Geography1 fill:#50e6ff,color:#000
+    style Geography2 fill:#50e6ff,color:#000
+    style Sovereign fill:#ffb900,color:#000
+    style OnPrem fill:#00aa00,color:#fff
+    style Region1 fill:#e8f4fd,color:#000
+    style Region2 fill:#e8f4fd,color:#000
+    style Region3 fill:#e8f4fd,color:#000
 ```
 
 ```mermaid
@@ -308,12 +308,12 @@ graph TD
     Zone1 <-.->|"< 2ms latency<br/>Synchronous Replication"| Zone2
     Zone2 <-.->|"< 2ms latency<br/>Synchronous Replication"| Zone3
     
-    style Global fill:#FFB900,color:#000
-    style RegionalLayer fill:#0078D4,color:#fff
-    style ZonalLayer fill:#50E6FF,color:#000
-    style LocalLayer fill:#00AA00,color:#fff
-    style Region1 fill:#0078D4,color:#fff
-    style Region2 fill:#0078D4,color:#fff
+    style Global fill:#ffb900,color:#000
+    style RegionalLayer fill:#0078d4,color:#fff
+    style ZonalLayer fill:#50e6ff,color:#000
+    style LocalLayer fill:#00aa00,color:#fff
+    style Region1 fill:#0078d4,color:#fff
+    style Region2 fill:#0078d4,color:#fff
 ```
 
 ## References

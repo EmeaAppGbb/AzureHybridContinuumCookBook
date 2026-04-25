@@ -109,17 +109,17 @@ graph TB
     Internet -.->|Intermittent| IntIdentity
     Internet -.->|No Connection| Disconnected
     
-    style Connected fill:#50E6FF,stroke:#0078D4,stroke-width:3px
-    style Intermittent fill:#00BCF2,stroke:#0078D4,stroke-width:3px
-    style Disconnected fill:#505050,stroke:#FFB900,stroke-width:3px,color:#fff
+    style Connected fill:#50e6ff,stroke:#0078d4,stroke-width:3px
+    style Intermittent fill:#00bcf2,stroke:#0078d4,stroke-width:3px
+    style Disconnected fill:#505050,stroke:#ffb900,stroke-width:3px,color:#fff
     
-    style ConnIdentity fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style IntIdentity fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style IntCache fill:#FFB900,stroke:#D83B01,stroke-width:2px
-    style DiscADDS fill:#7FBA00,stroke:#107C10,stroke-width:2px
-    style DiscKeycloak fill:#00B7C3,stroke:#005B70,stroke-width:2px
+    style ConnIdentity fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style IntIdentity fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style IntCache fill:#ffb900,stroke:#d83b01,stroke-width:2px
+    style DiscADDS fill:#7fba00,stroke:#107c10,stroke-width:2px
+    style DiscKeycloak fill:#00b7c3,stroke:#005b70,stroke-width:2px
     
-    style Internet fill:#E8F4FD,stroke:#0078D4,stroke-width:2px,stroke-dasharray: 5 5
+    style Internet fill:#e8f4fd,stroke:#0078d4,stroke-width:2px,stroke-dasharray: 5 5
 ```
 
 ### Federated Identity with Active Directory Federation Services (ADFS)

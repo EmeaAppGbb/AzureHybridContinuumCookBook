@@ -168,14 +168,14 @@ graph TB
     SecureMedia -.->|One-Way Transfer| Harbor & Nexus
     Updates -.->|Manual Process| Harbor & Nexus
     
-    style AirGap fill:#505050,stroke:#FFB900,stroke-width:4px,color:#fff
-    style Identity fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style Compute fill:#00BCF2,stroke:#0078D4,stroke-width:2px
-    style Data fill:#FFB900,stroke:#D83B01,stroke-width:2px
-    style Messaging fill:#7FBA00,stroke:#107C10,stroke-width:2px
-    style Security fill:#E74856,stroke:#A80000,stroke-width:2px
-    style Monitoring fill:#00B7C3,stroke:#005B70,stroke-width:2px
-    style External fill:#D83B01,stroke:#A80000,stroke-width:3px,stroke-dasharray: 5 5
+    style AirGap fill:#505050,stroke:#ffb900,stroke-width:4px,color:#fff
+    style Identity fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style Compute fill:#00bcf2,stroke:#0078d4,stroke-width:2px
+    style Data fill:#ffb900,stroke:#d83b01,stroke-width:2px
+    style Messaging fill:#7fba00,stroke:#107c10,stroke-width:2px
+    style Security fill:#e74856,stroke:#a80000,stroke-width:2px
+    style Monitoring fill:#00b7c3,stroke:#005b70,stroke-width:2px
+    style External fill:#d83b01,stroke:#a80000,stroke-width:3px,stroke-dasharray: 5 5
 ```
 
 ## Reference Architecture Components

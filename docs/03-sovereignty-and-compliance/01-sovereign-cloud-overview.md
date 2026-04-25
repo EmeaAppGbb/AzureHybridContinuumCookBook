@@ -151,11 +151,11 @@ graph LR
     L4 -.->|"Higher"| C4
     L5 -.->|"Maximum"| C4
     
-    style L1 fill:#0078D4,stroke:#004578,color:#fff
-    style L2 fill:#0078D4,stroke:#004578,color:#fff
-    style L3 fill:#0078D4,stroke:#004578,color:#fff
-    style L4 fill:#50E6FF,stroke:#0078D4,color:#000
-    style L5 fill:#50E6FF,stroke:#0078D4,color:#000
+    style L1 fill:#0078d4,stroke:#004578,color:#fff
+    style L2 fill:#0078d4,stroke:#004578,color:#fff
+    style L3 fill:#0078d4,stroke:#004578,color:#fff
+    style L4 fill:#50e6ff,stroke:#0078d4,color:#000
+    style L5 fill:#50e6ff,stroke:#0078d4,color:#000
     style C1 fill:#f0f0f0,stroke:#999
     style C2 fill:#f0f0f0,stroke:#999
     style C3 fill:#f0f0f0,stroke:#999

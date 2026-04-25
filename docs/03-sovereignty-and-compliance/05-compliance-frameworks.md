@@ -461,42 +461,42 @@ graph TB
     HybridArc -.->|"Increasing Customer Control"| AzLocalConn
     AzLocalConn -.->|"Increasing Customer Control"| AzLocalDisc
     
-    style PublicCloud fill:#E6F3FF,stroke:#0078D4,color:#000,stroke-width:2px
-    style HybridArc fill:#E6F3FF,stroke:#0078D4,color:#000,stroke-width:2px
-    style AzLocalConn fill:#FFE6CC,stroke:#D97700,color:#000,stroke-width:2px
-    style AzLocalDisc fill:#FFE6CC,stroke:#D97700,color:#000,stroke-width:2px
+    style PublicCloud fill:#e6f3ff,stroke:#0078d4,color:#000,stroke-width:2px
+    style HybridArc fill:#e6f3ff,stroke:#0078d4,color:#000,stroke-width:2px
+    style AzLocalConn fill:#ffe6cc,stroke:#d97700,color:#000,stroke-width:2px
+    style AzLocalDisc fill:#ffe6cc,stroke:#d97700,color:#000,stroke-width:2px
     
-    style PC_App fill:#FF9933,stroke:#D97700,color:#000
-    style PC_Runtime fill:#FFA500,stroke:#D97700,color:#000
-    style PC_OS fill:#FFD700,stroke:#D97700,color:#000
-    style PC_VM fill:#50E6FF,stroke:#0078D4,color:#000
-    style PC_Infra fill:#0078D4,stroke:#004578,color:#fff
+    style PC_App fill:#ff9933,stroke:#d97700,color:#000
+    style PC_Runtime fill:#ffa500,stroke:#d97700,color:#000
+    style PC_OS fill:#ffd700,stroke:#d97700,color:#000
+    style PC_VM fill:#50e6ff,stroke:#0078d4,color:#000
+    style PC_Infra fill:#0078d4,stroke:#004578,color:#fff
     style PC_Physical fill:#004578,stroke:#002952,color:#fff
     
-    style Arc_App fill:#FF9933,stroke:#D97700,color:#000
-    style Arc_Runtime fill:#FF9933,stroke:#D97700,color:#000
-    style Arc_OS fill:#FF9933,stroke:#D97700,color:#000
-    style Arc_VM fill:#FFD700,stroke:#D97700,color:#000
-    style Arc_Infra fill:#FFD700,stroke:#D97700,color:#000
-    style Arc_Physical fill:#FF9933,stroke:#D97700,color:#000
+    style Arc_App fill:#ff9933,stroke:#d97700,color:#000
+    style Arc_Runtime fill:#ff9933,stroke:#d97700,color:#000
+    style Arc_OS fill:#ff9933,stroke:#d97700,color:#000
+    style Arc_VM fill:#ffd700,stroke:#d97700,color:#000
+    style Arc_Infra fill:#ffd700,stroke:#d97700,color:#000
+    style Arc_Physical fill:#ff9933,stroke:#d97700,color:#000
     
-    style Conn_App fill:#FF9933,stroke:#D97700,color:#000
-    style Conn_Runtime fill:#FF9933,stroke:#D97700,color:#000
-    style Conn_OS fill:#FF9933,stroke:#D97700,color:#000
-    style Conn_VM fill:#FF9933,stroke:#D97700,color:#000
-    style Conn_Infra fill:#FF9933,stroke:#D97700,color:#000
-    style Conn_Physical fill:#FF9933,stroke:#D97700,color:#000
+    style Conn_App fill:#ff9933,stroke:#d97700,color:#000
+    style Conn_Runtime fill:#ff9933,stroke:#d97700,color:#000
+    style Conn_OS fill:#ff9933,stroke:#d97700,color:#000
+    style Conn_VM fill:#ff9933,stroke:#d97700,color:#000
+    style Conn_Infra fill:#ff9933,stroke:#d97700,color:#000
+    style Conn_Physical fill:#ff9933,stroke:#d97700,color:#000
     
-    style Disc_App fill:#FF9933,stroke:#D97700,color:#000
-    style Disc_Runtime fill:#FF9933,stroke:#D97700,color:#000
-    style Disc_OS fill:#FF9933,stroke:#D97700,color:#000
-    style Disc_VM fill:#FF9933,stroke:#D97700,color:#000
-    style Disc_Infra fill:#FF9933,stroke:#D97700,color:#000
-    style Disc_Physical fill:#FF9933,stroke:#D97700,color:#000
+    style Disc_App fill:#ff9933,stroke:#d97700,color:#000
+    style Disc_Runtime fill:#ff9933,stroke:#d97700,color:#000
+    style Disc_OS fill:#ff9933,stroke:#d97700,color:#000
+    style Disc_VM fill:#ff9933,stroke:#d97700,color:#000
+    style Disc_Infra fill:#ff9933,stroke:#d97700,color:#000
+    style Disc_Physical fill:#ff9933,stroke:#d97700,color:#000
     
-    style MSResp fill:#0078D4,stroke:#004578,color:#fff
-    style SharedResp fill:#FFD700,stroke:#D97700,color:#000
-    style CustResp fill:#FF9933,stroke:#D97700,color:#000
+    style MSResp fill:#0078d4,stroke:#004578,color:#fff
+    style SharedResp fill:#ffd700,stroke:#d97700,color:#000
+    style CustResp fill:#ff9933,stroke:#d97700,color:#000
 ```
 
 ---

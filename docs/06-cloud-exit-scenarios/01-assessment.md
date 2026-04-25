@@ -42,18 +42,18 @@ graph TD
     Plan --> End([Assessment Complete])
     Reassess --> End
     
-    style Start fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
-    style End fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
-    style Inventory fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Classify fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Score fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Dependencies fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Strategy fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Risk fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Plan fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Gate1 fill:#FFF,stroke:#0078D4,stroke-width:2px
-    style Gate2 fill:#FFF,stroke:#0078D4,stroke-width:2px
-    style Gate3 fill:#FFF,stroke:#0078D4,stroke-width:2px
+    style Start fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
+    style End fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
+    style Inventory fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Classify fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Score fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Dependencies fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Strategy fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Risk fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Plan fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Gate1 fill:#FFF,stroke:#0078d4,stroke-width:2px
+    style Gate2 fill:#FFF,stroke:#0078d4,stroke-width:2px
+    style Gate3 fill:#FFF,stroke:#0078d4,stroke-width:2px
 ```
 
 Each phase produces artifacts that feed into subsequent phases, culminating in a comprehensive migration plan with well-defined scope, sequencing, and risk mitigation strategies.
@@ -283,9 +283,9 @@ graph LR
     AzureAD -->|Low| AzADConn
     AzADConn -->|Very High| ADDS
     
-    style Azure fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
-    style Connected fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Disconnected fill:#107C10,stroke:#004B1C,stroke-width:2px,color:#fff
+    style Azure fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
+    style Connected fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Disconnected fill:#107c10,stroke:#004b1c,stroke-width:2px,color:#fff
 ```
 
 | Azure PaaS Service | Connected Azure Local | Disconnected Azure Local |

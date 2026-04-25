@@ -143,23 +143,23 @@ graph TD
     
     Success --> Operate[Operational Mode<br/>Workload Onboarding]
     
-    style Start fill:#0078D4,stroke:#002050,stroke-width:2px,color:#fff
-    style Success fill:#107C10,stroke:#004B1C,stroke-width:3px,color:#fff
-    style Operate fill:#7FBA00,stroke:#107C10,stroke-width:3px
+    style Start fill:#0078d4,stroke:#002050,stroke-width:2px,color:#fff
+    style Success fill:#107c10,stroke:#004b1c,stroke-width:3px,color:#fff
+    style Operate fill:#7fba00,stroke:#107c10,stroke-width:3px
     
-    style Terraform fill:#00BCF2,stroke:#0078D4,stroke-width:2px
-    style Bicep fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Portal fill:#FFB900,stroke:#D83B01,stroke-width:2px
+    style Terraform fill:#00bcf2,stroke:#0078d4,stroke-width:2px
+    style Bicep fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Portal fill:#ffb900,stroke:#d83b01,stroke-width:2px
     
-    style Connected fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Intermittent fill:#00BCF2,stroke:#0078D4,stroke-width:2px
-    style Disconnected fill:#505050,stroke:#FFB900,stroke-width:3px,color:#fff
+    style Connected fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Intermittent fill:#00bcf2,stroke:#0078d4,stroke-width:2px
+    style Disconnected fill:#505050,stroke:#ffb900,stroke-width:3px,color:#fff
     
-    style ExistingLZ fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style IaCChoice fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style CloudType fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style ConnectivityCheck fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style DeployMethod fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style ExistingLZ fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style IaCChoice fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style CloudType fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style ConnectivityCheck fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style DeployMethod fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
 ```
 
 ## Bicep Implementation Walkthrough

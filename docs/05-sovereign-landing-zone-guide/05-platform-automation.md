@@ -448,17 +448,17 @@ graph LR
     
     DisconnectedDeploy -.->|Local Monitoring| ManualValidation
     
-    style Source fill:#7FBA00,stroke:#107C10,stroke-width:2px
-    style CI fill:#00BCF2,stroke:#0078D4,stroke-width:2px
-    style Artifacts fill:#FFB900,stroke:#D83B01,stroke-width:2px
-    style CD fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Disconnected fill:#505050,stroke:#FFB900,stroke-width:3px,color:#fff
-    style Monitoring fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style Source fill:#7fba00,stroke:#107c10,stroke-width:2px
+    style CI fill:#00bcf2,stroke:#0078d4,stroke-width:2px
+    style Artifacts fill:#ffb900,stroke:#d83b01,stroke-width:2px
+    style CD fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Disconnected fill:#505050,stroke:#ffb900,stroke-width:3px,color:#fff
+    style Monitoring fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
     
-    style Approval fill:#E74856,stroke:#A80000,stroke-width:2px,color:#fff
-    style ComplianceCheck fill:#E74856,stroke:#A80000,stroke-width:2px,color:#fff
-    style SecurityScan fill:#E74856,stroke:#A80000,stroke-width:2px,color:#fff
-    style SecureTransfer fill:#D83B01,stroke:#A80000,stroke-width:2px,color:#fff
+    style Approval fill:#e74856,stroke:#a80000,stroke-width:2px,color:#fff
+    style ComplianceCheck fill:#e74856,stroke:#a80000,stroke-width:2px,color:#fff
+    style SecurityScan fill:#e74856,stroke:#a80000,stroke-width:2px,color:#fff
+    style SecureTransfer fill:#d83b01,stroke:#a80000,stroke-width:2px,color:#fff
 ```
 
 ## GitOps for Kubernetes Workloads

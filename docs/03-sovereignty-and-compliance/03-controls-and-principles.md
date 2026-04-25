@@ -496,14 +496,14 @@ graph TB
     
     Layer1 -.->|"Protects"| Core
     
-    style Layer7 fill:#0078D4,stroke:#004578,color:#fff
-    style Layer6 fill:#1A8CCC,stroke:#004578,color:#fff
-    style Layer5 fill:#3399D4,stroke:#004578,color:#fff
-    style Layer4 fill:#50A6DC,stroke:#004578,color:#fff
-    style Layer3 fill:#6BB3E4,stroke:#0078D4,color:#000
-    style Layer2 fill:#85C0EC,stroke:#0078D4,color:#000
-    style Layer1 fill:#A0CDF4,stroke:#0078D4,color:#000
-    style Core fill:#FFE6CC,stroke:#D97700,color:#000,stroke-width:4px
+    style Layer7 fill:#0078d4,stroke:#004578,color:#fff
+    style Layer6 fill:#1a8ccc,stroke:#004578,color:#fff
+    style Layer5 fill:#3399d4,stroke:#004578,color:#fff
+    style Layer4 fill:#50a6dc,stroke:#004578,color:#fff
+    style Layer3 fill:#6bb3e4,stroke:#0078d4,color:#000
+    style Layer2 fill:#85c0ec,stroke:#0078d4,color:#000
+    style Layer1 fill:#a0cdf4,stroke:#0078d4,color:#000
+    style Core fill:#ffe6cc,stroke:#d97700,color:#000,stroke-width:4px
 ```
 
 ### How Defense-in-Depth Works in Practice

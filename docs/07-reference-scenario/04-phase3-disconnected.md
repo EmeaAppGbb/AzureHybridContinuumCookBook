@@ -544,13 +544,13 @@ graph TB
     
     Internet -.->|❌ BLOCKED| AirGap
     
-    style AirGap fill:#107C10,stroke:#004B1C,stroke-width:4px,color:#fff
-    style Apps fill:#326CE5,stroke:#1A4D8C,stroke-width:2px,color:#fff
-    style K8s fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style DataLayer fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
-    style Identity fill:#DC3545,stroke:#A71D2A,stroke-width:2px,color:#fff
-    style DevOps fill:#FFC107,stroke:#F57C00,stroke-width:2px
-    style Observability fill:#9C27B0,stroke:#6A1B9A,stroke-width:2px,color:#fff
+    style AirGap fill:#107c10,stroke:#004b1c,stroke-width:4px,color:#fff
+    style Apps fill:#326ce5,stroke:#1a4d8c,stroke-width:2px,color:#fff
+    style K8s fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style DataLayer fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
+    style Identity fill:#dc3545,stroke:#a71d2a,stroke-width:2px,color:#fff
+    style DevOps fill:#ffc107,stroke:#f57c00,stroke-width:2px
+    style Observability fill:#9c27b0,stroke:#6a1b9a,stroke-width:2px,color:#fff
 ```
 
 ```mermaid
@@ -618,10 +618,10 @@ graph TB
         Complexity["Deployment Time: API Deploy<br/>5 min → 15 min → 30 min"]
     end
     
-    style Phase1 fill:#0078D4,stroke:#005A9E,stroke-width:3px,color:#fff
-    style Phase2 fill:#50E6FF,stroke:#0078D4,stroke-width:3px
-    style Phase3 fill:#107C10,stroke:#004B1C,stroke-width:3px,color:#fff
-    style Metrics fill:#FFC107,stroke:#F57C00,stroke-width:2px
+    style Phase1 fill:#0078d4,stroke:#005a9e,stroke-width:3px,color:#fff
+    style Phase2 fill:#50e6ff,stroke:#0078d4,stroke-width:3px
+    style Phase3 fill:#107c10,stroke:#004b1c,stroke-width:3px,color:#fff
+    style Metrics fill:#ffc107,stroke:#f57c00,stroke-width:2px
 ```
 
 ## References

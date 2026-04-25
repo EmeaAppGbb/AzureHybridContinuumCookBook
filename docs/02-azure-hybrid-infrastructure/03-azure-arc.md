@@ -471,11 +471,11 @@ graph TB
     
     CloudAgent -.-> ArcRP
     
-    style AzureCloud fill:#0078D4,color:#fff
-    style AzureServices fill:#50E6FF,color:#000
-    style OnPremDC fill:#00AA00,color:#fff
-    style Edge fill:#FFB900,color:#000
-    style Agent fill:#E8F4FD,color:#000
+    style AzureCloud fill:#0078d4,color:#fff
+    style AzureServices fill:#50e6ff,color:#000
+    style OnPremDC fill:#00aa00,color:#fff
+    style Edge fill:#ffb900,color:#000
+    style Agent fill:#e8f4fd,color:#000
 ```
 
 ## References

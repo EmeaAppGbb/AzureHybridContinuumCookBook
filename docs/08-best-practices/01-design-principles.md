@@ -156,12 +156,12 @@ graph TB
     Observability <-.->|Informs| Automation
     Observability <-.->|Monitors| Security
     
-    style Center fill:#0078D4,stroke:#005A9E,stroke-width:4px,color:#fff,font-size:16px
-    style Portability fill:#50E6FF,stroke:#0078D4,stroke-width:3px
-    style Disconnection fill:#50E6FF,stroke:#0078D4,stroke-width:3px
-    style Automation fill:#50E6FF,stroke:#0078D4,stroke-width:3px
-    style Security fill:#50E6FF,stroke:#0078D4,stroke-width:3px
-    style Observability fill:#50E6FF,stroke:#0078D4,stroke-width:3px
+    style Center fill:#0078d4,stroke:#005a9e,stroke-width:4px,color:#fff,font-size:16px
+    style Portability fill:#50e6ff,stroke:#0078d4,stroke-width:3px
+    style Disconnection fill:#50e6ff,stroke:#0078d4,stroke-width:3px
+    style Automation fill:#50e6ff,stroke:#0078d4,stroke-width:3px
+    style Security fill:#50e6ff,stroke:#0078d4,stroke-width:3px
+    style Observability fill:#50e6ff,stroke:#0078d4,stroke-width:3px
 ```
 
 ## Mapping to Well-Architected Framework Pillars

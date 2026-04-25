@@ -117,35 +117,35 @@ graph TB
         Tools["🛠️ Management Tools:<br/>PaaS: Azure Portal only<br/>Connected: Portal + Local tools<br/>Disconnected: All local tools"]
     end
     
-    style PublicCloud fill:#0078D4,stroke:#005A9E,stroke-width:3px,color:#fff
-    style Connected fill:#50E6FF,stroke:#0078D4,stroke-width:3px
-    style Disconnected fill:#107C10,stroke:#004B1C,stroke-width:3px,color:#fff
-    style Legend fill:#E0E0E0,stroke:#666,stroke-width:2px
-    style Metrics fill:#FFC107,stroke:#F57C00,stroke-width:2px
+    style PublicCloud fill:#0078d4,stroke:#005a9e,stroke-width:3px,color:#fff
+    style Connected fill:#50e6ff,stroke:#0078d4,stroke-width:3px
+    style Disconnected fill:#107c10,stroke:#004b1c,stroke-width:3px,color:#fff
+    style Legend fill:#e0e0e0,stroke:#666,stroke-width:2px
+    style Metrics fill:#ffc107,stroke:#f57c00,stroke-width:2px
     
-    style PC_Data fill:#90EE90,stroke:#006400,stroke-width:2px
-    style PC_App fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
-    style PC_Platform fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
-    style PC_OS fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
-    style PC_Hypervisor fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
-    style PC_Network fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
-    style PC_Physical fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style PC_Data fill:#90ee90,stroke:#006400,stroke-width:2px
+    style PC_App fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
+    style PC_Platform fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
+    style PC_OS fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
+    style PC_Hypervisor fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
+    style PC_Network fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
+    style PC_Physical fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
     
-    style HC_Data fill:#90EE90,stroke:#006400,stroke-width:2px
-    style HC_App fill:#90EE90,stroke:#006400,stroke-width:2px
-    style HC_Platform fill:#FFD93D,stroke:#CC6600,stroke-width:2px
-    style HC_OS fill:#FFD93D,stroke:#CC6600,stroke-width:2px
-    style HC_Hypervisor fill:#90EE90,stroke:#006400,stroke-width:2px
-    style HC_Network fill:#90EE90,stroke:#006400,stroke-width:2px
-    style HC_Physical fill:#90EE90,stroke:#006400,stroke-width:2px
+    style HC_Data fill:#90ee90,stroke:#006400,stroke-width:2px
+    style HC_App fill:#90ee90,stroke:#006400,stroke-width:2px
+    style HC_Platform fill:#ffd93d,stroke:#cc6600,stroke-width:2px
+    style HC_OS fill:#ffd93d,stroke:#cc6600,stroke-width:2px
+    style HC_Hypervisor fill:#90ee90,stroke:#006400,stroke-width:2px
+    style HC_Network fill:#90ee90,stroke:#006400,stroke-width:2px
+    style HC_Physical fill:#90ee90,stroke:#006400,stroke-width:2px
     
-    style DC_Data fill:#90EE90,stroke:#006400,stroke-width:2px
-    style DC_App fill:#90EE90,stroke:#006400,stroke-width:2px
-    style DC_Platform fill:#90EE90,stroke:#006400,stroke-width:2px
-    style DC_OS fill:#90EE90,stroke:#006400,stroke-width:2px
-    style DC_Hypervisor fill:#90EE90,stroke:#006400,stroke-width:2px
-    style DC_Network fill:#90EE90,stroke:#006400,stroke-width:2px
-    style DC_Physical fill:#90EE90,stroke:#006400,stroke-width:2px
+    style DC_Data fill:#90ee90,stroke:#006400,stroke-width:2px
+    style DC_App fill:#90ee90,stroke:#006400,stroke-width:2px
+    style DC_Platform fill:#90ee90,stroke:#006400,stroke-width:2px
+    style DC_OS fill:#90ee90,stroke:#006400,stroke-width:2px
+    style DC_Hypervisor fill:#90ee90,stroke:#006400,stroke-width:2px
+    style DC_Network fill:#90ee90,stroke:#006400,stroke-width:2px
+    style DC_Physical fill:#90ee90,stroke:#006400,stroke-width:2px
 ```
 
 !!! warning "Operational Complexity Increases with Control"

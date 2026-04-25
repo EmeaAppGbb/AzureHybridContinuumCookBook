@@ -192,9 +192,9 @@ graph LR
     KV1 -.->|Retain via Connectivity| KV2
     Monitor1 -.->|Arc Integration| Monitor2
     
-    style Phase1 fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
-    style Phase2 fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style AzureServices fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
+    style Phase1 fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
+    style Phase2 fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style AzureServices fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
 ```
 
 ### Containerized Workloads: AKS → AKS on Azure Local

@@ -120,10 +120,10 @@ graph TB
     Storage --> Cluster
     Network --> Cluster
     
-    style Azure fill:#0078D4,color:#fff
-    style Workloads fill:#50E6FF,color:#000
-    style AzureLocal fill:#00AA00,color:#fff
-    style Hardware fill:#605E5C,color:#fff
+    style Azure fill:#0078d4,color:#fff
+    style Workloads fill:#50e6ff,color:#000
+    style AzureLocal fill:#00aa00,color:#fff
+    style Hardware fill:#605e5c,color:#fff
 ```
 
 ### Hardware Layer: Validated Solutions
@@ -453,10 +453,10 @@ graph TB
     StorageHW --> Config
     NetworkHW --> Config
     
-    style Layer4 fill:#0078D4,color:#fff
-    style Layer3 fill:#50E6FF,color:#000
-    style Layer2 fill:#00AA00,color:#fff
-    style Layer1 fill:#605E5C,color:#fff
+    style Layer4 fill:#0078d4,color:#fff
+    style Layer3 fill:#50e6ff,color:#000
+    style Layer2 fill:#00aa00,color:#fff
+    style Layer1 fill:#605e5c,color:#fff
 ```
 
 ## References

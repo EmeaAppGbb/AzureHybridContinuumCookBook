@@ -901,10 +901,10 @@ graph TB
     Monitor_C -.->|Replace with| Prom_D
     ACR_C -.->|Replace with| Harbor_D
     
-    style Before fill:#50E6FF,stroke:#0078D4,stroke-width:3px
-    style After fill:#107C10,stroke:#004B1C,stroke-width:3px,color:#fff
-    style CloudDeps fill:#DC3545,stroke:#A71D2A,stroke-width:2px,color:#fff
-    style LocalServices fill:#107C10,stroke:#004B1C,stroke-width:2px,color:#fff
+    style Before fill:#50e6ff,stroke:#0078d4,stroke-width:3px
+    style After fill:#107c10,stroke:#004b1c,stroke-width:3px,color:#fff
+    style CloudDeps fill:#dc3545,stroke:#a71d2a,stroke-width:2px,color:#fff
+    style LocalServices fill:#107c10,stroke:#004b1c,stroke-width:2px,color:#fff
 ```
 
 ```mermaid

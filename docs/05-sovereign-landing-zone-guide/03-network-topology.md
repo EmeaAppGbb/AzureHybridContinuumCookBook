@@ -135,15 +135,15 @@ graph TB
     %% Bastion Access
     Bastion -.->|Secure RDP/SSH| Spoke1Subnet1 & Spoke2Subnet1
     
-    style Hub fill:#0078D4,stroke:#002050,stroke-width:3px,color:#fff
-    style Spoke1 fill:#E74856,stroke:#A80000,stroke-width:3px,color:#fff
-    style Spoke2 fill:#FFB900,stroke:#D83B01,stroke-width:3px
-    style Spoke3 fill:#7FBA00,stroke:#107C10,stroke-width:3px
-    style OnPrem fill:#50E6FF,stroke:#0078D4,stroke-width:3px
-    style PaaS fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style Cloud fill:#E8F4FD,stroke:#0078D4,stroke-width:2px
-    style AzFW fill:#E74856,stroke:#A80000,stroke-width:2px,color:#fff
-    style Gateway fill:#00BCF2,stroke:#0078D4,stroke-width:2px
+    style Hub fill:#0078d4,stroke:#002050,stroke-width:3px,color:#fff
+    style Spoke1 fill:#e74856,stroke:#a80000,stroke-width:3px,color:#fff
+    style Spoke2 fill:#ffb900,stroke:#d83b01,stroke-width:3px
+    style Spoke3 fill:#7fba00,stroke:#107c10,stroke-width:3px
+    style OnPrem fill:#50e6ff,stroke:#0078d4,stroke-width:3px
+    style PaaS fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style Cloud fill:#e8f4fd,stroke:#0078d4,stroke-width:2px
+    style AzFW fill:#e74856,stroke:#a80000,stroke-width:2px,color:#fff
+    style Gateway fill:#00bcf2,stroke:#0078d4,stroke-width:2px
 ```
 
 ### Network Segmentation and Micro-Segmentation

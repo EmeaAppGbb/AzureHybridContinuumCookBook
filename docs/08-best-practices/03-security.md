@@ -258,25 +258,25 @@ graph TB
     A6 -.->|Detected by| Ops_C
     A6 -.->|Detected by| Ops_D
     
-    style DefenseInDepth fill:#E0F7FF,stroke:#0078D4,stroke-width:3px
-    style Layer1 fill:#DC3545,stroke:#A71D2A,stroke-width:2px,color:#fff
-    style Layer2 fill:#FD7E14,stroke:#CC6600,stroke-width:2px
-    style Layer3 fill:#FFC107,stroke:#F57C00,stroke-width:2px
-    style Layer4 fill:#20C997,stroke:#0F6848,stroke-width:2px
-    style Layer5 fill:#0078D4,stroke:#005A9E,stroke-width:2px,color:#fff
-    style Layer6 fill:#6F42C1,stroke:#4A2870,stroke-width:2px,color:#fff
-    style Attacker fill:#000,stroke:#DC3545,stroke-width:3px,color:#fff
+    style DefenseInDepth fill:#e0f7ff,stroke:#0078d4,stroke-width:3px
+    style Layer1 fill:#dc3545,stroke:#a71d2a,stroke-width:2px,color:#fff
+    style Layer2 fill:#fd7e14,stroke:#cc6600,stroke-width:2px
+    style Layer3 fill:#ffc107,stroke:#f57c00,stroke-width:2px
+    style Layer4 fill:#20c997,stroke:#0f6848,stroke-width:2px
+    style Layer5 fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
+    style Layer6 fill:#6f42c1,stroke:#4a2870,stroke-width:2px,color:#fff
+    style Attacker fill:#000,stroke:#dc3545,stroke-width:3px,color:#fff
     
-    style Network_C fill:#50E6FF,stroke:#0078D4,stroke-width:1px
-    style Network_D fill:#107C10,stroke:#004B1C,stroke-width:1px,color:#fff
-    style Identity_C fill:#50E6FF,stroke:#0078D4,stroke-width:1px
-    style Identity_D fill:#107C10,stroke:#004B1C,stroke-width:1px,color:#fff
-    style App_C fill:#50E6FF,stroke:#0078D4,stroke-width:1px
-    style App_D fill:#107C10,stroke:#004B1C,stroke-width:1px,color:#fff
-    style Data_C fill:#50E6FF,stroke:#0078D4,stroke-width:1px
-    style Data_D fill:#107C10,stroke:#004B1C,stroke-width:1px,color:#fff
-    style Ops_C fill:#50E6FF,stroke:#0078D4,stroke-width:1px
-    style Ops_D fill:#107C10,stroke:#004B1C,stroke-width:1px,color:#fff
+    style Network_C fill:#50e6ff,stroke:#0078d4,stroke-width:1px
+    style Network_D fill:#107c10,stroke:#004b1c,stroke-width:1px,color:#fff
+    style Identity_C fill:#50e6ff,stroke:#0078d4,stroke-width:1px
+    style Identity_D fill:#107c10,stroke:#004b1c,stroke-width:1px,color:#fff
+    style App_C fill:#50e6ff,stroke:#0078d4,stroke-width:1px
+    style App_D fill:#107c10,stroke:#004b1c,stroke-width:1px,color:#fff
+    style Data_C fill:#50e6ff,stroke:#0078d4,stroke-width:1px
+    style Data_D fill:#107c10,stroke:#004b1c,stroke-width:1px,color:#fff
+    style Ops_C fill:#50e6ff,stroke:#0078d4,stroke-width:1px
+    style Ops_D fill:#107c10,stroke:#004b1c,stroke-width:1px,color:#fff
 ```
 
 ## Secret Management Across Environments

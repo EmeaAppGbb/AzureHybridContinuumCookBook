@@ -250,13 +250,13 @@ graph TB
     
     Defender -.->|Security Monitoring| AKS & AppSvc & SQL & Cosmos
     
-    style Azure fill:#0078D4,stroke:#002050,stroke-width:3px,color:#fff
-    style Ingress fill:#50E6FF,stroke:#0078D4,stroke-width:2px
-    style Compute fill:#00BCF2,stroke:#0078D4,stroke-width:2px
-    style Data fill:#FFB900,stroke:#D83B01,stroke-width:2px
-    style Integration fill:#7FBA00,stroke:#107C10,stroke-width:2px
-    style Security fill:#E74856,stroke:#A80000,stroke-width:2px
-    style Observability fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style Azure fill:#0078d4,stroke:#002050,stroke-width:3px,color:#fff
+    style Ingress fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Compute fill:#00bcf2,stroke:#0078d4,stroke-width:2px
+    style Data fill:#ffb900,stroke:#d83b01,stroke-width:2px
+    style Integration fill:#7fba00,stroke:#107c10,stroke-width:2px
+    style Security fill:#e74856,stroke:#a80000,stroke-width:2px
+    style Observability fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
 ```
 
 !!! example "Example: E-Commerce Platform"

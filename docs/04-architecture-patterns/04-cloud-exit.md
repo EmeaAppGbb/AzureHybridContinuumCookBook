@@ -461,16 +461,16 @@ graph TD
     EdgeDeploy & Mature --> Optional[ℹ️ Exit OPTIONAL<br/>Business Decision]
     StayCloud & Innovation & Immature --> None[❌ Stay in Cloud<br/>Exit Not Recommended]
     
-    style Start fill:#0078D4,stroke:#002050,stroke-width:2px,color:#fff
-    style Required fill:#107C10,stroke:#004B1C,stroke-width:3px,color:#fff
-    style Candidate fill:#FFB900,stroke:#D83B01,stroke-width:3px
-    style Optional fill:#00BCF2,stroke:#0078D4,stroke-width:3px
-    style None fill:#E74856,stroke:#A80000,stroke-width:3px,color:#fff
-    style Regulatory fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style Cost fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style Latency fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style Strategic fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
-    style Assess fill:#B4A0FF,stroke:#5E5E5E,stroke-width:2px
+    style Start fill:#0078d4,stroke:#002050,stroke-width:2px,color:#fff
+    style Required fill:#107c10,stroke:#004b1c,stroke-width:3px,color:#fff
+    style Candidate fill:#ffb900,stroke:#d83b01,stroke-width:3px
+    style Optional fill:#00bcf2,stroke:#0078d4,stroke-width:3px
+    style None fill:#e74856,stroke:#a80000,stroke-width:3px,color:#fff
+    style Regulatory fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style Cost fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style Latency fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style Strategic fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style Assess fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
 ```
 
 ## Post-Exit Considerations

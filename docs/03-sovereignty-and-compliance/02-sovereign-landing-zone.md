@@ -92,17 +92,17 @@ graph TD
     LandingZones --> ConfCorp
     LandingZones --> ConfOnline
     
-    style Root fill:#0078D4,stroke:#004578,color:#fff,stroke-width:3px
-    style Platform fill:#0078D4,stroke:#004578,color:#fff
-    style LandingZones fill:#0078D4,stroke:#004578,color:#fff
-    style Sandbox fill:#50E6FF,stroke:#0078D4,color:#000
-    style Decommissioned fill:#50E6FF,stroke:#0078D4,color:#000
-    style Identity fill:#E6F3FF,stroke:#0078D4,color:#000
-    style Management fill:#E6F3FF,stroke:#0078D4,color:#000
-    style Connectivity fill:#E6F3FF,stroke:#0078D4,color:#000
-    style Public fill:#E6F3FF,stroke:#0078D4,color:#000
-    style ConfCorp fill:#FFE6CC,stroke:#D97700,color:#000,stroke-width:2px
-    style ConfOnline fill:#FFE6CC,stroke:#D97700,color:#000,stroke-width:2px
+    style Root fill:#0078d4,stroke:#004578,color:#fff,stroke-width:3px
+    style Platform fill:#0078d4,stroke:#004578,color:#fff
+    style LandingZones fill:#0078d4,stroke:#004578,color:#fff
+    style Sandbox fill:#50e6ff,stroke:#0078d4,color:#000
+    style Decommissioned fill:#50e6ff,stroke:#0078d4,color:#000
+    style Identity fill:#e6f3ff,stroke:#0078d4,color:#000
+    style Management fill:#e6f3ff,stroke:#0078d4,color:#000
+    style Connectivity fill:#e6f3ff,stroke:#0078d4,color:#000
+    style Public fill:#e6f3ff,stroke:#0078d4,color:#000
+    style ConfCorp fill:#ffe6cc,stroke:#d97700,color:#000,stroke-width:2px
+    style ConfOnline fill:#ffe6cc,stroke:#d97700,color:#000,stroke-width:2px
 ```
 
 ### Platform Management Groups
@@ -278,16 +278,16 @@ graph TB
     DNS -.->|"Resolves"| CorpPE
     DNS -.->|"Resolves"| OnlinePE
     
-    style HubVNet fill:#0078D4,stroke:#004578,color:#fff,stroke-width:2px
-    style SpokeConfCorp fill:#FFE6CC,stroke:#D97700,color:#000,stroke-width:2px
-    style SpokeConfOnline fill:#FFE6CC,stroke:#D97700,color:#000,stroke-width:2px
-    style OnPrem fill:#E6F3FF,stroke:#0078D4,color:#000
+    style HubVNet fill:#0078d4,stroke:#004578,color:#fff,stroke-width:2px
+    style SpokeConfCorp fill:#ffe6cc,stroke:#d97700,color:#000,stroke-width:2px
+    style SpokeConfOnline fill:#ffe6cc,stroke:#d97700,color:#000,stroke-width:2px
+    style OnPrem fill:#e6f3ff,stroke:#0078d4,color:#000
     style Internet fill:#f0f0f0,stroke:#999
-    style Firewall fill:#50E6FF,stroke:#0078D4,color:#000
-    style VPNGw fill:#50E6FF,stroke:#0078D4,color:#000
-    style ERGw fill:#50E6FF,stroke:#0078D4,color:#000
-    style Bastion fill:#50E6FF,stroke:#0078D4,color:#000
-    style DNS fill:#50E6FF,stroke:#0078D4,color:#000
+    style Firewall fill:#50e6ff,stroke:#0078d4,color:#000
+    style VPNGw fill:#50e6ff,stroke:#0078d4,color:#000
+    style ERGw fill:#50e6ff,stroke:#0078d4,color:#000
+    style Bastion fill:#50e6ff,stroke:#0078d4,color:#000
+    style DNS fill:#50e6ff,stroke:#0078d4,color:#000
 ```
 
 ### Virtual WAN Topology
