@@ -305,8 +305,9 @@
    MERMAID DIAGRAMS
    ============================================================ */
 
+.md-typeset .mermaid-rendered,
 .md-typeset .mermaid,
-.md-typeset pre.mermaid {
+.md-typeset pre.mermaid-diagram {
   margin: 1.5em 0;
   text-align: center;
   cursor: pointer;
@@ -315,14 +316,15 @@
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
+.md-typeset .mermaid-rendered:hover,
 .md-typeset .mermaid:hover,
-.md-typeset pre.mermaid:hover {
+.md-typeset pre.mermaid-diagram:hover {
   box-shadow: 0 4px 16px rgba(0, 120, 212, 0.15);
   transform: scale(1.005);
 }
 
-.md-typeset .mermaid[data-modal-attached]::after,
-.md-typeset pre.mermaid[data-modal-attached]::after {
+.md-typeset .mermaid-rendered[data-modal-attached]::after,
+.md-typeset .mermaid[data-modal-attached]::after {
   content: "\01F50D Click to enlarge";
   display: block;
   font-size: 0.7em;
@@ -332,8 +334,8 @@
   transition: opacity 0.2s ease;
 }
 
-.md-typeset .mermaid[data-modal-attached]:hover::after,
-.md-typeset pre.mermaid[data-modal-attached]:hover::after {
+.md-typeset .mermaid-rendered[data-modal-attached]:hover::after,
+.md-typeset .mermaid[data-modal-attached]:hover::after {
   opacity: 1;
 }
 
