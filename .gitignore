@@ -5,3 +5,12 @@
 .squad/sessions/
 # Squad: SubSquad activation file (local to this machine)
 .squad-workstream
+
+# Node.js
+node_modules/
+package.json
+package-lock.json
+
+# Test artifacts
+debug-mermaid.js
+diagram-screenshots/
