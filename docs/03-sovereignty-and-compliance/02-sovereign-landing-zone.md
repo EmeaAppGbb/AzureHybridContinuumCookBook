@@ -412,7 +412,7 @@ Microsoft's **Azure Verified Modules** initiative provides tested, supported IaC
 
 ## SLZ and Azure Local: Extending Sovereignty On-Premises
 
-The Sovereign Landing Zone is not limited to Azure public cloud regions. Organizations can extend SLZ principles and controls to **Azure Local** (formerly Azure Stack HCI) for on-premises sovereign workloads.
+The Sovereign Landing Zone is not limited to Azure public cloud regions. Organizations can extend SLZ principles and controls to **Azure Local** for on-premises sovereign workloads.
 
 ### Azure Arc Integration
 

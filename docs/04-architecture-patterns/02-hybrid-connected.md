@@ -17,7 +17,7 @@ Organizations adopt hybrid connected architectures when regulations mandate on-p
 
 Hybrid connected architecture splits the control plane (management, monitoring, identity) from the data plane (workload execution, data storage):
 
-- **Data plane:** Runs on Azure Local, Azure Stack HCI, or traditional on-premises servers
+- **Data plane:** Runs on Azure Local or traditional on-premises servers
 - **Control plane:** Runs in Azure, managing on-premises resources via Azure Arc agents
 - **Identity plane:** Hybrid Entra ID synchronizes on-premises Active Directory to Azure AD
 - **Network plane:** ExpressRoute or site-to-site VPN provides secure, low-latency connectivity

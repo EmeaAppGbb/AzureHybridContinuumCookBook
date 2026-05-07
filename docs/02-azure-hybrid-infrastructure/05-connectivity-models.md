@@ -89,7 +89,7 @@ In fully connected mode, the complete Azure hybrid service portfolio is availabl
 
 Updates and patches flow automatically from Azure:
 
-- Azure Local (Stack HCI) receives monthly quality updates and feature updates via Arc
+- Azure Local receives monthly quality updates and feature updates via Arc
 - Azure Arc-enabled servers pull configuration updates and extensions automatically
 - Azure Kubernetes Service (AKS) hybrid receives cluster updates orchestrated from Azure
 

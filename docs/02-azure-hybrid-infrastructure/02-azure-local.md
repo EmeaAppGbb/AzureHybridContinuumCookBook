@@ -8,7 +8,7 @@ As part of Microsoft's [adaptive cloud](https://azure.microsoft.com/solutions/ad
 
 ## What is Azure Local?
 
-**Azure Local** (formerly known as Azure Stack HCI) is a hyperconverged infrastructure (HCI) platform that combines compute, storage, and networking into validated hardware clusters running a specialized operating system optimized for hybrid cloud scenarios. Unlike traditional on-premises infrastructure, Azure Local is designed from the ground up to integrate with Azure, providing a cloud-native management experience for on-premises workloads.
+**Azure Local** is a hyperconverged infrastructure (HCI) platform that combines compute, storage, and networking into validated hardware clusters running a specialized operating system optimized for hybrid cloud scenarios. Unlike traditional on-premises infrastructure, Azure Local is designed from the ground up to integrate with Azure, providing a cloud-native management experience for on-premises workloads.
 
 Azure Local enables organizations to:
 
@@ -19,8 +19,7 @@ Azure Local enables organizations to:
 
 Azure Local is priced per physical core on on-premises machines, plus consumption-based charges for additional Azure services, all rolling up to existing Azure subscriptions. This pricing model aligns on-premises infrastructure costs with cloud-native consumption models.
 
-!!! note "Naming Evolution"
-    Microsoft rebranded Azure Stack HCI to Azure Local in late 2024 to better reflect its role as an extension of Azure into local environments. Existing Azure Stack HCI deployments continue to function and receive support under the Azure Local brand.
+
 
 ## Key Business Use Cases and Benefits
 
@@ -197,7 +196,7 @@ Azure Local hosts multiple Azure service offerings, providing on-premises deploy
 - Azure Data Studio and familiar Azure SQL tools
 - Disconnected or connected operational modes
 
-**Azure Stack HCI Storage**: Leverage Azure Local as a storage target for Azure Backup, Azure Site Recovery, and Azure File Sync, providing on-premises endpoints for Azure storage services.
+**Azure Local Storage**: Leverage Azure Local as a storage target for Azure Backup, Azure Site Recovery, and Azure File Sync, providing on-premises endpoints for Azure storage services.
 
 ## Deployment Models and Connectivity Scenarios
 

@@ -370,7 +370,7 @@ Each stage of the continuum is enabled by specific Azure technologies and servic
 | **Azure Cosmos DB** | ✓ | ✓ (limited) | ✗ | ✗ |
 | **Azure Key Vault** | ✓ | ✓ | ✓ (with connectivity) | ✗ (local key management) |
 | **Microsoft Defender for Cloud** | ✓ | ✓ | ✓ (hybrid) | ✗ |
-| **Azure Local (Stack HCI)** | ✗ | ✓ | ✓ | ✓ (disconnected mode) |
+| **Azure Local** | ✗ | ✓ | ✓ | ✓ (disconnected mode) |
 | **Sovereign Landing Zones** | ✗ | ✓ | ✗ | ✗ |
 
 For a comprehensive service mapping, see **Appendix B: Azure Service Availability Across the Continuum**.

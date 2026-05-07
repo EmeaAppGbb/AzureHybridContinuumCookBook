@@ -46,7 +46,7 @@ Operational sovereignty is particularly critical for government, defense, and cr
 - **Transparency**: Understanding the software stack, including firmware, hypervisors, and control plane components.
 - **Supply chain security**: Ensuring the integrity of software components and dependencies.
 
-Azure Local (formerly Azure Stack HCI) exemplifies software sovereignty by enabling organizations to run Azure services on-premises with consistent APIs, while retaining full control over the hardware and network infrastructure.
+Azure Local exemplifies software sovereignty by enabling organizations to run Azure services on-premises with consistent APIs, while retaining full control over the hardware and network infrastructure.
 
 ## Why Sovereignty Matters
 

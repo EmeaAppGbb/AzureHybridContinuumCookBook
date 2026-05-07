@@ -416,7 +416,7 @@ For sovereign workloads with public-facing services (e.g., web applications, API
 
 ## Network Topology for Azure Local Integration
 
-Extending the SLZ to **Azure Local** (formerly Azure Stack HCI) requires adapting the hub-and-spoke topology to include on-premises infrastructure as additional "spokes."
+Extending the SLZ to **Azure Local** requires adapting the hub-and-spoke topology to include on-premises infrastructure as additional "spokes."
 
 ### Azure Local Network Requirements
 

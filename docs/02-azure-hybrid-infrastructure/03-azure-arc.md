@@ -494,4 +494,4 @@ graph TB
 
 ---
 
-> **Next:** [Azure Stack HCI →](04-azure-stack-hci.md)
+> **Next:** [Connectivity Models →](05-connectivity-models.md)

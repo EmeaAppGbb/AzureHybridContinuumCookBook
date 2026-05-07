@@ -37,7 +37,7 @@ This CookBook covers the full **Azure Hybrid Continuum** — from cloud-native w
 | Part | Section | What You'll Learn |
 |------|---------|-------------------|
 | **1 — Foundation** | [Introduction](docs/01-introduction/) | The Hybrid Continuum concept, how to use this guide |
-| | [Azure Hybrid Infrastructure](docs/02-azure-hybrid-infrastructure/) | Azure Local, Azure Arc, Stack HCI, connectivity models |
+| | [Azure Hybrid Infrastructure](docs/02-azure-hybrid-infrastructure/) | Azure Local, Azure Arc, connectivity models |
 | | [Sovereignty & Compliance](docs/03-sovereignty-and-compliance/) | Sovereign cloud, data residency, compliance frameworks |
 | **2 — Architecture** | [Architecture Patterns](docs/04-architecture-patterns/) | Cloud-native, hybrid connected, disconnected, cloud exit |
 | | [Sovereign Landing Zone Guide](docs/05-sovereign-landing-zone-guide/) | Identity, network, security, governance, automation |

@@ -255,7 +255,7 @@ Encryption is only as secure as the keys protecting it. Azure offers a **key man
 
 ## Azure Local: Full On-Premises Data Sovereignty
 
-**Azure Local** (formerly Azure Stack HCI) represents the ultimate data sovereignty solution for organizations that cannot or will not store data in any cloud—even sovereign clouds.
+**Azure Local** represents the ultimate data sovereignty solution for organizations that cannot or will not store data in any cloud—even sovereign clouds.
 
 ### Complete Data Localization
 

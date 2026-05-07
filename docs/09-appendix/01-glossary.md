@@ -38,7 +38,7 @@ Azure Kubernetes Service (AKS)
 : A managed Kubernetes service that simplifies deploying, managing, and scaling containerized applications. Azure manages the Kubernetes control plane at no cost, while you maintain control over worker nodes. AKS reduces operational overhead through automated health monitoring, maintenance, and integration with Azure services.
 : [Azure Kubernetes Service documentation](https://learn.microsoft.com/en-us/azure/aks/intro-kubernetes)
 
-Azure Local (formerly Azure Stack HCI)
+Azure Local
 : A hyperconverged infrastructure platform that runs on validated hardware in your datacenter, providing virtualized compute, storage, and networking with Azure hybrid services integration. Azure Local enables you to run workloads on-premises while benefiting from Azure management, security, and innovation through Arc integration.
 : [Azure Local documentation](https://learn.microsoft.com/en-us/azure/azure-local/)
 

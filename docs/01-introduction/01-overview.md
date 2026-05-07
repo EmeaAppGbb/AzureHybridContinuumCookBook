@@ -59,7 +59,7 @@ Azure Arc is foundational to the hybrid continuum, providing the management laye
 
 ### Azure Local: Hyperconverged Infrastructure as an Azure Service
 
-[Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/) (formerly Azure Stack HCI) is a hyperconverged infrastructure solution that brings Azure services to on-premises and edge locations. It delivers:
+[Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/) is a hyperconverged infrastructure solution that brings Azure services to on-premises and edge locations. It delivers:
 
 - **Azure-managed infrastructure:** Hardware and software are managed through Azure, with updates, monitoring, and support delivered as a service.
 - **Local Azure services:** Run Azure Virtual Machines, Azure Kubernetes Service (AKS), and Azure Virtual Desktop on-premises while maintaining Azure-consistent APIs and management experiences.

@@ -22,7 +22,7 @@ This section establishes the conceptual framework for understanding the Azure Hy
 
 These sections provide detailed technical deep dives into the technologies, compliance frameworks, and architectural patterns that underpin the continuum:
 
-- **Azure Hybrid Infrastructure:** Explores Azure regions and availability zones, Azure Local, Azure Arc, Azure Stack HCI, and connectivity models. Technical foundation for hybrid deployments.
+- **Azure Hybrid Infrastructure:** Explores Azure regions and availability zones, Azure Local, Azure Arc, and connectivity models. Technical foundation for hybrid deployments.
 - **Sovereignty & Compliance:** Covers sovereign cloud concepts, Sovereign Landing Zone architecture, data residency and sovereignty requirements, and compliance frameworks (GDPR, FedRAMP, NIS2, etc.).
 - **Architecture Patterns:** Presents reusable patterns for cloud-native, hybrid connected, hybrid disconnected, and cloud exit scenarios, plus a workload placement framework for deciding where workloads should run.
 
@@ -312,7 +312,7 @@ While this guide is self-contained, the following Microsoft documentation provid
 - **[Azure Well-Architected Framework (WAF)](https://learn.microsoft.com/en-us/azure/well-architected/):** Foundational design principles for building reliable, secure, efficient, and cost-optimized architectures. This guide extends WAF principles to hybrid scenarios.
 - **[Cloud Adoption Framework (CAF)](https://learn.microsoft.com/en-us/azure/cloud-adoption-framework/):** Comprehensive guidance for cloud adoption strategy, planning, and governance. The Sovereign Landing Zone guide extends CAF landing zone concepts with sovereignty controls.
 - **[Azure Arc overview](https://learn.microsoft.com/en-us/azure/azure-arc/overview):** Introductory documentation for Azure Arc's capabilities and architecture.
-- **[Azure Local documentation](https://learn.microsoft.com/en-us/azure/azure-local/):** Product documentation for Azure Local (formerly Azure Stack HCI).
+- **[Azure Local documentation](https://learn.microsoft.com/en-us/azure/azure-local/):** Product documentation for Azure Local.
 
 ### Knowledge Not Assumed
 
@@ -400,7 +400,7 @@ The following table provides a complete overview of the guide's structure with c
 | Part | Title | Chapters | Est. Time | Description |
 |------|-------|----------|-----------|-------------|
 | **1** | **[Introduction](../01-introduction/README.md)** | 3 | 45 min | Foundational concepts, continuum framework, and guide navigation |
-| **2** | **[Azure Hybrid Infrastructure](../02-azure-hybrid-infrastructure/README.md)** | 5 | 90 min | Azure regions, Azure Local, Azure Arc, Azure Stack HCI, connectivity models |
+| **2** | **[Azure Hybrid Infrastructure](../02-azure-hybrid-infrastructure/README.md)** | 4 | 90 min | Azure regions, Azure Local, Azure Arc, connectivity models |
 | **3** | **[Sovereignty & Compliance](../03-sovereignty-and-compliance/README.md)** | 5 | 90 min | Sovereign clouds, SLZ deep dive, controls, data residency, compliance frameworks |
 | **4** | **[Architecture Patterns](../04-architecture-patterns/README.md)** | 5 | 75 min | Cloud-native, hybrid connected, hybrid disconnected, cloud exit, workload placement |
 | **5** | **[Sovereign Landing Zone Guide](../05-sovereign-landing-zone-guide/README.md)** | 6 | 120 min | SLZ design areas, identity, networking, security, automation, implementation |

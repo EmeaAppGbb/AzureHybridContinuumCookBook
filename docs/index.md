@@ -32,7 +32,7 @@ This CookBook is a comprehensive guide to designing, building, and operating hyb
 | # | Section | Description |
 |---|---------|-------------|
 | 1 | [**Introduction**](01-introduction/README.md) | The Azure Hybrid Continuum concept, guide overview |
-| 2 | [**Azure Hybrid Infrastructure**](02-azure-hybrid-infrastructure/README.md) | Deep dive into Azure Local, Azure Arc, Azure Stack HCI, connectivity models |
+| 2 | [**Azure Hybrid Infrastructure**](02-azure-hybrid-infrastructure/README.md) | Deep dive into Azure Local, Azure Arc, connectivity models |
 | 3 | [**Sovereignty & Compliance**](03-sovereignty-and-compliance/README.md) | Sovereign cloud, data residency, compliance frameworks |
 
 ### Part 2: Architecture & Design

@@ -793,7 +793,7 @@ Verify that the Log Analytics workspace is deployed and that diagnostic settings
 
 ## Extending the SLZ to Azure Local
 
-To extend the SLZ to Azure Local (on-premises Azure Stack HCI), additional configuration is required for hybrid connectivity, Arc registration, and policy enforcement.
+To extend the SLZ to Azure Local, additional configuration is required for hybrid connectivity, Arc registration, and policy enforcement.
 
 ### Step 1: Deploy ExpressRoute or VPN Connectivity
 

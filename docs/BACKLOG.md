@@ -36,8 +36,8 @@ Deep-dive content into the building blocks of the hybrid continuum.
 | P1-04 | Create Azure Local architecture stack diagram | Seldon (Architect) | P1-03 | ✅ Complete |
 | P1-05 | Write Azure Arc deep dive | Hardin (Writer) | P0-02 | ✅ Complete |
 | P1-06 | Create Azure Arc architecture diagram | Seldon (Architect) | P1-05 | ✅ Complete |
-| P1-07 | Write Azure Stack HCI chapter | Hardin (Writer) | P1-03 | ✅ Complete |
-| P1-08 | Create Azure Stack family comparison diagram | Seldon (Architect) | P1-07 | ✅ Complete |
+| P1-07 | Write Azure Local chapter | Hardin (Writer) | P1-03 | ✅ Complete |
+| P1-08 | Create Azure Local family comparison diagram | Seldon (Architect) | P1-07 | ✅ Complete |
 | P1-09 | Write Connectivity Models chapter | Hardin (Writer) | P1-03, P1-05 | ✅ Complete |
 | P1-10 | Create connectivity models comparison diagram | Seldon (Architect) | P1-09 | ✅ Complete |
 | P1-11 | Review Part 2 for structural coherence | Venabili (Reviewer) | P1-01 through P1-10 | ✅ Complete |

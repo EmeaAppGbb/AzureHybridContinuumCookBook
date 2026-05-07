@@ -136,7 +136,7 @@ Sovereign regions support most Azure services but may lag behind public Azure in
 
 ## How Regions Relate to Azure Local and the Hybrid Continuum
 
-Azure regions provide the public cloud foundation, but the hybrid continuum extends this infrastructure model into customer-controlled environments through **Azure Local** (formerly Azure Stack HCI) and **Azure Arc**.
+Azure regions provide the public cloud foundation, but the hybrid continuum extends this infrastructure model into customer-controlled environments through **Azure Local** and **Azure Arc**.
 
 ### Extending the Region Concept
 

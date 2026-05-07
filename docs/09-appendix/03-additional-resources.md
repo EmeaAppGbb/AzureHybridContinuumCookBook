@@ -9,7 +9,7 @@ This appendix provides a curated collection of links, training resources, tools,
 ### Azure Hybrid Infrastructure
 
 - **[Azure Architecture Center](https://learn.microsoft.com/en-us/azure/architecture/)** — Reference architectures, design patterns, and best practices
-- **[Azure Local Documentation](https://learn.microsoft.com/en-us/azure/azure-local/)** — Complete guide to Azure Local (formerly Azure Stack HCI)
+- **[Azure Local Documentation](https://learn.microsoft.com/en-us/azure/azure-local/)** — Complete guide to Azure Local
 - **[Azure Arc Documentation](https://learn.microsoft.com/en-us/azure/azure-arc/)** — Hybrid management plane documentation
 - **[Azure Stack Hub Documentation](https://learn.microsoft.com/en-us/azure/azure-stack/)** — Documentation for disconnected cloud services
 - **[Azure ExpressRoute Documentation](https://learn.microsoft.com/en-us/azure/expressroute/)** — Private connectivity to Azure
