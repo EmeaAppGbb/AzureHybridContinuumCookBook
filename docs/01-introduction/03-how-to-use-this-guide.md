@@ -12,7 +12,7 @@ The guide is structured in four major sections:
 
 **Chapters:** Overview, The Hybrid Continuum, How to Use This Guide
 
-This section establishes the conceptual framework for understanding the Azure Hybrid Continuum. It defines the four stages of the continuum (Public Cloud, Connected Hybrid, Sovereign Cloud, Disconnected), explains the business and regulatory drivers for hybrid architectures, and introduces Microsoft's hybrid cloud strategy centered on Azure Arc, Azure Local, and Sovereign Landing Zones.
+This section establishes the conceptual framework for understanding the Azure Hybrid Continuum. It defines the four stages of the continuum (Public Cloud, Sovereign Cloud, Connected Hybrid, Disconnected), explains the business and regulatory drivers for hybrid architectures, and introduces Microsoft's hybrid cloud strategy centered on Azure Arc, Azure Local, and Sovereign Landing Zones.
 
 **Purpose:** Provides shared vocabulary and mental models for the rest of the guide. Essential for all readers.
 

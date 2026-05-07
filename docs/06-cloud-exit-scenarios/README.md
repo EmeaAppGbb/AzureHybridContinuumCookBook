@@ -20,7 +20,7 @@ This section provides comprehensive guidance on cloud exit—the journey of movi
 | [Data Migration Strategies](04-data-migration.md) | Moving data across the continuum |
 | [Operational Continuity](05-operational-continuity.md) | Maintaining operations during transition |
 
-<!-- DIAGRAM: Cloud exit journey timeline showing the three-stage progression: Stage 1 (Public Cloud) → Assessment & Planning → Stage 2 (Connected Azure Local) → Hardening & Testing → Stage 3 (Disconnected Azure Local), with key milestones at each transition point -->
+<!-- DIAGRAM: Cloud exit journey timeline showing the three-stage progression: Stage 1 (Public Cloud) → Assessment & Planning → Stage 3 (Connected Azure Local) → Hardening & Testing → Stage 4 (Disconnected Azure Local), with key milestones at each transition point -->
 
 ## References
 

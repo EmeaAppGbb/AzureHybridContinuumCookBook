@@ -12,7 +12,7 @@ This section introduces the Azure Hybrid Continuum — the full spectrum of depl
 
 ## Key Concepts
 
-- **Azure Hybrid Continuum**: The spectrum of deployment models spanning public cloud, hybrid connected, and fully disconnected environments
+- **Azure Hybrid Continuum**: The spectrum of deployment models spanning public cloud, sovereign, hybrid connected, and fully disconnected environments
 - **Sovereignty**: The ability to control where data resides and how it is processed
 - **Azure Local**: Microsoft's on-premises Azure infrastructure platform
 - **Azure Arc**: The management plane that extends Azure to any infrastructure

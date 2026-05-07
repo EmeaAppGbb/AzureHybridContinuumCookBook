@@ -32,18 +32,18 @@ graph LR
         S1_Svc["<b>Available Services:</b><br/>• AKS, App Service, Functions<br/>• SQL DB, Cosmos DB<br/>• Azure ML, Cognitive Services<br/>• Logic Apps, Event Grid<br/>• Full PaaS Catalog"]
     end
     
-    subgraph Stage2["<b>Stage 2: Connected Hybrid</b><br/>(Azure Local + Arc)"]
+    subgraph Stage2["<b>Stage 2: Sovereign Cloud</b><br/>(Enhanced Controls)"]
         direction TB
-        S2_Conn["🔗 Outbound Azure Connectivity<br/>Management & Telemetry"]
-        S2_Mgmt["☁️ Azure Control Plane<br/>Hybrid ARM via Arc"]
-        S2_Svc["<b>Available Services:</b><br/>• Azure Local VMs<br/>• AKS on Azure Local<br/>• Arc-enabled SQL MI<br/>• Arc-enabled Kubernetes<br/>• Azure Monitor (hybrid)<br/>• Azure Policy (hybrid)"]
+        S2_Conn["🔒 Restricted Connectivity<br/>In-Jurisdiction Only"]
+        S2_Mgmt["🛡️ Sovereign Control Plane<br/>Policy-Enforced ARM"]
+        S2_Svc["<b>Available Services:</b><br/>• Azure VMs, AKS<br/>• Azure SQL DB (limited)<br/>• Sovereign Landing Zones<br/>• Confidential Computing<br/>• Customer Lockbox<br/>• In-Region Key Vault"]
     end
     
-    subgraph Stage3["<b>Stage 3: Sovereign Cloud</b><br/>(Enhanced Controls)"]
+    subgraph Stage3["<b>Stage 3: Connected Hybrid</b><br/>(Azure Local + Arc)"]
         direction TB
-        S3_Conn["🔒 Restricted Connectivity<br/>In-Jurisdiction Only"]
-        S3_Mgmt["🛡️ Sovereign Control Plane<br/>Policy-Enforced ARM"]
-        S3_Svc["<b>Available Services:</b><br/>• Azure VMs, AKS<br/>• Azure SQL DB (limited)<br/>• Sovereign Landing Zones<br/>• Confidential Computing<br/>• Customer Lockbox<br/>• In-Region Key Vault"]
+        S3_Conn["🔗 Outbound Azure Connectivity<br/>Management & Telemetry"]
+        S3_Mgmt["☁️ Azure Control Plane<br/>Hybrid ARM via Arc"]
+        S3_Svc["<b>Available Services:</b><br/>• Azure Local VMs<br/>• AKS on Azure Local<br/>• Arc-enabled SQL MI<br/>• Arc-enabled Kubernetes<br/>• Azure Monitor (hybrid)<br/>• Azure Policy (hybrid)"]
     end
     
     subgraph Stage4["<b>Stage 4: Disconnected</b><br/>(Air-Gapped)"]
@@ -62,8 +62,8 @@ graph LR
     Stage2 -.->|"⬅️ Cloud Adoption<br/>Full Migration"| Stage1
     
     classDef stage1Style fill:#0078d4,stroke:#003d6b,stroke-width:2px,color:#fff
-    classDef stage2Style fill:#50e6ff,stroke:#0078d4,stroke-width:2px,color:#000
-    classDef stage3Style fill:#ffb900,stroke:#b8860b,stroke-width:2px,color:#000
+    classDef stage2Style fill:#ffb900,stroke:#b8860b,stroke-width:2px,color:#000
+    classDef stage3Style fill:#50e6ff,stroke:#0078d4,stroke-width:2px,color:#000
     classDef stage4Style fill:#e74856,stroke:#a31e22,stroke-width:2px,color:#fff
     
     class Stage1 stage1Style
@@ -89,13 +89,13 @@ graph TD
     
     RegQ -->|"National Sovereignty<br/>Laws Apply"| SovQ{"Enhanced Governance<br/>Controls Sufficient?"}
     
-    SovQ -->|"Yes"| Sovereign["<b>Stage 3: Sovereign Cloud</b><br/>Sovereign Landing Zone<br/>In-jurisdiction resources"]
+    SovQ -->|"Yes"| Sovereign["<b>Stage 2: Sovereign Cloud</b><br/>Sovereign Landing Zone<br/>In-jurisdiction resources"]
     
     SovQ -->|"No - Physical<br/>Isolation Required"| Disconnected
     
     RegQ -->|"Data Residency<br/>On-Premises"| LatencyQ{"Local Processing<br/>Required?"}
     
-    LatencyQ -->|"Yes"| Connected["<b>Stage 2: Connected Hybrid</b><br/>Azure Local + Arc<br/>Cloud management"]
+    LatencyQ -->|"Yes"| Connected["<b>Stage 3: Connected Hybrid</b><br/>Azure Local + Arc<br/>Cloud management"]
     
     LatencyQ -->|"No"| Sovereign
     
@@ -115,14 +115,14 @@ graph TD
     
     classDef decisionStyle fill:#fff,stroke:#0078d4,stroke-width:2px,color:#000
     classDef stage1Style fill:#0078d4,stroke:#003d6b,stroke-width:3px,color:#fff
-    classDef stage2Style fill:#50e6ff,stroke:#0078d4,stroke-width:3px,color:#000
-    classDef stage3Style fill:#ffb900,stroke:#b8860b,stroke-width:3px,color:#000
+    classDef stage2Style fill:#ffb900,stroke:#b8860b,stroke-width:3px,color:#000
+    classDef stage3Style fill:#50e6ff,stroke:#0078d4,stroke-width:3px,color:#000
     classDef stage4Style fill:#e74856,stroke:#a31e22,stroke-width:3px,color:#fff
     
     class Start,RegQ,SovQ,LatencyQ,CostQ decisionStyle
     class PublicCloud stage1Style
-    class Connected stage2Style
-    class Sovereign stage3Style
+    class Sovereign stage2Style
+    class Connected stage3Style
     class Disconnected stage4Style
 ```
 
@@ -164,7 +164,56 @@ The Public Cloud stage is appropriate when:
 - **Data egress costs:** Moving large volumes of data out of Azure incurs egress charges, which can be significant for data-intensive workloads.
 - **Limited local processing:** All processing occurs in Azure datacenters, which may introduce latency for applications requiring real-time local data processing.
 
-### Stage 2: Connected Hybrid (Azure Local + Arc)
+### Stage 2: Sovereign Cloud
+
+**Characteristics:**
+
+The **Sovereign Cloud** stage addresses scenarios requiring enhanced data residency, regulatory compliance, and digital sovereignty while still operating as cloud services. This stage is implemented through [Sovereign Landing Zones](https://learn.microsoft.com/en-gb/azure/azure-sovereign-clouds/public/overview-sovereign-landing-zone) on Azure public cloud or through dedicated sovereign cloud instances (Azure Government, Azure China, Azure Germany).
+
+Sovereign Landing Zones extend the standard Azure landing zone architecture with additional governance controls, policy enforcement, and design patterns that ensure compliance with stringent regulatory and sovereignty requirements. These controls enforce data residency, restrict data flows, limit administrative access to specific jurisdictions, and provide audit capabilities for regulatory reporting.
+
+**Available Services:**
+
+Sovereign clouds and Sovereign Landing Zones provide access to core Azure services with additional compliance controls:
+
+- **Compute and storage:** Azure Virtual Machines, Azure Kubernetes Service, Azure Storage, Azure Disk
+- **Networking:** Azure Virtual Network, Azure VPN Gateway, Azure ExpressRoute with in-country termination
+- **Data services:** Azure SQL Database, Azure Database for PostgreSQL/MySQL (with data residency guarantees)
+- **Identity:** Azure Active Directory (with sovereignty controls), Azure AD Domain Services
+- **Governance:** Azure Policy (with sovereign-specific policies), Azure Blueprints, Azure Resource Manager
+- **Security:** Microsoft Defender for Cloud, Azure Key Vault (with HSM-backed keys in sovereign regions)
+
+The specific service catalog varies by sovereign cloud instance and Sovereign Landing Zone configuration. Some advanced PaaS services may be unavailable or have limited functionality compared to Azure public cloud.
+
+**Management and Operations:**
+
+Resources are managed through Azure Resource Manager, but with additional policy constraints enforcing sovereignty requirements. These constraints may include:
+
+- **Data residency policies:** Ensure all data remains within specified geographic regions or jurisdictions
+- **Network isolation policies:** Prevent data flows to non-compliant regions or external networks
+- **Identity restrictions:** Limit administrative access to personnel with specific clearances or citizenship
+- **Encryption requirements:** Mandate encryption at rest and in transit with keys managed in-jurisdiction
+- **Audit and compliance reporting:** Enhanced logging and audit trails for regulatory compliance
+
+Organizations implementing Sovereign Landing Zones typically deploy dedicated management groups with sovereign-specific policies, separate from their standard Azure environments.
+
+**When to Use:**
+
+Sovereign Cloud is appropriate when:
+
+- **Data sovereignty is legally mandated:** National laws require data to remain within specific jurisdictions with local operator control.
+- **Regulatory compliance requires enhanced controls:** Financial services, healthcare, or government regulations mandate specific governance, audit, or access controls beyond standard Azure capabilities.
+- **Operational sovereignty is required:** Organizations need guarantees about data residency, operator nationality, and legal jurisdiction for compliance or strategic reasons.
+- **Government or critical infrastructure workloads:** Government agencies and critical infrastructure operators face requirements that standard commercial cloud services cannot satisfy.
+
+**Considerations:**
+
+- **Reduced service availability:** Sovereign clouds and Sovereign Landing Zones may not support the full Azure service catalog, limiting PaaS and advanced AI capabilities.
+- **Increased operational complexity:** Additional policy enforcement, network segmentation, and compliance controls increase management overhead.
+- **Potential cost premium:** Sovereign cloud services may have different pricing structures than standard Azure.
+- **Limited cross-region capabilities:** Data residency requirements may restrict use of cross-region replication, global load balancing, and multi-region architectures.
+
+### Stage 3: Connected Hybrid (Azure Local + Arc)
 
 **Characteristics:**
 
@@ -218,55 +267,6 @@ Connected Hybrid is appropriate when:
 - **Limited service subset:** Not all Azure services are available on-premises. PaaS services like Azure Functions, Azure Cosmos DB, and most AI services require public cloud.
 - **On-premises infrastructure management:** While Azure manages software updates, organizations are responsible for physical hardware, power, cooling, and network infrastructure.
 - **Licensing costs:** Azure Local requires Azure subscription charges in addition to hardware costs.
-
-### Stage 3: Sovereign Cloud
-
-**Characteristics:**
-
-The **Sovereign Cloud** stage addresses scenarios requiring enhanced data residency, regulatory compliance, and digital sovereignty while still operating as cloud services. This stage is implemented through [Sovereign Landing Zones](https://learn.microsoft.com/en-gb/azure/azure-sovereign-clouds/public/overview-sovereign-landing-zone) on Azure public cloud or through dedicated sovereign cloud instances (Azure Government, Azure China, Azure Germany).
-
-Sovereign Landing Zones extend the standard Azure landing zone architecture with additional governance controls, policy enforcement, and design patterns that ensure compliance with stringent regulatory and sovereignty requirements. These controls enforce data residency, restrict data flows, limit administrative access to specific jurisdictions, and provide audit capabilities for regulatory reporting.
-
-**Available Services:**
-
-Sovereign clouds and Sovereign Landing Zones provide access to core Azure services with additional compliance controls:
-
-- **Compute and storage:** Azure Virtual Machines, Azure Kubernetes Service, Azure Storage, Azure Disk
-- **Networking:** Azure Virtual Network, Azure VPN Gateway, Azure ExpressRoute with in-country termination
-- **Data services:** Azure SQL Database, Azure Database for PostgreSQL/MySQL (with data residency guarantees)
-- **Identity:** Azure Active Directory (with sovereignty controls), Azure AD Domain Services
-- **Governance:** Azure Policy (with sovereign-specific policies), Azure Blueprints, Azure Resource Manager
-- **Security:** Microsoft Defender for Cloud, Azure Key Vault (with HSM-backed keys in sovereign regions)
-
-The specific service catalog varies by sovereign cloud instance and Sovereign Landing Zone configuration. Some advanced PaaS services may be unavailable or have limited functionality compared to Azure public cloud.
-
-**Management and Operations:**
-
-Resources are managed through Azure Resource Manager, but with additional policy constraints enforcing sovereignty requirements. These constraints may include:
-
-- **Data residency policies:** Ensure all data remains within specified geographic regions or jurisdictions
-- **Network isolation policies:** Prevent data flows to non-compliant regions or external networks
-- **Identity restrictions:** Limit administrative access to personnel with specific clearances or citizenship
-- **Encryption requirements:** Mandate encryption at rest and in transit with keys managed in-jurisdiction
-- **Audit and compliance reporting:** Enhanced logging and audit trails for regulatory compliance
-
-Organizations implementing Sovereign Landing Zones typically deploy dedicated management groups with sovereign-specific policies, separate from their standard Azure environments.
-
-**When to Use:**
-
-Sovereign Cloud is appropriate when:
-
-- **Data sovereignty is legally mandated:** National laws require data to remain within specific jurisdictions with local operator control.
-- **Regulatory compliance requires enhanced controls:** Financial services, healthcare, or government regulations mandate specific governance, audit, or access controls beyond standard Azure capabilities.
-- **Operational sovereignty is required:** Organizations need guarantees about data residency, operator nationality, and legal jurisdiction for compliance or strategic reasons.
-- **Government or critical infrastructure workloads:** Government agencies and critical infrastructure operators face requirements that standard commercial cloud services cannot satisfy.
-
-**Considerations:**
-
-- **Reduced service availability:** Sovereign clouds and Sovereign Landing Zones may not support the full Azure service catalog, limiting PaaS and advanced AI capabilities.
-- **Increased operational complexity:** Additional policy enforcement, network segmentation, and compliance controls increase management overhead.
-- **Potential cost premium:** Sovereign cloud services may have different pricing structures than standard Azure.
-- **Limited cross-region capabilities:** Data residency requirements may restrict use of cross-region replication, global load balancing, and multi-region architectures.
 
 ### Stage 4: Disconnected (Air-Gapped)
 
@@ -358,20 +358,20 @@ Many organizations operate workloads at multiple points on the continuum simulta
 
 Each stage of the continuum is enabled by specific Azure technologies and services. The following table maps core technologies to their applicable continuum stages:
 
-| Technology / Service | Public Cloud | Connected Hybrid | Sovereign Cloud | Disconnected |
-|----------------------|:------------:|:----------------:|:---------------:|:------------:|
-| **Azure Virtual Machines** | ✓ | ✓ (via Azure Local) | ✓ | ✓ (Azure Local disconnected) |
-| **Azure Kubernetes Service** | ✓ | ✓ (AKS on Azure Local) | ✓ | ✓ (AKS-HCI disconnected) |
-| **Azure SQL Database (PaaS)** | ✓ | ✗ | ✓ (limited) | ✗ |
+| Technology / Service | Public Cloud | Sovereign Cloud | Connected Hybrid | Disconnected |
+|----------------------|:------------:|:---------------:|:----------------:|:------------:|
+| **Azure Virtual Machines** | ✓ | ✓ | ✓ (via Azure Local) | ✓ (Azure Local disconnected) |
+| **Azure Kubernetes Service** | ✓ | ✓ | ✓ (AKS on Azure Local) | ✓ (AKS-HCI disconnected) |
+| **Azure SQL Database (PaaS)** | ✓ | ✓ (limited) | ✗ | ✗ |
 | **Azure Arc** | ✓ | ✓ | ✓ | ✗ |
-| **Azure Monitor** | ✓ | ✓ (hybrid) | ✓ | ✗ (local tools required) |
-| **Azure Policy** | ✓ | ✓ (hybrid) | ✓ | ✗ (local policy engines) |
-| **Azure Functions** | ✓ | ✗ | ✓ (limited) | ✗ |
-| **Azure Cosmos DB** | ✓ | ✗ | ✓ (limited) | ✗ |
-| **Azure Key Vault** | ✓ | ✓ (with connectivity) | ✓ | ✗ (local key management) |
-| **Microsoft Defender for Cloud** | ✓ | ✓ (hybrid) | ✓ | ✗ |
+| **Azure Monitor** | ✓ | ✓ | ✓ (hybrid) | ✗ (local tools required) |
+| **Azure Policy** | ✓ | ✓ | ✓ (hybrid) | ✗ (local policy engines) |
+| **Azure Functions** | ✓ | ✓ (limited) | ✗ | ✗ |
+| **Azure Cosmos DB** | ✓ | ✓ (limited) | ✗ | ✗ |
+| **Azure Key Vault** | ✓ | ✓ | ✓ (with connectivity) | ✗ (local key management) |
+| **Microsoft Defender for Cloud** | ✓ | ✓ | ✓ (hybrid) | ✗ |
 | **Azure Local (Stack HCI)** | ✗ | ✓ | ✓ | ✓ (disconnected mode) |
-| **Sovereign Landing Zones** | ✗ | ✗ | ✓ | ✗ |
+| **Sovereign Landing Zones** | ✗ | ✓ | ✗ | ✗ |
 
 For a comprehensive service mapping, see **Appendix B: Azure Service Availability Across the Continuum**.
 
@@ -423,7 +423,7 @@ Applications and infrastructure should be designed to operate at multiple points
 
 ### 2. Use Consistent Management Planes
 
-Leverage Azure Arc to extend Azure Resource Manager to all connected environments (public cloud, connected hybrid, sovereign cloud). This provides:
+Leverage Azure Arc to extend Azure Resource Manager to all connected environments (public cloud, sovereign cloud, connected hybrid). This provides:
 
 - **Single pane of glass:** Manage all resources through the Azure portal, regardless of where they run.
 - **Unified RBAC and governance:** Apply consistent access controls and policies across cloud and on-premises.

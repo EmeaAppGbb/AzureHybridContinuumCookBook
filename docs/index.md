@@ -39,7 +39,7 @@ This CookBook is a comprehensive guide to designing, building, and operating hyb
 
 | # | Section | Description |
 |---|---------|-------------|
-| 4 | [**Architecture Patterns**](04-architecture-patterns/README.md) | Cloud-native, hybrid connected, disconnected, cloud exit patterns |
+| 4 | [**Architecture Patterns**](04-architecture-patterns/README.md) | Cloud-native, sovereign, hybrid connected, disconnected, cloud exit patterns |
 | 5 | [**Sovereign Landing Zone Guide**](05-sovereign-landing-zone-guide/README.md) | Step-by-step SLZ implementation: identity, network, security, automation |
 
 ### Part 3: Practical Scenarios

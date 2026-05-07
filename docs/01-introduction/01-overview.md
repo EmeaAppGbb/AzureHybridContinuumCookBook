@@ -2,7 +2,7 @@
 
 ## Abstract
 
-The Azure Hybrid Continuum CookBook is a comprehensive, practitioner-focused guide to designing, building, and operating hybrid and sovereign cloud architectures using Microsoft Azure technologies. This guide addresses the full spectrum of deployment models — from cloud-native workloads running in Azure public cloud, through connected hybrid deployments managed by Azure Arc and Azure Local, to sovereign landing zones and fully disconnected, air-gapped environments for regulated and high-security scenarios.
+The Azure Hybrid Continuum CookBook is a comprehensive, practitioner-focused guide to designing, building, and operating hybrid and sovereign cloud architectures using Microsoft Azure technologies. This guide addresses the full spectrum of deployment models — from cloud-native workloads running in Azure public cloud, through sovereign landing zones with enhanced compliance controls, to connected hybrid deployments managed by Azure Arc and Azure Local, and fully disconnected, air-gapped environments for regulated and high-security scenarios.
 
 Unlike traditional cloud migration guides that assume a one-way journey to the cloud, this CookBook recognizes that modern enterprises operate across a **continuum** of deployment models. Organizations may need to move workloads between these models in either direction — from cloud to on-premises (cloud exit), from disconnected to connected, or from public cloud to sovereign environments — based on evolving business, regulatory, and operational requirements.
 
@@ -106,7 +106,7 @@ The guide assumes familiarity with cloud computing concepts, Azure fundamentals,
 
 This guide covers:
 
-- **Architectural patterns** for each stage of the Azure Hybrid Continuum, including public cloud, connected hybrid, sovereign, and disconnected deployments.
+- **Architectural patterns** for each stage of the Azure Hybrid Continuum, including public cloud, sovereign, connected hybrid, and disconnected deployments.
 - **Decision frameworks** to help organizations determine where workloads should be deployed and when to move between continuum stages.
 - **Azure technologies and services** that enable hybrid and sovereign architectures: Azure Arc, Azure Local, Azure Kubernetes Service, Azure Policy, Sovereign Landing Zones, and related services.
 - **Implementation guidance** including infrastructure provisioning, application deployment, management, monitoring, and governance.
@@ -135,7 +135,7 @@ This CookBook is organized to support multiple reading paths depending on your r
 !!! tip "Recommended Starting Point"
     New readers should start with Chapter 1 (Introduction) and Chapter 2 (The Hybrid Continuum) to build foundational understanding, then proceed to Chapter 3 (Navigation Guide) to identify the most relevant path for your role and objectives.
 
-<!-- DIAGRAM: High-level overview diagram showing the Azure Hybrid Continuum — from Public Cloud (left) through Connected Hybrid (center) to Disconnected/Sovereign (right), with Azure technologies mapped to each stage -->
+<!-- DIAGRAM: High-level overview diagram showing the Azure Hybrid Continuum — from Public Cloud (left) through Sovereign (center-left) and Connected Hybrid (center-right) to Disconnected (right), with Azure technologies mapped to each stage -->
 
 ## References
 

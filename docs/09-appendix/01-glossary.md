@@ -122,7 +122,7 @@ Hybrid Cloud
 : An IT architecture that combines on-premises infrastructure, private cloud services, and public cloud services with orchestration and management across environments. Hybrid cloud enables workload portability, consistent security and governance, and flexibility to place workloads based on performance, cost, compliance, and sovereignty requirements.
 
 Hybrid Continuum
-: The spectrum of deployment options ranging from fully public cloud (Azure), through connected hybrid (Azure Local with Arc), to fully disconnected on-premises infrastructure. The continuum reflects varying degrees of connectivity, cloud service availability, and operational models, enabling organizations to choose placement strategies matching their sovereignty, security, and operational needs.
+: The spectrum of deployment options ranging from fully public cloud (Azure), through sovereign cloud (Sovereign Landing Zones with enhanced compliance controls), to connected hybrid (Azure Local with Arc), and fully disconnected on-premises infrastructure. The continuum reflects varying degrees of connectivity, cloud service availability, and operational models, enabling organizations to choose placement strategies matching their sovereignty, security, and operational needs.
 
 Infrastructure as Code (IaC)
 : The practice of managing and provisioning infrastructure through machine-readable definition files rather than manual processes. IaC enables version control, automated deployment, consistency, repeatability, and disaster recovery. Azure supports IaC through ARM templates, Bicep, Terraform, and other declarative tools.

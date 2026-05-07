@@ -107,7 +107,7 @@ Spot-checked key technical claims across all 9 parts against official Microsoft 
 
 #### Part 1: Introduction (01-introduction/)
 ✅ **ACCURATE**
-- Four-stage continuum model clearly defined: Public Cloud → Connected Hybrid → Sovereign Cloud → Disconnected
+- Four-stage continuum model clearly defined: Public Cloud → Sovereign Cloud → Connected Hybrid → Disconnected
 - Terminology consistent throughout
 - Decision trees align with technical realities
 - Microsoft Learn references appropriate

@@ -26,7 +26,7 @@
 This CookBook covers the full **Azure Hybrid Continuum** — from cloud-native workloads in Azure public cloud, through hybrid deployments on Azure Local, to fully disconnected and air-gapped sovereign environments. It's a practical, opinionated guide grounded entirely in official Microsoft documentation.
 
 ```
-  ☁️ Public Cloud  ──▶  🔗 Connected (Azure Local)  ──▶  🛡️ Sovereign  ──▶  🏢 Disconnected
+  ☁️ Public Cloud  ──▶  🛡️ Sovereign  ──▶  🔗 Connected (Azure Local)  ──▶  🏢 Disconnected
   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Cloud-native PaaS      Azure Local + Arc          Sovereign Landing        Air-gapped
   Full Azure services     On-premises + cloud mgmt   Zone with compliance     No cloud dependency
