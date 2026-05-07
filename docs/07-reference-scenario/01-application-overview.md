@@ -225,10 +225,10 @@ graph TB
     Dashboard -.->|Auth| IdP
     API -.->|Validate Token| IdP
     
-    style Frontend fill:#50e6ff,stroke:#0078d4,stroke-width:2px
-    style Backend fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
-    style Data fill:#107c10,stroke:#004b1c,stroke-width:2px,color:#fff
-    style Security fill:#dc3545,stroke:#a71d2a,stroke-width:2px,color:#fff
+    style Frontend fill:#e0f7fa,stroke:#0078d4,stroke-width:2px
+    style Backend fill:#dceefb,stroke:#0078d4,stroke-width:2px
+    style Data fill:#dff0df,stroke:#107c10,stroke-width:2px
+    style Security fill:#fce4e6,stroke:#dc3545,stroke-width:2px
 ```
 
 ```mermaid

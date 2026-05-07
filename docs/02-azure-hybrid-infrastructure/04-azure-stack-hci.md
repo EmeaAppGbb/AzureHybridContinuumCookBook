@@ -128,9 +128,9 @@ graph TB
     AzureRM --> AzureServices
     
     style Hub fill:#8b4513,color:#fff
-    style Local fill:#00aa00,color:#fff
-    style Edge fill:#ffb900,color:#000
-    style Azure fill:#0078d4,color:#fff
+    style Local fill:#dff0df
+    style Edge fill:#fff3cd,color:#000
+    style Azure fill:#dceefb
     
     classDef positioning fill:#e8f4fd,color:#000
     class HubDesc,LocalDesc,EdgeDesc positioning

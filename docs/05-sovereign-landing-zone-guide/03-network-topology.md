@@ -135,12 +135,12 @@ graph TB
     %% Bastion Access
     Bastion -.->|Secure RDP/SSH| Spoke1Subnet1 & Spoke2Subnet1
     
-    style Hub fill:#0078d4,stroke:#002050,stroke-width:3px,color:#fff
-    style Spoke1 fill:#e74856,stroke:#a80000,stroke-width:3px,color:#fff
-    style Spoke2 fill:#ffb900,stroke:#d83b01,stroke-width:3px
-    style Spoke3 fill:#7fba00,stroke:#107c10,stroke-width:3px
-    style OnPrem fill:#50e6ff,stroke:#0078d4,stroke-width:3px
-    style PaaS fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
+    style Hub fill:#dceefb,stroke:#002050,stroke-width:3px
+    style Spoke1 fill:#fce4e6,stroke:#a80000,stroke-width:3px
+    style Spoke2 fill:#fff3cd,stroke:#d83b01,stroke-width:3px
+    style Spoke3 fill:#edf5d6,stroke:#107c10,stroke-width:3px
+    style OnPrem fill:#e0f7fa,stroke:#0078d4,stroke-width:3px
+    style PaaS fill:#ede7f6,stroke:#5e5e5e,stroke-width:2px
     style Cloud fill:#e8f4fd,stroke:#0078d4,stroke-width:2px
     style AzFW fill:#e74856,stroke:#a80000,stroke-width:2px,color:#fff
     style Gateway fill:#00bcf2,stroke:#0078d4,stroke-width:2px

@@ -129,14 +129,14 @@ graph TB
     style Center fill:#0078d4,stroke:#002050,stroke-width:4px,color:#fff
     style SLZ fill:#e8f4fd,stroke:#0078d4,stroke-width:2px
     
-    style DA1 fill:#b4a0ff,stroke:#5e5e5e,stroke-width:3px
-    style DA2 fill:#7fba00,stroke:#107c10,stroke-width:3px
-    style DA3 fill:#e74856,stroke:#a80000,stroke-width:3px
-    style DA4 fill:#00b7c3,stroke:#005b70,stroke-width:3px
-    style DA5 fill:#ffb900,stroke:#d83b01,stroke-width:3px
-    style DA6 fill:#00bcf2,stroke:#0078d4,stroke-width:3px
-    style DA7 fill:#50e6ff,stroke:#0078d4,stroke-width:3px
-    style DA8 fill:#fff100,stroke:#ffb900,stroke-width:3px
+    style DA1 fill:#ede7f6,stroke:#5e5e5e,stroke-width:3px
+    style DA2 fill:#edf5d6,stroke:#107c10,stroke-width:3px
+    style DA3 fill:#fce4e6,stroke:#a80000,stroke-width:3px
+    style DA4 fill:#dff5f5,stroke:#005b70,stroke-width:3px
+    style DA5 fill:#fff3cd,stroke:#d83b01,stroke-width:3px
+    style DA6 fill:#d4f1fb,stroke:#0078d4,stroke-width:3px
+    style DA7 fill:#e0f7fa,stroke:#0078d4,stroke-width:3px
+    style DA8 fill:#fffde7,stroke:#ffb900,stroke-width:3px
 ```
 
 ## SLZ-Specific Modifications by Design Area

@@ -120,9 +120,9 @@ graph TB
     Storage --> Cluster
     Network --> Cluster
     
-    style Azure fill:#0078d4,color:#fff
-    style Workloads fill:#50e6ff,color:#000
-    style AzureLocal fill:#00aa00,color:#fff
+    style Azure fill:#dceefb
+    style Workloads fill:#e0f7fa,color:#000
+    style AzureLocal fill:#dff0df
     style Hardware fill:#605e5c,color:#fff
 ```
 
@@ -453,9 +453,9 @@ graph TB
     StorageHW --> Config
     NetworkHW --> Config
     
-    style Layer4 fill:#0078d4,color:#fff
-    style Layer3 fill:#50e6ff,color:#000
-    style Layer2 fill:#00aa00,color:#fff
+    style Layer4 fill:#dceefb
+    style Layer3 fill:#e0f7fa,color:#000
+    style Layer2 fill:#dff0df
     style Layer1 fill:#605e5c,color:#fff
 ```
 

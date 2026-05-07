@@ -447,8 +447,8 @@ graph TB
     
     style Tier4 fill:#d97700,stroke:#8b4500,color:#fff,stroke-width:3px
     style Tier3 fill:#ff9933,stroke:#d97700,color:#000,stroke-width:2px
-    style Tier2 fill:#0078d4,stroke:#004578,color:#fff,stroke-width:2px
-    style Tier1 fill:#50e6ff,stroke:#0078d4,color:#000
+    style Tier2 fill:#dceefb,stroke:#004578,stroke-width:2px
+    style Tier1 fill:#e0f7fa,stroke:#0078d4,color:#000
     style T4Features fill:#ffe6cc,stroke:#d97700,color:#000
     style T3Features fill:#ffe6cc,stroke:#d97700,color:#000
     style T2Features fill:#e6f3ff,stroke:#0078d4,color:#000

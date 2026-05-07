@@ -123,14 +123,14 @@ graph TB
     ACR -.->|Mirror Images| Harbor
     GitHub -.->|Deploy| AKS
     
-    style OnPremises fill:#50e6ff,stroke:#0078d4,stroke-width:3px
-    style AzureLocal fill:#107c10,stroke:#004b1c,stroke-width:2px,color:#fff
-    style AKS fill:#326ce5,stroke:#1a4d8c,stroke-width:2px,color:#fff
-    style Data fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
-    style Azure fill:#0078d4,stroke:#005a9e,stroke-width:3px,color:#fff
-    style Identity fill:#dc3545,stroke:#a71d2a,stroke-width:2px,color:#fff
+    style OnPremises fill:#e0f7fa,stroke:#0078d4,stroke-width:3px
+    style AzureLocal fill:#dff0df,stroke:#004b1c,stroke-width:2px
+    style AKS fill:#dce3f9,stroke:#1a4d8c,stroke-width:2px
+    style Data fill:#dceefb,stroke:#005a9e,stroke-width:2px
+    style Azure fill:#dceefb,stroke:#005a9e,stroke-width:3px
+    style Identity fill:#fce4e6,stroke:#a71d2a,stroke-width:2px
     style Management fill:#ffc107,stroke:#f57c00,stroke-width:2px
-    style Network fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Network fill:#e0f7fa,stroke:#0078d4,stroke-width:2px
 ```
 
 ### Azure Local Infrastructure

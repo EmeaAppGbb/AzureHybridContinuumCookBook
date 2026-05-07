@@ -201,9 +201,9 @@ graph TB
     end
     
     style TCO fill:#e0f7ff,stroke:#0078d4,stroke-width:3px
-    style PublicCloud fill:#0078d4,stroke:#005a9e,stroke-width:3px,color:#fff
-    style ConnectedHybrid fill:#50e6ff,stroke:#0078d4,stroke-width:3px
-    style DisconnectedLocal fill:#107c10,stroke:#004b1c,stroke-width:3px,color:#fff
+    style PublicCloud fill:#dceefb,stroke:#005a9e,stroke-width:3px
+    style ConnectedHybrid fill:#e0f7fa,stroke:#0078d4,stroke-width:3px
+    style DisconnectedLocal fill:#dff0df,stroke:#004b1c,stroke-width:3px
     style Insights fill:#ffc107,stroke:#f57c00,stroke-width:2px
     style Trend fill:#9c27b0,stroke:#6a1b9a,stroke-width:2px,color:#fff
     

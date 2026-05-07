@@ -263,11 +263,11 @@ graph TD
     
     Region1 <-->|"Region Pair<br/>300+ miles"| Region2
     
-    style Global fill:#0078d4,color:#fff
-    style Geography1 fill:#50e6ff,color:#000
-    style Geography2 fill:#50e6ff,color:#000
-    style Sovereign fill:#ffb900,color:#000
-    style OnPrem fill:#00aa00,color:#fff
+    style Global fill:#dceefb
+    style Geography1 fill:#e0f7fa,color:#000
+    style Geography2 fill:#e0f7fa,color:#000
+    style Sovereign fill:#fff3cd,color:#000
+    style OnPrem fill:#dff0df
     style Region1 fill:#e8f4fd,color:#000
     style Region2 fill:#e8f4fd,color:#000
     style Region3 fill:#e8f4fd,color:#000
@@ -309,9 +309,9 @@ graph TD
     Zone2 <-.->|"< 2ms latency<br/>Synchronous Replication"| Zone3
     
     style Global fill:#ffb900,color:#000
-    style RegionalLayer fill:#0078d4,color:#fff
-    style ZonalLayer fill:#50e6ff,color:#000
-    style LocalLayer fill:#00aa00,color:#fff
+    style RegionalLayer fill:#dceefb
+    style ZonalLayer fill:#e0f7fa,color:#000
+    style LocalLayer fill:#dff0df
     style Region1 fill:#0078d4,color:#fff
     style Region2 fill:#0078d4,color:#fff
 ```

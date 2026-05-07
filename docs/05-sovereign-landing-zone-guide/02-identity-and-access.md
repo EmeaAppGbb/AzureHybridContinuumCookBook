@@ -109,9 +109,9 @@ graph TB
     Internet -.->|Intermittent| IntIdentity
     Internet -.->|No Connection| Disconnected
     
-    style Connected fill:#50e6ff,stroke:#0078d4,stroke-width:3px
-    style Intermittent fill:#00bcf2,stroke:#0078d4,stroke-width:3px
-    style Disconnected fill:#505050,stroke:#ffb900,stroke-width:3px,color:#fff
+    style Connected fill:#e0f7fa,stroke:#0078d4,stroke-width:3px
+    style Intermittent fill:#d4f1fb,stroke:#0078d4,stroke-width:3px
+    style Disconnected fill:#f0f0f0,stroke:#ffb900,stroke-width:3px
     
     style ConnIdentity fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
     style IntIdentity fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px

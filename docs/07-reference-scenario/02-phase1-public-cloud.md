@@ -124,13 +124,13 @@ graph TB
     
     Hub -.->|Peering| Spoke
     
-    style Edge fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
-    style Hub fill:#50e6ff,stroke:#0078d4,stroke-width:2px
-    style Spoke fill:#50e6ff,stroke:#0078d4,stroke-width:2px
-    style AKS fill:#326ce5,stroke:#1a4d8c,stroke-width:2px,color:#fff
-    style PaaS fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
-    style Identity fill:#dc3545,stroke:#a71d2a,stroke-width:2px,color:#fff
-    style Management fill:#107c10,stroke:#004b1c,stroke-width:2px,color:#fff
+    style Edge fill:#dceefb,stroke:#0078d4,stroke-width:2px
+    style Hub fill:#e0f7fa,stroke:#0078d4,stroke-width:2px
+    style Spoke fill:#e0f7fa,stroke:#0078d4,stroke-width:2px
+    style AKS fill:#dce3f9,stroke:#326ce5,stroke-width:2px
+    style PaaS fill:#dceefb,stroke:#0078d4,stroke-width:2px
+    style Identity fill:#fce4e6,stroke:#dc3545,stroke-width:2px
+    style Management fill:#dff0df,stroke:#107c10,stroke-width:2px
 ```
 
 ```mermaid
@@ -186,12 +186,12 @@ graph TB
     Cluster -.->|Private| PrivateEP
     Cluster -.->|Management| AzureServices
     
-    style SystemPool fill:#326ce5,stroke:#1a4d8c,stroke-width:2px,color:#fff
-    style FrontendPool fill:#50e6ff,stroke:#0078d4,stroke-width:2px
-    style BackendPool fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
-    style WorkerPool fill:#107c10,stroke:#004b1c,stroke-width:2px,color:#fff
-    style Network fill:#ffc107,stroke:#f57c00,stroke-width:2px
-    style External fill:#dc3545,stroke:#a71d2a,stroke-width:2px,color:#fff
+    style SystemPool fill:#dce3f9,stroke:#326ce5,stroke-width:2px
+    style FrontendPool fill:#e0f7fa,stroke:#0078d4,stroke-width:2px
+    style BackendPool fill:#dceefb,stroke:#0078d4,stroke-width:2px
+    style WorkerPool fill:#dff0df,stroke:#107c10,stroke-width:2px
+    style Network fill:#fff3cd,stroke:#f57c00,stroke-width:2px
+    style External fill:#fce4e6,stroke:#dc3545,stroke-width:2px
 ```
 
 ## Azure Kubernetes Service (AKS) Configuration

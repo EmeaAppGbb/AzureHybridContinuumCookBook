@@ -283,9 +283,9 @@ graph LR
     AzureAD -->|Low| AzADConn
     AzADConn -->|Very High| ADDS
     
-    style Azure fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
-    style Connected fill:#50e6ff,stroke:#0078d4,stroke-width:2px
-    style Disconnected fill:#107c10,stroke:#004b1c,stroke-width:2px,color:#fff
+    style Azure fill:#dceefb,stroke:#005a9e,stroke-width:2px
+    style Connected fill:#e0f7fa,stroke:#0078d4,stroke-width:2px
+    style Disconnected fill:#dff0df,stroke:#004b1c,stroke-width:2px
 ```
 
 | Azure PaaS Service | Connected Azure Local | Disconnected Azure Local |

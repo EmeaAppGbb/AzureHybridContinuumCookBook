@@ -387,14 +387,14 @@ graph TB
     SQLMI <-.->|Data Sync| SQLCloud
     VMs <-.->|Backup| Storage
     
-    style Cloud fill:#0078d4,stroke:#002050,stroke-width:3px,color:#fff
-    style OnPrem fill:#50e6ff,stroke:#0078d4,stroke-width:3px
-    style Management fill:#00bcf2,stroke:#0078d4,stroke-width:2px
-    style LocalStack fill:#ffb900,stroke:#d83b01,stroke-width:2px
-    style Workloads fill:#fff100,stroke:#ffb900,stroke-width:2px
-    style Identity fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
-    style LocalIdentity fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
-    style Connectivity fill:#7fba00,stroke:#107c10,stroke-width:2px
+    style Cloud fill:#dceefb,stroke:#0078d4,stroke-width:3px
+    style OnPrem fill:#e0f7fa,stroke:#0078d4,stroke-width:3px
+    style Management fill:#d4f1fb,stroke:#0078d4,stroke-width:2px
+    style LocalStack fill:#fff3cd,stroke:#d83b01,stroke-width:2px
+    style Workloads fill:#fffde7,stroke:#ffb900,stroke-width:2px
+    style Identity fill:#ede7f6,stroke:#5e5e5e,stroke-width:2px
+    style LocalIdentity fill:#ede7f6,stroke:#5e5e5e,stroke-width:2px
+    style Connectivity fill:#edf5d6,stroke:#107c10,stroke-width:2px
 ```
 
 !!! example "Example: Healthcare Provider"

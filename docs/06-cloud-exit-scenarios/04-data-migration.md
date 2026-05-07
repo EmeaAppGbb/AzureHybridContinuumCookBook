@@ -789,9 +789,9 @@ graph TB
     RabbitMQ -.->|Ready| Cutover
     SMB -.->|Ready| Cutover
     
-    style Azure fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
-    style OnPrem fill:#107c10,stroke:#004b1c,stroke-width:2px,color:#fff
-    style Migration fill:#50e6ff,stroke:#0078d4,stroke-width:2px
+    style Azure fill:#dceefb,stroke:#005a9e,stroke-width:2px
+    style OnPrem fill:#dff0df,stroke:#004b1c,stroke-width:2px
+    style Migration fill:#e0f7fa,stroke:#0078d4,stroke-width:2px
     style Validation fill:#ffc107,stroke:#f57c00,stroke-width:2px
     style Cutover fill:#dc3545,stroke:#a71d2a,stroke-width:3px,color:#fff
 ```

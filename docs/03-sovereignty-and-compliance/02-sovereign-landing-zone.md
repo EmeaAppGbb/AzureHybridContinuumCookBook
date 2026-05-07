@@ -278,7 +278,7 @@ graph TB
     DNS -.->|"Resolves"| CorpPE
     DNS -.->|"Resolves"| OnlinePE
     
-    style HubVNet fill:#0078d4,stroke:#004578,color:#fff,stroke-width:2px
+    style HubVNet fill:#dceefb,stroke:#004578,stroke-width:2px
     style SpokeConfCorp fill:#ffe6cc,stroke:#d97700,color:#000,stroke-width:2px
     style SpokeConfOnline fill:#ffe6cc,stroke:#d97700,color:#000,stroke-width:2px
     style OnPrem fill:#e6f3ff,stroke:#0078d4,color:#000

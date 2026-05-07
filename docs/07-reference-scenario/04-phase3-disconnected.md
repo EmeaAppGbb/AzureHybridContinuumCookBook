@@ -544,11 +544,11 @@ graph TB
     
     Internet -.->|❌ BLOCKED| AirGap
     
-    style AirGap fill:#107c10,stroke:#004b1c,stroke-width:4px,color:#fff
-    style Apps fill:#326ce5,stroke:#1a4d8c,stroke-width:2px,color:#fff
-    style K8s fill:#50e6ff,stroke:#0078d4,stroke-width:2px
-    style DataLayer fill:#0078d4,stroke:#005a9e,stroke-width:2px,color:#fff
-    style Identity fill:#dc3545,stroke:#a71d2a,stroke-width:2px,color:#fff
+    style AirGap fill:#dff0df,stroke:#004b1c,stroke-width:4px
+    style Apps fill:#dce3f9,stroke:#1a4d8c,stroke-width:2px
+    style K8s fill:#e0f7fa,stroke:#0078d4,stroke-width:2px
+    style DataLayer fill:#dceefb,stroke:#005a9e,stroke-width:2px
+    style Identity fill:#fce4e6,stroke:#a71d2a,stroke-width:2px
     style DevOps fill:#ffc107,stroke:#f57c00,stroke-width:2px
     style Observability fill:#9c27b0,stroke:#6a1b9a,stroke-width:2px,color:#fff
 ```
@@ -618,9 +618,9 @@ graph TB
         Complexity["Deployment Time: API Deploy<br/>5 min → 15 min → 30 min"]
     end
     
-    style Phase1 fill:#0078d4,stroke:#005a9e,stroke-width:3px,color:#fff
-    style Phase2 fill:#50e6ff,stroke:#0078d4,stroke-width:3px
-    style Phase3 fill:#107c10,stroke:#004b1c,stroke-width:3px,color:#fff
+    style Phase1 fill:#dceefb,stroke:#005a9e,stroke-width:3px
+    style Phase2 fill:#e0f7fa,stroke:#0078d4,stroke-width:3px
+    style Phase3 fill:#dff0df,stroke:#004b1c,stroke-width:3px
     style Metrics fill:#ffc107,stroke:#f57c00,stroke-width:2px
 ```
 

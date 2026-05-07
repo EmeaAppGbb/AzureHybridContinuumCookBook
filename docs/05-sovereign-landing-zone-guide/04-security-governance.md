@@ -307,20 +307,20 @@ graph TB
     KVPolicy -.->|Applied to| ConfidentalCorp & ConfidentialOnline
     KVRBAC -.->|Assigned per Vault| ConfidentalCorp & ConfidentialOnline
     
-    style Root fill:#0078d4,stroke:#002050,stroke-width:3px,color:#fff
-    style Platform fill:#50e6ff,stroke:#0078d4,stroke-width:3px
-    style LandingZones fill:#7fba00,stroke:#107c10,stroke-width:3px
-    style ConfidentialLZ fill:#e74856,stroke:#a80000,stroke-width:3px,color:#fff
-    style StandardLZ fill:#ffb900,stroke:#d83b01,stroke-width:3px
+    style Root fill:#dceefb,stroke:#002050,stroke-width:3px
+    style Platform fill:#e0f7fa,stroke:#0078d4,stroke-width:3px
+    style LandingZones fill:#edf5d6,stroke:#107c10,stroke-width:3px
+    style ConfidentialLZ fill:#fce4e6,stroke:#a80000,stroke-width:3px
+    style StandardLZ fill:#fff3cd,stroke:#d83b01,stroke-width:3px
     style Decommissioned fill:#5e5e5e,stroke:#000,stroke-width:2px,color:#fff
-    style Sandbox fill:#00b7c3,stroke:#005b70,stroke-width:2px
+    style Sandbox fill:#dff5f5,stroke:#005b70,stroke-width:2px
     
     style ConfidentalCorp fill:#c4314b,stroke:#5e0000,stroke-width:2px,color:#fff
     style ConfidentialOnline fill:#e74856,stroke:#a80000,stroke-width:2px,color:#fff
     
-    style Security fill:#b4a0ff,stroke:#5e5e5e,stroke-width:2px
-    style RBAC fill:#fff100,stroke:#ffb900,stroke-width:2px
-    style KVGov fill:#00bcf2,stroke:#0078d4,stroke-width:2px
+    style Security fill:#ede7f6,stroke:#5e5e5e,stroke-width:2px
+    style RBAC fill:#fffde7,stroke:#ffb900,stroke-width:2px
+    style KVGov fill:#d4f1fb,stroke:#0078d4,stroke-width:2px
 ```
 
 ## Microsoft Sentinel for Security Operations
