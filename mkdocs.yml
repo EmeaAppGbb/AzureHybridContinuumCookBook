@@ -128,6 +128,7 @@ nav:
     - Hybrid Disconnected Pattern: 04-architecture-patterns/03-hybrid-disconnected.md
     - Cloud Exit Pattern: 04-architecture-patterns/04-cloud-exit.md
     - Workload Placement Framework: 04-architecture-patterns/05-workload-placement.md
+    - Multi-Cluster AKS and Fleet Manager: 04-architecture-patterns/06-multi-cluster-fleet.md
   - Sovereign Landing Zone Guide:
     - 05-sovereign-landing-zone-guide/README.md
     - Design Areas Overview: 05-sovereign-landing-zone-guide/01-design-areas.md

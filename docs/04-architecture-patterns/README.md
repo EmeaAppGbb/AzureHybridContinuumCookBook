@@ -19,6 +19,7 @@ This section presents proven, reusable architecture patterns for deploying workl
 | [Hybrid Disconnected Pattern](03-hybrid-disconnected.md) | Air-gapped and isolated environments |
 | [Cloud Exit Pattern](04-cloud-exit.md) | Migrating from public cloud to on-premises |
 | [Workload Placement Framework](05-workload-placement.md) | Decision framework for where to run what |
+| [Multi-Cluster AKS and Fleet Manager](06-multi-cluster-fleet.md) | Multi-datacenter orchestration with Azure Kubernetes Fleet Manager |
 
 ## The Azure Hybrid Continuum at a Glance
 
