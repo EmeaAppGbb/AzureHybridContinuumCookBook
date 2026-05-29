@@ -1181,3 +1181,36 @@ Together, these updates transform the CookBook from "comprehensive content" into
 - Surgical additions only — no existing content rewritten or restructured
 - Each callout mentions the specific aspect relevant to that chapter
 - Sample repo three-branch model maps directly to documentation three-phase structure
+
+
+### 2026-05-29 — Expanded Hybrid Continuum from 4 to 5 Stages
+
+**Completed:**
+- Expanded Azure Hybrid Continuum model from 4 stages to 5 stages by splitting original Stage 3 into two distinct stages
+- Added comprehensive new Stage 3 (Hybrid - Cloud + Local) documenting split-workload architectures where some production workloads remain in cloud while others run on Azure Local
+- Renumbered original Stage 3 → Stage 4 (Local Connected - all workloads local, cloud for management only)
+- Renumbered original Stage 4 → Stage 5 (Disconnected - air-gapped)
+- Rewrote main Mermaid flow diagram (Figure 1) and decision tree diagram (Figure 2) in 02-the-hybrid-continuum.md for 5-stage model
+- Updated Azure Technologies table with new Hybrid column showing full PaaS availability on cloud side
+- Updated 8 documentation files with stage reference corrections and clarifications
+
+**Key Distinction — Stage 3 vs Stage 4:**
+- **Stage 3 (Hybrid):** Cloud actively hosts production workloads (PaaS, AKS, databases, AI services). Split-workload architecture is a permanent operating model for many organizations. Full Azure PaaS catalog available for cloud-side workloads.
+- **Stage 4 (Local Connected):** ALL production workloads migrated to Azure Local. Cloud connection used ONLY for management (Portal, Monitor, Policy, Identity, Updates). Represents complete workload independence from cloud services.
+
+**Documentation Architecture Insights:**
+- Real customer patterns revealed a missing stage — many organizations operate permanent hybrid models where both cloud and local host production workloads indefinitely, not as a transitional state
+- The previous conflation of 'some workloads local' and 'all workloads local' into single Stage 3 created confusion about when to use which model
+- Workload placement decisions are clearer when split-workload (Stage 3) is distinct from all-local-workload (Stage 4)
+- Color scheme follows Azure design system: new Stage 3 uses #7fba00 (Azure green) to differentiate from Stage 4's #50e6ff (cyan)
+
+**Files Modified:**
+- Primary: docs/01-introduction/02-the-hybrid-continuum.md (major rewrite with new Stage 3 section ~100 lines)
+- Secondary: docs/01-introduction/01-overview.md, docs/01-introduction/03-how-to-use-this-guide.md
+- Supporting: docs/04-architecture-patterns/README.md, docs/06-cloud-exit-scenarios/ (3 files), docs/07-reference-scenario/03-phase2-hybrid-connected.md
+
+**Why This Matters:**
+The continuum is the foundational mental model for the entire CookBook. Separating 'hybrid split-workload' from 'all-local with cloud management' reflects how customers actually operate Azure Local. Organizations can now clearly identify their target stage: Stage 3 for permanent hybrid, Stage 4 for local-first with Azure management, Stage 5 for air-gapped. The 5-stage model better maps to Azure Arc's unified management capabilities and supports progressive migration paths (Public → Hybrid → Local Connected → Disconnected).
+
+**Decision Record:**
+Recorded in .squad/decisions/inbox/hardin-5stage-continuum.md with full rationale, implementation details, and consequences.
