@@ -12,7 +12,7 @@ The guide is structured in four major sections:
 
 **Chapters:** Overview, The Hybrid Continuum, How to Use This Guide
 
-This section establishes the conceptual framework for understanding the Azure Hybrid Continuum. It defines the four stages of the continuum (Public Cloud, Sovereign Cloud, Connected Hybrid, Disconnected), explains the business and regulatory drivers for hybrid architectures, and introduces Microsoft's hybrid cloud strategy centered on Azure Arc, Azure Local, and Sovereign Landing Zones.
+This section establishes the conceptual framework for understanding the Azure Hybrid Continuum. It defines the five stages of the continuum (Public Cloud, Sovereign Cloud, Hybrid, Local Connected, Disconnected), explains the business and regulatory drivers for hybrid architectures, and introduces Microsoft's hybrid cloud strategy centered on Azure Arc, Azure Local, and Sovereign Landing Zones.
 
 **Purpose:** Provides shared vocabulary and mental models for the rest of the guide. Essential for all readers.
 
@@ -36,7 +36,7 @@ These sections transition from concepts to implementation:
 
 - **Sovereign Landing Zone Guide:** Step-by-step guidance for implementing Sovereign Landing Zones, covering identity, networking, security, governance, and automation. Includes implementation options using Azure Portal, Bicep, and Terraform.
 - **Cloud Exit Scenarios:** Practical scenarios for moving workloads across the continuum — from public cloud to connected hybrid, from connected to disconnected, with detailed data migration strategies and operational continuity guidance.
-- **Reference Scenario:** A comprehensive, end-to-end reference implementation featuring Contoso Insurance, a fictional enterprise application that evolves across all four continuum stages. Demonstrates real-world architecture decisions, trade-offs, and lessons learned.
+- **Reference Scenario:** A comprehensive, end-to-end reference implementation featuring Contoso Insurance, a fictional enterprise application that evolves across continuum stages. Demonstrates real-world architecture decisions, trade-offs, and lessons learned.
 
 **Purpose:** Actionable implementation guidance. Follow these chapters when actively building or migrating architectures.
 
@@ -70,7 +70,7 @@ Different roles have different priorities when approaching hybrid and sovereign 
    - [Part 3 — Sovereignty & Compliance](../03-sovereignty-and-compliance/README.md) (all chapters)  
      Sovereign Landing Zone architecture, controls, and compliance frameworks.
    - [Part 4 — Architecture Patterns](../04-architecture-patterns/README.md) (all chapters)  
-     Study all four deployment patterns and the workload placement framework.
+     Study deployment patterns and the workload placement framework.
 
 3. **Implementation Deep Dive:**
    - [Part 5 — Sovereign Landing Zone Guide](../05-sovereign-landing-zone-guide/README.md) (all chapters)  
@@ -159,11 +159,11 @@ Different roles have different priorities when approaching hybrid and sovereign 
 
 1. **Quick Start:**
    - [Part 1 — Introduction](../01-introduction/README.md): The Hybrid Continuum (02)  
-     Understand the four deployment stages and their characteristics.
+     Understand the deployment stages and their characteristics.
 
 2. **Reference Implementation:**
    - [Part 7 — Reference Scenario](../07-reference-scenario/README.md) (all chapters)  
-     Deep dive into Contoso Insurance application architecture, showing how a representative application is designed to operate across all four continuum stages.
+     Deep dive into Contoso Insurance application architecture, showing how a representative application is designed to operate across the continuum stages.
 
 3. **Service Availability:**
    - [Part 9 — Appendix](../09-appendix/README.md): Azure Service Mapping (02)  

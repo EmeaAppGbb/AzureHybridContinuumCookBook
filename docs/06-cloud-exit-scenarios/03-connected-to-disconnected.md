@@ -1,8 +1,8 @@
-# Connected → Disconnected Azure Local
+# Local Connected → Disconnected
 
 ## Introduction
 
-Transitioning from connected Azure Local to a fully disconnected, air-gapped deployment represents the final and most complex stage of cloud exit. Every dependency on Azure cloud services—identity, management, monitoring, container registries, secrets management, and DNS—must be severed and replaced with self-hosted alternatives. This chapter guides you through the systematic process of achieving true independence from cloud infrastructure.
+Transitioning from Local Connected (Stage 4) to a fully disconnected, air-gapped deployment (Stage 5) represents the final and most complex stage of cloud exit. Every dependency on Azure cloud services—identity, management, monitoring, container registries, secrets management, and DNS—must be severed and replaced with self-hosted alternatives. This chapter guides you through the systematic process of achieving true independence from cloud infrastructure.
 
 The disconnection journey requires meticulous planning because there's no safety net once connectivity is removed. Unlike the connected-to-Azure Local migration where Azure management remains accessible, disconnected mode demands complete self-sufficiency. Organizations typically pursue this path for stringent regulatory requirements, data sovereignty mandates, defense and intelligence use cases, or operation in environments lacking reliable internet connectivity.
 

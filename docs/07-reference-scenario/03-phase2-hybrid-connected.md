@@ -1,7 +1,7 @@
 # Phase 2: Hybrid Connected
 
 !!! abstract "Chapter Summary"
-    Phase 2 represents Contoso Insurance's transition from Azure public cloud to Azure Local infrastructure while maintaining connectivity to Azure for management, identity, and monitoring. This hybrid connected model reduces costs and improves data sovereignty while preserving Azure's operational tools. This chapter details the migration planning, architecture changes, and operational implications of the hybrid transition.
+    Phase 2 represents Contoso Insurance's transition to a hybrid architecture where some workloads run on Azure Local infrastructure while maintaining connectivity to Azure for management, identity, and monitoring. This phase demonstrates **Stage 3 (Hybrid)** of the continuum, where the organization operates a split-workload model: restricted data and latency-sensitive processing run on Azure Local, while other services leverage Azure PaaS. This architecture reduces costs, improves data sovereignty, and maintains operational flexibility while preserving Azure's management tools.
 
 ## Migration Planning & Timeline
 

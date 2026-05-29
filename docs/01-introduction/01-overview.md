@@ -82,12 +82,13 @@ Sovereign Landing Zones enable organizations to operate Azure services while mai
 
 The **Azure Hybrid Continuum** is not a binary choice between "cloud" and "on-premises." It is a **spectrum of deployment models** with varying degrees of cloud connectivity, management integration, and operational independence. Organizations may operate workloads at different points on this continuum simultaneously, and workloads may move between positions over time.
 
-The continuum consists of four primary stages:
+The continuum consists of five primary stages:
 
 1. **Public Cloud (Fully Connected):** Workloads running entirely in Azure public cloud regions, leveraging the full breadth of Azure PaaS and SaaS services.
-2. **Connected Hybrid:** On-premises infrastructure running Azure Local and Azure Arc-enabled servers and Kubernetes clusters, with continuous connectivity to Azure for management, monitoring, and control plane operations.
-3. **Sovereign Cloud:** Workloads running in Azure sovereign clouds or Azure public cloud with Sovereign Landing Zone controls, meeting enhanced data residency and regulatory requirements.
-4. **Disconnected (Air-Gapped):** Fully isolated environments with no connectivity to Azure, running Azure Local in disconnected mode or traditional on-premises infrastructure.
+2. **Sovereign Cloud (Enhanced Controls):** Workloads running in Azure sovereign clouds or Azure public cloud with Sovereign Landing Zone controls, meeting enhanced data residency and regulatory requirements.
+3. **Hybrid (Cloud + Local):** Deliberate split-workload architecture where some production workloads run in Azure cloud (leveraging PaaS and scale) while others run on Azure Local on-premises (for latency, sovereignty, or compliance). Both environments connected and managed through unified Azure Arc control plane.
+4. **Local Connected (Azure Local + Arc):** All production workloads migrated to on-premises Azure Local infrastructure, with continuous connectivity to Azure maintained solely for management, monitoring, identity, and updates via Azure Arc.
+5. **Disconnected (Air-Gapped):** Fully isolated environments with no connectivity to Azure, running Azure Local in disconnected mode or traditional on-premises infrastructure.
 
 Each stage represents different trade-offs in terms of service availability, operational complexity, compliance posture, and cost. Chapter 2 explores this continuum in depth, defining each stage and providing guidance on when each deployment model is appropriate.
 

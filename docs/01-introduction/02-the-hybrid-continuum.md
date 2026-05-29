@@ -19,9 +19,9 @@ The continuum is **not unidirectional**. Organizations may move workloads in eit
 
 Understanding where on the continuum your workloads operate — and designing them to support movement between stages — is foundational to building resilient, compliant, and operationally efficient hybrid architectures.
 
-## The Four Stages of the Continuum
+## The Five Stages of the Continuum
 
-The Azure Hybrid Continuum consists of four primary deployment stages. While real-world architectures may blend characteristics from multiple stages, this framework provides a structured way to understand the options available and the trade-offs inherent in each.
+The Azure Hybrid Continuum consists of five primary deployment stages. While real-world architectures may blend characteristics from multiple stages, this framework provides a structured way to understand the options available and the trade-offs inherent in each.
 
 ```mermaid
 graph LR
@@ -39,40 +39,51 @@ graph LR
         S2_Svc["<b>Available Services:</b><br/>• Azure VMs, AKS<br/>• Azure SQL DB (limited)<br/>• Sovereign Landing Zones<br/>• Confidential Computing<br/>• Customer Lockbox<br/>• In-Region Key Vault"]
     end
     
-    subgraph Stage3["<b>Stage 3: Connected Hybrid</b><br/>(Azure Local + Arc)"]
+    subgraph Stage3["<b>Stage 3: Hybrid</b><br/>(Cloud + Local)"]
         direction TB
-        S3_Conn["🔗 Outbound Azure Connectivity<br/>Management & Telemetry"]
-        S3_Mgmt["☁️ Azure Control Plane<br/>Hybrid ARM via Arc"]
-        S3_Svc["<b>Available Services:</b><br/>• Azure Local VMs<br/>• AKS on Azure Local<br/>• Arc-enabled SQL MI<br/>• Arc-enabled Kubernetes<br/>• Azure Monitor (hybrid)<br/>• Azure Policy (hybrid)"]
+        S3_Conn["🔄 Split Workload Architecture<br/>ExpressRoute / VPN"]
+        S3_Mgmt["☁️ Unified Management<br/>Azure Arc + ARM"]
+        S3_Svc["<b>Available Services:</b><br/>• Full Azure PaaS (cloud)<br/>• Azure Local VMs/AKS (local)<br/>• Arc-enabled services<br/>• Cross-environment networking<br/>• Unified Azure Portal<br/>• Split-workload flexibility"]
     end
     
-    subgraph Stage4["<b>Stage 4: Disconnected</b><br/>(Air-Gapped)"]
+    subgraph Stage4["<b>Stage 4: Local Connected</b><br/>(Azure Local + Arc)"]
         direction TB
-        S4_Conn["❌ No External Connectivity<br/>Physical Isolation"]
-        S4_Mgmt["💻 Local Control Plane<br/>On-Premises Management"]
-        S4_Svc["<b>Available Services:</b><br/>• Azure Local (disconnected)<br/>• Self-hosted Kubernetes<br/>• Local container registry<br/>• Local AD DS<br/>• Prometheus/Grafana<br/>• GitOps (local Git)"]
+        S4_Conn["🔗 Outbound Azure Connectivity<br/>Management & Telemetry"]
+        S4_Mgmt["☁️ Azure Control Plane<br/>Hybrid ARM via Arc"]
+        S4_Svc["<b>Available Services:</b><br/>• Azure Local VMs<br/>• AKS on Azure Local<br/>• Arc-enabled SQL MI<br/>• Arc-enabled Kubernetes<br/>• Azure Monitor (hybrid)<br/>• Azure Policy (hybrid)"]
     end
     
-    Stage1 -->|"Increasing Sovereignty ➡️<br/>Decreasing Connectivity"| Stage2
-    Stage2 -->|"Increasing Sovereignty ➡️<br/>Decreasing Connectivity"| Stage3
-    Stage3 -->|"Increasing Sovereignty ➡️<br/>Decreasing Connectivity"| Stage4
+    subgraph Stage5["<b>Stage 5: Disconnected</b><br/>(Air-Gapped)"]
+        direction TB
+        S5_Conn["❌ No External Connectivity<br/>Physical Isolation"]
+        S5_Mgmt["💻 Local Control Plane<br/>On-Premises Management"]
+        S5_Svc["<b>Available Services:</b><br/>• Azure Local (disconnected)<br/>• Self-hosted Kubernetes<br/>• Local container registry<br/>• Local AD DS<br/>• Prometheus/Grafana<br/>• GitOps (local Git)"]
+    end
     
-    Stage4 -.->|"⬅️ Cloud Adoption<br/>Improved Connectivity"| Stage3
-    Stage3 -.->|"⬅️ Cloud Adoption<br/>Regulatory Relief"| Stage2
-    Stage2 -.->|"⬅️ Cloud Adoption<br/>Full Migration"| Stage1
+    Stage1 -->|"Workload Split ➡️"| Stage3
+    Stage3 -->|"Full Local Migration ➡️"| Stage4
+    Stage2 -->|"Enhanced Sovereignty ➡️"| Stage4
+    Stage4 -->|"Complete Isolation ➡️"| Stage5
+    
+    Stage5 -.->|"⬅️ Reconnection"| Stage4
+    Stage4 -.->|"⬅️ Hybrid Adoption"| Stage3
+    Stage3 -.->|"⬅️ Cloud Consolidation"| Stage1
+    Stage4 -.->|"⬅️ Regulatory Relief"| Stage2
     
     classDef stage1Style fill:#0078d4,stroke:#003d6b,stroke-width:2px,color:#fff
     classDef stage2Style fill:#ffb900,stroke:#b8860b,stroke-width:2px,color:#000
-    classDef stage3Style fill:#50e6ff,stroke:#0078d4,stroke-width:2px,color:#000
-    classDef stage4Style fill:#e74856,stroke:#a31e22,stroke-width:2px,color:#fff
+    classDef stage3Style fill:#7fba00,stroke:#498205,stroke-width:2px,color:#fff
+    classDef stage4Style fill:#50e6ff,stroke:#0078d4,stroke-width:2px,color:#000
+    classDef stage5Style fill:#e74856,stroke:#a31e22,stroke-width:2px,color:#fff
     
     class Stage1 stage1Style
     class Stage2 stage2Style
     class Stage3 stage3Style
     class Stage4 stage4Style
+    class Stage5 stage5Style
 ```
 
-**Figure 1: The Azure Hybrid Continuum Spectrum** — Organizations operate across four stages, each with distinct connectivity models, management approaches, and service availability. Movement is bidirectional based on evolving requirements.
+**Figure 1: The Azure Hybrid Continuum Spectrum** — Organizations operate across five stages, each with distinct connectivity models, management approaches, and service availability. Movement is bidirectional based on evolving requirements.
 
 !!! example "🔗 Working Example: Three Branches, Three Continuum Stages"
     The [Contoso Insurance sample application](https://github.com/EmeaAppGbb/ContosoInsurances-NativeToLocal) demonstrates the continuum in code using a branch-per-stage model: **`main`** (Azure/AKS — fully connected), **`local-connected`** (Azure Local via Arc — hybrid connected), and **`local-disconnected`** (air-gapped — fully disconnected). Compare the branches to see exactly how infrastructure, services, and configuration change at each stage.
@@ -85,7 +96,7 @@ graph TD
     
     Start --> RegQ{"Data Sovereignty<br/>or Regulatory<br/>Requirements?"}
     
-    RegQ -->|"Classified / Air-Gapped<br/>Required"| Disconnected["<b>Stage 4: Disconnected</b><br/>Air-gapped infrastructure<br/>No cloud connectivity"]
+    RegQ -->|"Classified / Air-Gapped<br/>Required"| Disconnected["<b>Stage 5: Disconnected</b><br/>Air-gapped infrastructure<br/>No cloud connectivity"]
     
     RegQ -->|"National Sovereignty<br/>Laws Apply"| SovQ{"Enhanced Governance<br/>Controls Sufficient?"}
     
@@ -93,40 +104,45 @@ graph TD
     
     SovQ -->|"No - Physical<br/>Isolation Required"| Disconnected
     
-    RegQ -->|"Data Residency<br/>On-Premises"| LatencyQ{"Local Processing<br/>Required?"}
+    RegQ -->|"Data Residency<br/>On-Premises"| WorkloadQ{"All Workloads<br/>Must Stay Local?"}
     
-    LatencyQ -->|"Yes"| Connected["<b>Stage 3: Connected Hybrid</b><br/>Azure Local + Arc<br/>Cloud management"]
+    WorkloadQ -->|"Yes - All Local"| LocalConnected["<b>Stage 4: Local Connected</b><br/>Azure Local + Arc<br/>Cloud management only"]
     
-    LatencyQ -->|"No"| Sovereign
+    WorkloadQ -->|"No - Split Allowed"| Hybrid["<b>Stage 3: Hybrid</b><br/>Split Architecture<br/>Some cloud, some local"]
     
     RegQ -->|"No Restrictions"| CostQ{"Workload<br/>Characteristics?"}
     
     CostQ -->|"Variable Demand<br/>Global Scale<br/>Rapid Innovation"| PublicCloud["<b>Stage 1: Public Cloud</b><br/>Full Azure PaaS/SaaS<br/>Cloud-native operations"]
     
-    CostQ -->|"Predictable Load<br/>Large Data Volume<br/>Cost Optimization"| Connected
+    CostQ -->|"Predictable Load<br/>Large Data Volume<br/>Cost Optimization"| HybridOrLocal{"Want Cloud<br/>Services for<br/>Some Workloads?"}
     
-    CostQ -->|"Hybrid Permanence<br/>Strategic Independence"| Connected
+    HybridOrLocal -->|"Yes"| Hybrid
+    HybridOrLocal -->|"No"| LocalConnected
     
-    PublicCloud -.->|"Repatriation Drivers:<br/>• New regulations<br/>• Cost optimization<br/>• Vendor independence"| Connected
+    PublicCloud -.->|"Repatriation Drivers:<br/>• New regulations<br/>• Cost optimization<br/>• Vendor independence"| Hybrid
     
-    Connected -.->|"Cloud Migration Drivers:<br/>• Innovation needs<br/>• Global expansion<br/>• Operational efficiency"| PublicCloud
+    Hybrid -.->|"Cloud Migration Drivers:<br/>• Innovation needs<br/>• Global expansion"| PublicCloud
+    
+    Hybrid -.->|"Full Local Migration:<br/>• Complete sovereignty<br/>• All workloads local"| LocalConnected
     
     Sovereign -.->|"Sovereignty Increase:<br/>• Geopolitical change<br/>• Stricter regulations"| Disconnected
     
     classDef decisionStyle fill:#fff,stroke:#0078d4,stroke-width:2px,color:#000
     classDef stage1Style fill:#0078d4,stroke:#003d6b,stroke-width:3px,color:#fff
     classDef stage2Style fill:#ffb900,stroke:#b8860b,stroke-width:3px,color:#000
-    classDef stage3Style fill:#50e6ff,stroke:#0078d4,stroke-width:3px,color:#000
-    classDef stage4Style fill:#e74856,stroke:#a31e22,stroke-width:3px,color:#fff
+    classDef stage3Style fill:#7fba00,stroke:#498205,stroke-width:3px,color:#fff
+    classDef stage4Style fill:#50e6ff,stroke:#0078d4,stroke-width:3px,color:#000
+    classDef stage5Style fill:#e74856,stroke:#a31e22,stroke-width:3px,color:#fff
     
-    class Start,RegQ,SovQ,LatencyQ,CostQ decisionStyle
+    class Start,RegQ,SovQ,WorkloadQ,CostQ,HybridOrLocal decisionStyle
     class PublicCloud stage1Style
     class Sovereign stage2Style
-    class Connected stage3Style
-    class Disconnected stage4Style
+    class Hybrid stage3Style
+    class LocalConnected stage4Style
+    class Disconnected stage5Style
 ```
 
-**Figure 2: Decision Factors Driving Continuum Positioning** — Key drivers that determine where organizations operate along the continuum, including regulatory requirements, latency needs, cost optimization, and strategic considerations. Dotted lines show common transition paths as requirements evolve.
+**Figure 2: Decision Factors Driving Continuum Positioning** — Key drivers that determine where organizations operate along the continuum, including regulatory requirements, workload distribution needs, cost optimization, and strategic considerations. Dotted lines show common transition paths as requirements evolve.
 
 ### Stage 1: Public Cloud (Fully Connected)
 
@@ -213,17 +229,84 @@ Sovereign Cloud is appropriate when:
 - **Potential cost premium:** Sovereign cloud services may have different pricing structures than standard Azure.
 - **Limited cross-region capabilities:** Data residency requirements may restrict use of cross-region replication, global load balancing, and multi-region architectures.
 
-### Stage 3: Connected Hybrid (Azure Local + Arc)
+### Stage 3: Hybrid (Cloud + Local)
 
 **Characteristics:**
 
-The **Connected Hybrid** stage brings Azure services to on-premises locations while maintaining continuous connectivity to Azure for management, monitoring, and control plane operations. This stage is enabled by [Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/) and [Azure Arc](https://learn.microsoft.com/en-us/azure/azure-arc/overview).
+The **Hybrid** stage represents a deliberate split-workload architecture where some production workloads run in Azure public or sovereign cloud, while others run on Azure Local on-premises infrastructure. This is a **permanent operating model** for many organizations, not a transitional state — the cloud is actively used for workloads that benefit from global scale, PaaS innovation, and elasticity, while on-premises infrastructure hosts latency-sensitive, data-sovereign, or compliance-restricted workloads.
 
-Azure Local provides hyperconverged infrastructure running Azure-consistent services on-premises. Azure Arc extends the Azure Resource Manager control plane to on-premises servers, Kubernetes clusters, and data services, enabling unified management across cloud and on-premises environments.
+Both environments are connected via ExpressRoute or VPN and managed through a unified control plane using Azure Arc, providing a single Azure portal view of all resources regardless of their physical location.
+
+**Key Differentiator from Stage 4:**
+
+In Stage 3, the **cloud is actively running production application workloads**, not just providing management services. Organizations in this stage maintain a permanent hybrid posture where both cloud and local infrastructure contribute to the production environment. In contrast, Stage 4 (Local Connected) represents a state where **all production workloads have been migrated to local infrastructure**, and the cloud connection is used solely for management, monitoring, identity, and updates.
 
 **Available Services:**
 
-Connected Hybrid environments can run:
+Hybrid environments provide the broadest service catalog across the continuum:
+
+- **Cloud-side services (full Azure PaaS catalog):**
+  - Azure Kubernetes Service (AKS), Azure App Service, Azure Functions
+  - Azure SQL Database, Azure Cosmos DB, Azure Database for PostgreSQL/MySQL
+  - Azure Machine Learning, Azure Cognitive Services, Azure Synapse Analytics
+  - Azure Logic Apps, Azure Service Bus, Azure Event Grid
+  - Azure Storage (Blob, File, Queue, Table)
+- **Local-side services (Azure Local + Arc):**
+  - Azure Virtual Machines on Azure Local (Arc-enabled)
+  - Azure Kubernetes Service on Azure Local (AKS-HCI)
+  - Azure Arc-enabled data services (SQL Managed Instance, PostgreSQL Hyperscale)
+  - Azure Virtual Desktop on Azure Local
+  - Azure Arc-enabled servers (existing on-premises infrastructure)
+- **Cross-environment capabilities:**
+  - Azure Virtual WAN for unified networking
+  - ExpressRoute or VPN for secure connectivity
+  - Azure Arc for unified resource management
+  - Azure Monitor for centralized observability
+  - Azure Policy for consistent governance
+  - Azure Private Link for secure PaaS access from on-premises
+
+**Management and Operations:**
+
+Resources across both cloud and local environments are managed through a single Azure Resource Manager control plane. The Azure portal provides a unified view where cloud-based AKS clusters, PaaS databases, and on-premises Arc-enabled virtual machines appear side-by-side in the same resource groups and subscriptions.
+
+Infrastructure as Code (Bicep, Terraform, ARM templates) can deploy resources to either environment using the same tooling and workflows. Azure Policy applies consistently across both locations, and Azure Monitor aggregates telemetry from all environments into a single Log Analytics workspace.
+
+**When to Use:**
+
+The Hybrid stage is appropriate when:
+
+- **Workload requirements vary significantly:** Some workloads have regulatory or latency constraints requiring local execution, while others benefit from cloud scale and innovation.
+- **Data sovereignty affects only specific data sets:** Personal data, financial records, or regulated data must remain on-premises, but other application data can leverage cloud services.
+- **Branch/edge processing with central analytics:** Edge locations (retail stores, manufacturing plants, branch offices) process data locally while aggregated analytics and ML workloads run in the cloud.
+- **Seasonal or burst capacity requirements:** Baseline workloads run on-premises on owned infrastructure, with temporary scale-out to cloud during peak demand.
+- **Dev/test in cloud, production on-premises (or vice versa):** Development and testing leverage cloud agility and PaaS services, while production maintains data residency on-premises — or the reverse, where production benefits from cloud availability while development runs locally.
+- **Progressive cloud adoption:** Organizations are gradually migrating workloads to cloud but maintain a permanent hybrid footprint based on workload characteristics.
+- **Cost optimization through workload placement:** Large data volume or predictable workloads run cost-effectively on-premises, while variable or compute-intensive workloads leverage cloud consumption pricing.
+
+**Considerations:**
+
+- **Network connectivity is critical:** The architecture depends on reliable ExpressRoute or VPN connectivity between cloud and on-premises environments. Network outages can impact cross-environment communication.
+- **Data gravity and egress costs:** Moving large data volumes between cloud and on-premises incurs bandwidth costs and latency. Workload placement should minimize cross-environment data transfers.
+- **Complexity in multi-environment operations:** Managing two production environments requires robust automation, monitoring, and operational processes. Teams need skills in both cloud and on-premises technologies.
+- **Identity and access management:** Azure AD B2C / Entra ID integration requires connectivity. Plan for identity federation and authentication flows that span both environments.
+- **Service dependency management:** Applications must be designed to tolerate partial failures. If cloud-side services become unavailable, local workloads should degrade gracefully.
+- **Dual cost structure:** Organizations pay for both Azure consumption (PaaS services, data egress) and on-premises infrastructure (Azure Local hardware, maintenance, power, cooling).
+
+### Stage 4: Local Connected (Azure Local + Arc)
+
+**Characteristics:**
+
+The **Local Connected** stage brings Azure services to on-premises locations while maintaining continuous connectivity to Azure for management, monitoring, and control plane operations. **All production workloads run locally** on Azure Local infrastructure, but the environment remains connected to Azure for identity, governance, monitoring, and updates.
+
+This stage is enabled by [Azure Local](https://learn.microsoft.com/en-us/azure/azure-local/) and [Azure Arc](https://learn.microsoft.com/en-us/azure/azure-arc/overview). Azure Local provides hyperconverged infrastructure running Azure-consistent services on-premises. Azure Arc extends the Azure Resource Manager control plane to on-premises resources, enabling unified management.
+
+**Key Differentiator from Stage 3:**
+
+In Stage 4, the **cloud connection is used exclusively for management, not for production application workloads**. All business logic, data processing, and user-facing services run on local infrastructure. The Azure cloud provides identity (Azure AD / Entra ID), monitoring (Azure Monitor), policy enforcement (Azure Policy), and software updates, but no application workloads execute in Azure regions.
+
+**Available Services:**
+
+Local Connected environments can run:
 
 - **Azure Local native services:**
   - Azure Virtual Machines (managed through Azure Arc)
@@ -253,22 +336,24 @@ Azure Local requires outbound connectivity to Azure for:
 
 **When to Use:**
 
-Connected Hybrid is appropriate when:
+Local Connected is appropriate when:
 
-- **Data must remain on-premises:** Regulatory, security, or data gravity requirements mandate that data stays in local datacenters while management can occur through Azure.
-- **Low-latency local processing is required:** Applications need to process data locally (edge manufacturing, retail stores, branch offices) while still benefiting from centralized management.
-- **Consistent hybrid operations are desired:** Organizations want a single operational model for cloud and on-premises infrastructure.
-- **Gradual cloud migration is underway:** Applications are being migrated to cloud over time, and interim hybrid operation is required.
-- **Network bandwidth to cloud is limited:** Large datasets cannot be economically moved to cloud, but cloud management capabilities are desired.
+- **All data must remain on-premises:** Regulatory, security, or data gravity requirements mandate that all production data stays in local datacenters, but cloud management is acceptable.
+- **Low-latency local processing is required for all workloads:** All applications need to process data locally (edge manufacturing, remote facilities, isolated locations) while still benefiting from centralized management.
+- **Complete workload independence from cloud services:** Organizations want all production workloads running on owned infrastructure, but still desire Azure management capabilities.
+- **Cost optimization for entire workload portfolio:** All workloads have been migrated from cloud to on-premises to reduce Azure consumption costs, while maintaining cloud management benefits.
+- **Strategic independence from cloud PaaS:** Organizations want to eliminate dependencies on cloud platform services while retaining management integration.
+- **Network bandwidth to cloud is limited:** Large datasets cannot be economically stored in cloud, and all processing must occur locally.
 
 **Considerations:**
 
 - **Outbound connectivity required:** Azure Local and Azure Arc require continuous or regular outbound connectivity to Azure. While short outages are tolerated, extended disconnection impacts management capabilities.
-- **Limited service subset:** Not all Azure services are available on-premises. PaaS services like Azure Functions, Azure Cosmos DB, and most AI services require public cloud.
+- **Limited service subset:** Not all Azure services are available on-premises. PaaS services like Azure Functions, Azure Cosmos DB, and most AI services require public cloud infrastructure.
 - **On-premises infrastructure management:** While Azure manages software updates, organizations are responsible for physical hardware, power, cooling, and network infrastructure.
 - **Licensing costs:** Azure Local requires Azure subscription charges in addition to hardware costs.
+- **Cloud management dependency:** While workloads run independently, management operations (provisioning, policy enforcement, monitoring) depend on Azure connectivity.
 
-### Stage 4: Disconnected (Air-Gapped)
+### Stage 5: Disconnected (Air-Gapped)
 
 **Characteristics:**
 
@@ -358,20 +443,21 @@ Many organizations operate workloads at multiple points on the continuum simulta
 
 Each stage of the continuum is enabled by specific Azure technologies and services. The following table maps core technologies to their applicable continuum stages:
 
-| Technology / Service | Public Cloud | Sovereign Cloud | Connected Hybrid | Disconnected |
-|----------------------|:------------:|:---------------:|:----------------:|:------------:|
-| **Azure Virtual Machines** | ✓ | ✓ | ✓ (via Azure Local) | ✓ (Azure Local disconnected) |
-| **Azure Kubernetes Service** | ✓ | ✓ | ✓ (AKS on Azure Local) | ✓ (AKS-HCI disconnected) |
-| **Azure SQL Database (PaaS)** | ✓ | ✓ (limited) | ✗ | ✗ |
-| **Azure Arc** | ✓ | ✓ | ✓ | ✗ |
-| **Azure Monitor** | ✓ | ✓ | ✓ (hybrid) | ✗ (local tools required) |
-| **Azure Policy** | ✓ | ✓ | ✓ (hybrid) | ✗ (local policy engines) |
-| **Azure Functions** | ✓ | ✓ (limited) | ✗ | ✗ |
-| **Azure Cosmos DB** | ✓ | ✓ (limited) | ✗ | ✗ |
-| **Azure Key Vault** | ✓ | ✓ | ✓ (with connectivity) | ✗ (local key management) |
-| **Microsoft Defender for Cloud** | ✓ | ✓ | ✓ (hybrid) | ✗ |
-| **Azure Local** | ✗ | ✓ | ✓ | ✓ (disconnected mode) |
-| **Sovereign Landing Zones** | ✗ | ✓ | ✗ | ✗ |
+| Technology / Service | Public Cloud | Sovereign Cloud | Hybrid (Cloud + Local) | Local Connected | Disconnected |
+|----------------------|:------------:|:---------------:|:----------------------:|:---------------:|:------------:|
+| **Azure Virtual Machines** | ✓ | ✓ | ✓ (both locations) | ✓ (via Azure Local) | ✓ (Azure Local disconnected) |
+| **Azure Kubernetes Service** | ✓ | ✓ | ✓ (both locations) | ✓ (AKS on Azure Local) | ✓ (AKS-HCI disconnected) |
+| **Azure SQL Database (PaaS)** | ✓ | ✓ (limited) | ✓ (cloud side) | ✗ | ✗ |
+| **Azure Arc** | ✓ | ✓ | ✓ | ✓ | ✗ |
+| **Azure Monitor** | ✓ | ✓ | ✓ (unified) | ✓ (hybrid) | ✗ (local tools required) |
+| **Azure Policy** | ✓ | ✓ | ✓ (unified) | ✓ (hybrid) | ✗ (local policy engines) |
+| **Azure Functions** | ✓ | ✓ (limited) | ✓ (cloud side) | ✗ | ✗ |
+| **Azure Cosmos DB** | ✓ | ✓ (limited) | ✓ (cloud side) | ✗ | ✗ |
+| **Azure Key Vault** | ✓ | ✓ | ✓ (with connectivity) | ✓ (with connectivity) | ✗ (local key management) |
+| **Microsoft Defender for Cloud** | ✓ | ✓ | ✓ (unified) | ✓ (hybrid) | ✗ |
+| **Azure Local** | ✗ | ✓ | ✓ (local side) | ✓ | ✓ (disconnected mode) |
+| **Sovereign Landing Zones** | ✗ | ✓ | ✗ | ✗ | ✗ |
+| **Full PaaS Catalog** | ✓ | Partial | ✓ (cloud side only) | ✗ | ✗ |
 
 For a comprehensive service mapping, see **Appendix B: Azure Service Availability Across the Continuum**.
 

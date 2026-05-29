@@ -1,13 +1,17 @@
-# Public Cloud → Connected Azure Local
+# Public Cloud → Hybrid or Local Connected
 
 ## Introduction
 
-The first stage of cloud exit transitions workloads from Azure public cloud to Azure Local infrastructure while maintaining connectivity to Azure management services. This hybrid phase represents the lowest-risk cloud exit approach because Azure Arc preserves access to familiar management tools, monitoring, security services, and identity infrastructure.
+The first stage of cloud exit transitions workloads from Azure public cloud to on-premises infrastructure while maintaining connectivity to Azure management services. Organizations can choose between two target models:
 
-This chapter provides a step-by-step methodology for migrating workloads to Azure Local in connected mode, covering infrastructure preparation, workload-specific migration strategies, PaaS service replacement, data migration execution, validation procedures, and rollback plans. The goal is to establish a stable hybrid environment that can operate on-premises while retaining the operational benefits of Azure management.
+- **Stage 3: Hybrid (Cloud + Local)** — A split-workload architecture where some production workloads remain in Azure cloud (leveraging PaaS, global scale, elasticity) while others move to Azure Local on-premises (for latency, data sovereignty, or compliance). This is often a permanent operating model, not a transitional state.
+
+- **Stage 4: Local Connected (Azure Local + Arc)** — All production workloads migrate to Azure Local infrastructure, with Azure connectivity maintained solely for management, monitoring, identity, and updates via Azure Arc.
+
+Both approaches maintain Azure Arc integration, preserving access to familiar management tools, monitoring, security services, and identity infrastructure. This chapter provides step-by-step methodology for migrating workloads to either target stage, covering infrastructure preparation, workload-specific migration strategies, PaaS service replacement, data migration execution, validation procedures, and rollback plans.
 
 !!! info "Connected Mode Advantages"
-    Connected Azure Local maintains Azure Portal management, Azure AD authentication, Azure Monitor integration, and policy enforcement. This significantly reduces operational complexity compared to fully disconnected deployments.
+    Both Hybrid and Local Connected architectures maintain Azure Portal management, Azure AD authentication, Azure Monitor integration, and policy enforcement. This significantly reduces operational complexity compared to fully disconnected deployments (Stage 5).
 
 ## Prerequisites and Readiness Validation
 
