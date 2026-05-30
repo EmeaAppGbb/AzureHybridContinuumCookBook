@@ -342,12 +342,14 @@ Azure Local management uses the same tools and interfaces as Azure cloud resourc
 All Azure Local operations are scriptable via Azure CLI extensions:
 
 ```bash
-# Register an Azure Local cluster
+# Register an Azure Local cluster (CLI still uses the legacy 'stack-hci' command group)
 az stack-hci cluster create --name MyCluster --resource-group MyRG
 
 # Create a VM on Azure Local
 az stack-hci vm create --name MyVM --resource-group MyRG --location "eastus" --custom-location MyCustomLocation
 ```
+
+> **Note:** The Azure CLI command group remains `az stack-hci` for backward compatibility. Azure Stack HCI was rebranded to **Azure Local** — the product capabilities are identical.
 
 ### Azure PowerShell
 PowerShell modules provide deep configuration and automation capabilities:

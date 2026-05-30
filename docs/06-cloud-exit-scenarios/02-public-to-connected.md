@@ -28,7 +28,7 @@ Before beginning workload migration, ensure:
 **Validation Checklist:**
 
 ```powershell
-# Verify cluster health
+# Verify cluster health (cmdlet retains legacy naming)
 Get-AzureStackHCI
 
 # Confirm Arc connectivity
@@ -37,6 +37,8 @@ az connectedk8s show --name <cluster-name> --resource-group <rg-name>
 # Check available capacity
 Get-StoragePool | Get-PhysicalDisk
 ```
+
+> **Note:** The `Get-AzureStackHCI` cmdlet retains the legacy name. Azure Stack HCI was rebranded to **Azure Local** — the product and its capabilities are unchanged.
 
 ### Network Connectivity Established
 

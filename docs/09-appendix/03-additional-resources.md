@@ -44,7 +44,7 @@ This appendix provides a curated collection of links, training resources, tools,
 
 - **[Introduction to Azure Hybrid Cloud Services](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-hybrid-services/)** — Foundational hybrid concepts
 - **[Manage Hybrid Workloads with Azure Arc](https://learn.microsoft.com/en-us/training/paths/manage-hybrid-infrastructure-with-azure-arc/)** — Complete Azure Arc learning path
-- **[Implement Azure Local](https://learn.microsoft.com/en-us/training/paths/implement-azure-stack-hci/)** — Azure Local deployment and operations
+- **[Implement Azure Local](https://learn.microsoft.com/en-us/training/paths/implement-azure-stack-hci/)** — Azure Local deployment and operations (URL retains legacy "stack-hci" path)
 - **[Deploy and Manage Azure Arc-enabled Servers](https://learn.microsoft.com/en-us/training/modules/intro-to-arc-for-servers/)** — Arc server management
 - **[Azure Arc-enabled Kubernetes](https://learn.microsoft.com/en-us/training/modules/intro-to-arc-enabled-kubernetes/)** — Arc Kubernetes fundamentals
 
@@ -68,7 +68,7 @@ This appendix provides a curated collection of links, training resources, tools,
 - **[Hybrid Architecture Design](https://learn.microsoft.com/en-us/azure/architecture/hybrid/hybrid-start-here)** — Hybrid architecture patterns overview
 - **[Azure Arc Hybrid Management and Deployment](https://learn.microsoft.com/en-us/azure/architecture/hybrid/arc-hybrid-kubernetes)** — Arc-based hybrid architectures
 - **[Disconnected AI at the Edge](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/idea/disconnected-ai-at-the-edge)** — AI in air-gapped environments
-- **[Azure Local for Branch Office](https://learn.microsoft.com/en-us/azure/architecture/hybrid/azure-stack-hci-dr)** — Distributed hybrid deployment
+- **[Azure Local for Branch Office](https://learn.microsoft.com/en-us/azure/architecture/hybrid/azure-stack-hci-dr)** — Distributed hybrid deployment (URL retains legacy "stack-hci" path)
 - **[Regulated Industries on Azure](https://learn.microsoft.com/en-us/azure/architecture/industries/finance)** — Financial services and healthcare architectures
 
 ### High Availability & Disaster Recovery
