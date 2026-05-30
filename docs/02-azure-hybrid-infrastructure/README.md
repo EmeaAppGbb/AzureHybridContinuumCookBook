@@ -16,6 +16,7 @@ This section provides a comprehensive exploration of the Azure technologies that
 | [Azure Regions & Availability Zones](01-azure-regions.md) | The global infrastructure foundation |
 | [Azure Local](02-azure-local.md) | Azure infrastructure in your data center |
 | [Azure Arc](03-azure-arc.md) | The hybrid management plane |
+| [Azure Local Deployment Types](04-azure-local-deployment-types.md) | Hyperconverged, Disaggregated, Multi-rack, Disconnected, and M365 Local |
 | [Connectivity Models](05-connectivity-models.md) | Connected, partially connected, and disconnected |
 
 <!-- DIAGRAM: Azure Hybrid Infrastructure taxonomy showing the relationship between Azure Regions, Azure Local, and Azure Arc — how they layer and complement each other -->

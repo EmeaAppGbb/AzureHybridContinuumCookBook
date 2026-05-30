@@ -185,6 +185,45 @@ graph TB
 
 ## Reference Architecture Components
 
+### Azure Local Disconnected Operations
+
+Starting with **Azure Local version 2602+**, Microsoft provides **Disconnected Operations** — a local instance of the Azure control plane that brings familiar Azure management experiences to air-gapped environments without requiring any cloud connectivity.
+
+!!! info "Azure Local Disconnected Operations"
+    Disconnected Operations provides a **local Azure Portal, Azure Resource Manager, RBAC, and managed identity** — enabling teams familiar with Azure to operate in air-gapped environments using the same tools and workflows they know from the cloud.
+
+**Supported services in disconnected mode:**
+
+- Azure Portal (local instance)
+- Azure Resource Manager (ARM)
+- Azure RBAC and Managed Identity
+- Arc-enabled servers and Azure Local VMs
+- Arc-enabled Kubernetes and AKS
+- Azure Container Registry (local)
+- Azure Key Vault (local)
+- Azure Policy
+
+**Infrastructure requirements for disconnected management cluster:**
+
+| Requirement | Specification |
+|-------------|--------------|
+| Minimum nodes | 3 |
+| RAM per node | 512 GB |
+| CPU cores per node | 24 cores |
+| Purpose | Hosts local control plane services |
+
+**Eligibility:** Requires an eligible Microsoft agreement, valid business need, and operational staff or qualified partner. Contact your Microsoft account team for assessment.
+
+> 📖 **Reference:** [Disconnected Operations Overview](https://learn.microsoft.com/en-us/azure/azure-local/manage/disconnected-operations-overview) | [Azure Local Deployment Types](../02-azure-hybrid-infrastructure/04-azure-local-deployment-types.md)
+
+!!! tip "Azure Local Disconnected vs. Fully Open-Source Stack"
+    Organizations have two paths for disconnected environments:
+    
+    - **Azure Local Disconnected Operations**: Familiar Azure experience, subset of Azure services, requires eligible agreement and specific hardware. Best for organizations invested in Azure and wanting consistency across connected and disconnected environments.
+    - **Open-source stack (K3s/RKE2 + OSS tools)**: Maximum flexibility, no vendor requirements, broader hardware support. Best for organizations with strong Kubernetes expertise or specific open-source preferences.
+    
+    Both approaches are valid — the choice depends on team skills, licensing agreements, and long-term platform strategy.
+
 ### Compute Services
 
 | Component | Description | Use Case |

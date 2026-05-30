@@ -1214,3 +1214,73 @@ The continuum is the foundational mental model for the entire CookBook. Separati
 
 **Decision Record:**
 Recorded in .squad/decisions/inbox/hardin-5stage-continuum.md with full rationale, implementation details, and consequences.
+
+### 2025-01-XX — Multi-Cluster AKS and Fleet Manager Architecture Pattern
+
+**Completed:**
+- Created comprehensive new chapter docs/04-architecture-patterns/06-multi-cluster-fleet.md covering Azure Kubernetes Fleet Manager and multi-datacenter AKS patterns
+- Documented 5 core multi-datacenter patterns: Hub-and-Spoke, Active-Active HA, Active-Passive DR, Cloud-Burst, and Geo-Distributed
+- Included 3 detailed Mermaid diagrams: Fleet Manager hub-spoke topology, staged update orchestration with approval gates, and multi-cluster traffic flow
+- Covered Fleet Manager core capabilities: cluster-wide resource propagation, update orchestration, multi-cluster networking, and fleet-wide RBAC
+- Documented hybrid fleet architecture pattern: unified management of cloud AKS + AKS on Azure Local as fleet members
+- Added comprehensive supporting tools section: GitOps with Flux, Azure Front Door/Traffic Manager, multi-cluster observability, Azure Policy for Kubernetes
+- Created decision framework covering when to use Fleet Manager vs. manual management, fleet topology options, network patterns, and cost considerations
+- Updated docs/04-architecture-patterns/README.md with new chapter entry
+- Updated mkdocs.yml navigation to include new page in Part 4
+
+**Pattern Categories Covered:**
+- **Hub-and-Spoke:** Centralized Fleet Manager orchestrating policies/updates to regional members (cloud + on-prem)
+- **Active-Active HA:** All clusters serve production traffic simultaneously with geo-distributed load balancing
+- **Active-Passive DR:** Primary cluster active, secondary scaled down or idle for cost-optimized disaster recovery
+- **Cloud-Burst:** Baseline on-premises, burst to cloud AKS for peak demand (KEDA-triggered scaling)
+- **Geo-Distributed:** Regional clusters with data residency compliance and low-latency user access
+
+**Fleet Manager Capabilities Documented:**
+- **Resource Propagation:** ClusterResourcePlacement API for distributing ConfigMaps, Secrets, NetworkPolicies, ResourceQuotas across fleet
+- **Update Orchestration:** Staged rollouts with update stages, groups, wait periods, and approval gates; supports Latest vs. Consistent node image strategies
+- **Multi-Cluster Networking:** ServiceExport pattern and DNS-based layer 4 load balancing across member cluster endpoints
+- **Hybrid Fleet:** Enrolling AKS on Azure Local as fleet members alongside cloud AKS for unified management experience
+
+**Key Architectural Insights:**
+- Fleet Manager enables "centralized management without centralized execution" — workloads run close to users/data, policies enforce consistently from hub
+- Hybrid fleet architecture (cloud + Azure Local) is first-class pattern, not afterthought — on-premises clusters receive identical management capabilities
+- Update orchestration with approval gates addresses real operational risk: platform teams can pause between dev/staging/prod rollouts to validate each stage
+- Label-based workload placement handles heterogeneous clusters (different node counts, specialized hardware like GPUs, network topologies)
+- Pattern especially relevant to Stage 3 (Hybrid) of the continuum where organizations permanently split workloads across cloud and local environments
+
+**Decision Framework Highlights:**
+- **Use Fleet Manager when:** Managing 5+ clusters, compliance requires consistent policies, staged updates critical, hybrid deployment spans cloud + Azure Local
+- **Use manual management when:** Fewer than 5 clusters, GitOps alone sufficient, air-gapped clusters, standardized on third-party tools (Rancher, OpenShift)
+- **Fleet topology options:** Single global fleet (centralized), regional fleets (isolated blast radius), environment-based fleets (strict change control)
+- **Network topology:** Hub-spoke VNet peering (<2ms, low cost), ExpressRoute (5-20ms, private connectivity), Site-to-Site VPN (10-50ms, cost-sensitive), Service mesh for cross-cluster microservices
+
+**Supporting Tools Integration:**
+- **GitOps with Flux:** Single FluxConfiguration at fleet level deploys Flux controllers to all members; Git commit updates entire fleet declaratively
+- **Azure Front Door/Traffic Manager:** Global traffic distribution with geo-routing, health-based failover, WAF, caching (Front Door for L7 HTTPS, Traffic Manager for L4 DNS-based)
+- **Multi-cluster observability:** Azure Monitor for Containers + Azure Managed Grafana + Prometheus federation for centralized fleet-wide monitoring
+- **Azure Policy for Kubernetes:** Fleet-wide policy assignment ensures consistent security posture (e.g., pod security baseline, image restrictions, network policies)
+
+**Mermaid Diagram Standards Applied:**
+- Azure color scheme: #0078d4 (blue) for hub/Azure services, #50e6ff (cyan) for cloud members, #7fba00 (green) for on-prem/hybrid, #ffb900 (amber) for traffic/load balancers
+- Subgraphs for logical grouping (Azure Cloud, On-Premises Datacenter, Update Stages)
+- Emoji icons for visual landmarks (🎯 hub, ☁️ cloud, 🏢 on-prem, 🌐 load balancer, ⚙️ stage, ✋ approval)
+- Graph TB for hierarchies (hub-to-members), Graph LR for sequential flows (update stages)
+
+**Grounding Sources Used:**
+- Azure Kubernetes Fleet Manager Overview: https://learn.microsoft.com/en-us/azure/kubernetes-fleet/overview
+- Fleet Manager Update Orchestration: https://learn.microsoft.com/en-us/azure/kubernetes-fleet/concepts-update-orchestration
+- AKS Multi-Region Best Practices: https://learn.microsoft.com/en-us/azure/aks/operator-best-practices-multi-region
+- GitOps with Flux on AKS: https://learn.microsoft.com/en-us/azure/azure-arc/kubernetes/conceptual-gitops-flux2
+- Azure Front Door: https://learn.microsoft.com/en-us/azure/frontdoor/
+- All content grounded in official Microsoft Learn documentation (web_fetch used to verify current state)
+
+**Why This Chapter Matters:**
+Multi-cluster orchestration is critical for enterprise Kubernetes adoption at scale. Organizations running 10+ AKS clusters face operational complexity managing updates, policies, and configurations consistently. Fleet Manager addresses this directly with Azure-native orchestration (no third-party tools required). The pattern is especially valuable for Stage 3 (Hybrid) deployments where cloud and on-premises clusters must be managed uniformly. This chapter provides the architectural patterns and decision framework to implement multi-cluster strategies correctly from the start, avoiding common pitfalls like uncoordinated updates, policy drift, and inconsistent configurations.
+
+**Documentation Patterns Applied:**
+- Followed existing chapter structure: Introduction → Pattern Summary (info box) → Pattern Definition → When to Use / When NOT to Use → Architecture diagrams → Implementation guidance → Considerations/Trade-offs → References
+- Referenced related patterns (Hybrid Connected, Workload Placement Framework) for cross-navigation
+- Used Microsoft Learn links in References section for authoritative grounding
+- Included practical examples (ServiceExport YAML, FluxConfiguration, policy assignments) to bridge concept and implementation
+- Created decision tables comparing options (Fleet Manager vs. manual, Traffic Manager vs. Front Door, network topology trade-offs)
+

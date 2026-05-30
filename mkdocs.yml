@@ -113,6 +113,7 @@ nav:
     - Azure Regions & Availability Zones: 02-azure-hybrid-infrastructure/01-azure-regions.md
     - Azure Local: 02-azure-hybrid-infrastructure/02-azure-local.md
     - Azure Arc: 02-azure-hybrid-infrastructure/03-azure-arc.md
+    - Azure Local Deployment Types: 02-azure-hybrid-infrastructure/04-azure-local-deployment-types.md
     - Connectivity Models: 02-azure-hybrid-infrastructure/05-connectivity-models.md
   - Sovereignty & Compliance:
     - 03-sovereignty-and-compliance/README.md

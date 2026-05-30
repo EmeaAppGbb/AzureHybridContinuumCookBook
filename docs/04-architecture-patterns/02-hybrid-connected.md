@@ -419,6 +419,19 @@ When migrating from Azure to hybrid connected:
 4. **Establish connectivity:** Set up ExpressRoute or VPN to Azure
 5. **Enable Arc agents:** Onboard all on-premises servers and clusters to Azure Arc
 
+### Choosing the Right Azure Local Deployment Type
+
+For hybrid connected architectures, the choice of Azure Local deployment type depends on scale and existing infrastructure:
+
+| Scenario | Recommended Deployment Type | Rationale |
+|----------|---------------------------|-----------|
+| Branch office / edge (1-5 nodes) | **Hyperconverged** | Simplest deployment, minimal infrastructure |
+| Datacenter (5-16 nodes) | **Hyperconverged** | Storage Spaces Direct provides integrated storage |
+| Large datacenter with existing SAN | **Disaggregated** | Leverage existing storage investment, scale to 64 nodes |
+| Enterprise-scale (100+ nodes) | **Multi-Rack** | Preintegrated racks with built-in fault tolerance |
+
+> 📖 For detailed guidance on all deployment types, see [Azure Local Deployment Types](../02-azure-hybrid-infrastructure/04-azure-local-deployment-types.md).
+
 ### Moving from Hybrid Connected to Disconnected
 
 If requirements evolve toward air-gapped deployment:
@@ -438,6 +451,8 @@ If requirements evolve toward air-gapped deployment:
 - [Hybrid identity with Entra ID](https://learn.microsoft.com/en-us/entra/identity/hybrid/whatis-hybrid-identity)
 - [Microsoft Defender for Cloud hybrid support](https://learn.microsoft.com/en-us/azure/defender-for-cloud/quickstart-onboard-machines)
 - [Azure Monitor for hybrid environments](https://learn.microsoft.com/en-us/azure/azure-monitor/vm/monitor-virtual-machine)
+- [Azure Local Deployment Types](../02-azure-hybrid-infrastructure/04-azure-local-deployment-types.md)
+- [Azure Local Scalability and Deployments](https://learn.microsoft.com/en-us/azure/azure-local/scalability-deployments)
 
 ---
 

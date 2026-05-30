@@ -4,6 +4,8 @@
 
 The **Azure Hybrid Continuum** is a conceptual framework for understanding the spectrum of deployment models available to organizations using Microsoft Azure technologies. Rather than viewing infrastructure choices as a binary decision between "cloud" and "on-premises," the continuum recognizes that modern enterprises operate across a range of deployment models, each with different characteristics, trade-offs, and use cases.
 
+This framework aligns with Microsoft's **[Adaptive Cloud](https://azure.microsoft.com/solutions/adaptive-cloud)** approach — a strategy for unifying distributed infrastructure under a single control plane with Azure Arc, bringing cloud capabilities to customers wherever they operate. The Hybrid Continuum provides the conceptual model; the Adaptive Cloud provides the technical implementation through Azure Arc, Azure Local, and Azure's distributed services.
+
 At one end of the continuum is the **fully cloud-native** model: workloads running entirely in Azure public cloud regions, leveraging the complete breadth of Azure platform-as-a-service (PaaS) and software-as-a-service (SaaS) offerings. At the other end is the **fully disconnected** model: infrastructure operating in complete isolation with no connectivity to Azure or external networks, such as air-gapped military installations or classified research facilities.
 
 Between these extremes lies a spectrum of **hybrid deployment models** that blend on-premises infrastructure with Azure services in various configurations. These models provide different balances of:

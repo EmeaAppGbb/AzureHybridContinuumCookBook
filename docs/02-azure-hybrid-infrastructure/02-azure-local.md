@@ -4,7 +4,9 @@
 
 Azure Local is Microsoft's distributed infrastructure solution that extends Azure capabilities into customer-owned environments. It facilitates the local deployment of both modern and legacy applications across distributed or sovereign locations, bringing the Azure experience — management, security, services, and innovation — to datacenters, branch offices, edge locations, and regulated environments where workloads must remain on-premises.
 
-As part of Microsoft's [adaptive cloud](https://azure.microsoft.com/solutions/adaptive-cloud) approach, Azure Local accelerates cloud and AI innovation by seamlessly delivering new applications, workloads, and services from cloud to edge, using Azure Arc as the unifying control plane. This chapter explores Azure Local's architecture, capabilities, deployment models, and positioning within the broader Azure hybrid portfolio.
+As part of Microsoft's [Adaptive Cloud](https://azure.microsoft.com/solutions/adaptive-cloud) approach, Azure Local accelerates cloud and AI innovation by seamlessly delivering new applications, workloads, and services from cloud to edge, using Azure Arc as the unifying control plane. The Adaptive Cloud strategy unifies siloed teams, distributed sites, and sprawling systems under a single control plane — consolidating disparate assets with built-in AI assistance, transcending legacy systems with cloud-native toolchains, and growing operations with flexible Azure infrastructure while maintaining control.
+
+This chapter explores Azure Local's architecture, capabilities, deployment models, and positioning within the broader Azure hybrid portfolio. For detailed guidance on choosing between deployment types (Hyperconverged, Disaggregated, Multi-rack, Disconnected, and Microsoft 365 Local), see the dedicated [Azure Local Deployment Types](04-azure-local-deployment-types.md) chapter.
 
 ## What is Azure Local?
 
@@ -366,6 +368,11 @@ For initial cluster deployment and deep troubleshooting, Windows Admin Center pr
 The hybrid management model allows infrastructure teams to use familiar on-premises tools (Windows Admin Center, PowerShell) while enabling developers and application teams to self-serve through Azure portal and APIs, bridging traditional IT operations and cloud-native DevOps practices.
 
 ## Deployment Scalability and Multi-Rack Configurations
+
+Azure Local supports scaling from single-node edge deployments to enterprise-scale multi-rack configurations. For a comprehensive guide to all five deployment types and when to use each, see the [Azure Local Deployment Types](04-azure-local-deployment-types.md) chapter.
+
+!!! tip "Deployment Type Summary"
+    Azure Local offers five deployment types: **Hyperconverged** (1-16 nodes, Storage Spaces Direct), **Disaggregated** (1-64 nodes, external SAN), **Multi-Rack** (hundreds of nodes, preintegrated), **Disconnected** (local control plane, air-gapped), and **Microsoft 365 Local** (M365 workloads on-prem). Each addresses different scale, connectivity, and workload requirements.
 
 Azure Local supports scaling from single-node edge deployments to enterprise-scale multi-rack configurations:
 

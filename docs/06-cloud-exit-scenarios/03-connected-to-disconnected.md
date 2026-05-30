@@ -76,6 +76,41 @@ Before disconnecting, every Azure cloud dependency must be identified and replac
 
 ## Infrastructure Preparation for Disconnected Mode
 
+### Option A: Azure Local Disconnected Operations (Recommended for Azure-invested organizations)
+
+Starting with **Azure Local version 2602+**, organizations with eligible Microsoft agreements can leverage **Disconnected Operations** — a local instance of the Azure control plane that eliminates many of the service replacement challenges listed above.
+
+!!! success "Simplified Transition with Disconnected Operations"
+    With Azure Local Disconnected Operations, you retain familiar Azure management experiences (Portal, ARM, RBAC, Key Vault, Container Registry, Policy) running entirely on-premises. This significantly reduces the number of services that need open-source replacements and preserves team productivity by using the same tools and workflows.
+
+**What Azure Local Disconnected Operations replaces:**
+
+| Original Need | Disconnected Ops Provides | Still Needs OSS Replacement |
+|---------------|--------------------------|----------------------------|
+| Management portal | ✅ Local Azure Portal | — |
+| Resource management | ✅ Local ARM | — |
+| Access control | ✅ RBAC + Managed Identity | — |
+| Container registry | ✅ Local ACR | — |
+| Secrets management | ✅ Local Key Vault | — |
+| Policy enforcement | ✅ Azure Policy (local) | — |
+| Monitoring | ❌ Not included | Prometheus + Grafana |
+| Service mesh | ❌ Not included | Istio / Linkerd |
+| Event streaming | ❌ Not included | Kafka / RabbitMQ |
+| Backup | ❌ Not included | Velero / Veeam |
+
+**Hardware requirements for the management cluster:**
+
+- Minimum 3 dedicated nodes
+- 512 GB RAM per management node
+- 24 CPU cores per management node
+- Dedicated from workload clusters
+
+> 📖 **Reference:** [Disconnected Operations Overview](https://learn.microsoft.com/en-us/azure/azure-local/manage/disconnected-operations-overview) | [Azure Local Deployment Types](../02-azure-hybrid-infrastructure/04-azure-local-deployment-types.md)
+
+### Option B: Full Open-Source Stack (For maximum flexibility)
+
+For organizations without eligible Microsoft agreements, or those preferring full open-source sovereignty, the following approach replaces all Azure dependencies with self-hosted alternatives:
+
 ### Local Identity Infrastructure Deployment
 
 **Active Directory Domain Services Setup:**
